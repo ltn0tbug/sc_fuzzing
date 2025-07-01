@@ -4,6 +4,7 @@ A Python-based environment for testing and fuzzing smart contracts using Ganache
 
 ## 🔧 Project Status
 
+- ENV: **Under Construction**
 - LLM: **TBD**
 - RF: **TBD**
 
@@ -29,7 +30,7 @@ pip install -r requirements.txt
 npm install -g npm-packages.json
 ```
 
-## 🚀 Example Usage
+## 🚀 Example Usage for ENV
 
 ## 0. Package Setup
 
