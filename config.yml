@@ -1,0 +1,7 @@
+name: "Test Configuration"
+workspace_path: "/home/ltn0tbug/workspace/"
+
+ganache:
+  mnemonic: "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
+  verbose: True
+  debug: True
