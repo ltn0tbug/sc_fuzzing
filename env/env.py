@@ -71,8 +71,7 @@ class Env:
         # Init Ganache
         log("Initializing environment...", "info")
         log("Initializing Ganache...", "info")
-        if not self.ganache.is_alive():
-            self.start_ganache()
+        self.start_ganache()
         
         # Init Truffle
         log("Update Truffle configuration...", "info")
