@@ -116,7 +116,7 @@ print(f"Message: {result['message']}")
 """ Example Output
 Caller:  Attacker (0xf17f52151EbEF6C7334FAD080c5704D77216b732)
 Call function pauseAllTokens with args: {'_status': True, '_notice': 'Some string'}
-Function call success: False
+Success: False
 Transaction Hash: None
 Message: Exception - execution reverted: VM Exception while processing transaction: revert
 """
@@ -134,7 +134,7 @@ print(f"Message: {result['message']}")
 """ Example Output
 Caller:  Deployer (owner) (0x627306090abaB3A6e1400e9345bC60c78a8BEf57)
 Call function pauseAllTokens with args: {'_status': True, '_notice': 'Some string'}
-Function call success: True
+Success: True
 Transaction Hash: 0x814bf6b44a9d54ba1f0f6588de2cec0342a6de5fe4d55d50cce28526599b7579
 Message: Function `pauseAllTokens` executed successfully
 """
