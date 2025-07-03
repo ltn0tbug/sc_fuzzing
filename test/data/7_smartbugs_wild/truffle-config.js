@@ -106,7 +106,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.21",      // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.5.8",      // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
@@ -139,3 +139,17 @@ module.exports = {
   //   }
   // }
 };
+
+
+
+/*---BEGIN-FUZZING-CONFIG---*/
+const config = module.exports;
+// Modify the configuration to add a new network for fuzzing
+config.networks.fuzzing = {
+    host: "127.0.0.1",
+    port: 8545,
+    network_id: "*", // Match any network id
+}
+// Export the modified configuration
+module.exports = config;
+/*---END-FUZZING-CONFIG---*/
