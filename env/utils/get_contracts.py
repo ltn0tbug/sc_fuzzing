@@ -32,7 +32,7 @@ def load_compiled_contracts(artifacts_path="build/contracts"):
     return compiled_contracts
 
 
-def get_contracts_by_project(ganache_rpc_url, project_path):
+def get_contracts(ganache_rpc_url, project_path):
     """
     Retrieve all deployed contracts from a local Ganache instance for specified Truffle project.
 

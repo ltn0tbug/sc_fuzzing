@@ -1,7 +1,16 @@
-name: "Test Configuration"
+name: "SC Fuzzing Configuration"
 workspace_path: "/home/ltn0tbug/workspace/"
 
 ganache:
+  host: "127.0.0.1"
+  port: 8545
   mnemonic: "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
   verbose: True
   debug: True
+
+truffle:
+  network:
+    name: "fuzzing"
+    host: "127.0.0.1"
+    port: 8545
+    network_id: "*"

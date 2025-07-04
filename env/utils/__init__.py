@@ -1,6 +1,6 @@
 import os
-from .get_all_accounts import get_all_accounts
-from .get_contracts_by_project import get_contracts_by_project
+from .get_accounts import get_accounts
+from .get_contracts import get_contracts
 from .run_ganache import run_ganache
 from .run_truffle_compile import run_truffle_compile
 from .run_truffle_migrate import run_truffle_migrate
@@ -10,8 +10,8 @@ from .get_struct_logs import get_struct_logs
 from .add_truffle_config import add_truffle_config
 
 __all__ = [
-    "get_all_accounts",
-    "get_contracts_by_project",
+    "get_accounts",
+    "get_contracts",
     "run_ganache",
     "run_truffle_compile",
     "run_truffle_migrate",

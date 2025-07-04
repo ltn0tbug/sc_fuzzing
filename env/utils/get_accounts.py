@@ -3,7 +3,7 @@ from eth_account import Account
 import argparse
 
 
-def get_all_accounts(ganache_rpc_url, ganache_mnemonic_phrase):
+def get_accounts(ganache_rpc_url, ganache_mnemonic_phrase):
     """
     Retrieve all accounts from a local Ganache instance using a mnemonic phrase.
 

@@ -66,7 +66,7 @@ Fuzzing block found and matches the expected configuration.
 ### 2. Get Deployed Contracts & View Lastest Deployed Contract Info
 
 ```python
-contracts = env.get_contracts_by_project()
+contracts = env.get_contracts()
 print(f"Found {len(contracts)} contracts.")
 contract = contracts[-1]
 print(f"Name:           {contracts[-1].name}")
@@ -90,7 +90,7 @@ ABI (truncated): [{'constant': True, 'inputs': [], 'name': 'pauseNotice', 'ou...
 ### 3. Get Accounts
 
 ```python
-accounts = env.get_all_accounts()
+accounts = env.get_accounts()
 deployer = env.get_deployer_account()
 attacker = env.get_attacker_account()
 # In default setting, deployer will be the first account and attacker will the second account.

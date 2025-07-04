@@ -28,9 +28,15 @@ def add_truffle_config(project_path: str = None, config: dict = None):
     # Generate the addon configuration
     addon_config = TEMPLATE.format(**config)
 
-    truffle_config_path = os.path.join(project_path, 'truffle-config.js')
-    if not os.path.isfile(truffle_config_path):
-        print(f"Error: The file {truffle_config_path} does not exist.")
+    truffle_config_path = None
+
+    for config_file in ['truffle-config.js', 'truffle.js']:
+        if os.path.isfile(os.path.join(project_path, config_file)):
+            truffle_config_path = os.path.join(project_path, config_file)
+            break
+
+    if truffle_config_path is None:
+        print(f"Error: No Truffle configuration file existed in {project_path}.")
         return
 
     with open(truffle_config_path, 'r') as file:
