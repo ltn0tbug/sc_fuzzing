@@ -27,8 +27,7 @@ if len(contracts) >=1:
     print(f"Address:        {contracts[-1].address}")
     print(f"Creator:        {contracts[-1].creator}")
     print(f"Creation TX:    {contracts[-1].creation_tx}")
-    print(f"Bytecode (truncated): {contracts[-1].bytecode.hex()[:60]}...")
-    print(f"ABI (truncated): {str(contracts[-1].abi)[:60]}...")
+    print(f"ABI (truncated): {str(contracts[-1].abi)[:120]}...")
 
 print(f"{"":-^100}")
 

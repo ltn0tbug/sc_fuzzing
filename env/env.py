@@ -70,6 +70,7 @@ class Env:
         Add or update truffle config to truffle-config.js if not match or found
         """
         truffle_config = truffle_config or {
+            "name": "fuzzing",
             "host": "127.0.0.1",
             "port": 8545,
             "network_id": "*"

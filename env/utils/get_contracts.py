@@ -24,10 +24,9 @@ def load_compiled_contracts(artifacts_path="build/contracts"):
                 data = json.load(f)
                 name = data["contractName"]
                 # Get deployed bytecode and strip metadata hash (after 'a264' marker)
-                bytecode = data.get("deployedBytecode", "")
+                deployed_bytecode = data.get("deployedBytecode", "")
                 abi = data.get("abi", [])
-                cleaned_bytecode = bytecode.split("a264")[0] if "a264" in bytecode else bytecode
-                compiled_contracts[name] = (cleaned_bytecode.lower(), abi)
+                compiled_contracts[name] = (deployed_bytecode.lower(), abi)
 
     return compiled_contracts
 
@@ -74,23 +73,25 @@ def get_contracts(ganache_rpc_url, project_path):
             # If contractAddress is not None, this tx deployed a contract
             if contract_address:
                 creator = tx["from"]
-                deployed_code = w3.eth.get_code(contract_address)
-                deployed_code_clean = deployed_code.split(b'\xa2\x64')[0]  # Remove metadata
+                deployed_bytecode = w3.eth.get_code(contract_address)
 
                 # Try to identify the contract by comparing bytecode prefix
                 matched_name = None
-                for name, (known_code, _) in compiled.items():
-                    if deployed_code_clean.hex().startswith(known_code[2:]):
+                count = 0
+                for name, (deployed_bytecode_from_abi, _) in compiled.items():
+                    if deployed_bytecode.hex().lower() == deployed_bytecode_from_abi[2:]:
                         matched_name = name
-                        break
-
+                        count += 1
+                
+                if count > 1:
+                    raise ValueError(f"There are {count} contracts have same deployed code. Please remove the duplicated complied json file.")
+                
                 contracts.append(
                     {
                         "address": contract_address,
                         "creator": creator,
                         "creation_tx": f"0x{tx.hash.hex()}",
                         "name": matched_name or "Unknown",
-                        "bytecode": deployed_code,
                         "abi": compiled.get(matched_name, [])[1] if matched_name else None,
                     }
                 )
@@ -119,5 +120,4 @@ if __name__ == "__main__":
         print(f"Address:        {c['address']}")
         print(f"Creator:        {c['creator']}")
         print(f"Creation TX:    {c['creation_tx']}")
-        print(f"Bytecode (truncated): {c['bytecode'].hex()[:60]}...")
         print(f"ABI (truncated): {str(c['abi'])[:60]}...")
