@@ -110,7 +110,7 @@ if __name__ == "__main__":
     print(f"Connecting to Ganache at {ganache_rpc_url}...") 
     print(f"Running contract scanner on project at {project_path}...")
     # Run the contract scanner
-    contracts = get_contracts_by_project(ganache_rpc_url, project_path)
+    contracts = get_contracts(ganache_rpc_url, project_path)
 
     # Display results for each contract
     for i, c in enumerate(contracts):

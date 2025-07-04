@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print("Retrieving all accounts from Ganache...")
     print(f"Using mnemonic: {ganache_mnemonic_phrase}")
     print(f"Using RPC URL: {ganache_rpc_url}")
-    accounts = get_all_accounts(ganache_rpc_url, ganache_mnemonic_phrase)
+    accounts = get_accounts(ganache_rpc_url, ganache_mnemonic_phrase)
     # Print all accounts info
     for i, a in enumerate(accounts):
         print(f"\nAccount {i + 1}")  # Print account details
