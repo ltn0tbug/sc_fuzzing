@@ -74,7 +74,6 @@ print(f"Address:        {contracts[-1].address}")
 print(f"Creator:        {contracts[-1].creator}")
 print(f"Creation TX:    {contracts[-1].creation_tx}")
 print(f"Bytecode (truncated): {contracts[-1].bytecode.hex()[:60]}...")
-print(f"ABI (truncated): {str(contracts[-1].abi)[:60]}...")
 
 """ Example Output
 Found 1 contracts.
@@ -82,8 +81,7 @@ Name:           GlobalPause
 Address:        0x8CdaF0CD259887258Bc13a92C0a6dA92698644C0
 Creator:        0x627306090abaB3A6e1400e9345bC60c78a8BEf57
 Creation TX:    0x7137893f541f1fe9d1e7697bd97b050cdd67ba044226136d5fc2b69447fd3510
-Bytecode (truncated): 60806040526004361061008e576000357c01000000000000000000000000...
-ABI (truncated): [{'constant': True, 'inputs': [], 'name': 'pauseNotice', 'ou...
+ABI (truncated): [{'constant': True, 'inputs': [], 'name': 'pauseNotice', 'outputs': [{'name': '', 'type': 'string'}], 'payable': False, ...
 """
 ```
 
@@ -103,7 +101,9 @@ Attacker account:  {'address': '0xf17f52151EbEF6C7334FAD080c5704D77216b732', 'pr
 """
 ```
 
-### 4. Call Function as Attacker
+### 4. Call Function
+
+- From Attacker
 
 ```python
 args = {"_status": True, "_notice": "Some string"}
@@ -121,7 +121,7 @@ Message: Exception - execution reverted: VM Exception while processing transacti
 """
 ```
 
-### 5. Call Function as Deployer
+- From Deployer
 
 ```python
 result = env.call_sc_function(deployer, contract, "pauseAllTokens", args)
@@ -139,9 +139,7 @@ Message: Function `pauseAllTokens` executed successfully
 """
 ```
 
-
-
-### 6. Get Execution Trace (StructLogs)
+### 5. Get Execution Trace (StructLogs)
 
 ```python
 logs = env.get_struct_logs(result["tx_hash"])
@@ -152,7 +150,7 @@ StructLogs: [{'depth': 1, 'error': '', 'gas': '0x23f7b', 'gasCost': 3, 'memory':
 """
 ```
 
-### 7. Stop Ganache
+### 6. Stop Ganache
 
 ```python
 env.stop_ganache()
@@ -168,3 +166,33 @@ Tested with sample smart contracts in the `test/data` project directory.
 
 This project is licensed under the MIT License.
 
+## 🤝 Collaborators
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/ltn0tbug/">
+        <img src="https://avatars.githubusercontent.com/u/71972700?v=4" width="100px;" alt="ltn0tbug"/><br />
+        <sub><b>ltn0tbug</b></sub>
+      </a>
+      <br />
+      <!-- 💻 Project Lead -->
+    </td>
+    <td align="center">
+      <a href="https://github.com/frogin-mag">
+        <img src="https://avatars.githubusercontent.com/u/101979911?v=4" width="100px;" alt="frogin-mag"/><br />
+        <sub><b>frogin-mag</b></sub>
+      </a>
+      <br />
+      <!-- ⚙️ Blockchain Integration -->
+    </td>
+    <td align="center">
+      <a href="https://github.com/hovikhanh">
+        <img src="https://avatars.githubusercontent.com/u/85947145?v=4" width="100px;" alt="ViKa_618"/><br />
+        <sub><b>ViKa_618</b></sub>
+      </a>
+      <br />
+      <!-- 🧪 Testing & Examples -->
+    </td>
+  </tr>
+</table>
