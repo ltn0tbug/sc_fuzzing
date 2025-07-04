@@ -18,8 +18,8 @@ print(f"{"":-^100}")
 
 ## Get all deployed contracts for current project
 print("[+] {}".format("Get all deployed contracts for current project"))
-env.get_contracts_by_project()
-contracts = env.get_contracts_by_project()
+env.get_contracts()
+contracts = env.get_contracts()
 print(f"Found {len(contracts)} contracts.")
 if len(contracts) >=1:
     print(f"Last deployed contract")
@@ -33,7 +33,7 @@ print(f"{"":-^100}")
 
 ## Get all accounts
 print("[+] {}".format("Get all accounts"))
-accounts = env.get_all_accounts()
+accounts = env.get_accounts()
 print(f"Found {len(accounts)} accounts.")
 deployer = env.get_deployer_account()
 print(f"SC deployer account: ", deployer.to_dict())
@@ -56,7 +56,7 @@ args={"_status": True, "_notice": "Some string"}
 print("Caller: ", "Attacker", f"({attacker.address})")
 print(f"Call function {function_name} with args: {args}")
 attacker_call_result = env.call_sc_function(from_account, contract, function_name, args)
-print(f"Function call success: {attacker_call_result["success"]}")
+print(f"Success: {attacker_call_result["success"]}")
 print(f"Transaction Hash: {attacker_call_result['tx_hash'] if attacker_call_result['tx_hash'] is not None else None}")
 print(f"Message: {attacker_call_result['message']}")
 
@@ -69,7 +69,7 @@ from_account = deployer
 print("Caller: ", "Deployer (owner)", f"({deployer.address})")
 print(f"Call function {function_name} with args: {args}")
 deployer_call_result = env.call_sc_function(from_account, contract, function_name, args)
-print(f"Function call success: {deployer_call_result["success"]}")
+print(f"Success: {deployer_call_result["success"]}")
 print(f"Transaction Hash: {deployer_call_result['tx_hash'] if deployer_call_result['tx_hash'] is not None else None}")
 print(f"Message: {deployer_call_result['message']}")
 

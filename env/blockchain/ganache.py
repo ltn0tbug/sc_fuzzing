@@ -2,7 +2,7 @@ from web3 import Web3
 from ..utils import log, run_ganache
 
 class Ganache:
-    def __init__(self, mnemonic="candy maple cake sugar pudding cream honey rich smooth crumble sweet treat", rpc_url="http://127.0.1:8545"):
+    def __init__(self, mnemonic="candy maple cake sugar pudding cream honey rich smooth crumble sweet treat", rpc_url="http://127.0.0.1:8545"):
         """
         Initializes a Ganache instance with the given mnemonic and RPC URL.
         

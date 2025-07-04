@@ -6,7 +6,7 @@ import os
 TEMPLATE = """/*---BEGIN-FUZZING-CONFIG---*/
 const config = module.exports;
 // Modify the configuration to add a new network for fuzzing
-config.networks.fuzzing = {{
+config.networks.{name} = {{
     host: "{host}",
     port: {port},
     network_id: "{network_id}", // Match any network id
@@ -16,14 +16,7 @@ module.exports = config;
 /*---END-FUZZING-CONFIG---*/"""
 
 
-def add_truffle_config(project_path: str = None, config: dict = None):
-
-    if config is None:
-        config = {
-            "host": "127.0.0.1",
-            "port": 8545,
-            "network_id": "*"
-        }
+def add_truffle_config(project_path: str, config: dict):
 
     # Generate the addon configuration
     addon_config = TEMPLATE.format(**config)
@@ -65,10 +58,10 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Add or update fuzzing config in truffle-config.js")
     parser.add_argument('--path', type=str, required=True, help='Path to truffle project directory.')
-    parser.add_argument('--config', type=str, default=None, help='JSON string of the config to add (e.g. \'{"host": "127.0.01", "port": 8545, "network_id": "*"}\').')
+    parser.add_argument('--config', type=str, default=None, help='JSON string of the config to add (e.g. \'{"name": "fuzzing", "host": "127.0.01", "port": 8545, "network_id": "*"}\').')
 
     args = parser.parse_args()
-    config = json.loads(args.config) if args.config else None
+    config = json.loads(args.config) if args.config else { "name": "fuzzing", "host": "127.0.0.1", "port": 8545, "network_id": "*"}
 
     add_truffle_config(
         truffle_config_path=args.path,
