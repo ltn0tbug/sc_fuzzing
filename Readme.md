@@ -73,7 +73,7 @@ print(f"Name:           {contracts[-1].name}")
 print(f"Address:        {contracts[-1].address}")
 print(f"Creator:        {contracts[-1].creator}")
 print(f"Creation TX:    {contracts[-1].creation_tx}")
-print(f"Bytecode (truncated): {contracts[-1].bytecode.hex()[:60]}...")
+print(f"ABI (truncated): {contracts[-1].bytecode.hex()[:120]}...")
 
 """ Example Output
 Found 1 contracts.
