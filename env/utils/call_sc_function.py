@@ -40,14 +40,14 @@ def call_sc_function_function_type(w3, from_account_address, contract, fn_abi, a
         if receipt.status != 1:
             return {
                 "success": True,
-                "tx_hash": f"0x{receipt.transactionHash.hex()}",
+                "tx_hash": receipt.transactionHash.to_0x_hex(),
                 "message": f"Function `{fn_abi.get('name')}` executed, but transaction failed (`receipt.status=0`).",
                 "return_": receipt
             }
 
         return {
             "success": True,
-            "tx_hash": f"0x{receipt.transactionHash.hex()}",
+            "tx_hash": receipt.transactionHash.to_0x_hex(),
             "message": f"Function `{fn_abi.get('name')}` executed successfully and transaction confirmed (`receipt.status=1`).",
             "return_": receipt
         }
@@ -100,7 +100,7 @@ def call_sc_function_event_type(w3: Web3, from_account_address: str, contract, f
     try:
         # Fallback: scan all blocks for matching logs
         event_signature = f"{fn_abi['name']}({','.join([inp['type'] for inp in fn_abi['inputs']])})"
-        event_topic = f"0x{w3.keccak(text=event_signature).hex()}"
+        event_topic = w3.keccak(text=event_signature).to_0x_hex()
 
         logs = w3.eth.get_logs({
             "address": contract.address,

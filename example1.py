@@ -2,7 +2,6 @@ import sys
 sys.path.append(r"/home/ltn0tbug/workspace/")
 
 from sc_fuzzing.env import Env
-from sc_fuzzing.env.utils import log
 from sc_fuzzing.env.blockchain import Ganache
 
 

@@ -77,11 +77,13 @@ print(f"Bytecode (truncated): {contracts[-1].bytecode.hex()[:60]}...")
 
 """ Example Output
 Found 1 contracts.
+Found 1 contracts.
 Name:           GlobalPause
 Address:        0x8CdaF0CD259887258Bc13a92C0a6dA92698644C0
 Creator:        0x627306090abaB3A6e1400e9345bC60c78a8BEf57
 Creation TX:    0x7137893f541f1fe9d1e7697bd97b050cdd67ba044226136d5fc2b69447fd3510
 ABI (truncated): [{'constant': True, 'inputs': [], 'name': 'pauseNotice', 'outputs': [{'name': '', 'type': 'string'}], 'payable': False, ...
+----------------------------------------------------------------------------------------------------
 """
 ```
 

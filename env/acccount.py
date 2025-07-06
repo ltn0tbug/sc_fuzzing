@@ -7,7 +7,7 @@ class Account:
         self.nonce = nonce
 
     def __repr__(self):
-        return f"Account(address={self.address.hex()[:10]}, balance={self.balance:,} Wei)"
+        return f"Account(address={self.address}, balance={self.balance:,} Wei)"
     
     def to_dict(self):
         return {

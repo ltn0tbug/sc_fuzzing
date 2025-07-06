@@ -87,7 +87,7 @@ if __name__ == "__main__":
     for i, a in enumerate(accounts):
         print(f"\nAccount {i + 1}")  # Print account details
         print(f"Account Address: {a['address']}")
-        print(f"Private Key: {a['private_key'].hex()}")
+        print(f"Private Key: {a['private_key'].to_0x_hex()}")
         print(f"Balance (Wei): {a['balance']:,}")
         print(f"Balance (ETH): {Web3.from_wei(a['balance'], 'ether'):,}")
         print(f"Nonce: {a['nonce']}")

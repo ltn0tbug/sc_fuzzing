@@ -2,7 +2,6 @@ import sys
 sys.path.append(r"/home/ltn0tbug/workspace/")
 
 from sc_fuzzing.env import Env
-from sc_fuzzing.env.utils import log
 from sc_fuzzing.env.blockchain import Ganache
 
 
@@ -40,7 +39,6 @@ print(f"SC deployer account: ", deployer.to_dict())
 attacker = env.get_attacker_account()
 print(f"Attacker account: ", attacker.to_dict())
 
-### Note: In default, SC deployer will be the first account and Attacker will the second account.
 assert accounts[0].address == deployer.address
 assert accounts[1].address == attacker.address 
 
@@ -85,13 +83,6 @@ print(f"Success: {result["success"]}")
 print(f"Transaction Hash: {result['tx_hash'] if result['tx_hash'] is not None else None}")
 print(f"Message: {result['message']}")
 print(f"Reture_: {result['return_']}")
-
-print(f"{"":-^100}")
-
-## Get StructLogs
-# print("[+] {}".format("Get StructLogs"))
-# struct_logs = env.get_struct_logs(deployer_call_result['tx_hash'])
-# print("StructLogs:", f"{str(struct_logs)[:400]}...")
 
 print(f"{"":-^100}")
 

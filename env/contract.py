@@ -8,7 +8,7 @@ class Contract:
         self.abi = abi
 
     def __repr__(self):
-        return f"Contract(address={self.address[:10]}, name={self.name}, creator={self.creator[:10]}, creation_tx={self.creation_tx[:10]})"
+        return f"Contract(address={self.address}, name={self.name}, creator={self.creator}, creation_tx={self.creation_tx})"
     
     def to_dict(self):
         return {

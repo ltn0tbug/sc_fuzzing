@@ -45,9 +45,8 @@ def get_contracts(ganache_rpc_url, project_path):
         list: A list of dictionaries, each containing:
             - address (str): The deployed contract address.
             - creator (str): The address that deployed the contract.
-            - creation_tx (HexBytes): The transaction hash of the contract creation.
+            - creation_tx (str): The transaction hash of the contract creation.
             - contract_name (str): The identified contract name, or "Unknown" if not matched.
-            - bytecode (HexBytes): The deployed contract bytecode.
             - abi (list): The contract ABI, or None if not matched.
     """
     # Connect to local Ganache RPC
@@ -79,7 +78,7 @@ def get_contracts(ganache_rpc_url, project_path):
                 matched_name = None
                 count = 0
                 for name, (deployed_bytecode_from_abi, _) in compiled.items():
-                    if deployed_bytecode.hex().lower() == deployed_bytecode_from_abi[2:]:
+                    if deployed_bytecode.to_0x_hex().lower() == deployed_bytecode_from_abi:
                         matched_name = name
                         count += 1
                 
@@ -90,7 +89,7 @@ def get_contracts(ganache_rpc_url, project_path):
                     {
                         "address": contract_address,
                         "creator": creator,
-                        "creation_tx": f"0x{tx.hash.hex()}",
+                        "creation_tx": tx.hash.to_0x_hex(),
                         "name": matched_name or "Unknown",
                         "abi": compiled.get(matched_name, [])[1] if matched_name else None,
                     }
