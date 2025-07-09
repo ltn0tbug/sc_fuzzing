@@ -101,8 +101,14 @@ class Env:
         """
         return Account(**get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)[1])
     
-    def call_sc_function(self, from_acount: Account, contract: Contract, function_name: str, args: dict = {}, function_type: str = "auto"):
-        return call_sc_function(self.ganache.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args, function_type)
+    def call_sc_function(self, from_acount: Account, contract: Contract, function_name: str, args: dict = {}):
+        return call_sc_function(self.ganache.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args)
+    
+    def call_sc_event(self, contract: Contract, event_name: str, tx_hash: str = None):
+        return call_sc_event(self.ganache.rpc_url, contract.abi, contract.address, event_name, tx_hash)
+    
+    def debug_sc_function(self, from_acount: Account, contract: Contract, function_name: str, args: dict = {}):
+        return debug_sc_function(self.ganache.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args)
     
     def get_struct_logs(self, tx_hash: str, trace_config: dict = None):
         return get_struct_logs(self.ganache.rpc_url, tx_hash, trace_config)

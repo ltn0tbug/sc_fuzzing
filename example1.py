@@ -45,39 +45,19 @@ assert accounts[1].address == attacker.address
 
 print(f"{"":-^100}")
 
-## Call function - from attacker
-print("[+] {}".format("Call function - from attacker"))
-from_account = attacker
+## Debug function
+print("[+] {}".format("Debug function (call function - alway return tx_hash, even for view/pure function and get StructLogs)"))
+
 contract = contracts[-1]
 function_name="pauseAllTokens"
 args={"_status": True, "_notice": "Some string"}
 
 print("Caller: ", "Attacker", f"({attacker.address})")
-print(f"Call function {function_name} with args: {args}")
-attacker_call_result = env.call_sc_function(from_account, contract, function_name, args)
-print(f"Success: {attacker_call_result["success"]}")
-print(f"Transaction Hash: {attacker_call_result['tx_hash'] if attacker_call_result['tx_hash'] is not None else None}")
-print(f"Message: {attacker_call_result['message']}")
-
-print(f"{"":-^100}")
-
-## Call function - from deployer (owner)
-print("[+] {}".format("Call function - from deployer (owner)"))
-from_account = deployer
-
-print("Caller: ", "Deployer (owner)", f"({deployer.address})")
-print(f"Call function {function_name} with args: {args}")
-deployer_call_result = env.call_sc_function(from_account, contract, function_name, args)
-print(f"Success: {deployer_call_result["success"]}")
-print(f"Transaction Hash: {deployer_call_result['tx_hash'] if deployer_call_result['tx_hash'] is not None else None}")
-print(f"Message: {deployer_call_result['message']}")
-
-print(f"{"":-^100}")
-
-## Get StructLogs
-print("[+] {}".format("Get StructLogs"))
-struct_logs = env.get_struct_logs(deployer_call_result['tx_hash'])
-print("StructLogs:", f"{str(struct_logs)[:400]}...")
+print(f"Debug function {function_name} with args: {args}")
+result = env.debug_sc_function(attacker, contract, function_name, args)
+print(f"Success: {result["success"]}")
+print(f"Transaction Hash: {result['tx_hash']}")
+print(f"StructLogs: {str(result['struct_logs'])[:400]}...")
 
 print(f"{"":-^100}")
 

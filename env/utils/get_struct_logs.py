@@ -43,6 +43,7 @@ def get_struct_logs(ganache_rpc_url: str, tx_hash: str, trace_config: dict = Non
         }
 
     # Make the raw JSON-RPC call to debug_traceTransaction
+    
     response = w3.provider.make_request(
         method="debug_traceTransaction",
         params=[tx_hash, trace_config]
@@ -51,10 +52,11 @@ def get_struct_logs(ganache_rpc_url: str, tx_hash: str, trace_config: dict = Non
     # Handle response
     if "error" in response:
         print("Error:", response["error"])
+        trace = {}
     else:
         trace = response["result"]
 
-    return trace.get("structLogs", [])
+    return trace.get("structLogs", None)
 
 
 # main function for testing

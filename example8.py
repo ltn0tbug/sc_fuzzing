@@ -54,34 +54,41 @@ transfer_function_name="transfer"
 transfer_args={"to": attacker.address, "value": 5}
 transfer_event="Transfer"
 
-
 print("Caller:", "Deployer", f"({deployer.address})")
 print(f"Call function {mint_function_name} with args: {mint_args}")
 result = env.call_sc_function(deployer, contract, mint_function_name, mint_args)
 print(f"Success: {result["success"]}")
-print(f"Transaction Hash: {result['tx_hash'] if result['tx_hash'] is not None else None}")
-print(f"Message: {result['message']}")
+print(f"Transaction Hash: {result['tx_hash']}")
 print(f"Reture_: {result['return_']}")
 
 print("Caller:", "Deployer", f"({deployer.address})")
 print(f"Call function {transfer_function_name} with args: {transfer_args}")
 result = env.call_sc_function(deployer, contract, transfer_function_name, transfer_args)
 print(f"Success: {result["success"]}")
-print(f"Transaction Hash: {result['tx_hash'] if result['tx_hash'] is not None else None}")
-print(f"Message: {result['message']}")
+print(f"Transaction Hash: {result['tx_hash']}")
 print(f"Reture_: {result['return_']}")
 
 print(f"{"":-^100}")
 
+## Get StructLogs
+print("[+] {}".format("Get StructLogs"))
+struct_logs = env.get_struct_logs(result['tx_hash'])
+print("StructLogs:", f"{str(struct_logs)[:400]}...")
+
+print(f"{"":-^100}")
 
 print("[+] {}".format("Call Event"))
 
-print("Caller: ", "Deployer", f"({deployer.address})")
-print(f"Call Event {transfer_event} with args: {{}}")
-result = env.call_sc_function(deployer, contract, transfer_event, {})
+print(f"Call Event {transfer_event} (all logs)")
+result = env.call_sc_event(contract, transfer_event)
 print(f"Success: {result["success"]}")
-print(f"Transaction Hash: {result['tx_hash'] if result['tx_hash'] is not None else None}")
-print(f"Message: {result['message']}")
+print(f"Transaction Hash: {result['tx_hash']}")
+print(f"Reture_: {result['return_']}")
+
+print(f"Call Event {transfer_event} (logs from tx_hash: {result['tx_hash']})")
+result = env.call_sc_event(contract, transfer_event)
+print(f"Success: {result["success"]}")
+print(f"Transaction Hash: {result['tx_hash']}")
 print(f"Reture_: {result['return_']}")
 
 print(f"{"":-^100}")

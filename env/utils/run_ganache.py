@@ -51,3 +51,5 @@ if __name__ == "__main__":
     mnemonic = args.mnemonic
     log_to_console = args.log_to_console
     run_ganache(mnemonic, log_to_console)
+    if args.log_to_console:
+        print("Ganache is running in background mode. Please check the log in var/log/ganache.log")

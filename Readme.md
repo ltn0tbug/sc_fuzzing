@@ -6,7 +6,7 @@ A Python-based environment for testing and fuzzing smart contracts using Ganache
 
 - ENV: **Under Construction**
 - LLM: **TBD**
-- RF: **TBD**
+- RL: **TBD**
 
 ## 📁 Project Structure
 
@@ -27,7 +27,7 @@ pip install -r requirements.txt
 ### node 17+
 
 ```bash
-npm install -g npm-packages.json
+npm install -g ganache@7.9.2 truffle@5.11.5
 ```
 
 ## 🚀 Example Usage for ENV
@@ -103,70 +103,40 @@ Attacker account:  {'address': '0xf17f52151EbEF6C7334FAD080c5704D77216b732', 'pr
 """
 ```
 
-### 4. Call Function
-
-- From Attacker
+### 4. Debug Function Call
+> **Note**: Ganache does **not** support the `debug_traceCall` RPC method. Therefore, to obtain execution traces (`structLogs`) for any function call—including *non-state-changing* ones—this `debug_sc_function` method uses `eth_sendTransaction` to submit the transaction and retrieve a `tx_hash`. The `tx_hash` is then used with `debug_traceTransaction` to extract the execution trace.
 
 ```python
 args = {"_status": True, "_notice": "Some string"}
-result = env.call_sc_function(attacker, contract, "pauseAllTokens", args)
-print("Success:", result["success"])
-print(f"Transaction Hash: {result['tx_hash'] if result['tx_hash'] is not None else None}")
-print(f"Message: {result['message']}")
+result = env.debug_sc_function(attacker, contract, "pauseAllTokens", args)
+
+print(f"Success: {result["success"]}")
+print(f"Transaction Hash: {result['tx_hash']}")
+print(f"StructLogs: {str(result['struct_logs'])[:400]}")
 
 """ Example Output
-Caller:  Attacker (0xf17f52151EbEF6C7334FAD080c5704D77216b732)
-Call function pauseAllTokens with args: {'_status': True, '_notice': 'Some string'}
-Success: False
-Transaction Hash: None
-Message: Exception - execution reverted: VM Exception while processing transaction: revert
-"""
-```
-
-- From Deployer
-
-```python
-result = env.call_sc_function(deployer, contract, "pauseAllTokens", args)
-print("Success:", result["success"])
-print("Success:", result["success"])
-print(f"Transaction Hash: {result['tx_hash'] if result['tx_hash'] is not None else None}")
-print(f"Message: {result['message']}")
-
-""" Example Output
-Caller:  Deployer (owner) (0x627306090abaB3A6e1400e9345bC60c78a8BEf57)
-Call function pauseAllTokens with args: {'_status': True, '_notice': 'Some string'}
 Success: True
-Transaction Hash: 0x814bf6b44a9d54ba1f0f6588de2cec0342a6de5fe4d55d50cce28526599b7579
-Message: Function `pauseAllTokens` executed successfully
+Transaction Hash: 0x46eb1405405dc5c0056b1ef0ba5612fcde2ed3ae10767e399c96236955419559
+StructLogs: [{'depth': 1, 'error': '', 'gas': '0x10aa0', 'gasCost': 3, 'memory': [], 'op': 'PUSH1', 'pc': 0, 'stack': [], 'storage': {}}, {'depth': 1, 'error': '', 'gas': '0x10a9d', 'gasCost': 3, 'memory': [], 'op': 'PUSH1', 'pc': 2, 'stack': ['0000000000000000000000000000000000000000000000000000000000000080'], 'storage': {}}, {'depth': 1, 'error': '', 'gas': '0x10a9a', 'gasCost': 12, 'memory': ['000000000000..
 """
 ```
 
-### 5. Get Execution Trace (StructLogs)
-
-```python
-logs = env.get_struct_logs(result["tx_hash"])
-print("StructLogs:", logs[:400])
-
-""" Example Output
-StructLogs: [{'depth': 1, 'error': '', 'gas': '0x23f7b', 'gasCost': 3, 'memory': [], 'op': 'PUSH1', 'pc': 0, 'stack': [], 'storage': {}}, {'depth': 1, 'error': '', 'gas': '0x23f78', 'gasCost': 3, 'memory': [], 'op': 'PUSH1', 'pc': 2, 'stack': ['0000000000000000000000000000000000000000000000000000000000000080'], 'storage': {}}, {'depth': 1, 'error': '', 'gas': '0x23f75', 'gasCost': 12, 'memory': ['000000000000...
-"""
-```
-
-### 6. Stop Ganache
+### 5. Stop Ganache
 
 ```python
 env.stop_ganache()
 ```
 
-## 🧪 Testing
-
-Tested with sample smart contracts in the `test/data` project directory.
-
 ---
+
+### 6. Other Examples
+
+- [Example 1](example1.py): Oneshot version for the above example.
+- [Example 8](example8.py): Example usage for `call_sc_function`, `call_sc_event` and `get_struct_log` method on `8_smartbugs_wild` sample
 
 ## 📝 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
 
 ## 🤝 Collaborators
 
