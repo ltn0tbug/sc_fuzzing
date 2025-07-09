@@ -104,7 +104,7 @@ Attacker account:  {'address': '0xf17f52151EbEF6C7334FAD080c5704D77216b732', 'pr
 ```
 
 ### 4. Debug Function Call
-> **Note**: Ganache does **not** support the `debug_traceCall` RPC method. Therefore, to obtain execution traces (`structLogs`) for any function call—including *non-state-changing* ones—this `debug_sc_function` method uses `eth_sendTransaction` to submit the transaction and retrieve a `tx_hash`. The `tx_hash` is then used with `debug_traceTransaction` to extract the execution trace.
+> **Note**: Ganache does **not** support the `debug_traceCall` RPC method. Therefore, to obtain execution traces (`structLogs`) for any function call—including *non-state-changing* ones—this `debug_sc_function` method uses `eth_sendTransaction` to submit the transaction for any function calls and retrieve a `tx_hash`. The `tx_hash` is then used with `debug_traceTransaction` to extract the execution trace.
 
 ```python
 args = {"_status": True, "_notice": "Some string"}
