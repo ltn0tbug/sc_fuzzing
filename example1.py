@@ -1,5 +1,6 @@
-import sys
-sys.path.append(r"/home/ltn0tbug/workspace/")
+# (Optional) if you work outside the module root
+# import sys
+# sys.path.append(r"/path/to/workspace/")
 
 from env import Env
 from env.blockchain import Ganache

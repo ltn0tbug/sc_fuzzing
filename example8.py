@@ -1,8 +1,9 @@
-import sys
-sys.path.append(r"/home/ltn0tbug/workspace/")
+# (Optional) if you work outside the module root
+# import sys
+# sys.path.append(r"/path/to/workspace/")
 
-from sc_fuzzing.env import Env
-from sc_fuzzing.env.blockchain import Ganache
+from env import Env
+from env.blockchain import Ganache
 
 
 project_path="test/data/8_smartbugs_wild"
