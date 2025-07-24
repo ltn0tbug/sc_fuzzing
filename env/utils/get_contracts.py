@@ -2,6 +2,7 @@ import json
 import os
 from web3 import Web3
 import argparse
+import re
 
 
 def load_compiled_contracts(artifacts_path="build/contracts"):
@@ -30,6 +31,18 @@ def load_compiled_contracts(artifacts_path="build/contracts"):
 
     return compiled_contracts
 
+def patch_library_link_bytecode(bytecode):
+    """
+    Replace library link placeholders in bytecode with a fixed pattern.
+    This is necessary to ensure consistent matching of deployed bytecode against compiled artifacts.
+    Args:
+        bytecode (str): The bytecode string to patch.
+    Returns:
+        str: The patched bytecode with library links replaced by a fixed pattern.
+    """
+    pattern = r'__[a-zA-Z0-9/]+_+'
+    replacement = '.' * 40
+    return re.sub(pattern, replacement, bytecode)
 
 def get_contracts(ganache_rpc_url, project_path):
     """
@@ -74,11 +87,14 @@ def get_contracts(ganache_rpc_url, project_path):
                 creator = tx["from"]
                 deployed_bytecode = w3.eth.get_code(contract_address)
 
-                # Try to identify the contract by comparing bytecode prefix
+                # Try to identify the contract by comparing deployed bytecode
                 matched_name = None
                 count = 0
                 for name, (deployed_bytecode_from_abi, _) in compiled.items():
-                    if deployed_bytecode.to_0x_hex().lower() == deployed_bytecode_from_abi:
+                    deployed_bytecode_from_abi = patch_library_link_bytecode(deployed_bytecode_from_abi)
+                    if len(deployed_bytecode_from_abi) != len(deployed_bytecode.to_0x_hex().lower()):
+                        continue
+                    if re.match(deployed_bytecode_from_abi, deployed_bytecode.to_0x_hex().lower()):
                         matched_name = name
                         count += 1
                 
