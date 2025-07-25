@@ -27,18 +27,43 @@ The main modules of the framework are organized under the `sc_fuzzing/` director
 
 ## 📦 Installation
 
-### Requirements
-
-- **Python** 3.8+
-- **Node.js** 17+
-
-### Setup
-
 ```bash
-# Python environment
+# Python (3.8+) environment 
 python -m venv .env
 source .env/bin/activate
 pip install -r requirements.txt
 
-# Node and Ethereum tools
+# Node (17+) dependency 
 npm install -g ganache@7.9.2 truffle@5.11.5
+```
+
+## 🤝 Collaborators
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/ltn0tbug/">
+        <img src="https://avatars.githubusercontent.com/u/71972700?v=4" width="100px;" alt="ltn0tbug"/><br />
+        <sub><b>ltn0tbug</b></sub>
+      </a>
+      <br />
+      <!-- 💻 Project Lead -->
+    </td>
+    <td align="center">
+      <a href="https://github.com/frogin-mag">
+        <img src="https://avatars.githubusercontent.com/u/101979911?v=4" width="100px;" alt="frogin-mag"/><br />
+        <sub><b>frogin-mag</b></sub>
+      </a>
+      <br />
+      <!-- ⚙️ Blockchain Integration -->
+    </td>
+    <td align="center">
+      <a href="https://github.com/hovikhanh">
+        <img src="https://avatars.githubusercontent.com/u/85947145?v=4" width="100px;" alt="ViKa_618"/><br />
+        <sub><b>ViKa_618</b></sub>
+      </a>
+      <br />
+      <!-- 🧪 Testing & Examples -->
+    </td>
+  </tr>
+</table>
