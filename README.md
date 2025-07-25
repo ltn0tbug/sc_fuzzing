@@ -16,10 +16,10 @@ The main modules of the framework are organized under the `sc_fuzzing/` director
 
 | Module                                           | Description                                      | Status             |
 |--------------------------------------------------|--------------------------------------------------|--------------------|
-| [`env/`](sc_fuzzing/env/README.md)               | Core environment setup and interaction logic     | ✅ Done             |
-| [`data/`](sc_fuzzing/data/README.md)             | Preprocessed smart contracts in Truffle format   | ✅ Done             |
-| [`llm/`](sc_fuzzing/llm/README.md)               | LLM-based fuzzing strategy implementation        | ⚠️ In Development   |
-| [`rl/`](sc_fuzzing/rl/README.md)                 | Reinforcement learning-based fuzzing             | ⚠️ In Development   |
+| [`env/`](env/README.md)               | Core environment setup and interaction logic     | ✅ Done             |
+| [`data/`](data/README.md)             | Preprocessed smart contracts in Truffle format   | ✅ Done             |
+| [`llm/`](llm/README.md)               | LLM-based fuzzing strategy implementation        | ⚠️ In Development   |
+| [`rl/`](rl/README.md)                 | Reinforcement learning-based fuzzing             | ⚠️ In Development   |
 
 
 
