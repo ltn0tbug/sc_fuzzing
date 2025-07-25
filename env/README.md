@@ -18,7 +18,7 @@ from sc_fuzzing.env.blockchain import Ganache
 ### 1. Initialize Environment
 
 ```python
-project_path = "sc-fuzzing/test/data/1_smartbugs_wild"
+project_path = "test/data/1_smartbugs_wild"
 env = Env(Ganache(), project_path)
 env.init()
 
