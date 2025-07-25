@@ -2,34 +2,6 @@
 
 A Python-based environment for testing and fuzzing smart contracts using Ganache. This project supports interaction with deployed contracts, simulates attacks, and retrieves execution traces for further analysis.
 
-## 🔧 Project Status
-
-- ENV: **Under Construction**
-- LLM: **TBD**
-- RL: **TBD**
-
-## 📁 Project Structure
-
-- `sc_fuzzing/env/`: Core environment utilities
-- `sc_fuzzing/env/blockchain.py`: Ganache integration
-- `sc_fuzzing/test/data/`: Sample smart contract projects
-
-## 📦 Requirements
-
-### Python 3.8+
-
-```bash
-python -m venv .env
-source .env/bin/activate
-pip install -r requirements.txt
-```
-
-### node 17+
-
-```bash
-npm install -g ganache@7.9.2 truffle@5.11.5
-```
-
 ## 🚀 Example Usage for ENV
 
 ## 0. Package Setup
@@ -133,38 +105,3 @@ env.stop_ganache()
 
 - [Example 1](example1.py): Oneshot version for the above example.
 - [Example 8](example8.py): Example usage for `call_sc_function`, `call_sc_event` and `get_struct_log` method on `8_smartbugs_wild` sample
-
-## 📝 License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## 🤝 Collaborators
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/ltn0tbug/">
-        <img src="https://avatars.githubusercontent.com/u/71972700?v=4" width="100px;" alt="ltn0tbug"/><br />
-        <sub><b>ltn0tbug</b></sub>
-      </a>
-      <br />
-      <!-- 💻 Project Lead -->
-    </td>
-    <td align="center">
-      <a href="https://github.com/frogin-mag">
-        <img src="https://avatars.githubusercontent.com/u/101979911?v=4" width="100px;" alt="frogin-mag"/><br />
-        <sub><b>frogin-mag</b></sub>
-      </a>
-      <br />
-      <!-- ⚙️ Blockchain Integration -->
-    </td>
-    <td align="center">
-      <a href="https://github.com/hovikhanh">
-        <img src="https://avatars.githubusercontent.com/u/85947145?v=4" width="100px;" alt="ViKa_618"/><br />
-        <sub><b>ViKa_618</b></sub>
-      </a>
-      <br />
-      <!-- 🧪 Testing & Examples -->
-    </td>
-  </tr>
-</table>

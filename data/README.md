@@ -6,15 +6,14 @@ Currently, we have only supported for Smartbugs dataset (including 69 samples fo
 
 # Example Usages
 
-```python
-from sc_fuzzing.data import DataLoader
-
-```
-
 ## Get supported datasets
 
 ```python
-from sc_fuzzing.data import get_supported_datasets
+# (Optional) if you work outside the module root
+# import sys
+# sys.path.append(r"/path/to/workspace/")
+
+from sc_fuzzing.data import DataLoader
 print(DataLoader().get_supported_datasets())
 
 """ Example Output
@@ -25,8 +24,7 @@ print(DataLoader().get_supported_datasets())
 
 ### Smartbugs-Curated
 ```python
-from sc_fuzzing.data import load_metadata
-print(DataLoader().load_metadata("smartbugs_curated").head())
+print(DataLoader().get_metadata("smartbugs_curated").head())
 """ Example Output
                               name                                       project_path  primary_contract compiler_version           label
 0                 fibonaccibalance  /full/path/to/sc_fuzzing/data/module/smartbugs...  FibonacciBalance           0.4.22  access_control
@@ -40,7 +38,6 @@ print(DataLoader().load_metadata("smartbugs_curated").head())
 ### Smartbugs-Wild
 > The SmartBugs-Wild dataset does not include labels by default, so we created them manually. A smart contract is labeled as `1` (vulnerable) if any vulnerabilities were detected by any of the tools in [Smartbugs-results](https://github.com/smartbugs/smartbugs-results).
 ```python
-from sc_fuzzing.data import load_metadata
 print(DataLoader().get_metadata("smartbugs_wild").head())
 """ Example Output
                                                 name                                       project_path primary_contract compiler_version  label
