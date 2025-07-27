@@ -1,16 +1,22 @@
-# (Optional) if you work outside the module root
-# import sys
-# sys.path.append(r"/path/to/workspace/")
+# if you did not install `sc_fuzzing` in PYTHONPATH, the below line is required.
+if __name__ == "__main__":
+    import sys
+    sys.path.append(r"../")
 
-from env import Env
-from env.blockchain import Ganache
-
-
-project_path="test/data/1_smartbugs_wild"
+from sc_fuzzing.env import Env
+from sc_fuzzing.env.blockchain import Ganache
+from sc_fuzzing.data.dataloader import DataLoader
 
 # Example usage
+
+# Get sampe data from DataLoader
+sbc_metadata_df = DataLoader().get_metadata("smartbugs_curated")
+sample = sbc_metadata_df[sbc_metadata_df["name"] == "erc20"].iloc[0]
+
 ## Init
 print("[+] {}".format("Init"))
+
+project_path = sample["project_path"]
 env = Env(Ganache(), project_path)
 env.init()
 
@@ -18,16 +24,17 @@ print(f"{"":-^100}")
 
 ## Get all deployed contracts for current project
 print("[+] {}".format("Get all deployed contracts for current project"))
-env.get_contracts()
 contracts = env.get_contracts()
 print(f"Found {len(contracts)} contracts.")
-if len(contracts) >=1:
-    print(f"Last deployed contract")
-    print(f"Name:           {contracts[-1].name}")
-    print(f"Address:        {contracts[-1].address}")
-    print(f"Creator:        {contracts[-1].creator}")
-    print(f"Creation TX:    {contracts[-1].creation_tx}")
-    print(f"ABI (truncated): {str(contracts[-1].abi)[:120]}...")
+primary_contracts = [contract for contract in contracts if contract.name == sample["primary_contract"]]
+if len(primary_contracts) == 0:
+    raise ValueError(f"Primary contract '{sample['name']}' not found in the environment.")
+contract = primary_contracts[0]
+print(f"Name:           {contract.name}")
+print(f"Address:        {contract.address}")
+print(f"Creator:        {contract.creator}")
+print(f"Creation TX:    {contract.creation_tx}")
+print(f"ABI (truncated): {str(contract.abi)[:120]}...")
 
 print(f"{"":-^100}")
 
@@ -49,16 +56,13 @@ print(f"{"":-^100}")
 ## Debug function
 print("[+] {}".format("Debug function (call function - alway return tx_hash, even for view/pure function and get StructLogs)"))
 
-contract = contracts[-1]
-function_name="pauseAllTokens"
-args={"_status": True, "_notice": "Some string"}
+function_name = "transfer"
+args = {"to": attacker.address, "value": 10*6}
+result = env.debug_sc_function(deployer, contract, function_name, args)
 
-print("Caller: ", "Attacker", f"({attacker.address})")
-print(f"Debug function {function_name} with args: {args}")
-result = env.debug_sc_function(attacker, contract, function_name, args)
 print(f"Success: {result["success"]}")
 print(f"Transaction Hash: {result['tx_hash']}")
-print(f"StructLogs: {str(result['struct_logs'])[:400]}...")
+print(f"StructLogs: {str(result['struct_logs'])[:400]}")
 
 print(f"{"":-^100}")
 

@@ -1,16 +1,22 @@
-# (Optional) if you work outside the module root
-# import sys
-# sys.path.append(r"/path/to/workspace/")
+# if you did not install `sc_fuzzing` in PYTHONPATH, the below line is required.
+if __name__ == "__main__":
+    import sys
+    sys.path.append(r"../")
 
-from env import Env
-from env.blockchain import Ganache
-
-
-project_path="test/data/8_smartbugs_wild"
+from sc_fuzzing.env import Env
+from sc_fuzzing.env.blockchain import Ganache
+from sc_fuzzing.data.dataloader import DataLoader
 
 # Example usage
+
+# Get sampe data from DataLoader
+sbc_metadata_df = DataLoader().get_metadata("smartbugs_curated")
+sample = sbc_metadata_df[sbc_metadata_df["name"] == "erc20"].iloc[0]
+
 ## Init
 print("[+] {}".format("Init"))
+
+project_path = sample["project_path"]
 env = Env(Ganache(), project_path)
 env.init()
 
@@ -18,16 +24,17 @@ print(f"{"":-^100}")
 
 ## Get all deployed contracts for current project
 print("[+] {}".format("Get all deployed contracts for current project"))
-env.get_contracts()
 contracts = env.get_contracts()
 print(f"Found {len(contracts)} contracts.")
-if len(contracts) >=1:
-    print(f"Last deployed contract")
-    print(f"Name:           {contracts[-1].name}")
-    print(f"Address:        {contracts[-1].address}")
-    print(f"Creator:        {contracts[-1].creator}")
-    print(f"Creation TX:    {contracts[-1].creation_tx}")
-    print(f"ABI (truncated): {str(contracts[-1].abi)[:120]}...")
+primary_contracts = [contract for contract in contracts if contract.name == sample["primary_contract"]]
+if len(primary_contracts) == 0:
+    raise ValueError(f"Primary contract '{sample['name']}' not found in the environment.")
+contract = primary_contracts[0]
+print(f"Name:           {contract.name}")
+print(f"Address:        {contract.address}")
+print(f"Creator:        {contract.creator}")
+print(f"Creation TX:    {contract.creation_tx}")
+print(f"ABI (truncated): {str(contract.abi)[:120]}...")
 
 print(f"{"":-^100}")
 
@@ -40,31 +47,23 @@ print(f"SC deployer account: ", deployer.to_dict())
 attacker = env.get_attacker_account()
 print(f"Attacker account: ", attacker.to_dict())
 
+### Note: In default, SC deployer will be the first account and Attacker will the second account.
 assert accounts[0].address == deployer.address
 assert accounts[1].address == attacker.address 
 
 print(f"{"":-^100}")
 
+
 ## Call function
 print("[+] {}".format("Call function"))
 
-contract=contracts[-1]
-mint_function_name="mint"
-mint_args={"value": 10}
-transfer_function_name="transfer"
-transfer_args={"to": attacker.address, "value": 5}
-transfer_event="Transfer"
+function_name = "transfer"
+args = {"to": attacker.address, "value": 10*6}
+result = env.debug_sc_function(deployer, contract, function_name, args)
 
 print("Caller:", "Deployer", f"({deployer.address})")
-print(f"Call function {mint_function_name} with args: {mint_args}")
-result = env.call_sc_function(deployer, contract, mint_function_name, mint_args)
-print(f"Success: {result["success"]}")
-print(f"Transaction Hash: {result['tx_hash']}")
-print(f"Reture_: {result['return_']}")
-
-print("Caller:", "Deployer", f"({deployer.address})")
-print(f"Call function {transfer_function_name} with args: {transfer_args}")
-result = env.call_sc_function(deployer, contract, transfer_function_name, transfer_args)
+print(f"Call function {function_name} with args: {args}")
+result = env.call_sc_function(deployer, contract, function_name, args)
 print(f"Success: {result["success"]}")
 print(f"Transaction Hash: {result['tx_hash']}")
 print(f"Reture_: {result['return_']}")
@@ -79,6 +78,8 @@ print("StructLogs:", f"{str(struct_logs)[:400]}...")
 print(f"{"":-^100}")
 
 print("[+] {}".format("Call Event"))
+
+transfer_event = "Transfer"
 
 print(f"Call Event {transfer_event} (all logs)")
 result = env.call_sc_event(contract, transfer_event)
