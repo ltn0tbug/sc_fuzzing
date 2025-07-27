@@ -122,5 +122,5 @@ env.stop_ganache()
 
 ### 6. Other Examples
 
-- [Example 1](example1.py): Oneshot version for the above example.
-- [Example 2](example2.py): Example usage for `call_sc_function`, `call_sc_event` and `get_struct_log` method on `ERC20` sample
+- [Example 1](./example/example1.py): Oneshot version for the above example.
+- [Example 2](./example/example2.py): Example usage for `call_sc_function`, `call_sc_event` and `get_struct_log` method on `ERC20` sample
