@@ -4,14 +4,6 @@ import pandas as pd
 BASE_DATA_PATH=os.path.dirname(os.path.abspath(__file__))
 SUPPORTED_DATASETS = ["smartbugs_wild", "smartbugs_curated"]
 
-def get_supported_datasets():
-    """
-    Get the list of supported datasets.
-    Returns:
-        list: A list of supported dataset names.
-    """
-    return SUPPORTED_DATASETS
-
 def get_metadata(dataset_name: str):
     """
     get metadata for the specified dataset.
