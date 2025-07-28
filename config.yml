@@ -5,6 +5,7 @@ ganache:
   host: "127.0.0.1"
   port: 8545
   mnemonic: "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
+  default_balance: 1000000000
   verbose: True
   debug: True
 
@@ -14,3 +15,5 @@ truffle:
     host: "127.0.0.1"
     port: 8545
     network_id: "*"
+
+rl:

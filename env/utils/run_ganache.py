@@ -17,6 +17,8 @@ def run_ganache(ganache_mnemonic, log_to_console=False):
         "ganache",
         "-m",
         ganache_mnemonic,
+        "-e",
+        "1000000000", # 1_000_000_000 ETH
         "--logging.debug",
         "--logging.verbose"
     ]
