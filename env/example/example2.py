@@ -1,7 +1,8 @@
 # if you did not install `sc_fuzzing` in PYTHONPATH, the below line is required.
 if __name__ == "__main__":
+    from pathlib import Path
     import sys
-    sys.path.append(r"../")
+    sys.path.append(Path(__file__).parent.parent.parent.parent.as_posix())
 
 from sc_fuzzing.env import Env
 from sc_fuzzing.env.blockchain import Ganache

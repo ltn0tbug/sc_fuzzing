@@ -87,19 +87,19 @@ class Env:
         """
         Retrieve all accounts from the Ganache instance using the mnemonic phrase.
         """
-        return [Account(**account) for account in get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)]
+        return [Account(rpc_url=self.ganache.rpc_url, **account) for account in get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)]
     
     def get_deployer_account(self):
         """
         Retrieve the first account from Ganache, which is typically the default account used for deployments.
         """
-        return Account(**get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)[0])
+        return Account(rpc_url=self.ganache.rpc_url, **get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)[0])
     
     def get_attacker_account(self):
         """
         Retrieve the second account from Ganache, which is typically used as an attacker account in tests.
         """
-        return Account(**get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)[1])
+        return Account(rpc_url=self.ganache.rpc_url, **get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)[1])
     
     def call_sc_function(self, from_acount: Account, contract: Contract, function_name: str, args: dict = {}):
         return call_sc_function(self.ganache.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args)

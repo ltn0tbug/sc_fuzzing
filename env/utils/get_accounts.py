@@ -18,8 +18,6 @@ def get_accounts(ganache_rpc_url, ganache_mnemonic_phrase):
             - address (str): The account address.
             - private_key (HexBytes): The account's private key.
             - balance_wei (int): Account balance in Wei.
-            - balance_eth (Decimal): Account balance in Ether.
-            - nonce (int): Transaction count for the account.
     """
 
     # Enable HD wallet features in eth-account
@@ -50,19 +48,11 @@ def get_accounts(ganache_rpc_url, ganache_mnemonic_phrase):
             derive_account.address == account
         ), f"Address mismatch ({derive_account.address} != {account}). Please check the mnemonic or derivation path."
 
-        # Get balance (Wei)
-        balance = w3.eth.get_balance(account)
-
-        # Get transaction count (nonce)
-        nonce = w3.eth.get_transaction_count(account)
-
         # Save account info
         accounts_info.append(
             {
                 "address": account,
                 "private_key": derive_account.key,
-                "balance": balance,
-                "nonce": nonce,
             }
         )
 
@@ -82,6 +72,7 @@ if __name__ == "__main__":
     print("Retrieving all accounts from Ganache...")
     print(f"Using mnemonic: {ganache_mnemonic_phrase}")
     print(f"Using RPC URL: {ganache_rpc_url}")
+    w3 = Web3(Web3.HTTPProvider(ganache_rpc_url))
     accounts = get_accounts(ganache_rpc_url, ganache_mnemonic_phrase)
     # Print all accounts info
     for i, a in enumerate(accounts):
@@ -89,7 +80,7 @@ if __name__ == "__main__":
         print(f"Account Address: {a['address']}")
         print(f"Private Key: {a['private_key'].to_0x_hex()}")
         print(f"Balance (Wei): {a['balance']:,}")
-        print(f"Balance (ETH): {Web3.from_wei(a['balance'], 'ether'):,}")
-        print(f"Nonce: {a['nonce']}")
+        print(f"Balance (ETH): {Web3.from_wei(w3.eth.get_balance(a['address']), 'ether'):,}")
+        print(f"Nonce: {w3.eth.get_transaction_count(a['address'])}")
 
     print("\nAll accounts info retrieved successfully.")
