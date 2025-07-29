@@ -1,6 +1,9 @@
 name: "SC Fuzzing Configuration"
 version: "0.1"
 
+### Placeholder for global variables ###
+# log_path: "log_path"
+
 ### Ganache Configuration ###
 # This config will be passed to ganache as in CLI. Please using the same keyword and datatype as in `ganache --help`
 ganache:

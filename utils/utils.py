@@ -6,7 +6,6 @@ import sys
 MODULE_ROOT_PATH = Path(__file__).parent.parent.as_posix()
 WORKSPACE_PATH = Path.cwd()
 GLOBAL_CONFIG_PATH = Path(MODULE_ROOT_PATH, "config.yml").as_posix()
-LOG_PATH = Path(WORKSPACE_PATH, "logs").as_posix()
 
 def load_yaml(file_path):
     """Load a YAML file and return its content."""
@@ -24,6 +23,7 @@ def get_global_config():
     return get_config(GLOBAL_CONFIG_PATH)
 
 GLOBAL_CONFIG = get_global_config()
+GLOBAL_LOG_PATH = GLOBAL_CONFIG.get("log_path", Path(WORKSPACE_PATH, "logs").as_posix())
 
 def set_logging(verbosity=2, log_file=None):
     logger = logging.getLogger()

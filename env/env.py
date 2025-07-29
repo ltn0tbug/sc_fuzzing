@@ -2,7 +2,7 @@ from .utils import *
 from .blockchain import Ganache
 from .acccount import Account
 from .contract import Contract
-from ..utils import GLOBAL_CONFIG, LOG_PATH, get_config
+from ..utils import GLOBAL_CONFIG, GLOBAL_LOG_PATH, get_config
 import argparse
 import logging
 from pathlib import Path
@@ -31,7 +31,7 @@ class Env:
         else:
             self.config = config
 
-        self.log_path = self.config.get('log_path', LOG_PATH)
+        self.log_path = self.config.get('log_path', GLOBAL_LOG_PATH)
         ganache.__init__(self.config['ganache'])
         self.ganache = ganache
 
