@@ -7,9 +7,15 @@ A Python-based environment for testing and fuzzing smart contracts using Ganache
 ## 0. Package Setup
 
 ```python
+# (Optional) if you work outside the module root
+# import sys
+# sys.path.append(r"/path/to/workspace/")
+
 from sc_fuzzing.env import Env
 from sc_fuzzing.env.blockchain import Ganache
 from sc_fuzzing.data.dataloader import DataLoader
+from sc_fuzzing.utils import set_logging
+set_logging(2)
 ```
 
 ### 1. Get sample
@@ -17,6 +23,7 @@ from sc_fuzzing.data.dataloader import DataLoader
 sbc_metadata_df = DataLoader().get_metadata("smartbugs_curated")
 sample = sbc_metadata_df[sbc_metadata_df["name"] == "erc20"].iloc[0]
 sample
+
 
 """ Example Output
 name                                                            erc20
@@ -35,14 +42,16 @@ env = Env(Ganache(), project_path)
 env.init()
 
 """ Example Output
-[INFO] Initializing environment...
-[INFO] Initializing Ganache...
-[INFO] Ganache is not running yet. Please start it first!
-[INFO] Starting Ganache...
-[INFO] Ganache output will be logged to var/log/ganache.log
-[INFO] Update Truffle configuration...
-Fuzzing block found and matches the expected configuration.
-[INFO] Running Truffle compile...
+[2025-07-29 23:30:42][sc_fuzzing.env.env][INFO] Initializing environment...
+[2025-07-29 23:30:42][sc_fuzzing.env.env][INFO] Initializing Ganache...
+[2025-07-29 23:30:42][sc_fuzzing.env.blockchain.ganache][INFO] Starting Ganache...
+[2025-07-29 23:30:42][sc_fuzzing.env.blockchain.ganache][INFO] Ganache started. Logs are being written to /home/ltn0tbug/workspace/test/logs/ganache.log.
+[2025-07-29 23:30:42][sc_fuzzing.env.env][INFO] Update Truffle configuration...
+[2025-07-29 23:30:42][sc_fuzzing.env.utils.add_truffle_config][INFO] Fuzzing block found and matches the expected configuration.
+[2025-07-29 23:30:42][sc_fuzzing.env.env][INFO] Running Truffle compile...
+[2025-07-29 23:30:43][sc_fuzzing.env.utils.run_truffle_compile][INFO] Compile completed with exit code: 0. Command outputs are being written to /home/ltn0tbug/workspace/test/logs/truffle_compile.log.
+[2025-07-29 23:30:43][sc_fuzzing.env.env][INFO] Running Truffle migrate...
+[2025-07-29 23:30:45][sc_fuzzing.env.utils.run_truffle_migrate][INFO] Migration completed with exit code: 0. Command outputs are being written to /home/ltn0tbug/workspace/test/logs/truffle_migrate.log
 ...
 """
 ```
@@ -76,19 +85,14 @@ ABI (truncated): [{'inputs': [{'name': 'totalSupply', 'type': 'uint256'}], 'paya
 
 ```python
 accounts = env.get_accounts()
-print(f"Found {len(accounts)} accounts.")
 deployer = env.get_deployer_account()
-print(f"SC deployer account: ", deployer.to_dict())
 attacker = env.get_attacker_account()
+# In default setting, deployer will be the first account and attacker will the second account.
+assert accounts[0].address == deployer.address
+assert accounts[1].address == attacker.address
 print(f"Attacker account: ", attacker.to_dict())
 
-### Note: In default, SC deployer will be the first account and Attacker will the second account.
-assert accounts[0].address == deployer.address
-assert accounts[1].address == attacker.address 
-
 """ Example Output
-Found 10 accounts.
-SC deployer account:  {'address': '0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 'private_key': HexBytes('0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3'), 'balance': 999997719013000000000, 'nonce': 1}
 Attacker account:  {'address': '0xf17f52151EbEF6C7334FAD080c5704D77216b732', 'private_key': HexBytes('0xae6ae8e5ccbfb04590405997ee2d52d2b330726137b875053c36d94e974d162f'), 'balance': 1000000000000000000000, 'nonce': 0}
 """
 ```
@@ -122,5 +126,5 @@ env.stop_ganache()
 
 ### 6. Other Examples
 
-- [Example 1](./example/example1.py): Oneshot version for the above example.
-- [Example 2](./example/example2.py): Example usage for `call_sc_function`, `call_sc_event` and `get_struct_log` method on `ERC20` sample
+- [Example 1](example1.py): Oneshot version for the above example.
+- [Example 2](example2.py): Example usage for `call_sc_function`, `call_sc_event` and `get_struct_log` method on `8_smartbugs_wild` sample

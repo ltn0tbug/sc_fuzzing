@@ -7,6 +7,9 @@ if __name__ == "__main__":
 from sc_fuzzing.env import Env
 from sc_fuzzing.env.blockchain import Ganache
 from sc_fuzzing.data.dataloader import DataLoader
+from sc_fuzzing.utils import set_logging
+
+set_logging()
 
 # Example usage
 

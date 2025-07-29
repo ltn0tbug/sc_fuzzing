@@ -7,7 +7,9 @@ if __name__ == "__main__":
 from sc_fuzzing.env import Env
 from sc_fuzzing.env.blockchain import Ganache
 from sc_fuzzing.data.dataloader import DataLoader
+from sc_fuzzing.utils import set_logging
 
+set_logging()
 # Example usage
 
 # Get sampe data from DataLoader
@@ -97,5 +99,4 @@ print(f"Reture_: {result['return_']}")
 print(f"{"":-^100}")
 
 ## Stop ganache
-print(f"Stop Ganache...")
 env.stop_ganache()

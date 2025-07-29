@@ -2,6 +2,9 @@ import re
 import argparse
 import json
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 TEMPLATE = """/*---BEGIN-FUZZING-CONFIG---*/
 const config = module.exports;
@@ -41,8 +44,7 @@ def add_truffle_config(project_path: str, config: dict = None):
             break
 
     if truffle_config_path is None:
-        print(f"Error: No Truffle configuration file existed in {project_path}.")
-        return
+        raise ValueError(f"Error: No Truffle configuration file existed in {project_path}.")
 
     with open(truffle_config_path, 'r') as file:
         content = file.read()
@@ -53,17 +55,17 @@ def add_truffle_config(project_path: str, config: dict = None):
     if match:
         block = match.group(0)
         if block == addon_config:
-            print("Fuzzing block found and matches the expected configuration.")
+            logger.info("Fuzzing block found and matches the expected configuration.")
         else:
             new_content = re.sub(pattern, addon_config, content, flags=re.DOTALL)
             with open(truffle_config_path, 'w') as file:
                 file.write(new_content)
-            print("Fuzzing block found but did not match. Updated the configuration.")
+            logger.info("Fuzzing block found but did not match. Updated the configuration.")
     else:
         new_content = content + '\n' * 3 + addon_config
         with open(truffle_config_path, 'w') as file:
             file.write(new_content)
-        print("Fuzzing block not found. Added the configuration to the file.")
+        logger.info("Fuzzing block not found. Added the configuration to the file.")
 
 
 if __name__ == "__main__":

@@ -2,8 +2,12 @@ from .utils import *
 from .blockchain import Ganache
 from .acccount import Account
 from .contract import Contract
-from ..utils import GLOBAL_CONFIG, get_config
+from ..utils import GLOBAL_CONFIG, LOG_PATH, get_config
 import argparse
+import logging
+from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 
 class Env:
@@ -19,7 +23,7 @@ class Env:
         if not is_truffle_project(project_path):
             raise ValueError(f"Invalid Truffle project path provided ({project_path})")
         self.project_path = project_path
-
+    
         if config is None:
             self.config = GLOBAL_CONFIG
         elif isinstance(config, str):
@@ -27,6 +31,7 @@ class Env:
         else:
             self.config = config
 
+        self.log_path = self.config.get('log_path', LOG_PATH)
         ganache.__init__(self.config['ganache'])
         self.ganache = ganache
 
@@ -38,35 +43,37 @@ class Env:
         """
 
         # Init Ganache
-        log("Initializing environment...", "info")
-        log("Initializing Ganache...", "info")
-        self.start_ganache()
+        logger.info("Initializing environment...")
+        logger.info("Initializing Ganache...")
+        if self.start_ganache(True, Path(self.log_path, "ganache.log")) == False:
+            logger.error("Failed to start Ganache.")
+            return False
         
         # Init Truffle
-        log("Update Truffle configuration...", "info")
+        logger.info("Update Truffle configuration...")
         self.add_truffle_config(self.config['truffle'])
-        log("Running Truffle compile...", "info")
-        self.run_truffle_compile()
-        log("Running Truffle migrate...", "info")
-        self.run_truffle_migrate(self.config['truffle']['network']['name'])
+        logger.info("Running Truffle compile...")
+        self.run_truffle_compile(True, Path(self.log_path, "truffle_compile.log"))
+        logger.info("Running Truffle migrate...")
+        self.run_truffle_migrate(self.config['truffle']['network']['name'], True, Path(self.log_path, "truffle_migrate.log"))
     
-    def start_ganache(self):
-        self.ganache.start()
+    def start_ganache(self, log_to_file=False, log_file_path=None):
+        return self.ganache.start(log_to_file, log_file_path)
     
     def stop_ganache(self):
-        self.ganache.stop()
+        return self.ganache.stop()
 
-    def run_truffle_compile(self):
+    def run_truffle_compile(self, log_to_file=False, log_file_path=None):
         """
         Runs the Truffle compile command to compile the smart contracts in the project.
         """
-        run_truffle_compile(self.project_path)
+        run_truffle_compile(self.project_path, log_to_file, log_file_path)
 
-    def run_truffle_migrate(self, network = None):
+    def run_truffle_migrate(self, network="fuzzing", log_to_file=False, log_file_path=None):
         """
         Runs the Truffle migrate command to deploy the compiled contracts to the local Ganache instance.
         """
-        run_truffle_migrate(self.project_path, network)
+        run_truffle_migrate(self.project_path, network, log_to_file, log_file_path)
 
     def run_truffle_version(self):
         """
@@ -128,14 +135,14 @@ if __name__ == "__main__":
     env.init()
     
     if env.ganache.is_alive():
-        log("Ganache is connected.", "success")
+        print("Ganache is connected.")
         contracts = env.get_contracts()
-        log(f"Found {len(contracts)} contracts.", "info")
+        print(f"Found {len(contracts)} contracts.")
         
         accounts = env.get_accounts()
-        log(f"Found {len(accounts)} accounts.", "info")
+        print(f"Found {len(accounts)} accounts.")
 
-        log(f"Stop Ganache...")
+        print(f"Stop Ganache...")
         env.stop_ganache()
     else:
-        log("Failed to connect to Ganache.", "error")
+        print("Failed to connect to Ganache.", "error")

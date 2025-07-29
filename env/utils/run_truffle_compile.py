@@ -1,7 +1,13 @@
 import subprocess
 import argparse
+import logging
+from pathlib import Path
 
-def run_truffle_compile(project_path, log_to_console = False):
+
+
+logger = logging.getLogger(__name__)
+
+def run_truffle_compile(project_path: str, log_to_file: bool = False, log_file_path: str = None):
     """
     Launch Truffle to compile the smart contracts in the specified project directory.
 
@@ -17,11 +23,19 @@ def run_truffle_compile(project_path, log_to_console = False):
 
     # Run the command
     try:
-        result = subprocess.run(command, check=True, cwd=project_path)
-        print("Compile completed with exit code:", result.returncode)
+        if log_to_file == False:
+            result = subprocess.run(command, check=True, cwd=project_path)
+            logging.info("Compile completed with exit code:", result.returncode)
+
+        path = Path(log_file_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        log_file_handler = open(path, "a")
+        result = subprocess.run(command, stdout=log_file_handler, stderr=log_file_handler, check=True, cwd=project_path)
+        logger.info(f"Compile completed with exit code: {result.returncode}. Command outputs are being written to {path}.")
         return result
+    
     except subprocess.CalledProcessError as e:
-        print("Compile failed with error:", e)
+        logging.error(f"Compile failed with error: {e}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Compile a Truffle project.")

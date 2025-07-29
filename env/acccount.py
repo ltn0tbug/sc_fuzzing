@@ -1,4 +1,7 @@
 from web3 import Web3
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Account:
     def __init__(self, address, private_key, rpc_url="http://127.0.1:8545"):
@@ -17,7 +20,7 @@ class Account:
         """
         if self.w3.is_connected():
             return True
-        print(f"Failed to connect to the Ethereum node. Please check the RPC URL. ({self.rpc_url})")
+        logger.error(f"Failed to connect to the Ethereum node. Please check the RPC URL. ({self.rpc_url})")
         return False
     
     def get_balance(self):
