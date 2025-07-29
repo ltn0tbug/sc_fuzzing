@@ -1,7 +1,7 @@
 import subprocess
 import argparse
 
-def run_truffle_compile(project_path):
+def run_truffle_compile(project_path, log_to_console = False):
     """
     Launch Truffle to compile the smart contracts in the specified project directory.
 
@@ -12,7 +12,8 @@ def run_truffle_compile(project_path):
         subprocess.CompletedProcess: The result of the compilation command.
     """
     # Define the Truffle compile command
-    command = ["truffle", "compile"]
+    command = ["truffle", "compile", "--all"]
+    
 
     # Run the command
     try:

@@ -2,11 +2,12 @@ from .utils import *
 from .blockchain import Ganache
 from .acccount import Account
 from .contract import Contract
+from ..utils import GLOBAL_CONFIG, get_config
 import argparse
 
 
 class Env:
-    def __init__(self, ganache: Ganache, project_path: str):
+    def __init__(self, ganache: Ganache, project_path: str, config: str|dict = None):
         """
         Initializes the environment with a Ganache instance and a Truffle project path.
         Args:
@@ -15,12 +16,20 @@ class Env:
         Raises:
             ValueError: If the provided project path is not a valid Truffle project.
         """
-
         if not is_truffle_project(project_path):
             raise ValueError(f"Invalid Truffle project path provided ({project_path})")
-
         self.project_path = project_path
+
+        if config is None:
+            self.config = GLOBAL_CONFIG
+        elif isinstance(config, str):
+            self.config = get_config(config)
+        else:
+            self.config = config
+
+        ganache.__init__(self.config['ganache'])
         self.ganache = ganache
+
 
     def init(self):
         """
@@ -35,11 +44,11 @@ class Env:
         
         # Init Truffle
         log("Update Truffle configuration...", "info")
-        self.add_truffle_config()
+        self.add_truffle_config(self.config['truffle'])
         log("Running Truffle compile...", "info")
         self.run_truffle_compile()
         log("Running Truffle migrate...", "info")
-        self.run_truffle_migrate()
+        self.run_truffle_migrate(self.config['truffle']['network']['name'])
     
     def start_ganache(self):
         self.ganache.start()
@@ -53,11 +62,11 @@ class Env:
         """
         run_truffle_compile(self.project_path)
 
-    def run_truffle_migrate(self):
+    def run_truffle_migrate(self, network = None):
         """
         Runs the Truffle migrate command to deploy the compiled contracts to the local Ganache instance.
         """
-        run_truffle_migrate(self.project_path)
+        run_truffle_migrate(self.project_path, network)
 
     def run_truffle_version(self):
         """
@@ -65,16 +74,10 @@ class Env:
         """
         run_truffle_version()
     
-    def add_truffle_config(self, truffle_config:dict=None):
+    def add_truffle_config(self, truffle_config : dict = None):
         """
         Add or update truffle config to truffle-config.js if not match or found
         """
-        truffle_config = truffle_config or {
-            "name": "fuzzing",
-            "host": "127.0.0.1",
-            "port": 8545,
-            "network_id": "*"
-        }
         add_truffle_config(self.project_path, truffle_config)
 
     def get_contracts(self):
@@ -87,19 +90,19 @@ class Env:
         """
         Retrieve all accounts from the Ganache instance using the mnemonic phrase.
         """
-        return [Account(rpc_url=self.ganache.rpc_url, **account) for account in get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)]
+        return [Account(rpc_url=self.ganache.rpc_url, **account) for account in get_accounts(self.ganache.rpc_url, self.config['ganache']['wallet']['mnemonic'])]
     
     def get_deployer_account(self):
         """
         Retrieve the first account from Ganache, which is typically the default account used for deployments.
         """
-        return Account(rpc_url=self.ganache.rpc_url, **get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)[0])
+        return Account(rpc_url=self.ganache.rpc_url, **get_accounts(self.ganache.rpc_url, self.config['ganache']['wallet']['mnemonic'])[0])
     
     def get_attacker_account(self):
         """
         Retrieve the second account from Ganache, which is typically used as an attacker account in tests.
         """
-        return Account(rpc_url=self.ganache.rpc_url, **get_accounts(self.ganache.rpc_url, self.ganache.mnemonic)[1])
+        return Account(rpc_url=self.ganache.rpc_url, **get_accounts(self.ganache.rpc_url, self.config['ganache']['wallet']['mnemonic'])[1])
     
     def call_sc_function(self, from_acount: Account, contract: Contract, function_name: str, args: dict = {}):
         return call_sc_function(self.ganache.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args)

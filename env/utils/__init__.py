@@ -11,6 +11,7 @@ from .call_sc_event import call_sc_event
 from .get_struct_logs import get_struct_logs
 from .add_truffle_config import add_truffle_config
 
+
 __all__ = [
     "get_accounts",
     "get_contracts",

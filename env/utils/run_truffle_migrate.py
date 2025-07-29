@@ -1,7 +1,7 @@
 import subprocess
 import argparse
 
-def run_truffle_migrate(project_path):
+def run_truffle_migrate(project_path, network="fuzzing", log_to_console = False):
     """
     Launch Truffle to migrate the smart contracts in the specified project directory.
 
@@ -12,7 +12,8 @@ def run_truffle_migrate(project_path):
         subprocess.CompletedProcess: The result of the migration command.
     """
     # Define the Truffle migrate command
-    command = ["truffle", "migrate", "--network", "fuzzing"]
+    
+    command = ["truffle", "migrate", "--network", network]
 
     # Run the command
     try:

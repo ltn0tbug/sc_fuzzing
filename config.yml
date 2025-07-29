@@ -1,19 +1,25 @@
 name: "SC Fuzzing Configuration"
-workspace_path: "/home/ltn0tbug/workspace/"
+version: "0.1"
 
+### Ganache Configuration ###
+# This config will be passed to ganache as in CLI. Please using the same keyword and datatype as in `ganache --help`
 ganache:
-  host: "127.0.0.1"
-  port: 8545
-  mnemonic: "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
-  default_balance: 1000000000
-  verbose: True
-  debug: True
+  server:
+    host: "127.0.0.1"
+    port: 8545
+  wallet:
+    totalAccounts: 10
+    mnemonic: "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
+    defaultBalance: 1_000_000_000
+  logging:
+    verbose: true
+    debug: true
 
+### Truffle Configuration ###
+# This config will be added in the end of `truffle-config.js` in the project path. Not need to modify anything from `truffle-config.js`.
 truffle:
   network:
     name: "fuzzing"
     host: "127.0.0.1"
     port: 8545
     network_id: "*"
-
-rl:

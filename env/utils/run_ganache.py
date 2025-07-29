@@ -2,7 +2,24 @@ import subprocess
 import os
 import argparse
 
-def run_ganache(ganache_mnemonic, log_to_console=False):
+def parse_dict(ganache_arg : dict):
+    arg_template = r"--{}.{}"
+    command = []
+    for arg, sub_args in ganache_arg.items():
+        if arg not in ["server", "wallet", "miner", "logging", "chain", "database"]:
+            raise ValueError(f"The specified Ganache {arg} argument does not exist or is not supported.")
+        for sub_arg, value in sub_args.items():
+            if isinstance(value, bool):
+                if value == True:
+                    command.append(arg_template.format(arg,sub_arg))
+            else:
+                command.append(arg_template.format(arg,sub_arg))
+                command.append(str(value))
+    
+    return command
+
+
+def run_ganache(ganache_arg: dict|list = None, log_to_console = False):
     """
     Launch ganache-cli using the provided mnemonic.
 
@@ -13,15 +30,20 @@ def run_ganache(ganache_mnemonic, log_to_console=False):
     Returns:
         subprocess.Popen: The process object for the running ganache-cli instance.
     """
-    command = [
-        "ganache",
-        "-m",
-        ganache_mnemonic,
-        "-e",
-        "1000000000", # 1_000_000_000 ETH
-        "--logging.debug",
-        "--logging.verbose"
-    ]
+    if isinstance(ganache_arg, list):
+        command = ["ganache"] + ganache_arg 
+    elif isinstance(ganache_arg, dict):
+        command = ["ganache"] + parse_dict(ganache_arg)
+    else:
+        command = [
+            "ganache",
+            "-m",
+            "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat",
+            "-e",
+            "1000000000", # 1_000_000_000 ETH
+            "--logging.debug",
+            "--logging.verbose"
+        ]
     if log_to_console:
         process = subprocess.Popen(command)
         print("Ganache started. Press Ctrl+C to stop.")

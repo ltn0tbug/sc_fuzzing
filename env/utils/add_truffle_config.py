@@ -16,10 +16,22 @@ module.exports = config;
 /*---END-FUZZING-CONFIG---*/"""
 
 
-def add_truffle_config(project_path: str, config: dict):
+def add_truffle_config(project_path: str, config: dict = None):
+
+    if config is None:
+        config = {
+            "network":
+                {
+                    "name": "fuzzing",
+                    "host": "127.0.0.1",
+                    "port": 8545,
+                    "network_id": "*"
+                }
+
+        }
 
     # Generate the addon configuration
-    addon_config = TEMPLATE.format(**config)
+    addon_config = TEMPLATE.format(**config['network'])
 
     truffle_config_path = None
 

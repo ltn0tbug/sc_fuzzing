@@ -2,7 +2,7 @@ from web3 import Web3
 from ..utils import log, run_ganache
 
 class Ganache:
-    def __init__(self, mnemonic="candy maple cake sugar pudding cream honey rich smooth crumble sweet treat", rpc_url="http://127.0.0.1:8545"):
+    def __init__(self, config: dict = None):
         """
         Initializes a Ganache instance with the given mnemonic and RPC URL.
         
@@ -10,8 +10,8 @@ class Ganache:
             mnemonic (str): The mnemonic phrase for account generation.
             rpc_url (str): The RPC URL for connecting to the Ganache instance.
         """
-        self.mnemonic = mnemonic
-        self.rpc_url = rpc_url
+        self.config = config
+        self.rpc_url = "http://127.0.0.1:8545" if config is None else f"http://{config['server']['host']}:{config['server']['port']}"
         self.w3 = Web3(Web3.HTTPProvider(self.rpc_url))
         self.process_handler = None
     
@@ -48,7 +48,7 @@ class Ganache:
         
         log("Starting Ganache...", "info")
         log("Ganache output will be logged to var/log/ganache.log", "info")
-        self.process_handler = run_ganache(self.mnemonic, False)
+        self.process_handler = run_ganache(self.config, False)
     
     def stop(self):
         """
