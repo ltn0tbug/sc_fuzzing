@@ -1,8 +1,9 @@
 name: "SC Fuzzing Configuration"
 version: "0.1"
 
-### Placeholder for global variables ###
-# log_path: "log_path"
+### Global variables ###
+# log_path: "log_path" # Default is `{WORKSPACE}/logs`
+# force_stop: true # Force stop ganache when call `env.init()` if it running on defined port. Default is false
 
 ### Ganache Configuration ###
 # This config will be passed to ganache as in CLI. Please using the same keyword and datatype as in `ganache --help`

@@ -34,6 +34,7 @@ class Env:
         self.log_path = self.config.get('log_path', GLOBAL_LOG_PATH)
         ganache.__init__(self.config['ganache'])
         self.ganache = ganache
+        self.rpc_url = ganache.rpc_url
 
 
     def init(self):
@@ -45,7 +46,7 @@ class Env:
         # Init Ganache
         logger.info("Initializing environment...")
         logger.info("Initializing Ganache...")
-        if self.start_ganache(True, Path(self.log_path, "ganache.log")) == False:
+        if self.start_ganache(self.config.get('force_stop', False), True, Path(self.log_path, "ganache.log")) == False:
             logger.error("Failed to start Ganache.")
             return False
         
@@ -57,11 +58,11 @@ class Env:
         logger.info("Running Truffle migrate...")
         self.run_truffle_migrate(self.config['truffle']['network']['name'], True, Path(self.log_path, "truffle_migrate.log"))
     
-    def start_ganache(self, log_to_file=False, log_file_path=None):
-        return self.ganache.start(log_to_file, log_file_path)
+    def start_ganache(self, force_stop=False,  log_to_file=False, log_file_path=None):
+        return self.ganache.start(force_stop, log_to_file, log_file_path)
     
     def stop_ganache(self):
-        return self.ganache.stop()
+        return self.ganache.stop(self.config.get('force_stop', False))
 
     def run_truffle_compile(self, log_to_file=False, log_file_path=None):
         """
@@ -91,37 +92,37 @@ class Env:
         """
         Retrieve all contracts deployed in the Truffle project.
         """
-        return [Contract(**contract) for contract in get_contracts(self.ganache.rpc_url, self.project_path)]
+        return [Contract(**contract) for contract in get_contracts(self.rpc_url, self.project_path)]
 
     def get_accounts(self):
         """
         Retrieve all accounts from the Ganache instance using the mnemonic phrase.
         """
-        return [Account(rpc_url=self.ganache.rpc_url, **account) for account in get_accounts(self.ganache.rpc_url, self.config['ganache']['wallet']['mnemonic'])]
+        return [Account(rpc_url=self.rpc_url, **account) for account in get_accounts(self.rpc_url, self.config['ganache']['wallet']['mnemonic'])]
     
     def get_deployer_account(self):
         """
         Retrieve the first account from Ganache, which is typically the default account used for deployments.
         """
-        return Account(rpc_url=self.ganache.rpc_url, **get_accounts(self.ganache.rpc_url, self.config['ganache']['wallet']['mnemonic'])[0])
+        return Account(rpc_url=self.rpc_url, **get_accounts(self.rpc_url, self.config['ganache']['wallet']['mnemonic'])[0])
     
     def get_attacker_account(self):
         """
         Retrieve the second account from Ganache, which is typically used as an attacker account in tests.
         """
-        return Account(rpc_url=self.ganache.rpc_url, **get_accounts(self.ganache.rpc_url, self.config['ganache']['wallet']['mnemonic'])[1])
+        return Account(rpc_url=self.rpc_url, **get_accounts(self.rpc_url, self.config['ganache']['wallet']['mnemonic'])[1])
     
     def call_sc_function(self, from_acount: Account, contract: Contract, function_name: str, args: dict = {}):
-        return call_sc_function(self.ganache.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args)
+        return call_sc_function(self.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args)
     
     def call_sc_event(self, contract: Contract, event_name: str, tx_hash: str = None):
-        return call_sc_event(self.ganache.rpc_url, contract.abi, contract.address, event_name, tx_hash)
+        return call_sc_event(self.rpc_url, contract.abi, contract.address, event_name, tx_hash)
     
     def debug_sc_function(self, from_acount: Account, contract: Contract, function_name: str, args: dict = {}):
-        return debug_sc_function(self.ganache.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args)
+        return debug_sc_function(self.rpc_url, from_acount.address, contract.abi, contract.address, function_name, args)
     
     def get_struct_logs(self, tx_hash: str, trace_config: dict = None):
-        return get_struct_logs(self.ganache.rpc_url, tx_hash, trace_config)
+        return get_struct_logs(self.rpc_url, tx_hash, trace_config)
     
 
 if __name__ == "__main__":

@@ -2,6 +2,8 @@ from web3 import Web3
 import subprocess
 import logging
 from pathlib import Path
+import sys
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -63,6 +65,53 @@ def run_ganache(ganache_arg: dict|list = None, log_to_file: bool = False, log_fi
         logger.info(f"Ganache started. Logs are being written to {log_file_path}.")
     return process
 
+def force_stop_process_by_port(port: int) -> bool:
+    """
+    Forcefully kills the process using the given port.
+
+    Args:
+        port (int): The port number to check.
+
+    Returns:
+        bool: True if a process was killed, False otherwise.
+    """
+    try:
+        if sys.platform.startswith("win"):
+            # Windows
+            result = subprocess.check_output(
+                f'netstat -ano | findstr LISTENING | findstr :{port}',
+                shell=True, text=True
+            )
+            pids = set()
+            for line in result.strip().splitlines():
+                parts = line.strip().split()
+                if len(parts) >= 5:
+                    pids.add(parts[-1])
+            if not pids:
+                logger.error("No process found using port {port}")
+                return False
+            for pid in pids:
+                subprocess.run(f'taskkill /PID {pid} /F', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                logger.info("Killed process {pid} using port {port}")
+            return True
+        else:
+            # Linux/macOS: use lsof + grep for LISTEN
+            result = subprocess.check_output(
+                f'lsof -nP -iTCP:{port} -sTCP:LISTEN -t',
+                shell=True, text=True
+            )
+            pids = result.strip().split()
+            if not pids:
+                logger.error("No process found using port {port}")
+                return False
+            for pid in pids:
+                os.kill(int(pid), 9)  # SIGKILL
+                logger.info("Killed process {pid} using port {port}")
+            return True
+    except Exception as e:
+        logger.error(f"Exception occurred while killing process on port {port}: {e}")
+        return False  # Error occurred
+
 class Ganache:
     def __init__(self, config: dict = None):
         """
@@ -96,21 +145,21 @@ class Ganache:
             return True
         return True
     
-    def start(self, log_to_file = False, log_file_path = None):
+    def start(self, force_stop = False, log_to_file = False, log_file_path = None):
         """
         Starts a local Ganache instance using the provided mnemonic.
         If Ganache is already running, it will stop the existing instance before starting a new one.
         """
         if self.is_running():
             logger.warning("Ganache is already running. Stopping the existing instance...")
-            if self.stop() == False:
+            if self.stop(force_stop) == False:
                 return False
         
         logger.info("Starting Ganache...")
         self.process_handler = run_ganache(self.config, log_to_file, log_file_path)
         return True
     
-    def stop(self):
+    def stop(self, force_stop = False):
         """
         Stops the currently running Ganache instance.
         If Ganache is not running, it will raise an error.
@@ -122,6 +171,9 @@ class Ganache:
             logger.error("Ganache is not running. Cannot stop it.")
             return False
         if self.w3.is_connected() and (self.process_handler is None or self.process_handler.poll() is not None):
+            if force_stop:
+                logger.info(f"Trying to force stop Ganache by killing all process using port {self.config['server']['port']}...")
+                return force_stop_process_by_port(self.config["server"]["port"])
             logger.error(f"Ganache is running at {self.rpc_url} but not managed by this instance. Can not stop it.")
             return False
 
