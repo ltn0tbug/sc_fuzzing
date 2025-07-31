@@ -25,15 +25,30 @@ def get_global_config():
 GLOBAL_CONFIG = get_global_config()
 GLOBAL_LOG_PATH = GLOBAL_CONFIG.get("log_path", Path(WORKSPACE_PATH, "logs").as_posix())
 
-def set_logging(verbosity=2, log_file=None):
+class TruncatingFormatter(logging.Formatter):
+    def __init__(self, fmt=None, datefmt=None, style='%', max_length=10_000):
+        super().__init__(fmt=fmt, datefmt=datefmt, style=style)
+        self.max_length = max_length
+
+    def format(self, record):
+        msg = super().format(record)
+        if len(msg) > self.max_length:
+            print(len(msg))
+            msg = msg[:self.max_length] + '... [truncated]'
+        return msg
+
+def set_logging(verbosity:int=2, log_file:str=None, truncate:bool=False):
     logger = logging.getLogger()
+
+    formatter_class = TruncatingFormatter if truncate else logging.Formatter
 
     if log_file is None:
         handler = logging.StreamHandler(sys.stdout)
+        formatter = formatter_class('[%(levelname)s] %(message)s') if verbosity >=2 else formatter_class('[%(asctime)s][%(name)s][%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     else:
         handler = logging.FileHandler(log_file)
+        formatter = formatter_class('[%(asctime)s][%(name)s][%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
-    formatter = logging.Formatter('[%(asctime)s][%(name)s][%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     handler.setFormatter(formatter)
     logger.addHandler(handler)
-    logger.setLevel(level=[logging.NOTSET, logging.DEBUG, logging.INFO, logging.ERROR, logging.CRITICAL][verbosity])
+    logger.setLevel(level=[logging.NOTSET, logging.DEBUG, logging.INFO, logging.ERROR, logging.CRITICAL, logging.CRITICAL + 1][verbosity])

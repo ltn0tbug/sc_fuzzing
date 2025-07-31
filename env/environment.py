@@ -1,4 +1,4 @@
-from .utils import *
+from .func import *
 from .blockchain import Ganache
 from .acccount import Account
 from .contract import Contract
