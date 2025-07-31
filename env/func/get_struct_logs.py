@@ -12,7 +12,7 @@ def get_struct_logs(ganache_rpc_url: str, tx_hash: str, trace_config: dict = Non
         ganache_rpc_url (str): The HTTP RPC URL of the Ganache instance.
         tx_hash (str): The transaction hash to trace. Expected to be in hexadecimal format (e.g., "0x123...").
         trace_config (dict, optional): Configuration for tracing options. If None, Geth’s Default configuration is used (e.g., enable memory, stack, and storage tracing).
-    
+
     Returns:
         list: A list of struct logs for the transaction, each containing:
             - pc (int): Program counter.
@@ -26,9 +26,10 @@ def get_struct_logs(ganache_rpc_url: str, tx_hash: str, trace_config: dict = Non
             - error (str, optional): Error message if the operation failed.
     """
 
-    w3 = Web3(Web3.HTTPProvider(ganache_rpc_url))
     # Verify connection
-
+    w3 = Web3(Web3.HTTPProvider(ganache_rpc_url))
+    if not w3.is_connected():
+        raise ConnectionError(f"Failed to connect to Ganache at {ganache_rpc_url}")
 
     # Prepare trace config (optional, reduces output)
     if trace_config is None:
@@ -39,14 +40,13 @@ def get_struct_logs(ganache_rpc_url: str, tx_hash: str, trace_config: dict = Non
             "disableStorage": False,
             "enableReturnData": False,
             "tracer": "",
-            "timeout": ""
+            "timeout": "",
         }
 
     # Make the raw JSON-RPC call to debug_traceTransaction
-    
+
     response = w3.provider.make_request(
-        method="debug_traceTransaction",
-        params=[tx_hash, trace_config]
+        method="debug_traceTransaction", params=[tx_hash, trace_config]
     )
 
     # Handle response
@@ -62,11 +62,17 @@ def get_struct_logs(ganache_rpc_url: str, tx_hash: str, trace_config: dict = Non
 # main function for testing
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description="Get struct logs for a transaction from Ganache.")
+    parser = argparse.ArgumentParser(
+        description="Get struct logs for a transaction from Ganache."
+    )
     parser.add_argument("--ganache_rpc_url", required=True, help="Ganache RPC URL")
     parser.add_argument("--tx_hash", required=True, help="Transaction hash to trace")
-    parser.add_argument("--trace_config", type=json.loads, default=None, help="Trace configuration as JSON string (e.g., '{\"disableMemory\": true, \"disableStack\": true, \"disableStorage\": true}')")
-    
+    parser.add_argument(
+        "--trace_config",
+        type=json.loads,
+        default=None,
+        help='Trace configuration as JSON string (e.g., \'{"disableMemory": true, "disableStack": true, "disableStorage": true}\')',
+    )
 
     args = parser.parse_args()
 

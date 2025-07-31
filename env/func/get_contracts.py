@@ -31,6 +31,7 @@ def load_compiled_contracts(artifacts_path="build/contracts"):
 
     return compiled_contracts
 
+
 def patch_library_link_bytecode(bytecode):
     """
     Replace library link placeholders in bytecode with a fixed pattern.
@@ -40,9 +41,10 @@ def patch_library_link_bytecode(bytecode):
     Returns:
         str: The patched bytecode with library links replaced by a fixed pattern.
     """
-    pattern = r'__[a-zA-Z0-9/]+_+'
-    replacement = '.' * 40
+    pattern = r"__[a-zA-Z0-9/]+_+"
+    replacement = "." * 40
     return re.sub(pattern, replacement, bytecode)
+
 
 def get_contracts(ganache_rpc_url, project_path):
     """
@@ -91,23 +93,34 @@ def get_contracts(ganache_rpc_url, project_path):
                 matched_name = None
                 count = 0
                 for name, (deployed_bytecode_from_abi, _) in compiled.items():
-                    deployed_bytecode_from_abi = patch_library_link_bytecode(deployed_bytecode_from_abi)
-                    if len(deployed_bytecode_from_abi) != len(deployed_bytecode.to_0x_hex().lower()):
+                    deployed_bytecode_from_abi = patch_library_link_bytecode(
+                        deployed_bytecode_from_abi
+                    )
+                    if len(deployed_bytecode_from_abi) != len(
+                        deployed_bytecode.to_0x_hex().lower()
+                    ):
                         continue
-                    if re.match(deployed_bytecode_from_abi, deployed_bytecode.to_0x_hex().lower()):
+                    if re.match(
+                        deployed_bytecode_from_abi,
+                        deployed_bytecode.to_0x_hex().lower(),
+                    ):
                         matched_name = name
                         count += 1
-                
+
                 if count > 1:
-                    raise ValueError(f"There are {count} contracts have same deployed code. Please remove the duplicated complied json file.")
-                
+                    raise ValueError(
+                        f"There are {count} contracts have same deployed code. Please remove the duplicated complied json file."
+                    )
+
                 contracts.append(
                     {
                         "address": contract_address,
                         "creator": creator,
                         "creation_tx": tx.hash.to_0x_hex(),
                         "name": matched_name or "Unknown",
-                        "abi": compiled.get(matched_name, [])[1] if matched_name else None,
+                        "abi": (
+                            compiled.get(matched_name, [])[1] if matched_name else None
+                        ),
                     }
                 )
 
@@ -115,15 +128,24 @@ def get_contracts(ganache_rpc_url, project_path):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Scan Ganache for deployed contracts and identify them.")
-    parser.add_argument("--rpc", type=str, default="http://127.0.1:8545", help="Ganache RPC URL")
-    parser.add_argument("--project", type=str, required=True, help="Path to Truffle project directory with build/contracts")
+    parser = argparse.ArgumentParser(
+        description="Scan Ganache for deployed contracts and identify them."
+    )
+    parser.add_argument(
+        "--rpc", type=str, default="http://127.0.1:8545", help="Ganache RPC URL"
+    )
+    parser.add_argument(
+        "--project",
+        type=str,
+        required=True,
+        help="Path to Truffle project directory with build/contracts",
+    )
     args = parser.parse_args()
 
     ganache_rpc_url = args.rpc
     project_path = args.project
-  
-    print(f"Connecting to Ganache at {ganache_rpc_url}...") 
+
+    print(f"Connecting to Ganache at {ganache_rpc_url}...")
     print(f"Running contract scanner on project at {project_path}...")
     # Run the contract scanner
     contracts = get_contracts(ganache_rpc_url, project_path)

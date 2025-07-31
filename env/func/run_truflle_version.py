@@ -1,4 +1,8 @@
 import subprocess
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def run_truffle_version():
     """
@@ -14,11 +18,12 @@ def run_truffle_version():
     # Run the command
     try:
         result = subprocess.run(command, check=True)
-        print("Truffle version command ran successfully.")
+        logger.info("Truffle version command ran successfully.")
     except subprocess.CalledProcessError as e:
-        print("Failed to get Truffle version:", e)
+        logger.error(f"Failed to get Truffle version: {e}")
 
     return result
+
 
 if __name__ == "__main__":
     # Test

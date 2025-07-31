@@ -2,6 +2,7 @@
 if __name__ == "__main__":
     from pathlib import Path
     import sys
+
     sys.path.append(Path(__file__).parent.parent.parent.parent.as_posix())
 
 from sc_fuzzing.env import Env
@@ -10,11 +11,14 @@ from sc_fuzzing.data.dataloader import DataLoader
 from sc_fuzzing.utils import set_logging
 
 set_logging()
+
 # Example usage
 
-# Get sampe data from DataLoader
+## Get sampe data from DataLoader
+print("[+] {}".format("Get sample data from DataLoader"))
 sbc_metadata_df = DataLoader().get_metadata("smartbugs_curated")
 sample = sbc_metadata_df[sbc_metadata_df["name"] == "erc20"].iloc[0]
+print(sample)
 
 ## Init
 print("[+] {}".format("Init"))
@@ -29,9 +33,13 @@ print(f"{"":-^100}")
 print("[+] {}".format("Get all deployed contracts for current project"))
 contracts = env.get_contracts()
 print(f"Found {len(contracts)} contracts.")
-primary_contracts = [contract for contract in contracts if contract.name == sample["primary_contract"]]
+primary_contracts = [
+    contract for contract in contracts if contract.name == sample["primary_contract"]
+]
 if len(primary_contracts) == 0:
-    raise ValueError(f"Primary contract '{sample['name']}' not found in the environment.")
+    raise ValueError(
+        f"Primary contract '{sample['name']}' not found in the environment."
+    )
 contract = primary_contracts[0]
 print(f"Name:           {contract.name}")
 print(f"Address:        {contract.address}")
@@ -52,7 +60,7 @@ print(f"Attacker account: ", attacker.to_dict())
 
 ### Note: In default, SC deployer will be the first account and Attacker will the second account.
 assert accounts[0].address == deployer.address
-assert accounts[1].address == attacker.address 
+assert accounts[1].address == attacker.address
 
 print(f"{"":-^100}")
 
@@ -61,7 +69,7 @@ print(f"{"":-^100}")
 print("[+] {}".format("Call function"))
 
 function_name = "transfer"
-args = {"to": attacker.address, "value": 10*6}
+args = {"to": attacker.address, "value": 10 * 6}
 result = env.debug_sc_function(deployer, contract, function_name, args)
 
 print("Caller:", "Deployer", f"({deployer.address})")
@@ -75,7 +83,7 @@ print(f"{"":-^100}")
 
 ## Get StructLogs
 print("[+] {}".format("Get StructLogs"))
-struct_logs = env.get_struct_logs(result['tx_hash'])
+struct_logs = env.get_struct_logs(result["tx_hash"])
 print("StructLogs:", f"{str(struct_logs)[:400]}...")
 
 print(f"{"":-^100}")

@@ -60,10 +60,19 @@ def get_accounts(ganache_rpc_url, ganache_mnemonic_phrase):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Retrieve all Ganache accounts using mnemonic and RPC URL.")
-    parser.add_argument("--mnemonic", type=str, help="Ganache mnemonic phrase", default="candy maple cake sugar pudding cream honey rich smooth crumble sweet treat")
-    parser.add_argument("--rpc-url", type=str, help="Ganache RPC URL", default="http://127.0.0.1:8545")
-    
+    parser = argparse.ArgumentParser(
+        description="Retrieve all Ganache accounts using mnemonic and RPC URL."
+    )
+    parser.add_argument(
+        "--mnemonic",
+        type=str,
+        help="Ganache mnemonic phrase",
+        default="candy maple cake sugar pudding cream honey rich smooth crumble sweet treat",
+    )
+    parser.add_argument(
+        "--rpc-url", type=str, help="Ganache RPC URL", default="http://127.0.0.1:8545"
+    )
+
     args = parser.parse_args()
 
     ganache_mnemonic_phrase = args.mnemonic
@@ -80,7 +89,9 @@ if __name__ == "__main__":
         print(f"Account Address: {a['address']}")
         print(f"Private Key: {a['private_key'].to_0x_hex()}")
         print(f"Balance (Wei): {a['balance']:,}")
-        print(f"Balance (ETH): {Web3.from_wei(w3.eth.get_balance(a['address']), 'ether'):,}")
+        print(
+            f"Balance (ETH): {Web3.from_wei(w3.eth.get_balance(a['address']), 'ether'):,}"
+        )
         print(f"Nonce: {w3.eth.get_transaction_count(a['address'])}")
 
     print("\nAll accounts info retrieved successfully.")

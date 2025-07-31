@@ -3,13 +3,14 @@ import argparse
 import json
 from .get_struct_logs import get_struct_logs
 
+
 def debug_sc_function(
     ganache_rpc_url: str,
     from_account_address: str,
     abi: list,
     contract_address: str,
     function_name: str,
-    args: dict = {}
+    args: dict = {},
 ):
     """
     Attempt to call a smart contract function on a local Ganache node and return execution trace.
@@ -17,20 +18,20 @@ def debug_sc_function(
     If the function is not found in the ABI, the function sends an intentionally invalid
     transaction (with invalid selector) to trigger a fallback or error for debugging purposes.
 
-    Parameters:
-    - ganache_rpc_url (str): HTTP RPC URL of the Ganache node.
-    - from_account_address (str): Sender address (must be unlocked in Ganache).
-    - abi (list): Contract ABI.
-    - contract_address (str): Address of the deployed contract.
-    - function_name (str): Name of the function to call.
-    - args (dict): Named arguments for the function.
+    Args:
+        ganache_rpc_url (str): HTTP RPC URL of the Ganache node.
+        from_account_address (str): Sender address (must be unlocked in Ganache).
+        abi (list): Contract ABI.
+        contract_address (str): Address of the deployed contract.
+        function_name (str): Name of the function to call.
+        args (dict): Named arguments for the function.
 
     Returns:
-    dict: {
-        "tx_hash": str or None,
-        "struct_logs": List or None,
-        "Success": bool
-    }
+        dict: {
+            "tx_hash": str or None,
+            "struct_logs": List or None,
+            "Success": bool
+        }
     """
 
     w3 = Web3(Web3.HTTPProvider(ganache_rpc_url))
@@ -41,7 +42,8 @@ def debug_sc_function(
 
     # Try to find function definition in the ABI that matches name and arg count
     fn_candidates = [
-        f for f in abi
+        f
+        for f in abi
         if f.get("type") == "function"
         and f.get("name") == function_name
         and len(f.get("inputs", [])) == len(args)
@@ -49,7 +51,9 @@ def debug_sc_function(
 
     # Handle ambiguous matches
     if len(fn_candidates) > 1:
-        raise ValueError(f"Multiple candidates found for `{function_name}`: {fn_candidates}")
+        raise ValueError(
+            f"Multiple candidates found for `{function_name}`: {fn_candidates}"
+        )
 
     # If function not found, send invalid function call
     if len(fn_candidates) == 0:
@@ -61,23 +65,19 @@ def debug_sc_function(
         tx = {
             "from": from_account_address,
             "to": contract_address,
-            "data": "0x3d52b82c"  # Invalid function selector (e.g. from hash of 'inteand()')
+            "data": "0x3d52b82c",  # Invalid function selector (e.g. from hash of 'inteand()')
         }
 
         tx_response = w3.provider.make_request("eth_sendTransaction", [tx])
 
         if "error" in tx_response:
             print("Error:", tx_response["error"])
-            return {
-                "success": False,
-                "tx_hash": None,
-                "struct_logs": None
-            }
+            return {"success": False, "tx_hash": None, "struct_logs": None}
 
         return {
             "success": True,
             "tx_hash": tx_response["result"],
-            "struct_logs": get_struct_logs(ganache_rpc_url, tx_response["result"])
+            "struct_logs": get_struct_logs(ganache_rpc_url, tx_response["result"]),
         }
 
     # Function was found in ABI
@@ -87,42 +87,49 @@ def debug_sc_function(
     param_names = [inp["name"] for inp in fn_abi["inputs"]]
     missing_args = [name for name in param_names if name not in args]
     if missing_args:
-        raise ValueError(f"Missing required arguments for `{function_name}`: {', '.join(missing_args)}")
+        raise ValueError(
+            f"Missing required arguments for `{function_name}`: {', '.join(missing_args)}"
+        )
 
     # Create contract function call and encode ABI
     contract_fn = getattr(contract.functions, fn_abi.get("name"))(**args)
-    fn_encoded_abi = contract.encode_abi(contract_fn.abi_element_identifier, kwargs=args)
+    fn_encoded_abi = contract.encode_abi(
+        contract_fn.abi_element_identifier, kwargs=args
+    )
 
-    tx = {
-        "from": from_account_address,
-        "to": contract_address,
-        "data": fn_encoded_abi
-    }
+    tx = {"from": from_account_address, "to": contract_address, "data": fn_encoded_abi}
 
     tx_response = w3.provider.make_request("eth_sendTransaction", [tx])
 
     if "error" in tx_response:
         print("Error:", tx_response["error"])
-        return {
-            "success": False,
-            "tx_hash": None,
-            "struct_logs": None
-        }
+        return {"success": False, "tx_hash": None, "struct_logs": None}
 
     return {
         "success": True,
         "tx_hash": tx_response["result"],
-        "struct_logs": get_struct_logs(ganache_rpc_url, tx_response["result"])
+        "struct_logs": get_struct_logs(ganache_rpc_url, tx_response["result"]),
     }
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Debug a smart contract function via Ganache RPC.")
+    parser = argparse.ArgumentParser(
+        description="Debug a smart contract function via Ganache RPC."
+    )
     parser.add_argument("--ganache_rpc_url", required=True, help="Ganache RPC URL")
-    parser.add_argument("--from_account_address", required=True, help="Sender account address")
-    parser.add_argument("--abi_path", required=True, help="Path to contract ABI JSON file")
+    parser.add_argument(
+        "--from_account_address", required=True, help="Sender account address"
+    )
+    parser.add_argument(
+        "--abi_path", required=True, help="Path to contract ABI JSON file"
+    )
     parser.add_argument("--contract_address", required=True, help="Contract address")
     parser.add_argument("--function_name", required=True, help="Function name to call")
-    parser.add_argument("--args", default="{}", help="Function arguments as JSON string (e.g., '{\"param1\": 123}')")
+    parser.add_argument(
+        "--args",
+        default="{}",
+        help="Function arguments as JSON string (e.g., '{\"param1\": 123}')",
+    )
 
     args = parser.parse_args()
 
@@ -144,7 +151,7 @@ if __name__ == "__main__":
         abi=abi,
         contract_address=args.contract_address,
         function_name=args.function_name,
-        args=fn_args
+        args=fn_args,
     )
 
     print("📦 Transaction Result:")

@@ -1,8 +1,9 @@
 import os
 import pandas as pd
 
-BASE_DATA_PATH=os.path.dirname(os.path.abspath(__file__))
+BASE_DATA_PATH = os.path.dirname(os.path.abspath(__file__))
 SUPPORTED_DATASETS = ["smartbugs_wild", "smartbugs_curated"]
+
 
 def get_metadata(dataset_name: str):
     """
@@ -21,12 +22,15 @@ def get_metadata(dataset_name: str):
         case "smartbugs_curated":
             meta_data_path = os.path.join(BASE_DATA_PATH, "smartbugs_curated.csv")
         case _:
-            raise ValueError(f"Unsupported dataset: {dataset_name}. Supported datasets are: {SUPPORTED_DATASETS}")
-        
-    
+            raise ValueError(
+                f"Unsupported dataset: {dataset_name}. Supported datasets are: {SUPPORTED_DATASETS}"
+            )
+
     metadata_df = pd.read_csv(meta_data_path)
 
-    metadata_df['project_path'] = metadata_df['project_path'].apply(lambda x: os.path.join(BASE_DATA_PATH, x))
+    metadata_df["project_path"] = metadata_df["project_path"].apply(
+        lambda x: os.path.join(BASE_DATA_PATH, x)
+    )
     return metadata_df
 
 
@@ -42,4 +46,3 @@ class DataLoader:
             list: A list of supported dataset names.
         """
         return SUPPORTED_DATASETS
-    

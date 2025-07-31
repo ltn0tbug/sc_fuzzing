@@ -7,7 +7,7 @@ A Python-based environment for testing and fuzzing smart contracts using Ganache
 ## 0. Package Setup
 
 ```python
-# (Optional) if you work outside the module root
+# (Optional) if you did not install `sc_fuzzing` in PYTHONPATH yet.
 # import sys
 # sys.path.append(r"/path/to/workspace/")
 
