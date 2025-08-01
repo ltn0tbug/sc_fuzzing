@@ -1,8 +1,10 @@
 from web3 import Web3
 import argparse
 import json
+import logging
 from .get_struct_logs import get_struct_logs
 
+logger = logging.getLogger(__name__)
 
 def debug_sc_function(
     ganache_rpc_url: str,
@@ -57,21 +59,21 @@ def debug_sc_function(
 
     # If function not found, send invalid function call
     if len(fn_candidates) == 0:
-        print(
+        logger.info(
             f"Could not find `{function_name}` in contract ABI. "
-            "Transaction with invalid data (0x3d52b82c) will be sent to trigger fallback."
+            "Transaction with invalid data (0xdeadbeefdeadbeef) will be sent to trigger fallback."
         )
 
         tx = {
             "from": from_account_address,
             "to": contract_address,
-            "data": "0x3d52b82c",  # Invalid function selector (e.g. from hash of 'inteand()')
+            "data": "0xdeadbeefdeadbeef",  # Invalid function selector
         }
 
         tx_response = w3.provider.make_request("eth_sendTransaction", [tx])
 
         if "error" in tx_response:
-            print("Error:", tx_response["error"])
+            logger.info("Error:", tx_response["error"])
             return {"success": False, "tx_hash": None, "struct_logs": None}
 
         return {
@@ -102,7 +104,7 @@ def debug_sc_function(
     tx_response = w3.provider.make_request("eth_sendTransaction", [tx])
 
     if "error" in tx_response:
-        print("Error:", tx_response["error"])
+        logger.error(f"Error: {tx_response["error"]}")
         return {"success": False, "tx_hash": None, "struct_logs": None}
 
     return {

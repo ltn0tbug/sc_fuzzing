@@ -1,7 +1,9 @@
 from web3 import Web3
 import argparse
 import json
+import logging
 
+logger = logging.getLogger(__name__)
 
 def call_sc_event(
     ganache_rpc_url: str,
@@ -64,7 +66,7 @@ def call_sc_event(
                 "return_": [log["args"] for log in decoded_logs],
             }
         except Exception as tx_err:
-            print(f"Exception while processing transaction receipt: {tx_err}")
+            logger.error(f"Exception while processing transaction receipt: {tx_err}")
             return {"success": False, "tx_hash": tx_hash, "return_": None}
 
     # Fallback: search all blocks for matching logs
@@ -91,7 +93,7 @@ def call_sc_event(
         }
 
     except Exception as e:
-        print(f"Exception while scanning logs: {e}")
+        logger.error(f"Exception while scanning logs: {e}")
         return {"success": False, "tx_hash": None, "return_": None}
 
 

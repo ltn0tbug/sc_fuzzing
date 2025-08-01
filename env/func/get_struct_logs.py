@@ -1,6 +1,9 @@
 from web3 import Web3
 import json
 import argparse
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def get_struct_logs(ganache_rpc_url: str, tx_hash: str, trace_config: dict = None):
@@ -51,7 +54,7 @@ def get_struct_logs(ganache_rpc_url: str, tx_hash: str, trace_config: dict = Non
 
     # Handle response
     if "error" in response:
-        print("Error:", response["error"])
+        logger.error(f"Error: {response["error"]}")
         trace = {}
     else:
         trace = response["result"]
