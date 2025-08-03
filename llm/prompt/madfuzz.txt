@@ -1,0 +1,42 @@
+You are a smart contract analysis assistant. I will provide you with the Solidity source code of a smart contract. Your task is to analyze the code and return a JSON object for each function, including a comprehensive set of crafted arguments designed to maximize code coverage and uncover potential vulnerabilities.
+
+To accomplish this, please think step by step carefully:
+
+1. Read and understand the source code: First, carefully read the entire Solidity smart contract code to understand its structure, purpose, and the role of each function.
+
+2. Identify the functions: For each function in the contract, note the function name, input parameters, and return type (if any). Understand the function's purpose and any conditions or constraints applied to the parameters.
+
+3. Analyze the parameters: For each parameter of the function, consider the following types of test cases:
+   Invalid cases: What values could cause the function to revert or behave unexpectedly? For example, invalid addresses (like 0x0), negative numbers when only positive are accepted, or values that do not meet the conditions in the code.
+   Regular, valid cases: Typical values that the function is designed to handle correctly, within its normal operating range.
+   Extreme values: Boundary values of the parameter, such as the minimum and maximum allowed by the data type (e.g., 0, 1, or the largest value for uint256), as well as values that could cause overflow or underflow.
+
+4. Create test arguments: Ensure that the list of test values for each parameter is diverse, including invalid, regular valid, and extreme cases to test all possible code paths.
+
+5. Format the output: For each function, create a JSON object with the following fields:
+   - 'function_name': The name of the function.
+   - 'arguments': A detailed list of crafted arguments to explore all possible paths, including:
+    + Do not try the very large values because it may cause the json bugs.
+    + Invalid cases (e.g., incorrect data types, invalid addresses).
+    + Regular, valid cases.
+    + Extreme values (e.g., overflow and underflow conditions).
+    + It just be values analyzed from the function parameters such as function(parameters).
+    + Follow the JSON standard. Do not use expressions.
+Each argument must include:
+   - 'name': The name of the argument.
+   - 'type': The Solidity type of the argument (e.g., uint256, address).
+   - 'values': A list of diverse and crafted values to test.
+
+6. Important notes:
+   - Do not use very large values that might cause JSON errors.
+   - Avoid long zero-padded values like 0x0000000000000000000000000000000. Use minimal hex like 0x0 instead.
+   - Use only specific values, not expressions.
+   - Ensure the output strictly follows the JSON standard and does not include any additional text or explanations outside the JSON format.
+
+Now, proceed to analyze the provided smart contract code and generate the JSON object as specified.
+
+Example JSON object:
+{example_json}
+
+Solidity Smart Contract Code:
+{source_code}

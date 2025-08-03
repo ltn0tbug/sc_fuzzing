@@ -18,26 +18,45 @@ def get_metadata(dataset_name: str):
 
     match dataset_name:
         case "smartbugs_wild":
-            meta_data_path = os.path.join(BASE_DATA_PATH, "smartbugs_wild_filter.csv")
+            df_path = os.path.join(BASE_DATA_PATH, "smartbugs_wild_filter.csv")
         case "smartbugs_curated":
-            meta_data_path = os.path.join(BASE_DATA_PATH, "smartbugs_curated.csv")
+            df_path = os.path.join(BASE_DATA_PATH, "smartbugs_curated.csv")
         case _:
             raise ValueError(
                 f"Unsupported dataset: {dataset_name}. Supported datasets are: {SUPPORTED_DATASETS}"
             )
 
-    metadata_df = pd.read_csv(meta_data_path)
+    df = pd.read_csv(df_path)
 
-    metadata_df["project_path"] = metadata_df["project_path"].apply(
+    df["project_path"] = df["project_path"].apply(
         lambda x: os.path.join(BASE_DATA_PATH, x)
     )
-    return metadata_df
+    return df
+
+
+def get_madfuzz_json(dataset_name: str):
+    match dataset_name:
+        case "smartbugs_wild":
+            df_path = os.path.join(BASE_DATA_PATH, "sbw_madfuzz_json.pkl")
+        case "smartbugs_curated":
+            df_path = os.path.join(BASE_DATA_PATH, "sbc_madfuzz_json.pkl")
+        case _:
+            raise ValueError(
+                f"Unsupported dataset: {dataset_name}. Supported datasets are: {SUPPORTED_DATASETS}"
+            )
+
+    df = pd.read_pickle(df_path)
+
+    return df
 
 
 class DataLoader:
 
     def get_metadata(self, dataset_name: str):
         return get_metadata(dataset_name)
+
+    def get_madfuzz_json(self, dataset_name: str):
+        return get_madfuzz_json(dataset_name)
 
     def get_supported_datasets(self):
         """

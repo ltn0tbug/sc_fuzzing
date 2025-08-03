@@ -5,6 +5,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def call_sc_event(
     ganache_rpc_url: str,
     abi: list,

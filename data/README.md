@@ -48,3 +48,16 @@ print(DataLoader().get_metadata("smartbugs_wild").head())
 4  poctoken_c9c4d9ec2b44b241361707679d3db0876ac10ca6  /full/path/to/sc_fuzzing/data/module/smartbugs...         POCToken           0.4.24      1
 """
 ```
+
+## Load MADFuzz Json
+```python
+print(DataLoader().get_madfuzz_json("smartbugs_curated").head())
+"""Example Output
+                              name                                        json_string is_valid
+0                 fibonaccibalance  [{"function_name": "withdraw", "arguments": [{...     True
+1  arbitrary_location_write_simple  [{"function_name": "PushBonusCode", "arguments...     True
+2      incorrect_constructor_name1  [{"function_name": "IamMissing", "arguments": ...     True
+3      incorrect_constructor_name2  [{"function_name": "missing", "arguments": []}...     True
+4      incorrect_constructor_name3  [{"function_name": "Constructor", "arguments":...     True
+"""
+```

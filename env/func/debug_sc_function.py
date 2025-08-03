@@ -6,6 +6,7 @@ from .get_struct_logs import get_struct_logs
 
 logger = logging.getLogger(__name__)
 
+
 def debug_sc_function(
     ganache_rpc_url: str,
     from_account_address: str,
