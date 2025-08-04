@@ -6,31 +6,107 @@ from .logger import Logger
 from ..ethereum import Method
 
 
+import os
+import json
+import hashlib
+from evmdasm import EvmBytecode
+
+
+def method_id(signature):
+    return hashlib.sha3_256(signature.encode()).hexdigest()[:8]
+
+
+def parse_abi(abi_json):
+    constructor = {
+        "Name": "constructor",
+        "ID": None,
+        "Const": False,
+        "Inputs": [],
+        "Outputs": []
+    }
+
+    methods = {}
+    payable = {}
+
+    for item in abi_json:
+        if item["type"] == "constructor":
+            constructor["Inputs"] = item.get("inputs", [])
+        elif item["type"] == "function":
+            name = item["name"]
+            inputs = item.get("inputs", [])
+            input_sig = ",".join([i["type"] for i in inputs])
+            sig = f"{name}({input_sig})"
+            methods[name] = {
+                "Name": name,
+                "ID": method_id(sig),
+                "Const": item.get("stateMutability") in ("view", "pure"),
+                "Inputs": inputs,
+                "Outputs": item.get("outputs", [])
+            }
+            payable[name] = item.get("stateMutability") == "payable"
+    return constructor, methods, payable
+
+
+def disassemble(bytecode_hex):
+    if bytecode_hex.startswith("0x"):
+        bytecode_hex = bytecode_hex[2:]
+    bytecode = bytes.fromhex(bytecode_hex)
+    disasm = EvmBytecode(bytecode).disassemble()
+    return [
+        {
+            "pc": int(insn.address),
+            "op": insn.name,
+            "arg": getattr(insn, "operand", None)
+        }
+        for insn in disasm
+    ]
+
+
+def load_contract_data(env_contracts, proj_path):
+    """
+    env_contracts: list of contracts from get_contracts() call (name, address, creator, abi json, etc.)
+    proj_path: root path to your project (contains build/contracts)
+    """
+    contracts_dir = os.path.join(proj_path, "build", "contracts")
+    result = {}
+
+    for c in env_contracts:
+        print(c)
+        name = c.name
+        json_path = os.path.join(contracts_dir, f"{name}.json")
+
+        if not os.path.exists(json_path):
+            print(f"[!] JSON not found for {name}")
+            continue
+
+        with open(json_path) as f:
+            compiled = json.load(f)
+
+        abi_json = compiled.get("abi", [])
+        bytecode = compiled.get("deployedBytecode", "")
+
+        constructor, methods, payable = parse_abi(abi_json)
+        insns = disassemble(bytecode)
+
+        result[name] = {
+            "name": name,
+            "addresses": [c.address],
+            "payable": payable,
+            "abi": {
+                "Constructor": constructor,
+                "Methods": methods
+            },
+            "insns": insns
+        }
+
+    return result
+
 class Execution:
 
-    def __init__(self, env):
+    def __init__(self, path, env):
         
         self.env = env
         self.path = path
-        self.lib = ctypes.cdll.LoadLibrary(path) # link the Dynamic library (language: c)
-
-        self.lib.SetBackend.argtypes = [ctypes.c_char_p] # the type of function parameter, c_char_p is a pointer to a string
-        self.lib.SetBackend.restype = ctypes.c_char_p # the type of function return value
-
-        self.lib.GetContracts.argtypes = []
-        self.lib.GetContracts.restype = ctypes.c_char_p
-
-        self.lib.GetAccounts.argtypes = []
-        self.lib.GetAccounts.restype = ctypes.c_char_p
-
-        self.lib.CommitTx.argtypes = [ctypes.c_char_p]
-        self.lib.CommitTx.restype = ctypes.c_char_p
-
-        self.lib.JumpState.argtypes = [ctypes.c_int]
-        self.lib.JumpState.restype = None
-
-        self.lib.SetBalance.argtypes = [ctypes.c_char_p]
-        self.lib.SetBalance.restype = None
 
 
     def set_backend(self, proj_path):
@@ -45,13 +121,32 @@ class Execution:
 
 
     def get_contracts(self):
-        bs = self.env.get_contracts() # return contracts in json
+        contracts = self.env.get_contracts() 
+        bs = load_contract_data(contracts, self.path)
         j = json.loads(bs.decode())
         return ContractManager(**j)
 
 
     def get_accounts(self):
-        bs = self.env.get_accounts() # return accoutns in json
+        def load_account_manager(env):
+            raw_accounts = env.get_accounts()
+            deployer = env.get_deployer_account()
+            attacker = env.get_attacker_account()
+
+            attacker_addr = attacker.address if hasattr(attacker, "address") else attacker["address"]
+
+            accounts_data = []
+            for acc in raw_accounts:
+                addr = acc.address if hasattr(acc, "address") else acc["address"]
+                balance = acc.balance if hasattr(acc, "balance") else acc["balance"]
+                accounts_data.append({
+                    "address": addr,
+                    "amount": int(balance),
+                    "is_attacker": addr == attacker_addr
+                })
+
+            return accounts_data
+        bs = load_account_manager(self.env)
         j = json.loads(bs.decode())
         manager = AccountManager(**j)
         return manager
