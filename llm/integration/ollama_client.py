@@ -58,7 +58,7 @@ class OllamaClient:
         )
         for part in gen:
             chunk = part.get("response", "")
-            # print(chunk, end="", flush=True)
+            print(chunk, end="", flush=True)
             full += chunk
-        # print()
+        print()
         return full
