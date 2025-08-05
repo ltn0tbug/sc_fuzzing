@@ -79,7 +79,7 @@ class Contract:
             self.insn_pc_to_idx[insn.pc] = i
             insn.idx = i
 
-        self.propagate_state()
+        # self.propagate_state()
 
         # Contract -> control flow graph
         self.cfg = CFG(self)
@@ -167,7 +167,8 @@ class Contract:
         for insn_idx in range(insn_idx, len(self.insns)):
             insn = self.insns[insn_idx]
             op = insn.op
-            # print(insn)
+            print(insn)
+            print(state)
             # before deal with the insn, copy the old state
             insn.add_state(state.copy())
             # deal with the insn line by line, simulate the change of stack

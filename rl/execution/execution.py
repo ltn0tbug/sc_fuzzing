@@ -99,7 +99,51 @@ def load_contract_data(env_contracts, proj_path):
             "insns": insns
         }
 
-    return result
+    return {
+        "proj_path": proj_path,
+        "contracts": result
+    }
+
+def transform_contracts(project_path, contracts):
+    def extract_payable_info(abi_list):
+        payable = {}
+        for item in abi_list:
+            if item.get("type") == "function":
+                payable[item["name"]] = item.get("stateMutability") == "payable"
+        return payable
+
+    def disassemble_bytecode(bytecode):
+        from evmdasm import EvmBytecode
+        if bytecode.startswith("0x"):
+            bytecode = bytecode[2:]
+        insns = []
+        bytecode_bytes = bytes.fromhex(bytecode)
+        disasm = EvmBytecode(bytecode_bytes).disassemble()
+        for insn in disasm.instructions:
+            insns.append({
+                "pc": insn.address,
+                "op": insn.opcode,
+                "arg": insn.operand
+            })
+        return insns
+
+    contract_dict = {}
+    for contract in contracts:
+        # assuming `contract.bytecode` is available
+        contract_dict[contract.name] = {
+            "name": contract.name,
+            "addresses": [contract.address],
+            "payable": extract_payable_info(contract.abi),
+            "abi": {
+                "abi": contract.abi
+            },
+            "insns": disassemble_bytecode(contract.bytecode),
+        }
+
+    return {
+        "proj_path": project_path,
+        "contracts": contract_dict
+    }
 
 class Execution:
 
@@ -123,8 +167,7 @@ class Execution:
     def get_contracts(self):
         contracts = self.env.get_contracts() 
         bs = load_contract_data(contracts, self.path)
-        j = json.loads(bs.decode())
-        return ContractManager(**j)
+        return ContractManager(**bs)
 
 
     def get_accounts(self):
@@ -147,8 +190,9 @@ class Execution:
 
             return accounts_data
         bs = load_account_manager(self.env)
-        j = json.loads(bs.decode())
-        manager = AccountManager(**j)
+        print("bs: ", type(bs))
+        print(bs)
+        manager = AccountManager(accounts=bs)
         return manager
 
 
