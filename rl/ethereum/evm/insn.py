@@ -1,5 +1,6 @@
 from .opcode import OP_NAME
 
+REVERSE_OP_NAME = {v: k for k, v in OP_NAME.items()}
 
 class Instruction:
 
@@ -7,8 +8,11 @@ class Instruction:
         self.contract = kwargs['contract']
         self.pc = kwargs['pc'] # program count, the count in bytecode
         self.arg = kwargs['arg'] # only PUSH has args
-        self.op = kwargs['op'] # the hex of opcode
-        self.op_name = OP_NAME[self.op] # the name of opcode
+        self.op_name = kwargs['op'] # the hex of opcode
+        if str(self.op_name).find("UNKNOWN") != -1 or str(self.op_name).find("INVALID") != -1:
+            self.op = 0
+        else:
+            self.op = REVERSE_OP_NAME[self.op_name] # the name of opcode
         self.idx = None # the line of insn, one line is that (opcode,arg)
         self.states = set()
 
@@ -20,7 +24,8 @@ class Instruction:
     def __str__(self):
         s = '{} {} {}'.format(self.idx, format(self.pc, '02x'), self.op_name)
         if self.is_push():
-            s += ' {}'.format(format(self.arg, '02x'))
+            arg_val = int(self.arg, 16) 
+            s += ' {}'.format(format(arg_val, '02x'))
 
         return s
 

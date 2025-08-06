@@ -72,6 +72,8 @@ class Value:
 
 
     def __str__(self):
+        if isinstance(self.value, str):
+            self.value = int(self.value, 16)
         return '0x{:x}'.format(self.value)
 
 
@@ -235,7 +237,7 @@ class EVMState:
                 s = self.stack.pop()
                 if not is_top(s):
                     s = s.value
-                vals.append(s)
+                vals.append(int(s))
             return tuple(vals)
         else:
             assert False, 'cannot pop non positive number of elements from stack'

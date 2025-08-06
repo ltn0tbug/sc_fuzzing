@@ -110,9 +110,9 @@ def main():
     LOG.info('fuzzing start')
 
     if args.proj is not None:
-        execution = Execution(env)
+        execution = Execution(args.proj, env)
         # print('set_backend')
-        backend_loggers = execution.set_backend(args.proj)
+        # backend_loggers = execution.set_backend(args.proj)
         # print('get_contracts')
         contract_manager = execution.get_contracts() # return contracts in json
         if args.contract is not None:
