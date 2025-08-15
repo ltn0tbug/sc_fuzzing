@@ -24,7 +24,20 @@ class Tx:
 
     IDGEN = IDGenerator()
 
-    def __init__(self, policy, contract, call_address, method, input_bytes, arguments, amount, sender, timestamp, snapshot, idd=None):
+    def __init__(
+        self,
+        policy,
+        contract,
+        call_address,
+        method,
+        input_bytes,
+        arguments,
+        amount,
+        sender,
+        timestamp,
+        snapshot,
+        idd=None,
+    ):
         self.idd = Tx.IDGEN.gen(contract) if idd is None else idd
 
         if policy.__class__ == str:
@@ -43,7 +56,6 @@ class Tx:
 
         self.snapshot = snapshot
 
-
     def to_execution_dict(self):
         # change arguments to str
         def recursive_to_str(args):
@@ -52,37 +64,36 @@ class Tx:
                     recursive_to_str(args[i])
                 else:
                     args[i] = str(args[i])
+
         recursive_to_str(self.arguments)
 
         return {
-            'idd': self.idd,
-            'contract': self.contract,
-            'call_address': self.call_address,
-            'method': self.method,
-            'input_bytes': list(self.input_bytes),
-            'arguments': self.arguments,
-            'amount': self.amount,
-            'sender': self.sender,
-            'timestamp': self.timestamp,
-            'snapshot': self.snapshot,
-            'policy': self.policy,
+            "idd": self.idd,
+            "contract": self.contract,
+            "call_address": self.call_address,
+            "method": self.method,
+            "input_bytes": list(self.input_bytes),
+            "arguments": self.arguments,
+            "amount": self.amount,
+            "sender": self.sender,
+            "timestamp": self.timestamp,
+            "snapshot": self.snapshot,
+            "policy": self.policy,
         }
 
-
     def to_execution_str(self):
-        return json.dumps(self.to_execution_dict()) # dict to json
-
+        return json.dumps(self.to_execution_dict())  # dict to json
 
     def to_json(self):
         j = OrderedDict()
-        j['idd'] = self.idd
-        j['contract'] = self.contract
-        j['call_address'] = self.call_address
-        j['method'] = self.method
-        j['arguments'] = self.arguments
-        j['amount'] = self.amount
-        j['sender'] = self.sender
-        j['timestamp'] = self.timestamp
-        j['snapshot'] = self.snapshot
-        j['policy'] = self.policy,
+        j["idd"] = self.idd
+        j["contract"] = self.contract
+        j["call_address"] = self.call_address
+        j["method"] = self.method
+        j["arguments"] = self.arguments
+        j["amount"] = self.amount
+        j["sender"] = self.sender
+        j["timestamp"] = self.timestamp
+        j["snapshot"] = self.snapshot
+        j["policy"] = (self.policy,)
         return j

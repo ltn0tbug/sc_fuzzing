@@ -53,7 +53,9 @@ class Actor_Gaussian(nn.Module):
         self.fc1 = nn.Linear(args.state_dim, args.hidden_width)
         self.fc2 = nn.Linear(args.hidden_width, args.hidden_width)
         self.mean_layer = nn.Linear(args.hidden_width, args.action_dim)
-        self.log_std = nn.Parameter(torch.zeros(1, args.action_dim))  # We use 'nn.Parameter' to train log_std automatically
+        self.log_std = nn.Parameter(
+            torch.zeros(1, args.action_dim)
+        )  # We use 'nn.Parameter' to train log_std automatically
         self.activate_func = [nn.ReLU(), nn.Tanh()][args.use_tanh]  # Trick10: use tanh
 
         if args.use_orthogonal_init:
@@ -65,13 +67,19 @@ class Actor_Gaussian(nn.Module):
     def forward(self, s):
         s = self.activate_func(self.fc1(s))
         s = self.activate_func(self.fc2(s))
-        mean = self.max_action * torch.tanh(self.mean_layer(s))  # [-1,1]->[-max_action,max_action]
+        mean = self.max_action * torch.tanh(
+            self.mean_layer(s)
+        )  # [-1,1]->[-max_action,max_action]
         return mean
 
     def get_dist(self, s):
         mean = self.forward(s)
-        log_std = self.log_std.expand_as(mean)  # To make 'log_std' have the same dimension as 'mean'
-        std = torch.exp(log_std)  # The reason we train the 'log_std' is to ensure std=exp(log_std)>0
+        log_std = self.log_std.expand_as(
+            mean
+        )  # To make 'log_std' have the same dimension as 'mean'
+        std = torch.exp(
+            log_std
+        )  # The reason we train the 'log_std' is to ensure std=exp(log_std)>0
         dist = Normal(mean, std)  # Get the Gaussian distribution
         return dist
 
@@ -97,7 +105,7 @@ class Critic(nn.Module):
         return v_s
 
 
-class PPO_continuous():
+class PPO_continuous:
     def __init__(self, args):
         self.policy_dist = args.policy_dist
         self.max_action = args.max_action
@@ -123,11 +131,19 @@ class PPO_continuous():
         self.critic = Critic(args)
 
         if self.set_adam_eps:  # Trick 9: set Adam epsilon=1e-5
-            self.optimizer_actor = torch.optim.Adam(self.actor.parameters(), lr=self.lr_a, eps=1e-5)
-            self.optimizer_critic = torch.optim.Adam(self.critic.parameters(), lr=self.lr_c, eps=1e-5)
+            self.optimizer_actor = torch.optim.Adam(
+                self.actor.parameters(), lr=self.lr_a, eps=1e-5
+            )
+            self.optimizer_critic = torch.optim.Adam(
+                self.critic.parameters(), lr=self.lr_c, eps=1e-5
+            )
         else:
-            self.optimizer_actor = torch.optim.Adam(self.actor.parameters(), lr=self.lr_a)
-            self.optimizer_critic = torch.optim.Adam(self.critic.parameters(), lr=self.lr_c)
+            self.optimizer_actor = torch.optim.Adam(
+                self.actor.parameters(), lr=self.lr_a
+            )
+            self.optimizer_critic = torch.optim.Adam(
+                self.critic.parameters(), lr=self.lr_c
+            )
 
     def evaluate(self, s):  # When evaluating the policy, we only use the mean
         s = torch.unsqueeze(torch.tensor(s, dtype=torch.float), 0)
@@ -142,18 +158,28 @@ class PPO_continuous():
         if self.policy_dist == "Beta":
             with torch.no_grad():
                 dist = self.actor.get_dist(s)
-                a = dist.sample()  # Sample the action according to the probability distribution
-                a_logprob = dist.log_prob(a)  # The log probability density of the action
+                a = (
+                    dist.sample()
+                )  # Sample the action according to the probability distribution
+                a_logprob = dist.log_prob(
+                    a
+                )  # The log probability density of the action
         else:
             with torch.no_grad():
                 dist = self.actor.get_dist(s)
-                a = dist.sample()  # Sample the action according to the probability distribution
+                a = (
+                    dist.sample()
+                )  # Sample the action according to the probability distribution
                 a = torch.clamp(a, -self.max_action, self.max_action)  # [-max,max]
-                a_logprob = dist.log_prob(a)  # The log probability density of the action
+                a_logprob = dist.log_prob(
+                    a
+                )  # The log probability density of the action
         return a.numpy().flatten(), a_logprob.numpy().flatten()
 
     def update(self, replay_buffer, total_steps):
-        s, a, a_logprob, r, s_, dw, done = replay_buffer.numpy_to_tensor()  # Get training data
+        s, a, a_logprob, r, s_, dw, done = (
+            replay_buffer.numpy_to_tensor()
+        )  # Get training data
         """
             Calculate the advantage using GAE
             'dw=True' means dead or win, there is no next state s'
@@ -165,27 +191,42 @@ class PPO_continuous():
             vs = self.critic(s)
             vs_ = self.critic(s_)
             deltas = r + self.gamma * (1.0 - dw) * vs_ - vs
-            for delta, d in zip(reversed(deltas.flatten().numpy()), reversed(done.flatten().numpy())):
+            for delta, d in zip(
+                reversed(deltas.flatten().numpy()), reversed(done.flatten().numpy())
+            ):
                 gae = delta + self.gamma * self.lamda * gae * (1.0 - d)
                 adv.insert(0, gae)
             adv = torch.tensor(adv, dtype=torch.float).view(-1, 1)
             v_target = adv + vs
             if self.use_adv_norm:  # Trick 1:advantage normalization
-                adv = ((adv - adv.mean()) / (adv.std() + 1e-5))
+                adv = (adv - adv.mean()) / (adv.std() + 1e-5)
 
         # Optimize policy for K epochs:
         for _ in range(self.K_epochs):
             # Random sampling and no repetition. 'False' indicates that training will continue even if the number of samples in the last time is less than mini_batch_size
-            for index in BatchSampler(SubsetRandomSampler(range(self.batch_size)), self.mini_batch_size, False):
+            for index in BatchSampler(
+                SubsetRandomSampler(range(self.batch_size)), self.mini_batch_size, False
+            ):
                 dist_now = self.actor.get_dist(s[index])
-                dist_entropy = dist_now.entropy().sum(1, keepdim=True)  # shape(mini_batch_size X 1)
+                dist_entropy = dist_now.entropy().sum(
+                    1, keepdim=True
+                )  # shape(mini_batch_size X 1)
                 a_logprob_now = dist_now.log_prob(a[index])
                 # a/b=exp(log(a)-log(b))  In multi-dimensional continuous action space，we need to sum up the log_prob
-                ratios = torch.exp(a_logprob_now.sum(1, keepdim=True) - a_logprob[index].sum(1, keepdim=True))  # shape(mini_batch_size X 1)
+                ratios = torch.exp(
+                    a_logprob_now.sum(1, keepdim=True)
+                    - a_logprob[index].sum(1, keepdim=True)
+                )  # shape(mini_batch_size X 1)
 
-                surr1 = ratios * adv[index]  # Only calculate the gradient of 'a_logprob_now' in ratios
-                surr2 = torch.clamp(ratios, 1 - self.epsilon, 1 + self.epsilon) * adv[index]
-                actor_loss = -torch.min(surr1, surr2) - self.entropy_coef * dist_entropy  # Trick 5: policy entropy
+                surr1 = (
+                    ratios * adv[index]
+                )  # Only calculate the gradient of 'a_logprob_now' in ratios
+                surr2 = (
+                    torch.clamp(ratios, 1 - self.epsilon, 1 + self.epsilon) * adv[index]
+                )
+                actor_loss = (
+                    -torch.min(surr1, surr2) - self.entropy_coef * dist_entropy
+                )  # Trick 5: policy entropy
                 # Update actor
                 self.optimizer_actor.zero_grad()
                 actor_loss.mean().backward()
@@ -209,6 +250,6 @@ class PPO_continuous():
         lr_a_now = self.lr_a * (1 - total_steps / self.max_train_steps)
         lr_c_now = self.lr_c * (1 - total_steps / self.max_train_steps)
         for p in self.optimizer_actor.param_groups:
-            p['lr'] = lr_a_now
+            p["lr"] = lr_a_now
         for p in self.optimizer_critic.param_groups:
-            p['lr'] = lr_c_now
+            p["lr"] = lr_c_now

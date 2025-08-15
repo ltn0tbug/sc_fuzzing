@@ -74,13 +74,23 @@ class PPO_discrete:
         self.actor = Actor(args)
         self.critic = Critic(args)
         if self.set_adam_eps:  # Trick 9: set Adam epsilon=1e-5
-            self.optimizer_actor = torch.optim.Adam(self.actor.parameters(), lr=self.lr_a, eps=1e-5)
-            self.optimizer_critic = torch.optim.Adam(self.critic.parameters(), lr=self.lr_c, eps=1e-5)
+            self.optimizer_actor = torch.optim.Adam(
+                self.actor.parameters(), lr=self.lr_a, eps=1e-5
+            )
+            self.optimizer_critic = torch.optim.Adam(
+                self.critic.parameters(), lr=self.lr_c, eps=1e-5
+            )
         else:
-            self.optimizer_actor = torch.optim.Adam(self.actor.parameters(), lr=self.lr_a)
-            self.optimizer_critic = torch.optim.Adam(self.critic.parameters(), lr=self.lr_c)
+            self.optimizer_actor = torch.optim.Adam(
+                self.actor.parameters(), lr=self.lr_a
+            )
+            self.optimizer_critic = torch.optim.Adam(
+                self.critic.parameters(), lr=self.lr_c
+            )
 
-    def evaluate(self, s):  # When evaluating the policy, we select the action with the highest probability
+    def evaluate(
+        self, s
+    ):  # When evaluating the policy, we select the action with the highest probability
         s = torch.unsqueeze(torch.tensor(s, dtype=torch.float), 0)
         a_prob = self.actor(s).detach().numpy().flatten()
         a = np.argmax(a_prob)
@@ -103,7 +113,9 @@ class PPO_discrete:
         return a.numpy(), a_logprob.numpy()
 
     def update(self, replay_buffer, total_steps):
-        s, a, a_logprob, r, s_, dw, done = replay_buffer.numpy_to_tensor()  # Get training data
+        s, a, a_logprob, r, s_, dw, done = (
+            replay_buffer.numpy_to_tensor()
+        )  # Get training data
         """
             Calculate the advantage using GAE
             'dw=True' means dead or win, there is no next state s'
@@ -115,29 +127,45 @@ class PPO_discrete:
             vs = self.critic(s)
             vs_ = self.critic(s_)
             deltas = r + self.gamma * (1.0 - dw) * vs_ - vs
-            for delta, d in zip(reversed(deltas.flatten().numpy()), reversed(done.flatten().numpy())):
+            for delta, d in zip(
+                reversed(deltas.flatten().numpy()), reversed(done.flatten().numpy())
+            ):
                 gae = delta + self.gamma * self.lamda * gae * (1.0 - d)
                 adv.insert(0, gae)
             adv = torch.tensor(adv, dtype=torch.float).view(-1, 1)
             v_target = adv + vs
             if self.use_adv_norm:  # Trick 1:advantage normalization
-                adv = ((adv - adv.mean()) / (adv.std() + 1e-5))
+                adv = (adv - adv.mean()) / (adv.std() + 1e-5)
 
         # Optimize policy for K epochs:
         for _ in range(self.K_epochs):
             # Random sampling and no repetition. 'False' indicates that training will continue even if the number of samples in the last time is less than mini_batch_size
-            for index in BatchSampler(SubsetRandomSampler(range(self.batch_size)), self.mini_batch_size, False):
+            for index in BatchSampler(
+                SubsetRandomSampler(range(self.batch_size)), self.mini_batch_size, False
+            ):
                 dist_now = Categorical(probs=self.actor(s[index]))
-                dist_entropy = dist_now.entropy().view(-1, 1)  # shape(mini_batch_size X 1)
+                dist_entropy = dist_now.entropy().view(
+                    -1, 1
+                )  # shape(mini_batch_size X 1)
                 print(f"a[index] shape: {a[index].shape}")
                 print(f"a[index] example: {a[index]}")
-                a_logprob_now = dist_now.log_prob(a[index].squeeze()).view(-1, 1)  # shape(mini_batch_size X 1)
+                a_logprob_now = dist_now.log_prob(a[index].squeeze()).view(
+                    -1, 1
+                )  # shape(mini_batch_size X 1)
                 # a/b=exp(log(a)-log(b))
-                ratios = torch.exp(a_logprob_now - a_logprob[index])  # shape(mini_batch_size X 1)
+                ratios = torch.exp(
+                    a_logprob_now - a_logprob[index]
+                )  # shape(mini_batch_size X 1)
 
-                surr1 = ratios * adv[index]  # Only calculate the gradient of 'a_logprob_now' in ratios
-                surr2 = torch.clamp(ratios, 1 - self.epsilon, 1 + self.epsilon) * adv[index]
-                actor_loss = -torch.min(surr1, surr2) - self.entropy_coef * dist_entropy  # shape(mini_batch_size X 1)
+                surr1 = (
+                    ratios * adv[index]
+                )  # Only calculate the gradient of 'a_logprob_now' in ratios
+                surr2 = (
+                    torch.clamp(ratios, 1 - self.epsilon, 1 + self.epsilon) * adv[index]
+                )
+                actor_loss = (
+                    -torch.min(surr1, surr2) - self.entropy_coef * dist_entropy
+                )  # shape(mini_batch_size X 1)
                 # Update actor
                 self.optimizer_actor.zero_grad()
                 actor_loss.mean().backward()
@@ -161,6 +189,6 @@ class PPO_discrete:
         lr_a_now = self.lr_a * (1 - total_steps / self.max_train_steps)
         lr_c_now = self.lr_c * (1 - total_steps / self.max_train_steps)
         for p in self.optimizer_actor.param_groups:
-            p['lr'] = lr_a_now
+            p["lr"] = lr_a_now
         for p in self.optimizer_critic.param_groups:
-            p['lr'] = lr_c_now
+            p["lr"] = lr_c_now

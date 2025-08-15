@@ -7,4 +7,4 @@ class Leaking(Checker):
         super().__init__()
 
     def check(self, logger):
-        return 'leaking' in logger.bug_res
+        return "leaking" in logger.bug_res

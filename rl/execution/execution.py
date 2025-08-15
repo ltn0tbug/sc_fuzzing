@@ -1,5 +1,7 @@
 import json
 import ctypes
+import copy
+from eth_hash.auto import keccak
 
 from ..ethereum import ContractManager, AccountManager
 from .logger import Logger
@@ -8,12 +10,11 @@ from ..ethereum import Method
 
 import os
 import json
-import hashlib
 from evmdasm import EvmBytecode
 
 
 def method_id(signature):
-    return hashlib.sha3_256(signature.encode()).hexdigest()[:8]
+    return int.from_bytes(keccak(signature.encode("utf8"))[:4])
 
 
 def parse_abi(abi_json):
@@ -22,7 +23,7 @@ def parse_abi(abi_json):
         "ID": None,
         "Const": False,
         "Inputs": [],
-        "Outputs": []
+        "Outputs": [],
     }
 
     methods = {}
@@ -41,22 +42,22 @@ def parse_abi(abi_json):
                 "ID": method_id(sig),
                 "Const": item.get("stateMutability") in ("view", "pure"),
                 "Inputs": inputs,
-                "Outputs": item.get("outputs", [])
+                "Outputs": item.get("outputs", []),
             }
             payable[name] = item.get("stateMutability") == "payable"
     return constructor, methods, payable
 
 
 def disassemble(bytecode_hex):
-    if bytecode_hex.startswith("0x"):
-        bytecode_hex = bytecode_hex[2:]
-    bytecode = bytes.fromhex(bytecode_hex)
-    disasm = EvmBytecode(bytecode).disassemble()
+    # if bytecode_hex.startswith("0x"):
+    #     bytecode_hex = bytecode_hex[2:]
+    # bytecode = bytes.fromhex(bytecode_hex)
+    disasm = EvmBytecode(bytecode_hex).disassemble()
     return [
         {
-            "pc": int(insn.address),
-            "op": insn.name,
-            "arg": getattr(insn, "operand", None)
+            "pc": insn.address,
+            "op": insn.opcode,
+            "arg": int.from_bytes(insn.operand_bytes),
         }
         for insn in disasm
     ]
@@ -71,10 +72,9 @@ def load_contract_data(env_contracts, proj_path):
     result = {}
 
     for c in env_contracts:
-        print(c)
         name = c.name
         json_path = os.path.join(contracts_dir, f"{name}.json")
-
+        # print(json_path)
         if not os.path.exists(json_path):
             print(f"[!] JSON not found for {name}")
             continue
@@ -92,40 +92,34 @@ def load_contract_data(env_contracts, proj_path):
             "name": name,
             "addresses": [c.address],
             "payable": payable,
-            "abi": {
-                "Constructor": constructor,
-                "Methods": methods
-            },
-            "insns": insns
+            "abi": {"Constructor": constructor, "Methods": methods},
+            "insns": insns,
         }
 
     return result
 
+
 class Execution:
 
     def __init__(self, path, env):
-        
+
         self.env = env
         self.path = path
 
-
-    def set_backend(self, proj_path):
-        """
-        initialize the ethereum backend
-        """
-        proj_path = proj_path.encode('ascii')
-        bs = self.lib.SetBackend(proj_path)
-        j = json.loads(bs.decode())
-        loggers = [Logger(**l) for l in j] # the fuzzLogger
-        return loggers
-
+    # def set_backend(self, proj_path):
+    #     """
+    #     initialize the ethereum backend
+    #     """
+    #     proj_path = proj_path.encode('ascii')
+    #     bs = self.lib.SetBackend(proj_path)
+    #     j = json.loads(bs.decode())
+    #     loggers = [Logger(**l) for l in j] # the fuzzLogger
+    #     return loggers
 
     def get_contracts(self):
-        contracts = self.env.get_contracts() 
+        contracts = self.env.get_contracts()
         bs = load_contract_data(contracts, self.path)
-        j = json.loads(bs.decode())
-        return ContractManager(**j)
-
+        return ContractManager(proj_path=self.path, contracts=bs)
 
     def get_accounts(self):
         def load_account_manager(env):
@@ -133,46 +127,69 @@ class Execution:
             deployer = env.get_deployer_account()
             attacker = env.get_attacker_account()
 
-            attacker_addr = attacker.address if hasattr(attacker, "address") else attacker["address"]
+            attacker_addr = attacker.address
 
             accounts_data = []
             for acc in raw_accounts:
-                addr = acc.address if hasattr(acc, "address") else acc["address"]
-                balance = acc.balance if hasattr(acc, "balance") else acc["balance"]
-                accounts_data.append({
-                    "address": addr,
-                    "amount": int(balance),
-                    "is_attacker": addr == attacker_addr
-                })
+                accounts_data.append(
+                    {
+                        "address": acc.address,
+                        "amount": acc.get_balance(),
+                        "is_attacker": acc.address == attacker_addr,
+                    }
+                )
 
             return accounts_data
+
         bs = load_account_manager(self.env)
-        j = json.loads(bs.decode())
-        manager = AccountManager(**j)
+        # j = json.loads(bs.decode())
+        manager = AccountManager(accounts=bs)
         return manager
 
-
     def commit_tx(self, tx):
+        # print(self.env.get_contracts())
+
         if tx.method == Method.FALLBACK:
-            tx.method = ''
-        tx = tx.to_execution_str().encode('ascii')
-        bs = self.lib.CommitTx(tx)
-        j = json.loads(bs.decode())
-        # print(j)
+            tx.method = ""
+        old_tx = copy.deepcopy(tx)
+        tx = tx.to_execution_str().encode("ascii")
+        tx = json.loads(tx.decode("utf-8"))
+        old_balance = self.env.get_attacker_account().get_balance()
+
+        contract = [x for x in self.env.get_contracts() if x.name == tx["contract"]][0]
+        sender = self.env.get_accounts()[tx["sender"]]
+        function_name = tx["method"]
+        args = old_tx.arguments
+        value = tx["amount"]
+        # print(contract.name, function_name, args, value)
+        bs = self.env.debug_sc_function(sender, contract, function_name, args, value)
+        # bs = self.lib.CommitTx(tx)
+        # j = json.loads(bs.decode())
+        # # print(j)
+        j = {}
+        j["tx"] = tx
+        j["logs"] = bs["struct_logs"]
+        j["bug_res"] = (
+            {"leaking": True}
+            if old_balance < self.env.get_attacker_account().get_balance()
+            else {}
+        )
+        j["contract_receive_ether"] = (
+            True
+            if old_balance < self.env.get_attacker_account().get_balance()
+            else False
+        )
         logger = Logger(**j)
-        if logger.tx.method == '':
+        if logger.tx.method == "":
             logger.tx.method = Method.FALLBACK
         return logger
 
-
     def jump_state(self, state_id):
-        self.lib.JumpState(state_id)
-
+        self.env.revert_snapshot(state_id)
+        self.env.take_snapshot()
 
     def set_balance(self, address, amount):
-        params = {
-            'address': str(address),
-            'amount': str(amount),
-        }
-        params = json.dumps(params).encode('ascii')
-        self.lib.SetBalance(params)
+        all_accounts = self.env.get_accounts()
+        for account in all_accounts:
+            if account.address == address:
+                account.set_balance(amount)

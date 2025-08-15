@@ -6,15 +6,18 @@ from .record import RecordManager
 from collections import OrderedDict
 from ..ethereum import select_interesting_ops
 
+
 class ObsBase:
 
     def __init__(self, contract_manager, account_manager, dataset_dump_path):
         self.contract_manager = contract_manager
-        self.account_manager =  account_manager
+        self.account_manager = account_manager
         self.dataset_dump_path = dataset_dump_path
 
         self.all_trace_bow = self.get_all_trace_bow(None)
-        self.trace_bow = self.get_trace_bow(None) # the frequency of 50 most representative opcodes in the logger(this tx)
+        self.trace_bow = self.get_trace_bow(
+            None
+        )  # the frequency of 50 most representative opcodes in the logger(this tx)
         self.stat = Stat(contract_manager, account_manager)
         self.record_manager = RecordManager(self, contract_manager, account_manager)
 
@@ -23,24 +26,23 @@ class ObsBase:
             return
 
         j = OrderedDict()
-        j['type'] = 'init'
-        j['contracts'] = OrderedDict()
+        j["type"] = "init"
+        j["contracts"] = OrderedDict()
         for name in self.contract_manager.fuzz_contract_names:
-            j['contracts'][name] = self.contract_manager[name].to_json()
-            with open(self.dataset_dump_path, 'w') as w:
+            j["contracts"][name] = self.contract_manager[name].to_json()
+            with open(self.dataset_dump_path, "w") as w:
                 w.write(json.dumps(j))
-                w.write('\n')
-
+                w.write("\n")
 
     def update(self, logger, is_init_txs):
         tx = logger.tx
 
         if self.dataset_dump_path and not is_init_txs:
             j = OrderedDict()
-            j['type'] = 'tx'
-            j['tx'] = tx.to_json()
-            j['trace_bow'] = self.trace_bow
-            j['features'] = self.record_manager.to_json(tx.contract, tx.method)
+            j["type"] = "tx"
+            j["tx"] = tx.to_json()
+            j["trace_bow"] = self.trace_bow
+            j["features"] = self.record_manager.to_json(tx.contract, tx.method)
 
         old_insn_coverage = self.stat.get_insn_coverage(tx.contract)
         old_block_coverage = self.stat.get_block_coverage(tx.contract)
@@ -53,19 +55,25 @@ class ObsBase:
         block_coverage_change = new_block_coverage - old_block_coverage
 
         if self.dataset_dump_path and not is_init_txs:
-            j['insn_coverage_change'] = insn_coverage_change
-            j['block_coverage_change'] = block_coverage_change
-            with open(self.dataset_dump_path, 'a') as w:
+            j["insn_coverage_change"] = insn_coverage_change
+            j["block_coverage_change"] = block_coverage_change
+            with open(self.dataset_dump_path, "a") as w:
                 w.write(json.dumps(j))
-                w.write('\n')
+                w.write("\n")
 
         self.trace_bow = self.get_trace_bow(logger)
         self.all_trace_bow = self.get_all_trace_bow(logger)
         # update method record
         if tx.method in self.contract_manager[tx.contract].abi.methods_by_name:
-            self.record_manager.update(logger, insn_coverage_change, block_coverage_change)
+            self.record_manager.update(
+                logger, insn_coverage_change, block_coverage_change
+            )
 
-        return destruct, self.stat.get_insn_coverage_with_input(tx.contract, executed_pcs), self.stat.get_block_coverage_with_input(tx.contract, executed_blocks)
+        return (
+            destruct,
+            self.stat.get_insn_coverage_with_input(tx.contract, executed_pcs),
+            self.stat.get_block_coverage_with_input(tx.contract, executed_blocks),
+        )
 
     def get_trace_bow(self, logger) -> list:
         """

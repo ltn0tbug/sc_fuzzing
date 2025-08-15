@@ -7,9 +7,8 @@ class BlockStateDep(Checker):
     def __init__(self):
         super().__init__()
 
-
     def check(self, logger):
-        block_state_op_idx = -1 # the related block
+        block_state_op_idx = -1  # the related block
 
         for i, log in enumerate(logger.logs):
             if log.op in (COINBASE, TIMESTAMP, NUMBER, DIFFICULTY, GASLIMIT):
@@ -42,7 +41,7 @@ class BlockStateDep(Checker):
                     continue
 
                 try:
-                    _, value_from_block = logger.trace_log_stack(i-1, -1)
+                    _, value_from_block = logger.trace_log_stack(i - 1, -1)
                     if value_from_block:
                         return True
                 except RecursionError:
@@ -53,14 +52,14 @@ class BlockStateDep(Checker):
                     continue
 
                 try:
-                    _, value_from_block = logger.trace_log_stack(i-1, -3)
+                    _, value_from_block = logger.trace_log_stack(i - 1, -3)
                     if value_from_block:
                         return True
                 except RecursionError:
                     continue
             elif log.op == JUMPI:
                 try:
-                    _, value_from_block = logger.trace_log_stack(i-1, -2)
+                    _, value_from_block = logger.trace_log_stack(i - 1, -2)
                     if value_from_block:
                         return True
                 except RecursionError:

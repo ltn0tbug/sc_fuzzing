@@ -6,11 +6,16 @@ from ...ethereum import SolType
 from ...execution import Tx
 
 # import seed
-from ..seed.int_values import INT_VALUES_FREQUENT, INT_VALUES_UNFREQUENT, INT_VALUES_UNFREQUENT
+from ..seed.int_values import (
+    INT_VALUES_FREQUENT,
+    INT_VALUES_UNFREQUENT,
+    INT_VALUES_UNFREQUENT,
+)
 from ..seed.amounts import AMOUNTS
 from ..seed.addr_map import ADDR_MAP
 
 INT_EXPLORE_RATE = -1
+
 
 class PolicyFRandom(PolicyBase):
 
@@ -23,7 +28,6 @@ class PolicyFRandom(PolicyBase):
         self.amounts = AMOUNTS
         self.slice_size = 2
 
-
     def select_tx_for_method(self, contract, method, obs):
         self.slice_size = random.randint(1, 5)
         address = contract.addresses[0]
@@ -32,7 +36,18 @@ class PolicyFRandom(PolicyBase):
         amount = self._select_amount(contract, method, sender, obs)
         timestamp = self._select_timestamp(obs)
 
-        tx = Tx(self, contract.name, address, method.name, bytes(), arguments, amount, sender, timestamp, True)
+        tx = Tx(
+            self,
+            contract.name,
+            address,
+            method.name,
+            bytes(),
+            arguments,
+            amount,
+            sender,
+            timestamp,
+            True,
+        )
         return tx
 
     def select_tx(self, obs):
@@ -49,9 +64,19 @@ class PolicyFRandom(PolicyBase):
         amount = self._select_amount(contract, method, sender, obs)
         timestamp = self._select_timestamp(obs)
 
-        tx = Tx(self, contract.name, address, method.name, bytes(), arguments, amount, sender, timestamp, True)
+        tx = Tx(
+            self,
+            contract.name,
+            address,
+            method.name,
+            bytes(),
+            arguments,
+            amount,
+            sender,
+            timestamp,
+            True,
+        )
         return tx
-
 
     def _select_contract(self):
         contract_name = random.choice(self.contract_manager.fuzz_contract_names)
@@ -76,7 +101,6 @@ class PolicyFRandom(PolicyBase):
         else:
             return 0
 
-
     def _select_arguments(self, contract, method, sender, obs):
 
         arguments = []
@@ -85,18 +109,30 @@ class PolicyFRandom(PolicyBase):
             if t == SolType.IntTy or t == SolType.UintTy:
                 chosen_int = None
                 if t == SolType.IntTy:
-                    arguments.append(self._select_int(contract, method, arg.evm_type.size, obs, chosen_int))
+                    arguments.append(
+                        self._select_int(
+                            contract, method, arg.evm_type.size, obs, chosen_int
+                        )
+                    )
                 elif t == SolType.UintTy:
-                    arguments.append(self._select_uint(contract, method, arg.evm_type.size, obs, chosen_int))
+                    arguments.append(
+                        self._select_uint(
+                            contract, method, arg.evm_type.size, obs, chosen_int
+                        )
+                    )
             elif t == SolType.BoolTy:
                 arguments.append(self._select_bool())
             elif t == SolType.StringTy:
                 arguments.append(self._select_string(obs))
             elif t == SolType.SliceTy:
-                arg = self._select_slice(contract, method, sender, arg.evm_type.elem, obs)
+                arg = self._select_slice(
+                    contract, method, sender, arg.evm_type.elem, obs
+                )
                 arguments.append(arg)
             elif t == SolType.ArrayTy:
-                arg = self._select_array(contract, method, sender, arg.evm_type.size, arg.evm_type.elem, obs)
+                arg = self._select_array(
+                    contract, method, sender, arg.evm_type.size, arg.evm_type.elem, obs
+                )
                 arguments.append(arg)
             elif t == SolType.AddressTy:
                 # TODO select address
@@ -107,7 +143,7 @@ class PolicyFRandom(PolicyBase):
             elif t == SolType.BytesTy:
                 arguments.append(self._select_bytes(obs))
             else:
-                assert False, 'type {} not supported'.format(t)
+                assert False, "type {} not supported".format(t)
         return arguments
 
     # def _select_int(self, contract, method, size, obs, chosen_int=None):
@@ -144,11 +180,11 @@ class PolicyFRandom(PolicyBase):
             value = random.choice(self.int_values_unfrequent)
         else:
             p = 1 << (size - 1)
-            return random.randint(-p, p-1)
+            return random.randint(-p, p - 1)
 
-        value &= ((1 << size) - 1)
+        value &= (1 << size) - 1
         if value & (1 << (size - 1)):
-            value -= (1 << size)
+            value -= 1 << size
         return value
 
     def _select_uint(self, contract, method, size, obs, chosen_int=None):
@@ -166,7 +202,7 @@ class PolicyFRandom(PolicyBase):
             value = random.choice(self.int_values_unfrequent)
         else:
             p = 1 << size
-            return random.randint(0, p-1)
+            return random.randint(0, p - 1)
         return value
 
     def _select_address(self, sender, idx=None):
@@ -176,8 +212,15 @@ class PolicyFRandom(PolicyBase):
             else:
                 return self.addresses[idx]
         else:
-            if idx is None or self.addresses[idx] in self.account_manager.attacker_addresses:
-                l = [addr for addr in self.addresses if addr not in self.account_manager.attacker_addresses]
+            if (
+                idx is None
+                or self.addresses[idx] in self.account_manager.attacker_addresses
+            ):
+                l = [
+                    addr
+                    for addr in self.addresses
+                    if addr not in self.account_manager.attacker_addresses
+                ]
                 return random.choice(l)
             else:
                 return self.addresses[idx]
@@ -190,7 +233,7 @@ class PolicyFRandom(PolicyBase):
         size = random.randint(0, 40)
         for _ in range(size):
             bs.append(random.randint(1, 127))
-        return bytearray(bs).decode('ascii')
+        return bytearray(bs).decode("ascii")
 
     def _select_slice(self, contract, method, sender, typ, obs):
         if self.slice_size is None:
@@ -213,9 +256,13 @@ class PolicyFRandom(PolicyBase):
                 #     chosen_int = None
                 chosen_int = None
                 if t == SolType.IntTy:
-                    arr.append(self._select_int(contract, method, typ.size, obs, chosen_int))
+                    arr.append(
+                        self._select_int(contract, method, typ.size, obs, chosen_int)
+                    )
                 elif t == SolType.UintTy:
-                    arr.append(self._select_uint(contract, method, typ.size, obs, chosen_int))
+                    arr.append(
+                        self._select_uint(contract, method, typ.size, obs, chosen_int)
+                    )
             elif t == SolType.BoolTy:
                 arr.append(self._select_bool())
             elif t == SolType.StringTy:
@@ -224,7 +271,9 @@ class PolicyFRandom(PolicyBase):
                 arg = self._select_slice(contract, method, sender, typ.elem, obs)
                 arr.append(arg)
             elif t == SolType.ArrayTy:
-                arg = self._select_array(contract, method, sender, typ.size, typ.elem, obs)
+                arg = self._select_array(
+                    contract, method, sender, typ.size, typ.elem, obs
+                )
                 arr.append(arg)
             elif t == SolType.AddressTy:
                 # TODO select address
@@ -235,7 +284,7 @@ class PolicyFRandom(PolicyBase):
             elif t == SolType.BytesTy:
                 arr.append(self._select_bytes(obs))
             else:
-                assert False, 'type {} not supported'.format(t)
+                assert False, "type {} not supported".format(t)
 
         return arr
 

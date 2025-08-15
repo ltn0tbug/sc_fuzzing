@@ -1,7 +1,7 @@
 INT_VALUES_FREQUENT = [
     0x0,
     0x1,
-    0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff,
+    0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,
     0x8,
     0x2,
     0x4,
@@ -51,6 +51,5 @@ INT_VALUES_UNFREQUENT = [
     0x1000000000,
     0x100,
     0x80000000000000,
-    0x200000000000
+    0x200000000000,
 ]
-

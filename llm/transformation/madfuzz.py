@@ -3,39 +3,12 @@ import os
 import copy
 import re
 
-VALID_SOLIDITY_TYPES = set(
-    [
-        # Integer types
-        "uint",
-        "uint8",
-        "uint16",
-        "uint32",
-        "uint64",
-        "uint128",
-        "uint256",
-        "int",
-        "int8",
-        "int16",
-        "int32",
-        "int64",
-        "int128",
-        "int256",
-        # Other value types
-        "bool",
-        "address",
-        "address payable",
-        "bytes",
-        "string",
-        # Arrays
-        "uint[]",
-        "int[]",
-        "bool[]",
-        "address[]",
-        "string[]",
-        "bytes[]",
-    ]
-    + [f"bytes{i}" for i in range(1, 33)]
-)  # Adds bytes1 to bytes32
+# Basic
+VALID_SOLIDITY_TYPES = ["uint", "int", "bool", "address", "bytes", "string"]
+
+VALID_SOLIDITY_TYPES += [f"uint{x}" for x in range(8, 257, 8)]
+VALID_SOLIDITY_TYPES += [f"int{x}" for x in range(8, 257, 8)]
+VALID_SOLIDITY_TYPES += [f"bytes{x}" for x in range(1, 33)]
 
 
 def normalize_argument_values(functions):
@@ -88,7 +61,15 @@ def normalize_argument_values(functions):
                 .replace("wei", "")
             )
             num = int(eval(val))
-            return num if signed else max(0, num)
+            if signed:
+                return (
+                    num
+                    if num >= -(2**255) and num <= 2**255 - 1
+                    else random.randint(-(2**255), 2**255 - 1)
+                )
+            return (
+                num if num >= 0 and num <= 2**256 - 1 else random.randint(0, 2**256 - 1)
+            )
         except:
             if signed:
                 return random.randint(-(2**255), 2**255 - 1)
@@ -108,9 +89,9 @@ def normalize_argument_values(functions):
                 hex_str = hex_str.ljust(size * 2, "0")[: size * 2]
             elif len(hex_str) > 64:
                 hex_str = hex_str[:64]
-            return "0x" + hex_str.lower()
+            return bytes.fromhex(hex_str.lower())
         except:
-            return "0x" + os.urandom(size or 32).hex()
+            return os.urandom(size or 32)
 
     def parse_string(val):
         try:
@@ -118,15 +99,28 @@ def normalize_argument_values(functions):
         except:
             return "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
 
-    def parse_array(val_list, subtype):
+    def parse_array(val_list, subtype, size=None):
         if not isinstance(val_list, list):
             val_list = [val_list]
-        return [parse_value(v, subtype) for v in val_list]
+
+        if size is None or (size is not None and len(val_list) == size):
+            return [parse_value(v, subtype) for v in val_list]
+
+        if len(val_list) > size:
+            return [
+                parse_value(v, subtype) for v in val_list[: -(len(val_list) - size)]
+            ]
+
+        raise ValueError(f"Length not match {val_list} < {size}")
 
     def parse_value(val, solidity_type):
         if solidity_type.endswith("[]"):
             subtype = solidity_type[:-2]
             return parse_array(val, subtype)
+        elif re.fullmatch(r"(.+)\[(\d+)\]", solidity_type):
+            match = re.fullmatch(r"(.+)\[(\d+)\]", solidity_type)
+            subtype, size = match.groups()
+            return parse_array(val, subtype, int(size))
         elif solidity_type.startswith("uint"):
             return parse_int(val, signed=False)
         elif solidity_type.startswith("int"):
@@ -150,7 +144,14 @@ def normalize_argument_values(functions):
         for j, arg in enumerate(arguments):
             arg_type = arg["type"]
             if arg_type not in VALID_SOLIDITY_TYPES:
-                raise ValueError(f"Unsupported Solidity type: {arg_type}")
+                match = re.fullmatch(r"([a-zA-Z0-9_]+)((\[\d*\])*)", arg_type)
+                if match:
+                    subtype = match.groups()[0]
+                    if subtype not in VALID_SOLIDITY_TYPES:
+                        raise ValueError(f"Unsupported Solidity type: {arg_type}")
+                else:
+                    raise ValueError(f"Unsupported Solidity type: {arg_type}")
+
             results[i]["arguments"][j]["values"] = [
                 parse_value(v, arg_type) for v in arg["values"]
             ]

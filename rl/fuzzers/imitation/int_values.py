@@ -1,7 +1,7 @@
 INT_VALUES = [
     0x0,
     0x1,
-    0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff,
+    0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,
     0x8,
     0x2,
     0x4,

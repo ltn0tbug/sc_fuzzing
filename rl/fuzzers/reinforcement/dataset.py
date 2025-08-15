@@ -11,12 +11,13 @@ class GraphsCollection:
     node: function
     edge: (function1, function2) captures that the reads and writes in f1 and f2 may overlap
     """
+
     def __init__(self):
         self.graph = {}
 
     def add_graph(self, contract, storage_args):
         if contract in self.graph:
-            return self.graph[contract][1] # return the edges
+            return self.graph[contract][1]  # return the edges
 
         edges = []
         num_fields = 0
@@ -25,25 +26,25 @@ class GraphsCollection:
         # storage_args [{}, {'SLOAD': {0, 1, 4, 5}, 'SSTORE': {1, 4}}, {'SLOAD': {4, 5}, 'SSTORE': {4}}, {'SLOAD': {3}, 'SSTORE': {3}}, {'SSTORE': {5}, 'SLOAD': {0, 1, 2}}, {'SLOAD': {1, 3, 5}}]
         # find max num (key) in SLOAD and SSTORE but not greater than 100
         for store in storage_args:
-            if 'SLOAD' in store and len(store['SLOAD']) > 0:
-                num_fields = max(num_fields, max(store['SLOAD']) + 1)
-            if 'SSTORE' in store and len(store['SSTORE']) > 0:
-                num_fields = max(num_fields, max(store['SSTORE']) + 1)
-        num_fields = min(num_fields, 100) # the max key
+            if "SLOAD" in store and len(store["SLOAD"]) > 0:
+                num_fields = max(num_fields, max(store["SLOAD"]) + 1)
+            if "SSTORE" in store and len(store["SSTORE"]) > 0:
+                num_fields = max(num_fields, max(store["SSTORE"]) + 1)
+        num_fields = min(num_fields, 100)  # the max key
 
         for i, store in enumerate(storage_args):
             # i the num of method, j the key in storage
-            if 'SLOAD' in store:
-                for j in store['SLOAD']:
+            if "SLOAD" in store:
+                for j in store["SLOAD"]:
                     if j < 100:
                         edges.append([j, i + num_fields])
-            if 'SSTORE' in store:
-                for j in store['SSTORE']:
+            if "SSTORE" in store:
+                for j in store["SSTORE"]:
                     if j < 100:
                         edges.append([i + num_fields, j])
 
         assert num_fields > 0 or len(storage_args) > 0
-                        
+
         for i in range(num_fields + len(storage_args)):
             edges.append([i, i])
         self.graph[contract] = (num_fields, edges)
@@ -116,7 +117,7 @@ class Dataset:
     def make_batches(self, batch_size):
         ret = []
         for i in range(0, len(self.data), batch_size):
-            ret.append(self.data[i:min(i + batch_size, len(self.data))])
+            ret.append(self.data[i : min(i + batch_size, len(self.data))])
         return ret
 
     @staticmethod
@@ -127,39 +128,43 @@ class Dataset:
 
         best_cov, best_samples = {}, {}
         for filename in tqdm(os.listdir(dump_dir)):
-            if not filename.endswith('.data'):
+            if not filename.endswith(".data"):
                 continue
 
             tot_cov = 0
             tmp_samples = []
-            with open(os.path.join(dump_dir, filename), 'r') as fin:
+            with open(os.path.join(dump_dir, filename), "r") as fin:
                 method_op_bow = {}
                 addresses = {}
                 for line in fin:
                     d = json.loads(line)
-                    if d['type'] == 'init':
-                        assert len(d['contracts']) == 1
-                        for contract, fmap in d['contracts'].items():
-                            methods[contract] = sorted(fmap['methods'].keys())
+                    if d["type"] == "init":
+                        assert len(d["contracts"]) == 1
+                        for contract, fmap in d["contracts"].items():
+                            methods[contract] = sorted(fmap["methods"].keys())
                             addresses[contract] = [addr for addr in addr_map.keys()]
-                            if 'addresses' in fmap:
-                                addresses[contract] += fmap['addresses']
-                            func_args = [fmap['methods'][method] for method in methods[contract]]
+                            if "addresses" in fmap:
+                                addresses[contract] += fmap["addresses"]
+                            func_args = [
+                                fmap["methods"][method] for method in methods[contract]
+                            ]
                             for method in methods[contract]:
-                                method_op_bow[method] = fmap['methods'][method]['op_bow']
+                                method_op_bow[method] = fmap["methods"][method][
+                                    "op_bow"
+                                ]
                             gc.add_graph(contract, func_args)
-                    elif d['type'] == 'tx':
-                        tx = d['tx']
-                        target_method = tx['method']
-                        sender = tx['sender']
-                        contract = tx['contract']
-                        amount = tx['amount']
-                        policy = tx['policy'] if 'policy' in tx else None
-                        tot_cov += d['insn_coverage_change']
+                    elif d["type"] == "tx":
+                        tx = d["tx"]
+                        target_method = tx["method"]
+                        sender = tx["sender"]
+                        contract = tx["contract"]
+                        amount = tx["amount"]
+                        policy = tx["policy"] if "policy" in tx else None
+                        tot_cov += d["insn_coverage_change"]
 
                         try:
                             addr_args, int_args = [], []
-                            for arg in tx['arguments']:
+                            for arg in tx["arguments"]:
                                 if arg in addresses[contract]:
                                     addr_args.append(addresses[contract].index(arg))
                                 if isinstance(arg, int):
@@ -170,8 +175,11 @@ class Dataset:
 
                             all_features = {}
                             for method in method_op_bow:
-                                all_features[method] = d['features']['methods'][method] + method_op_bow[method]
-                        except KeyError: # remove this when bug is fixed
+                                all_features[method] = (
+                                    d["features"]["methods"][method]
+                                    + method_op_bow[method]
+                                )
+                        except KeyError:  # remove this when bug is fixed
                             continue
 
                         use_train = True
@@ -180,15 +188,31 @@ class Dataset:
                         # if policy is not None and policy[0] == 'PolicyImitation':
                         #     use_train = False
 
-                        if all_features[target_method][4] < 1.0 or (amount not in amounts):
+                        if all_features[target_method][4] < 1.0 or (
+                            amount not in amounts
+                        ):
                             amount = None
                         else:
                             amount = amounts.index(amount)
-                        inp = Input(contract, all_features, d['trace_bow'], len(addresses[contract]))
-                        out = Output(target_method, sender, addr_args, int_args, amount, use_train)
-                        tmp_samples.append((d['insn_coverage_change'], Sample(inp, out)))
+                        inp = Input(
+                            contract,
+                            all_features,
+                            d["trace_bow"],
+                            len(addresses[contract]),
+                        )
+                        out = Output(
+                            target_method,
+                            sender,
+                            addr_args,
+                            int_args,
+                            amount,
+                            use_train,
+                        )
+                        tmp_samples.append(
+                            (d["insn_coverage_change"], Sample(inp, out))
+                        )
                     else:
-                        raise ValueError('Wrong type')
+                        raise ValueError("Wrong type")
             while len(tmp_samples) > 0 and tmp_samples[-1][0] < 0.0000001:
                 tmp_samples = tmp_samples[:-1]
 
@@ -208,5 +232,5 @@ class Dataset:
                 if len(samples) > 0:
                     dataset.add_sample(samples)
 
-        print('Loaded dataset with %d samples' % dataset.size())
+        print("Loaded dataset with %d samples" % dataset.size())
         return methods, gc, dataset

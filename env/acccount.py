@@ -10,11 +10,13 @@ class Account:
         self.private_key = private_key
         self.w3 = Web3(Web3.HTTPProvider(rpc_url))
         self.rpc_url = rpc_url
+        self.balance = self.get_balance()
+        self.nonce = self.get_nonce()
 
     def __repr__(self):
 
         return (
-            f"Account(address={self.address}, balance={self.get_account_balance():,} Wei, nonce={self.get_account_nonce()})"
+            f"Account(address={self.address}, balance={self.balance:,} Wei, nonce={self.nonce})"
             if self.w3.is_connected()
             else f"Account(address={self.address}, balance=Unknown, nonce=Unknown)"
         )

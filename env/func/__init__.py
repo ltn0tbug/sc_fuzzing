@@ -10,3 +10,4 @@ from .call_sc_event import call_sc_event
 from .get_struct_logs import get_struct_logs
 from .add_truffle_config import add_truffle_config
 from .is_truffle_project import is_truffle_project
+from .remove_truffle_config import remove_truffle_config

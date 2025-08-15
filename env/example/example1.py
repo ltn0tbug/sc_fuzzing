@@ -45,6 +45,7 @@ print(f"Name:           {contract.name}")
 print(f"Address:        {contract.address}")
 print(f"Creator:        {contract.creator}")
 print(f"Creation TX:    {contract.creation_tx}")
+print(f"Balance:        {contract.balance} Wei")
 print(f"ABI (truncated): {str(contract.abi)[:120]}...")
 
 print(f"{"":-^100}")

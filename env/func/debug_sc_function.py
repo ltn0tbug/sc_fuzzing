@@ -13,7 +13,8 @@ def debug_sc_function(
     abi: list,
     contract_address: str,
     function_name: str,
-    args: dict = {},
+    args={},
+    value: int = 0,
 ):
     """
     Attempt to call a smart contract function on a local Ganache node and return execution trace.
@@ -60,15 +61,16 @@ def debug_sc_function(
 
     # If function not found, send invalid function call
     if len(fn_candidates) == 0:
-        logger.info(
-            f"Could not find `{function_name}` in contract ABI. "
-            "Transaction with invalid data (0xdeadbeefdeadbeef) will be sent to trigger fallback."
-        )
+        # logger.info(
+        #     f"Could not find `{function_name}` in contract ABI. "
+        #     "Transaction with invalid data (0xdeadbeefdeadbeef) will be sent to trigger fallback."
+        # )
 
         tx = {
             "from": from_account_address,
             "to": contract_address,
             "data": "0xdeadbeefdeadbeef",  # Invalid function selector
+            "value": value,
         }
 
         tx_response = w3.provider.make_request("eth_sendTransaction", [tx])
@@ -88,19 +90,36 @@ def debug_sc_function(
 
     # Validate that all required parameters are provided
     param_names = [inp["name"] for inp in fn_abi["inputs"]]
-    missing_args = [name for name in param_names if name not in args]
-    if missing_args:
-        raise ValueError(
-            f"Missing required arguments for `{function_name}`: {', '.join(missing_args)}"
+    if isinstance(args, dict):
+        missing_args = [name for name in param_names if name not in args]
+        if missing_args:
+            raise ValueError(
+                f"Missing required arguments for `{function_name}`: {', '.join(missing_args)}"
+            )
+        contract_fn = getattr(contract.functions, fn_abi.get("name"))(**args)
+        fn_encoded_abi = contract.encode_abi(
+            contract_fn.abi_element_identifier, kwargs=args
+        )
+    else:
+        contract_fn = getattr(contract.functions, fn_abi.get("name"))(*args)
+        fn_encoded_abi = contract.encode_abi(
+            contract_fn.abi_element_identifier, args=args
         )
 
-    # Create contract function call and encode ABI
-    contract_fn = getattr(contract.functions, fn_abi.get("name"))(**args)
-    fn_encoded_abi = contract.encode_abi(
-        contract_fn.abi_element_identifier, kwargs=args
-    )
+    # print(args)
 
-    tx = {"from": from_account_address, "to": contract_address, "data": fn_encoded_abi}
+    # Create contract function call and encode ABI
+    # contract_fn = getattr(contract.functions, fn_abi.get("name"))(**args)
+    # fn_encoded_abi = contract.encode_abi(
+    #     contract_fn.abi_element_identifier, kwargs=args
+    # )
+
+    tx = {
+        "from": from_account_address,
+        "to": contract_address,
+        "data": fn_encoded_abi,
+        "value": value,
+    }
 
     tx_response = w3.provider.make_request("eth_sendTransaction", [tx])
 

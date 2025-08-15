@@ -8,8 +8,8 @@ MOD = 0x6
 SMOD = 0x7
 ADDMOD = 0x8
 MULMOD = 0x9
-EXP = 0xa
-SIGNEXTEND = 0xb
+EXP = 0xA
+SIGNEXTEND = 0xB
 
 LT = 0x10
 GT = 0x11
@@ -21,10 +21,10 @@ AND = 0x16
 OR = 0x17
 XOR = 0x18
 NOT = 0x19
-BYTE = 0x1a
-SHL = 0x1b
-SHR = 0x1c
-SAR = 0x1d
+BYTE = 0x1A
+SHL = 0x1B
+SHR = 0x1C
+SAR = 0x1D
 
 SHA3 = 0x20
 
@@ -38,14 +38,14 @@ CALLDATASIZE = 0x36
 CALLDATACOPY = 0x37
 CODESIZE = 0x38
 CODECOPY = 0x39
-GASPRICE = 0x3a
-EXTCODESIZE = 0x3b
-EXTCODECOPY = 0x3c
-RETURNDATASIZE = 0x3d
-RETURNDATACOPY = 0x3e
+GASPRICE = 0x3A
+EXTCODESIZE = 0x3B
+EXTCODECOPY = 0x3C
+RETURNDATASIZE = 0x3D
+RETURNDATACOPY = 0x3E
 
 BLOCKHASH = 0x40
-COINBASE = 0x41 # the beneficiary address of block
+COINBASE = 0x41  # the beneficiary address of block
 TIMESTAMP = 0x42
 NUMBER = 0x43
 DIFFICULTY = 0x44
@@ -61,8 +61,8 @@ JUMP = 0x56
 JUMPI = 0x57
 PC = 0x58
 MSIZE = 0x59
-GAS = 0x5a
-JUMPDEST = 0x5b
+GAS = 0x5A
+JUMPDEST = 0x5B
 
 PUSH1 = 0x60
 PUSH2 = 0x61
@@ -74,12 +74,12 @@ PUSH7 = 0x66
 PUSH8 = 0x67
 PUSH9 = 0x68
 PUSH10 = 0x69
-PUSH11 = 0x6a
-PUSH12 = 0x6b
-PUSH13 = 0x6c
-PUSH14 = 0x6d
-PUSH15 = 0x6e
-PUSH16 = 0x6f
+PUSH11 = 0x6A
+PUSH12 = 0x6B
+PUSH13 = 0x6C
+PUSH14 = 0x6D
+PUSH15 = 0x6E
+PUSH16 = 0x6F
 PUSH17 = 0x70
 PUSH18 = 0x71
 PUSH19 = 0x72
@@ -90,12 +90,12 @@ PUSH23 = 0x76
 PUSH24 = 0x77
 PUSH25 = 0x78
 PUSH26 = 0x79
-PUSH27 = 0x7a
-PUSH28 = 0x7b
-PUSH29 = 0x7c
-PUSH30 = 0x7d
-PUSH31 = 0x7e
-PUSH32 = 0x7f
+PUSH27 = 0x7A
+PUSH28 = 0x7B
+PUSH29 = 0x7C
+PUSH30 = 0x7D
+PUSH31 = 0x7E
+PUSH32 = 0x7F
 
 DUP1 = 0x80
 DUP2 = 0x81
@@ -107,12 +107,12 @@ DUP7 = 0x86
 DUP8 = 0x87
 DUP9 = 0x88
 DUP10 = 0x89
-DUP11 = 0x8a
-DUP12 = 0x8b
-DUP13 = 0x8c
-DUP14 = 0x8d
-DUP15 = 0x8e
-DUP16 = 0x8f
+DUP11 = 0x8A
+DUP12 = 0x8B
+DUP13 = 0x8C
+DUP14 = 0x8D
+DUP15 = 0x8E
+DUP16 = 0x8F
 
 SWAP1 = 0x90
 SWAP2 = 0x91
@@ -124,44 +124,44 @@ SWAP7 = 0x96
 SWAP8 = 0x97
 SWAP9 = 0x98
 SWAP10 = 0x99
-SWAP11 = 0x9a
-SWAP12 = 0x9b
-SWAP13 = 0x9c
-SWAP14 = 0x9d
-SWAP15 = 0x9e
-SWAP16 = 0x9f
+SWAP11 = 0x9A
+SWAP12 = 0x9B
+SWAP13 = 0x9C
+SWAP14 = 0x9D
+SWAP15 = 0x9E
+SWAP16 = 0x9F
 
-LOG0 = 0xa0
-LOG1 = 0xa1
-LOG2 = 0xa2
-LOG3 = 0xa3
-LOG4 = 0xa4
+LOG0 = 0xA0
+LOG1 = 0xA1
+LOG2 = 0xA2
+LOG3 = 0xA3
+LOG4 = 0xA4
 
-PUSH = 0xb0
-DUP = 0xb1
-SWAP = 0xb2
+PUSH = 0xB0
+DUP = 0xB1
+SWAP = 0xB2
 
-CREATE = 0xf0
-CALL = 0xf1
-CALLCODE = 0xf2
-RETURN = 0xf3
-DELEGATECALL = 0xf4
-STATICCALL = 0xfa
-REVERT = 0xfd
-INVALID = 0xfe
-SELFDESTRUCT = 0xff
+CREATE = 0xF0
+CALL = 0xF1
+CALLCODE = 0xF2
+RETURN = 0xF3
+DELEGATECALL = 0xF4
+STATICCALL = 0xFA
+REVERT = 0xFD
+INVALID = 0xFE
+SELFDESTRUCT = 0xFF
 
 
 def is_push(op):
-    return 0x60 <= op <= 0x7f
+    return 0x60 <= op <= 0x7F
 
 
 def is_dup(op):
-    return 0x80 <= op <= 0x8f
+    return 0x80 <= op <= 0x8F
 
 
 def is_swap(op):
-    return 0x90 <= op <= 0x9f
+    return 0x90 <= op <= 0x9F
 
 
 STACK_CHANGES = {
@@ -177,7 +177,6 @@ STACK_CHANGES = {
     MULMOD: -2,
     EXP: -1,
     SIGNEXTEND: -1,
-
     LT: -1,
     GT: -1,
     SLT: -1,
@@ -192,9 +191,7 @@ STACK_CHANGES = {
     SHL: -1,
     SHR: -1,
     SAR: -1,
-
     SHA3: -1,
-
     ADDRESS: 1,
     BALANCE: 0,
     ORIGIN: 1,
@@ -210,14 +207,12 @@ STACK_CHANGES = {
     EXTCODECOPY: -4,
     RETURNDATASIZE: 1,
     RETURNDATACOPY: -3,
-
     BLOCKHASH: 0,
     COINBASE: 1,
     TIMESTAMP: 1,
     NUMBER: 1,
     DIFFICULTY: 1,
     GASLIMIT: 1,
-
     POP: -1,
     MLOAD: 0,
     MSTORE: -2,
@@ -230,7 +225,6 @@ STACK_CHANGES = {
     MSIZE: 1,
     GAS: 1,
     JUMPDEST: 0,
-
     PUSH1: 1,
     PUSH2: 1,
     PUSH3: 1,
@@ -263,7 +257,6 @@ STACK_CHANGES = {
     PUSH30: 1,
     PUSH31: 1,
     PUSH32: 1,
-
     DUP1: 1,
     DUP2: 1,
     DUP3: 1,
@@ -280,7 +273,6 @@ STACK_CHANGES = {
     DUP14: 1,
     DUP15: 1,
     DUP16: 1,
-
     SWAP1: 0,
     SWAP2: 0,
     SWAP3: 0,
@@ -297,13 +289,11 @@ STACK_CHANGES = {
     SWAP14: 0,
     SWAP15: 0,
     SWAP16: 0,
-
     LOG0: -2,
     LOG1: -3,
     LOG2: -4,
     LOG3: -5,
     LOG4: -6,
-
     CREATE: -2,
     CALL: -6,
     CALLCODE: -6,
@@ -312,159 +302,149 @@ STACK_CHANGES = {
     STATICCALL: -5,
     REVERT: -2,
     INVALID: 0,
-    SELFDESTRUCT: -1
+    SELFDESTRUCT: -1,
 }
 
 
 OP_NAME = {
-    STOP: 'STOP',
-    ADD: 'ADD',
-    MUL: 'MUL',
-    SUB: 'SUB',
-    DIV: 'DIV',
-    SDIV: 'SDIV',
-    MOD: 'MOD',
-    SMOD: 'SMOD',
-    ADDMOD: 'ADDMOD',
-    MULMOD: 'MULMOD',
-    EXP: 'EXP',
-    SIGNEXTEND: 'SIGNEXTEND',
-
-    LT: 'LT',
-    GT: 'GT',
-    SLT: 'SLT',
-    SGT: 'SGT',
-    EQ: 'EQ',
-    ISZERO: 'ISZERO',
-    AND: 'AND',
-    OR: 'OR',
-    XOR: 'XOR',
-    NOT: 'NOT',
-    BYTE: 'BYTE',
-    SHL: 'SHL',
-    SHR: 'SHR',
-    SAR: 'SAR',
-
-    SHA3: 'SHA3',
-
-    ADDRESS: 'ADDRESS',
-    BALANCE: 'BALANCE',
-    ORIGIN: 'ORIGIN',
-    CALLER: 'CALLER',
-    CALLVALUE: 'CALLVALUE',
-    CALLDATALOAD: 'CALLDATALOAD',
-    CALLDATASIZE: 'CALLDATASIZE',
-    CALLDATACOPY: 'CALLDATACOPY',
-    CODESIZE: 'CODESIZE',
-    CODECOPY: 'CODECOPY',
-    GASPRICE: 'GASPRICE',
-    EXTCODESIZE: 'EXTCODESIZE',
-    EXTCODECOPY: 'EXTCODECOPY',
-    RETURNDATASIZE: 'RETURNDATASIZE',
-    RETURNDATACOPY: 'RETURNDATACOPY',
-
-    BLOCKHASH: 'BLOCKHASH',
-    COINBASE: 'COINBASE',
-    TIMESTAMP: 'TIMESTAMP',
-    NUMBER: 'NUMBER',
-    DIFFICULTY: 'DIFFICULTY',
-    GASLIMIT: 'GASLIMIT',
-
-    POP: 'POP',
-    MLOAD: 'MLOAD',
-    MSTORE: 'MSTORE',
-    MSTORE8: 'MSTORE8',
-    SLOAD: 'SLOAD',
-    SSTORE: 'SSTORE',
-    JUMP: 'JUMP',
-    JUMPI: 'JUMPI',
-    PC: 'PC',
-    MSIZE: 'MSIZE',
-    GAS: 'GAS',
-    JUMPDEST: 'JUMPDEST',
-
-    PUSH1: 'PUSH1',
-    PUSH2: 'PUSH2',
-    PUSH3: 'PUSH3',
-    PUSH4: 'PUSH4',
-    PUSH5: 'PUSH5',
-    PUSH6: 'PUSH6',
-    PUSH7: 'PUSH7',
-    PUSH8: 'PUSH8',
-    PUSH9: 'PUSH9',
-    PUSH10: 'PUSH10',
-    PUSH11: 'PUSH11',
-    PUSH12: 'PUSH12',
-    PUSH13: 'PUSH13',
-    PUSH14: 'PUSH14',
-    PUSH15: 'PUSH15',
-    PUSH16: 'PUSH16',
-    PUSH17: 'PUSH17',
-    PUSH18: 'PUSH18',
-    PUSH19: 'PUSH19',
-    PUSH20: 'PUSH20',
-    PUSH21: 'PUSH21',
-    PUSH22: 'PUSH22',
-    PUSH23: 'PUSH23',
-    PUSH24: 'PUSH24',
-    PUSH25: 'PUSH25',
-    PUSH26: 'PUSH26',
-    PUSH27: 'PUSH27',
-    PUSH28: 'PUSH28',
-    PUSH29: 'PUSH29',
-    PUSH30: 'PUSH30',
-    PUSH31: 'PUSH31',
-    PUSH32: 'PUSH32',
-
-    DUP1: 'DUP1',
-    DUP2: 'DUP2',
-    DUP3: 'DUP3',
-    DUP4: 'DUP4',
-    DUP5: 'DUP5',
-    DUP6: 'DUP6',
-    DUP7: 'DUP7',
-    DUP8: 'DUP8',
-    DUP9: 'DUP9',
-    DUP10: 'DUP10',
-    DUP11: 'DUP11',
-    DUP12: 'DUP12',
-    DUP13: 'DUP13',
-    DUP14: 'DUP14',
-    DUP15: 'DUP15',
-    DUP16: 'DUP16',
-
-    SWAP1: 'SWAP1',
-    SWAP2: 'SWAP2',
-    SWAP3: 'SWAP3',
-    SWAP4: 'SWAP4',
-    SWAP5: 'SWAP5',
-    SWAP6: 'SWAP6',
-    SWAP7: 'SWAP7',
-    SWAP8: 'SWAP8',
-    SWAP9: 'SWAP9',
-    SWAP10: 'SWP10',
-    SWAP11: 'SWP11',
-    SWAP12: 'SWP12',
-    SWAP13: 'SWP13',
-    SWAP14: 'SWP14',
-    SWAP15: 'SWP15',
-    SWAP16: 'SWP16',
-
-    LOG0: 'LOG0',
-    LOG1: 'LOG1',
-    LOG2: 'LOG2',
-    LOG3: 'LOG3',
-    LOG4: 'LOG4',
-
-    CREATE: 'CREATE',
-    CALL: 'CALL',
-    CALLCODE: 'CALLCODE',
-    RETURN: 'RETURN',
-    DELEGATECALL: 'DELEGATECALL',
-    STATICCALL: 'STATICCALL',
-    REVERT: 'REVERT',
-    INVALID: 'INVALID',
-    SELFDESTRUCT: 'SELFDESTRUCT',
+    STOP: "STOP",
+    ADD: "ADD",
+    MUL: "MUL",
+    SUB: "SUB",
+    DIV: "DIV",
+    SDIV: "SDIV",
+    MOD: "MOD",
+    SMOD: "SMOD",
+    ADDMOD: "ADDMOD",
+    MULMOD: "MULMOD",
+    EXP: "EXP",
+    SIGNEXTEND: "SIGNEXTEND",
+    LT: "LT",
+    GT: "GT",
+    SLT: "SLT",
+    SGT: "SGT",
+    EQ: "EQ",
+    ISZERO: "ISZERO",
+    AND: "AND",
+    OR: "OR",
+    XOR: "XOR",
+    NOT: "NOT",
+    BYTE: "BYTE",
+    SHL: "SHL",
+    SHR: "SHR",
+    SAR: "SAR",
+    SHA3: "SHA3",
+    ADDRESS: "ADDRESS",
+    BALANCE: "BALANCE",
+    ORIGIN: "ORIGIN",
+    CALLER: "CALLER",
+    CALLVALUE: "CALLVALUE",
+    CALLDATALOAD: "CALLDATALOAD",
+    CALLDATASIZE: "CALLDATASIZE",
+    CALLDATACOPY: "CALLDATACOPY",
+    CODESIZE: "CODESIZE",
+    CODECOPY: "CODECOPY",
+    GASPRICE: "GASPRICE",
+    EXTCODESIZE: "EXTCODESIZE",
+    EXTCODECOPY: "EXTCODECOPY",
+    RETURNDATASIZE: "RETURNDATASIZE",
+    RETURNDATACOPY: "RETURNDATACOPY",
+    BLOCKHASH: "BLOCKHASH",
+    COINBASE: "COINBASE",
+    TIMESTAMP: "TIMESTAMP",
+    NUMBER: "NUMBER",
+    DIFFICULTY: "DIFFICULTY",
+    GASLIMIT: "GASLIMIT",
+    POP: "POP",
+    MLOAD: "MLOAD",
+    MSTORE: "MSTORE",
+    MSTORE8: "MSTORE8",
+    SLOAD: "SLOAD",
+    SSTORE: "SSTORE",
+    JUMP: "JUMP",
+    JUMPI: "JUMPI",
+    PC: "PC",
+    MSIZE: "MSIZE",
+    GAS: "GAS",
+    JUMPDEST: "JUMPDEST",
+    PUSH1: "PUSH1",
+    PUSH2: "PUSH2",
+    PUSH3: "PUSH3",
+    PUSH4: "PUSH4",
+    PUSH5: "PUSH5",
+    PUSH6: "PUSH6",
+    PUSH7: "PUSH7",
+    PUSH8: "PUSH8",
+    PUSH9: "PUSH9",
+    PUSH10: "PUSH10",
+    PUSH11: "PUSH11",
+    PUSH12: "PUSH12",
+    PUSH13: "PUSH13",
+    PUSH14: "PUSH14",
+    PUSH15: "PUSH15",
+    PUSH16: "PUSH16",
+    PUSH17: "PUSH17",
+    PUSH18: "PUSH18",
+    PUSH19: "PUSH19",
+    PUSH20: "PUSH20",
+    PUSH21: "PUSH21",
+    PUSH22: "PUSH22",
+    PUSH23: "PUSH23",
+    PUSH24: "PUSH24",
+    PUSH25: "PUSH25",
+    PUSH26: "PUSH26",
+    PUSH27: "PUSH27",
+    PUSH28: "PUSH28",
+    PUSH29: "PUSH29",
+    PUSH30: "PUSH30",
+    PUSH31: "PUSH31",
+    PUSH32: "PUSH32",
+    DUP1: "DUP1",
+    DUP2: "DUP2",
+    DUP3: "DUP3",
+    DUP4: "DUP4",
+    DUP5: "DUP5",
+    DUP6: "DUP6",
+    DUP7: "DUP7",
+    DUP8: "DUP8",
+    DUP9: "DUP9",
+    DUP10: "DUP10",
+    DUP11: "DUP11",
+    DUP12: "DUP12",
+    DUP13: "DUP13",
+    DUP14: "DUP14",
+    DUP15: "DUP15",
+    DUP16: "DUP16",
+    SWAP1: "SWAP1",
+    SWAP2: "SWAP2",
+    SWAP3: "SWAP3",
+    SWAP4: "SWAP4",
+    SWAP5: "SWAP5",
+    SWAP6: "SWAP6",
+    SWAP7: "SWAP7",
+    SWAP8: "SWAP8",
+    SWAP9: "SWAP9",
+    SWAP10: "SWAP10",
+    SWAP11: "SWAP11",
+    SWAP12: "SWAP12",
+    SWAP13: "SWAP13",
+    SWAP14: "SWAP14",
+    SWAP15: "SWAP15",
+    SWAP16: "SWAP16",
+    LOG0: "LOG0",
+    LOG1: "LOG1",
+    LOG2: "LOG2",
+    LOG3: "LOG3",
+    LOG4: "LOG4",
+    CREATE: "CREATE",
+    CALL: "CALL",
+    CALLCODE: "CALLCODE",
+    RETURN: "RETURN",
+    DELEGATECALL: "DELEGATECALL",
+    STATICCALL: "STATICCALL",
+    REVERT: "REVERT",
+    INVALID: "INVALID",
+    SELFDESTRUCT: "SELFDESTRUCT",
 }
 
 # may be the essential opcode?
@@ -478,53 +458,47 @@ INTERESTING_OPS = [
     OR,
     XOR,
     NOT,
-
     SHA3,
-
-	ADDRESS,
-	BALANCE,
-	ORIGIN,
-	CALLER,
-	CALLVALUE,
-	CALLDATALOAD,
-	CALLDATASIZE,
-	CALLDATACOPY,
-	CODESIZE,
-	CODECOPY,
-	GASPRICE,
-	EXTCODESIZE,
-	EXTCODECOPY,
-	RETURNDATASIZE,
-	RETURNDATACOPY,
-	BLOCKHASH,
-	COINBASE,
-	TIMESTAMP,
-	NUMBER,
-	DIFFICULTY,
-	GASLIMIT,
-
-	SLOAD,
-	SSTORE,
-
-	PC,
-	MSIZE,
-	GAS,
-
-	LOG0,
-	LOG1,
-	LOG2,
-	LOG3,
-	LOG4,
-
-	CREATE,
-	CALL,
-	CALLCODE,
-	RETURN,
-	DELEGATECALL,
-	STATICCALL,
-	REVERT,
+    ADDRESS,
+    BALANCE,
+    ORIGIN,
+    CALLER,
+    CALLVALUE,
+    CALLDATALOAD,
+    CALLDATASIZE,
+    CALLDATACOPY,
+    CODESIZE,
+    CODECOPY,
+    GASPRICE,
+    EXTCODESIZE,
+    EXTCODECOPY,
+    RETURNDATASIZE,
+    RETURNDATACOPY,
+    BLOCKHASH,
+    COINBASE,
+    TIMESTAMP,
+    NUMBER,
+    DIFFICULTY,
+    GASLIMIT,
+    SLOAD,
+    SSTORE,
+    PC,
+    MSIZE,
+    GAS,
+    LOG0,
+    LOG1,
+    LOG2,
+    LOG3,
+    LOG4,
+    CREATE,
+    CALL,
+    CALLCODE,
+    RETURN,
+    DELEGATECALL,
+    STATICCALL,
+    REVERT,
     INVALID,
-	SELFDESTRUCT,
+    SELFDESTRUCT,
 ]
 
 MEM_WRITES = {
@@ -556,6 +530,7 @@ MEM_READ_WRITES = {
     STATICCALL,
 }
 
+
 # select the 50 most representative opcodes
 def select_interesting_ops(bow: list):
     res = []
@@ -563,9 +538,13 @@ def select_interesting_ops(bow: list):
         res.append(bow[op])
     return res
 
+
 import numpy as np
+
 remove_list = [PC, LOG0, LOG1, LOG2, LOG3, LOG4]
-def select_opcode_for_RL(bow: list) -> np.array: 
+
+
+def select_opcode_for_RL(bow: list) -> np.array:
     op_count = dict()
     for i, op in enumerate(INTERESTING_OPS):
         if op in remove_list:
@@ -574,10 +553,11 @@ def select_opcode_for_RL(bow: list) -> np.array:
     temp_bow = np.array(list(op_count.values()))
     sum_bow = temp_bow.sum()
     if sum_bow > 0:
-        temp_bow = temp_bow/sum_bow
+        temp_bow = temp_bow / sum_bow
     return temp_bow
 
-def select_opcode_for_cloud(bow) -> np.array: 
+
+def select_opcode_for_cloud(bow) -> np.array:
     op_count = dict()
     for i, op in enumerate(INTERESTING_OPS):
         if op in remove_list:
@@ -586,42 +566,44 @@ def select_opcode_for_cloud(bow) -> np.array:
     temp_bow = np.array(list(op_count.values()))
     sum_bow = temp_bow.sum()
     if sum_bow > 0:
-        temp_bow = temp_bow/sum_bow
+        temp_bow = temp_bow / sum_bow
         for key in op_count:
-            op_count[key] = op_count[key]/sum_bow
+            op_count[key] = op_count[key] / sum_bow
     return op_count
 
+
 def count_function_feature_for_kmeans(method) -> np.array:
-    row_bow = method['row_bow']
+    row_bow = method["row_bow"]
     op_count = np.array(row_bow)
     temp_bow = np.zeros(14)
     # Caculation
-    temp_bow[0] = op_count[ADD:EXP+1].sum() * 0.5
+    temp_bow[0] = op_count[ADD : EXP + 1].sum() * 0.5
     # Logic
-    temp_bow[1] = op_count[LT:NOT+1].sum() * 0.5
+    temp_bow[1] = op_count[LT : NOT + 1].sum() * 0.5
     # about MSG
-    temp_bow[2] = op_count[ADDRESS:RETURNDATACOPY+1].sum()
+    temp_bow[2] = op_count[ADDRESS : RETURNDATACOPY + 1].sum()
     # about block
-    temp_bow[3] = op_count[BLOCKHASH:GASLIMIT+1].sum()
+    temp_bow[3] = op_count[BLOCKHASH : GASLIMIT + 1].sum()
     # about Memory
-    temp_bow[4] = op_count[MLOAD:MSTORE8+1].sum() * 0.5
+    temp_bow[4] = op_count[MLOAD : MSTORE8 + 1].sum() * 0.5
     # about storage
-    temp_bow[5] = op_count[SLOAD:SSTORE+1].sum()
+    temp_bow[5] = op_count[SLOAD : SSTORE + 1].sum()
     # JUMP
-    temp_bow[6] = op_count[JUMP:JUMPI+1].sum()
+    temp_bow[6] = op_count[JUMP : JUMPI + 1].sum()
     # about LOG
     # temp_bow[7] = op_count[LOG0:LOG4+1].sum()
     # single opcode
     single_opcode = [SHA3, CALL, DELEGATECALL, STATICCALL, CREATE, SELFDESTRUCT]
     for i, opcode in enumerate(single_opcode):
-        temp_bow[7+i] = op_count[opcode] * 10
+        temp_bow[7 + i] = op_count[opcode] * 10
 
-    temp_bow[-1] = 10 if method['payable'] else 0
+    temp_bow[-1] = 10 if method["payable"] else 0
 
     sum_bow = temp_bow.sum()
     if sum_bow > 0:
-        temp_bow = temp_bow/sum_bow
+        temp_bow = temp_bow / sum_bow
     return temp_bow
+
 
 def select_trace_opcode(row_bow: list) -> np.array:
     op_count = np.array(row_bow)

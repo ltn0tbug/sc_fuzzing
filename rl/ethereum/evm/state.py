@@ -8,22 +8,17 @@ class Top:
     def __init__(self):
         pass
 
-
     def copy(self):
         return Top()
 
-
     def __hash__(self):
-        return hash('Top')
-
+        return hash("Top")
 
     def __eq__(self, other):
         return isinstance(other, Top)
 
-
     def __str__(self):
-        return 'Top'
-
+        return "Top"
 
     def __repr__(self):
         return str(self)
@@ -34,46 +29,37 @@ class TopCALLDATASIZE(Top):
     def __init__(self):
         super().__init__()
 
-
     def copy(self):
         return TopCALLDATASIZE()
 
-
     def __hash__(self):
-        return hash('TopCALLDATASIZE')
-
+        return hash("TopCALLDATASIZE")
 
     def __eq__(self, other):
         return isinstance(other, TopCALLDATASIZE)
 
-
     def __str__(self):
-        return 'TopCALLDATASIZE'
+        return "TopCALLDATASIZE"
 
 
 class Value:
 
     def __init__(self, value):
         self.value = value
-        assert not is_top(value), 'value inside Value is top'
-        assert not value.__class__ == Value, 'value inside Value is value'
-
+        assert not is_top(value), "value inside Value is top"
+        assert not value.__class__ == Value, "value inside Value is value"
 
     def copy(self):
         return Value(self.value)
 
-
     def __eq__(self, other):
         return isinstance(other, Value) and self.value == other.value
 
-
     def __hash__(self):
-        return hash(('Value', self.value))
-
+        return hash(("Value", self.value))
 
     def __str__(self):
-        return '0x{:x}'.format(self.value)
-
+        return "0x{:x}".format(self.value)
 
     def __repr__(self):
         return str(self)
@@ -87,7 +73,7 @@ def all_not_top(elems):
     """
     there is no Top in list
     """
-    return all([not is_top(elem) for elem in elems]) # [1,1,1] -> True [1,1,0] -> False
+    return all([not is_top(elem) for elem in elems])  # [1,1,1] -> True [1,1,0] -> False
 
 
 class StackChecker:
@@ -96,17 +82,20 @@ class StackChecker:
         self.insn = insn
         self.state = state
 
-
     def __enter__(self):
-        self.old_len = len(self.state.stack)
+        if self.insn.op_name == "MSTORE" and len(self.state.stack) == 1:
+            self.state.stack = [Value(0x60)] + self.state.stack
 
+        self.old_len = len(self.state.stack)
 
     def __exit__(self, *args):
         """
         check the stack change is correct or wrong
         """
         new_len = len(self.state.stack)
-        assert new_len - self.old_len == STACK_CHANGES[self.insn.op], 'stack change is wrong for insn {}'.format(str(self.insn))
+        assert (
+            new_len - self.old_len == STACK_CHANGES[self.insn.op]
+        ), "stack change is wrong for insn {}".format(str(self.insn))
 
 
 class EVMState:
@@ -119,19 +108,25 @@ class EVMState:
 
         self.block_trace = list()
 
-
     def __hash__(self):
-        t = tuple([tuple(self.stack), tuple(self.mem), self.mem_len_decidable, tuple(self.storage.items())])
+        t = tuple(
+            [
+                tuple(self.stack),
+                tuple(self.mem),
+                self.mem_len_decidable,
+                tuple(self.storage.items()),
+            ]
+        )
         return hash(t)
 
-
     def __eq__(self, other):
-        return self.__class__ == other.__class__ \
-            and self.stack == other.stack \
-            and self.mem == other.mem \
-            and self.mem_len_decidable == other.mem_len_decidable \
+        return (
+            self.__class__ == other.__class__
+            and self.stack == other.stack
+            and self.mem == other.mem
+            and self.mem_len_decidable == other.mem_len_decidable
             and self.storage == other.storage
-
+        )
 
     def copy(self):
         cpy = EVMState()
@@ -142,14 +137,12 @@ class EVMState:
         cpy.block_trace = self.block_trace.copy()
         return cpy
 
-
     def mem_extend(self, length):
         """
-        extend the mem using Top(), after that len(self.men) == length 
+        extend the mem using Top(), after that len(self.men) == length
         """
         if length > len(self.mem):
             self.mem += [Top() for _ in range(length - len(self.mem))]
-
 
     def mem_reset(self, offset, length):
         """
@@ -161,16 +154,13 @@ class EVMState:
         for i in range(offset, offset + length):
             self.mem[i] = Top()
 
-
     def mem_reset_all(self):
         self.mem.clear()
         self.mem_len_decidable = False
 
-
     def mem_load(self, offset, length):
-        bs = bytearray(map(lambda m: m.value, self.mem[offset:offset + length]))
-        return int.from_bytes(bs, byteorder='big')
-
+        bs = bytearray(map(lambda m: m.value, self.mem[offset : offset + length]))
+        return int.from_bytes(bs, byteorder="big")
 
     def mem_valid(self, offset, length):
         """
@@ -179,8 +169,7 @@ class EVMState:
         if len(self.mem) < offset + length:
             return False
         else:
-            return all_not_top(self.mem[offset:offset+length])
-
+            return all_not_top(self.mem[offset : offset + length])
 
     def mem_store(self, offset, values):
         """
@@ -192,7 +181,6 @@ class EVMState:
         for i in range(len(values)):
             self.mem[offset + i] = Value(values[i])
 
-
     def mem_store_top(self, offset, length):
         """
         stroe Top in mem[offset:offset+length]
@@ -203,22 +191,19 @@ class EVMState:
         for i in range(offset, offset + length):
             self.mem[i] = Top()
 
-
     def get_mem_intro_idx(self, offset, length):
-        mem_entries = self.mem[offset:offset+length]
+        mem_entries = self.mem[offset : offset + length]
         intro_idx_set = set(map(lambda e: e.intro_idx, mem_entries))
         if len(intro_idx_set) == 1:
             return list(intro_idx_set)[0]
         else:
             return -1
 
-
     def mem_size(self):
         if self.mem_len_decidable:
             return Value(len(self.mem))
         else:
             return Top()
-
 
     def pop_stack(self, size=1):
         """
@@ -238,19 +223,17 @@ class EVMState:
                 vals.append(s)
             return tuple(vals)
         else:
-            assert False, 'cannot pop non positive number of elements from stack'
-
+            assert False, "cannot pop non positive number of elements from stack"
 
     def push_stack(self, value):
         self.stack.append(value)
 
-
     def __str__(self):
         j = {
-            'statck': str(self.stack),
-            'mem': str(self.mem),
-            'storage': str(self.storage),
-            'mem_len_decidable': self.mem_len_decidable,
-            'block_trace': self.block_trace,
+            "statck": str(self.stack),
+            "mem": str(self.mem),
+            "storage": str(self.storage),
+            "mem_len_decidable": self.mem_len_decidable,
+            "block_trace": self.block_trace,
         }
         return json.dumps(j)

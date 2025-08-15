@@ -87,7 +87,7 @@ def get_contracts(ganache_rpc_url, project_path):
             # If contractAddress is not None, this tx deployed a contract
             if contract_address:
                 creator = tx["from"]
-                deployed_bytecode = w3.eth.get_code(contract_address)
+                deployed_bytecode = w3.eth.get_code(contract_address, i)
 
                 # Try to identify the contract by comparing deployed bytecode
                 matched_name = None

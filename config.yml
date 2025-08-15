@@ -3,7 +3,7 @@ version: "0.1"
 
 ### Global variables ###
 # log_path: "log_path" # log location for Ganache and Truffle. Default is `{WORKSPACE}/logs`
-# force_stop: true # Force stop any process that is listening on the defined ganache port when call `env.init()`. Default is false
+force_stop: true # Force stop any process that is listening on the defined ganache port when call `env.init()`. Default is false
 
 ### Ganache Configuration ###
 # This config will be passed to ganache as in CLI. Please using the same keyword and datatype as in `ganache --help`
@@ -20,10 +20,13 @@ ganache:
     debug: true
 
 ### Truffle Configuration ###
-# This config will be added in the end of `truffle-config.js` in the project path. Not need to modify anything from `truffle-config.js`.
+# This config will be added in the end of `truffle-config.js` in the project path and will autoremove when you call `env.init()`.
 truffle:
   network:
     name: "fuzzing"
     host: "127.0.0.1"
     port: 8545
     network_id: "*"
+  optimizer:
+    enabled: true
+    runs: 200

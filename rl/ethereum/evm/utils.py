@@ -1,16 +1,19 @@
 try:
     from Crypto.Hash import keccak
 
-    def sha3_256(x): return keccak.new(digest_bits=256, data=x).digest()
+    def sha3_256(x):
+        return keccak.new(digest_bits=256, data=x).digest()
+
 except (ImportError, ModuleNotFoundError):
     import sha3 as _sha3
 
-    def sha3_256(x): return _sha3.keccak_256(x).digest()
+    def sha3_256(x):
+        return _sha3.keccak_256(x).digest()
 
 
-TT256 = 2 ** 256
-TT256M1 = 2 ** 256 - 1
-TT255 = 2 ** 255
+TT256 = 2**256
+TT256M1 = 2**256 - 1
+TT255 = 2**255
 SECP256K1P = 2**256 - 4294968273
 
 
@@ -19,11 +22,11 @@ def to_signed(i):
 
 
 def bytes_to_int(value):
-    return int.from_bytes(value, byteorder='big')
+    return int.from_bytes(value, byteorder="big")
 
 
 def encode_int32(v):
-    return list(v.to_bytes(32, byteorder='big'))
+    return list(int(v).to_bytes(32, byteorder="big"))
 
 
 def int_to_big_endian(value: int):
@@ -42,6 +45,6 @@ def to_string(value):
     if isinstance(value, bytes):
         return value
     if isinstance(value, str):
-        return bytes(value, 'utf-8')
+        return bytes(value, "utf-8")
     if isinstance(value, int):
-        return bytes(str(value), 'utf-8')
+        return bytes(str(value), "utf-8")

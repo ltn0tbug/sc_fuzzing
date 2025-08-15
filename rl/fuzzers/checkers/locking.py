@@ -12,4 +12,6 @@ class Locking(Checker):
         can_send_ether = self.contract_manager[logger.tx.contract].can_send_ether
         can_receive_ether = self.contract_manager[logger.tx.contract].can_receive_ether
 
-        return can_receive_ether and not can_send_ether and logger.contract_receive_ether
+        return (
+            can_receive_ether and not can_send_ether and logger.contract_receive_ether
+        )

@@ -6,9 +6,20 @@ from torch import from_numpy
 from torch.optim.adam import Adam
 import os
 
+
 class SAC:
-    def __init__(self, n_states, n_actions, memory_size, batch_size, gamma, alpha, lr, action_bounds,
-                 reward_scale):
+    def __init__(
+        self,
+        n_states,
+        n_actions,
+        memory_size,
+        batch_size,
+        gamma,
+        alpha,
+        lr,
+        action_bounds,
+        reward_scale,
+    ):
         self.n_states = n_states
         self.n_actions = n_actions
         self.memory_size = memory_size
@@ -22,10 +33,17 @@ class SAC:
 
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
-        self.policy_network = PolicyNetwork(n_states=self.n_states, n_actions=self.n_actions,
-                                            action_bounds=self.action_bounds).to(self.device)
-        self.q_value_network1 = QvalueNetwork(n_states=self.n_states, n_actions=self.n_actions).to(self.device)
-        self.q_value_network2 = QvalueNetwork(n_states=self.n_states, n_actions=self.n_actions).to(self.device)
+        self.policy_network = PolicyNetwork(
+            n_states=self.n_states,
+            n_actions=self.n_actions,
+            action_bounds=self.action_bounds,
+        ).to(self.device)
+        self.q_value_network1 = QvalueNetwork(
+            n_states=self.n_states, n_actions=self.n_actions
+        ).to(self.device)
+        self.q_value_network2 = QvalueNetwork(
+            n_states=self.n_states, n_actions=self.n_actions
+        ).to(self.device)
         self.value_network = ValueNetwork(n_states=self.n_states).to(self.device)
         self.value_target_network = ValueNetwork(n_states=self.n_states).to(self.device)
         self.value_target_network.load_state_dict(self.value_network.state_dict())
@@ -50,11 +68,17 @@ class SAC:
     def unpack(self, batch):
         batch = Transition(*zip(*batch))
 
-        states = torch.cat(batch.state).view(self.batch_size, self.n_states).to(self.device)
+        states = (
+            torch.cat(batch.state).view(self.batch_size, self.n_states).to(self.device)
+        )
         rewards = torch.cat(batch.reward).view(self.batch_size, 1).to(self.device)
         dones = torch.cat(batch.done).view(self.batch_size, 1).to(self.device)
         actions = torch.cat(batch.action).view(-1, self.n_actions).to(self.device)
-        next_states = torch.cat(batch.next_state).view(self.batch_size, self.n_states).to(self.device)
+        next_states = (
+            torch.cat(batch.next_state)
+            .view(self.batch_size, self.n_states)
+            .to(self.device)
+        )
 
         return states, rewards, dones, actions, next_states
 
@@ -66,7 +90,9 @@ class SAC:
             states, rewards, dones, actions, next_states = self.unpack(batch)
 
             # Calculating the value target
-            reparam_actions, log_probs = self.policy_network.sample_or_likelihood(states)
+            reparam_actions, log_probs = self.policy_network.sample_or_likelihood(
+                states
+            )
             q1 = self.q_value_network1(states, reparam_actions)
             q2 = self.q_value_network2(states, reparam_actions)
             q = torch.min(q1, q2)
@@ -77,15 +103,17 @@ class SAC:
 
             # Calculating the Q-Value target
             with torch.no_grad():
-                target_q = self.reward_scale * rewards + \
-                           self.gamma * self.value_target_network(next_states) * (1 - dones)
+                target_q = (
+                    self.reward_scale * rewards
+                    + self.gamma * self.value_target_network(next_states) * (1 - dones)
+                )
             q1 = self.q_value_network1(states, actions)
             q2 = self.q_value_network2(states, actions)
             q1_loss = self.q_value_loss(q1, target_q)
             q2_loss = self.q_value_loss(q2, target_q)
 
             policy_loss = (self.alpha * log_probs - q).mean()
-            
+
             self.policy_opt.zero_grad()
             policy_loss.backward()
             self.policy_opt.step()
@@ -102,10 +130,15 @@ class SAC:
             q2_loss.backward()
             self.q_value2_opt.step()
 
+            self.soft_update_target_network(
+                self.value_network, self.value_target_network
+            )
 
-            self.soft_update_target_network(self.value_network, self.value_target_network)
-
-            return value_loss.item(), 0.5 * (q1_loss + q2_loss).item(), policy_loss.item()
+            return (
+                value_loss.item(),
+                0.5 * (q1_loss + q2_loss).item(),
+                policy_loss.item(),
+            )
 
     def choose_action(self, states):
         states = np.expand_dims(states, axis=0)
@@ -115,15 +148,21 @@ class SAC:
 
     @staticmethod
     def soft_update_target_network(local_network, target_network, tau=0.005):
-        for target_param, local_param in zip(target_network.parameters(), local_network.parameters()):
-            target_param.data.copy_(tau * local_param.data + (1 - tau) * target_param.data)
+        for target_param, local_param in zip(
+            target_network.parameters(), local_network.parameters()
+        ):
+            target_param.data.copy_(
+                tau * local_param.data + (1 - tau) * target_param.data
+            )
 
     def save(self, model_path):
-        torch.save(self.policy_network.state_dict(), f'{model_path}/sac_eval_net.pth')
+        torch.save(self.policy_network.state_dict(), f"{model_path}/sac_eval_net.pth")
 
     def load(self, model_path):
-        if 'sac_eval_net.pth' in os.listdir(f'{model_path}'):
-            self.policy_network.load_state_dict(torch.load(f'{model_path}/sac_eval_net.pth', map_location=self.device))
+        if "sac_eval_net.pth" in os.listdir(f"{model_path}"):
+            self.policy_network.load_state_dict(
+                torch.load(f"{model_path}/sac_eval_net.pth", map_location=self.device)
+            )
 
     def set_to_eval_mode(self):
         self.policy_network.eval()

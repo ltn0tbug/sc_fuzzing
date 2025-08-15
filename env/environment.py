@@ -68,6 +68,10 @@ class Env:
             True,
             Path(self.log_path, "truffle_migrate.log"),
         )
+        logger.info("Remove Addon Truffle configuration...")
+        self.remove_truffle_config()
+        logger.info("Taking Ganache snapshot...")
+        self.take_snapshot()
 
     def start_ganache(self, force_stop=False, log_to_file=False, log_file_path=None):
         return self.ganache.start(force_stop, log_to_file, log_file_path)
@@ -101,12 +105,18 @@ class Env:
         """
         add_truffle_config(self.project_path, truffle_config)
 
+    def remove_truffle_config(self):
+        """
+        Remove Addon truffle config to truffle-config.js
+        """
+        remove_truffle_config(self.project_path)
+
     def get_contracts(self):
         """
         Retrieve all contracts deployed in the Truffle project.
         """
         return [
-            Contract(**contract)
+            Contract(rpc_url=self.rpc_url, **contract)
             for contract in get_contracts(self.rpc_url, self.project_path)
         ]
 
@@ -169,7 +179,8 @@ class Env:
         from_acount: Account,
         contract: Contract,
         function_name: str,
-        args: dict = {},
+        args={},
+        value: int = 0,
     ):
         return debug_sc_function(
             self.rpc_url,
@@ -178,10 +189,17 @@ class Env:
             contract.address,
             function_name,
             args,
+            value,
         )
 
     def get_struct_logs(self, tx_hash: str, trace_config: dict = None):
         return get_struct_logs(self.rpc_url, tx_hash, trace_config)
+
+    def take_snapshot(self):
+        return self.ganache.w3.provider.make_request("evm_snapshot", [])["result"]
+
+    def revert_snapshot(self, snapshot_id: int):
+        return self.ganache.w3.provider.make_request("evm_revert", [snapshot_id])
 
 
 if __name__ == "__main__":

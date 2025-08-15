@@ -15,7 +15,10 @@ class Suicidal(Checker):
 
     def check(self, logger):
         for log in logger.logs:
-            if log.op == SELFDESTRUCT and int(log.stack[-1], 16) in self.attacker_addresses:
+            if (
+                log.op == SELFDESTRUCT
+                and int(log.stack[-1], 16) in self.attacker_addresses
+            ):
                 return True
 
         return False

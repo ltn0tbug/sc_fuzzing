@@ -9,9 +9,26 @@ from collections import OrderedDict
 from ..solidity import ABI, Method
 from .opcode import *
 from .insn import Instruction
-from .state import EVMState, is_top, all_not_top, Top, Value, StackChecker, TopCALLDATASIZE
+from .state import (
+    EVMState,
+    is_top,
+    all_not_top,
+    Top,
+    Value,
+    StackChecker,
+    TopCALLDATASIZE,
+)
 from ..analysis import CFG
-from .utils import TT256, TT256M1, TT255, SECP256K1P, to_signed, encode_int32, big_endian_to_int, sha3
+from .utils import (
+    TT256,
+    TT256M1,
+    TT255,
+    SECP256K1P,
+    to_signed,
+    encode_int32,
+    big_endian_to_int,
+    sha3,
+)
 
 
 LOG = logging.getLogger(__name__)
@@ -20,10 +37,15 @@ LOG = logging.getLogger(__name__)
 class ContractManager:
 
     def __init__(self, *args, **kwargs):
-        self.proj_path = kwargs['proj_path']
+        self.proj_path = kwargs["proj_path"]
         # contract_dict name -> Contract
-        if 'contracts' in kwargs and kwargs['contracts'] is not None:
-            self.contract_dict = dict([(name, Contract(**contract, manager=self)) for name, contract in kwargs['contracts'].items()])
+        if "contracts" in kwargs and kwargs["contracts"] is not None:
+            self.contract_dict = dict(
+                [
+                    (name, Contract(**contract, manager=self))
+                    for name, contract in kwargs["contracts"].items()
+                ]
+            )
         else:
             self.contract_dict = dict()
         self.fuzz_contract_names = list(sorted(self.contract_dict.keys()))
@@ -32,7 +54,6 @@ class ContractManager:
         for contract in self.contract_dict.values():
             for address in contract.addresses:
                 self.address_to_contract[address] = contract
-
 
     def __getitem__(self, name):
         # print(self.contract_dict)
@@ -44,12 +65,13 @@ class ContractManager:
 
     # return the contracts_dict name-> Contract
     def get_fuzz_contracts(self):
-        return dict([(name, self.contract_dict[name]) for name in self.fuzz_contract_names])
+        return dict(
+            [(name, self.contract_dict[name]) for name in self.fuzz_contract_names]
+        )
 
     # method_name -> function
     def is_payable(self, contract_name, method_name):
         return self.contract_dict[contract_name].is_payable(method_name)
-
 
     def dump(self, path):
         os.makedirs(path, exist_ok=True)
@@ -61,19 +83,24 @@ class ContractManager:
 class Contract:
 
     def __init__(self, *args, **kwargs):
-        self.manager = kwargs['manager']
+        self.manager = kwargs["manager"]
 
-        self.name = kwargs['name']
-        self.addresses = kwargs['addresses']
-        self.abi = ABI(contract=self, proj_path=self.manager.proj_path, payable=kwargs['payable'], **kwargs['abi'])
+        self.name = kwargs["name"]
+        self.addresses = kwargs["addresses"]
+        self.abi = ABI(
+            contract=self,
+            proj_path=self.manager.proj_path,
+            payable=kwargs["payable"],
+            **kwargs["abi"]
+        )
 
         self.can_receive_ether = False
         # if one methed/function payable, the contract can receive ether
         if len(self.abi.payable) > 0 and any(self.abi.payable.values()):
             self.can_receive_ether = True
 
-        self.insns = [Instruction(**insn, contract=self) for insn in kwargs['insns']]
-        self.insn_pc_to_idx = dict() # insn.pc -> i
+        self.insns = [Instruction(**insn, contract=self) for insn in kwargs["insns"]]
+        self.insn_pc_to_idx = dict()  # insn.pc -> i
         # label the line of insn, one line is that ( opcode , arg )
         for i, insn in enumerate(self.insns):
             self.insn_pc_to_idx[insn.pc] = i
@@ -90,32 +117,35 @@ class Contract:
         for i, block in self.cfg.blocks.items():
             for j in range(i, i + block.length):
                 insn = self.insns[j]
-                if insn.op in (CREATE, CALL, CALLCODE, DELEGATECALL, STATICCALL, SELFDESTRUCT):
+                if insn.op in (
+                    CREATE,
+                    CALL,
+                    CALLCODE,
+                    DELEGATECALL,
+                    STATICCALL,
+                    SELFDESTRUCT,
+                ):
                     self.can_send_ether = True
-
 
     def to_json(self):
         j = OrderedDict()
 
-        j['addresses'] = []
-        j['addresses'] += self.addresses
+        j["addresses"] = []
+        j["addresses"] += self.addresses
 
-        j['methods'] = OrderedDict()
+        j["methods"] = OrderedDict()
         for method in self.abi.methods:
-            j['methods'][method.name] = OrderedDict()
-            j['methods'][method.name]['op_bow'] = method.bow
+            j["methods"][method.name] = OrderedDict()
+            j["methods"][method.name]["op_bow"] = method.bow
             for key, value in method.storage_args.items():
-                j['methods'][method.name][key] = list(value)
+                j["methods"][method.name][key] = list(value)
         return j
-
 
     def __str__(self):
         return json.dumps(self.to_json())
 
-
     def __repr__(self):
-        return '{} {}'.format(self.name, self.addresses)
-
+        return "{} {}".format(self.name, self.addresses)
 
     def dump(self, path):
         """
@@ -124,26 +154,26 @@ class Contract:
         cfg_dot = self.cfg.to_graphviz()
         cfg_dot.render(directory=path)
 
-        with open(os.path.join(path, '{}.evm'.format(self.name)), 'w') as disasm_file:
-            disasm_file.write('bytecode for contract {}, project path {}'.format(self.name, self.manager.proj_path))
+        with open(os.path.join(path, "{}.evm".format(self.name)), "w") as disasm_file:
+            disasm_file.write(
+                "bytecode for contract {}, project path {}".format(
+                    self.name, self.manager.proj_path
+                )
+            )
             for insn in self.insns:
                 if insn.idx in self.cfg.blocks:
-                    disasm_file.write('\n')
-                disasm_file.write(str(insn) + '\n')
-
+                    disasm_file.write("\n")
+                disasm_file.write(str(insn) + "\n")
 
     def get_method_by_idd(self, idd):
         return self.abi.methods_by_idd[idd]
 
-
     def get_method_by_name(self, name):
         return self.abi.methods_by_name[name]
-
 
     def is_payable(self, method_name):
         # payable dict name->bool of payable
         return self.abi.payable[method_name]
-
 
     def propagate_state(self):
         """
@@ -151,7 +181,6 @@ class Contract:
         """
         state = EVMState()
         self._propagate_state(0, state, dict())
-
 
     def _propagate_state(self, insn_idx, state, visited_blocks):
         if insn_idx in visited_blocks and visited_blocks[insn_idx] >= 10:
@@ -172,7 +201,7 @@ class Contract:
             insn.add_state(state.copy())
             # deal with the insn line by line, simulate the change of stack
             with StackChecker(insn, state):
-                if 0x60 <= op <= 0x7f:
+                if 0x60 <= op <= 0x7F:
                     state.push_stack(Value(insn.arg))
                 elif op < 0x10:
                     if op == STOP:
@@ -210,7 +239,14 @@ class Contract:
                         s0, s1 = state.pop_stack(2)
                         if all_not_top((s0, s1)):
                             s0, s1 = to_signed(s0), to_signed(s1)
-                            res = 0 if s1 == 0 else ((abs(s0) // abs(s1) * (-1 if s0 * s1 < 0 else 1)) & TT256M1)
+                            res = (
+                                0
+                                if s1 == 0
+                                else (
+                                    (abs(s0) // abs(s1) * (-1 if s0 * s1 < 0 else 1))
+                                    & TT256M1
+                                )
+                            )
                             state.push_stack(Value(res))
                         else:
                             state.push_stack(Top())
@@ -225,7 +261,14 @@ class Contract:
                         s0, s1 = state.pop_stack(2)
                         if all_not_top((s0, s1)):
                             s0, s1 = to_signed(s0), to_signed(s1)
-                            res = 0 if s1 == 0 else ((abs(s0) % abs(s1) * (-1 if s0 < 0 else 1)) & TT256M1)
+                            res = (
+                                0
+                                if s1 == 0
+                                else (
+                                    (abs(s0) % abs(s1) * (-1 if s0 < 0 else 1))
+                                    & TT256M1
+                                )
+                            )
                             state.push_stack(Value(res))
                         else:
                             state.push_stack(Top())
@@ -395,7 +438,15 @@ class Contract:
                         else:
                             state.push_stack(Top())
                     # deal with the opcode which relate the date in evm, use Top(unknow) to define
-                    elif op in (ADDRESS, ORIGIN, CALLER, CALLVALUE, CODESIZE, GASPRICE, RETURNDATASIZE):
+                    elif op in (
+                        ADDRESS,
+                        ORIGIN,
+                        CALLER,
+                        CALLVALUE,
+                        CODESIZE,
+                        GASPRICE,
+                        RETURNDATASIZE,
+                    ):
                         state.push_stack(Top())
                     elif op in (BALANCE, EXTCODESIZE):
                         state.pop_stack()
@@ -407,14 +458,20 @@ class Contract:
                         state.push_stack(Top())
                     elif op in (CALLDATACOPY, CODECOPY, RETURNDATACOPY):
                         dest_offset, _, length = state.pop_stack(3)
-                        if all_not_top((dest_offset, length)) and dest_offset + length < 0x1000:
+                        if (
+                            all_not_top((dest_offset, length))
+                            and dest_offset + length < 0x1000
+                        ):
                             state.mem_extend(dest_offset + length)
                             state.mem_reset(dest_offset, length)
                         else:
                             state.mem_reset_all()
                     elif op == EXTCODECOPY:
                         _, dest_offset, _, length = state.pop_stack(4)
-                        if all_not_top((dest_offset, length)) and dest_offset + length < 0x1000:
+                        if (
+                            all_not_top((dest_offset, length))
+                            and dest_offset + length < 0x1000
+                        ):
                             state.mem_extend(dest_offset + length)
                             state.mem_reset(dest_offset, length)
                         else:
@@ -484,18 +541,32 @@ class Contract:
                     elif op == JUMP:
                         pc = state.pop_stack()
                         if not is_top(pc):
-                            self._propagate_state(self.insn_pc_to_idx[pc], state.copy(), visited_blocks)
+                            self._propagate_state(
+                                self.insn_pc_to_idx[pc], state.copy(), visited_blocks
+                            )
                         else:
-                            LOG.debug('for contract {} of project path {}, insn {} target has argument as TOP'.format(self.name, self.manager.proj_path, insn))
+                            LOG.debug(
+                                "for contract {} of project path {}, insn {} target has argument as TOP".format(
+                                    self.name, self.manager.proj_path, insn
+                                )
+                            )
                         break
                     elif op == JUMPI:
-                        pc, _ = state.pop_stack(2) # pc = stack[-1], bool = stack[-2]
+                        pc, _ = state.pop_stack(2)  # pc = stack[-1], bool = stack[-2]
                         if not is_top(pc):
-                            self._propagate_state(self.insn_pc_to_idx[pc], state.copy(), visited_blocks)
+                            self._propagate_state(
+                                self.insn_pc_to_idx[pc], state.copy(), visited_blocks
+                            )
                         else:
-                            LOG.debug('for contract {} of project path {}, insn {} target has argument as TOP'.format(self.name, self.manager.proj_path, insn))
+                            LOG.debug(
+                                "for contract {} of project path {}, insn {} target has argument as TOP".format(
+                                    self.name, self.manager.proj_path, insn
+                                )
+                            )
 
-                        self._propagate_state(insn_idx + 1, state.copy(), visited_blocks)
+                        self._propagate_state(
+                            insn_idx + 1, state.copy(), visited_blocks
+                        )
                         break
                     elif op == PC:
                         state.push_stack(Value(insn.pc))
@@ -509,15 +580,15 @@ class Contract:
                         visited_blocks[insn_idx] += 1
                     else:
                         assert False
-                elif 0x80 <= op <= 0x8f: # DUP
+                elif 0x80 <= op <= 0x8F:  # DUP
                     stack = state.stack
-                    state.push_stack(stack[0x7f - op].copy())
-                elif 0x90 <= op <= 0x9f: # SWAP
+                    state.push_stack(stack[0x7F - op].copy())
+                elif 0x90 <= op <= 0x9F:  # SWAP
                     stack = state.stack
-                    tmp = stack[0x8e - op]
-                    stack[0x8e - op] = stack[-1].copy()
+                    tmp = stack[0x8E - op]
+                    stack[0x8E - op] = stack[-1].copy()
                     stack[-1] = tmp.copy()
-                elif 0xa0 <= op <= 0xa4: # LOG
+                elif 0xA0 <= op <= 0xA4:  # LOG
                     if op == LOG0:
                         state.pop_stack(2)
                     elif op == LOG1:
@@ -559,4 +630,4 @@ class Contract:
                     state.pop_stack()
                     break
                 else:
-                    assert False, 'unsuppored opcode {}'.format(op)
+                    assert False, "unsuppored opcode {}".format(op)

@@ -6,17 +6,35 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-TEMPLATE = """/*---BEGIN-FUZZING-CONFIG---*/
+START_CONFIG_TEMPLATE = """/*---BEGIN-FUZZING-CONFIG---*/
 const config = module.exports;
+"""
+
+END_CONFIG_TEMPLATE = """
+// Export the modified configuration
+module.exports = config;
+/*---END-FUZZING-CONFIG---*/"""
+
+NETWORK_TEMPLATE = """
 // Modify the configuration to add a new network for fuzzing
+config.networks = config.networks || {{}};
 config.networks.{name} = {{
     host: "{host}",
     port: {port},
     network_id: "{network_id}", // Match any network id
 }}
-// Export the modified configuration
-module.exports = config;
-/*---END-FUZZING-CONFIG---*/"""
+"""
+
+OPTIMIZER_TEMPLATE = """
+// Modify the configuration to add a new compilers setting for fuzzing
+config.compilers = config.compilers || {{}};
+config.compilers.solc = config.compilers.solc || {{}};
+config.compilers.solc.settings = config.compilers.solc.settings || {{}};
+config.compilers.solc.settings.optimizer = {{
+    enabled: {enabled},
+    runs: {runs},
+}}
+"""
 
 
 def add_truffle_config(project_path: str, config: dict = None):
@@ -30,9 +48,21 @@ def add_truffle_config(project_path: str, config: dict = None):
                 "network_id": "*",
             }
         }
+    addon_config = START_CONFIG_TEMPLATE
+
+    if config.get("network"):
+        addon_config += NETWORK_TEMPLATE.format(**config["network"])
+
+    if config.get("optimizer"):
+        config["optimizer"]["enabled"] = (
+            "true" if config["optimizer"]["enabled"] else "false"
+        )
+        addon_config += OPTIMIZER_TEMPLATE.format(**config["optimizer"])
+
+    addon_config += END_CONFIG_TEMPLATE
 
     # Generate the addon configuration
-    addon_config = TEMPLATE.format(**config["network"])
+    # addon_config = TEMPLATE.format(**config["network"])
 
     truffle_config_path = None
 

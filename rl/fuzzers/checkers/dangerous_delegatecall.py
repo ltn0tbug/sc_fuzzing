@@ -16,7 +16,6 @@ class DangerousDelegatecall(Checker):
         for account in account_manager.accounts:
             self.addresses.append(account.address)
 
-
     def check(self, logger):
         logger.addresses = self.addresses
         for i, log in enumerate(logger.logs):
@@ -24,14 +23,26 @@ class DangerousDelegatecall(Checker):
                 args_offset = int(log.stack[-4], 16)
                 args_length = int(log.stack[-5], 16)
                 value_from_call0 = False
-                if args_length != 0 and int.from_bytes(bytes.fromhex(log.memory[2:])[args_offset:args_offset+args_length], byteorder='big') != 0:
+
+                if (
+                    args_length != 0
+                    and int.from_bytes(
+                        bytes.fromhex("".join(log.memory[2:]))[
+                            args_offset : args_offset + args_length
+                        ],
+                        byteorder="big",
+                    )
+                    != 0
+                ):
                     try:
-                        value_from_call0, _ = logger.trace_log_memory(i-1, args_offset, args_offset + args_length)
+                        value_from_call0, _ = logger.trace_log_memory(
+                            i - 1, args_offset, args_offset + args_length
+                        )
                     except RecursionError:
                         pass
 
                 try:
-                    value_from_call1, _ = logger.trace_log_stack(i-1, -2)
+                    value_from_call1, _ = logger.trace_log_stack(i - 1, -2)
                 except RecursionError:
                     value_from_call1 = False
 

@@ -16,19 +16,15 @@ class PolicyBase:
         for account in account_manager.accounts:
             self.addresses.append(account.address)
 
-
     @abc.abstractmethod
     def select_tx(self, obs):
         raise NotImplementedError
 
-
     def reset(self):
         self.execution.jump_state(0)
 
-
     def jump_state(self, idd):
         self.execution.jump_state(idd)
-
 
     def _select_timestamp(self, obs):
         return random.randint(1438214400, 1753833600)

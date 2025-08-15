@@ -4,20 +4,29 @@ from graphviz import Digraph
 from ..evm.opcode import *
 from ..evm.state import is_top, TopCALLDATASIZE
 from ..solidity import Method
-from ..evm.utils import TT256, TT256M1, TT255, SECP256K1P, to_signed, encode_int32, big_endian_to_int, sha3
+from ..evm.utils import (
+    TT256,
+    TT256M1,
+    TT255,
+    SECP256K1P,
+    to_signed,
+    encode_int32,
+    big_endian_to_int,
+    sha3,
+)
 
 
 BLOCK_VISIT_LIMIT = 1
 
 
 class CFG:
-    
+
     def __init__(self, contract):
         # print('contract')
         # print(contract)
         self.contract = contract
 
-        self.blocks = dict() # strat_idx -> CFGBLOCK
+        self.blocks = dict()  # strat_idx -> CFGBLOCK
         self.init_blocks()
 
         # any insn_idx in the block -> block
@@ -34,10 +43,11 @@ class CFG:
             entry_block = self.blocks[entry_block_idx]
             entry_block.add_block_to_method(method)
             method.row_bow = method.bow
-            method.bow = select_interesting_ops(method.bow) # bow is the list of the frequency of the interesting_ops
+            method.bow = select_interesting_ops(
+                method.bow
+            )  # bow is the list of the frequency of the interesting_ops
 
         self.init_methods_feature()
-
 
     def init_methods_feature(self):
         for method_name, entry_block_idx in self.method_to_entry.items():
@@ -45,10 +55,9 @@ class CFG:
             entry_block = self.blocks[entry_block_idx]
             result = dict()
             entry_block.storage_args(method, result, dict())
-            method.storage_args = result # the result is about SLOAD and SSTORE, the actual value is from stack
+            method.storage_args = result  # the result is about SLOAD and SSTORE, the actual value is from stack
             # print(method_name)
             # print(result)
-
 
     def init_method_entry(self):
         """
@@ -58,15 +67,78 @@ class CFG:
 
         for insn_idx, insn in enumerate(insns):
             # deal with the block with first_insn.op == EQ/LT and last_insn.op == JUMPI
-            if insn.op not in (EQ, LT) or len(insn.states) > 1 or insn_idx not in self.insn_idx_to_block:
+            if (
+                insn.op not in (EQ, LT)
+                or len(insn.states) < 1
+                or insn_idx not in self.insn_idx_to_block
+            ):
                 continue
 
             block = self.insn_idx_to_block[insn_idx]
             last_insn = block.last_insn
-            if last_insn.op != JUMPI \
-                    or len(last_insn.states) != 1 \
-                    or len(list(last_insn.states)[0].stack) == 0 \
-                    or is_top(list(last_insn.states)[0].stack[-1]):
+            if (
+                last_insn.op != JUMPI
+                or len(last_insn.states) < 1
+                or len(list(last_insn.states)[0].stack) == 0
+                or is_top(list(last_insn.states)[0].stack[-1])
+            ):
+                continue
+            # last_insn.op == JUMPI, len(last_insn.states) == 1, len(list(last_insn.states)[0].stack) > 0 and the stack[-1] is not Top
+
+            state = list(insn.states)[0]
+            s0, s1 = state.stack[-1], state.stack[-2]
+            if is_top(s0):
+                continue
+
+            if insn.op == EQ:
+                # if is_top(s0) and s1.value in self.contract.abi.methods_by_idd:
+                #     method = self.contract.get_method_by_idd(s1.value)
+                #     entry_pc = list(last_insn.states)[0].stack[-1].value
+                #     entry_idx = self.contract.insn_pc_to_idx[entry_pc]
+                #     self.method_to_entry[method.name] = entry_idx
+                #     self.entry_to_method[entry_idx] = method
+                #     method.entry_block = entry_idx
+
+                if s0.value in self.contract.abi.methods_by_idd:
+                    method = self.contract.get_method_by_idd(s0.value)
+                    entry_pc = list(last_insn.states)[0].stack[-1].value
+                    entry_idx = self.contract.insn_pc_to_idx[entry_pc]
+                    self.method_to_entry[method.name] = entry_idx
+                    self.entry_to_method[entry_idx] = method
+                    method.entry_block = entry_idx
+
+            if insn.op == LT and Method.FALLBACK in self.contract.abi.methods_by_name:
+                if s0.__class__ == TopCALLDATASIZE and s1.value == 4:
+                    method = self.contract.get_method_by_name(Method.FALLBACK)
+                    entry_pc = list(last_insn.states)[0].stack[-1].value
+                    entry_idx = self.contract.insn_pc_to_idx[entry_pc]
+                    self.method_to_entry[Method.FALLBACK] = entry_idx
+                    self.entry_to_method[entry_idx] = method
+                    method.entry_block = entry_idx
+
+    def init_method_entry_bu(self):
+        """
+        initialize the method_entry according the method sellector in the front of the bytecodes
+        """
+        insns = self.contract.insns
+
+        for insn_idx, insn in enumerate(insns):
+            # deal with the block with first_insn.op == EQ/LT and last_insn.op == JUMPI
+            if (
+                insn.op not in (EQ, LT)
+                or len(insn.states) > 1
+                or insn_idx not in self.insn_idx_to_block
+            ):
+                continue
+
+            block = self.insn_idx_to_block[insn_idx]
+            last_insn = block.last_insn
+            if (
+                last_insn.op != JUMPI
+                or len(last_insn.states) != 1
+                or len(list(last_insn.states)[0].stack) == 0
+                or is_top(list(last_insn.states)[0].stack[-1])
+            ):
                 continue
             # last_insn.op == JUMPI, len(last_insn.states) == 1, len(list(last_insn.states)[0].stack) > 0 and the stack[-1] is not Top
 
@@ -101,22 +173,21 @@ class CFG:
                     self.entry_to_method[entry_idx] = method
                     method.entry_block = entry_idx
 
-
     def init_blocks(self):
-        self.add_block(0) # only initialize the block with block_idx = 0
+        self.add_block(0)  # only initialize the block with block_idx = 0
         insns = self.contract.insns
-        block_idx = 0 # block_idx is the first insn_idx in block
-        # read insn one by one such as 
+        block_idx = 0  # block_idx is the first insn_idx in block
+        # read insn one by one such as
         for insn_idx, insn in enumerate(insns):
             # print(insn_idx, insn) # idx pc opcde (arg)
             # for state in insn.states:
             #     print(state)
-            
+
             # deal with the end of the block
             if insn.op in (STOP, RETURN, SELFDESTRUCT, REVERT, INVALID):
                 block = self.add_block(block_idx)
                 block.length = insn_idx - block_idx + 1
-                # set next block_idx is the next insn_idx 
+                # set next block_idx is the next insn_idx
                 block_idx = insn_idx + 1
             elif insn.op == JUMP:
                 block = self.add_block(block_idx)
@@ -126,12 +197,16 @@ class CFG:
                 jump_dests = set()
                 # a insn can have many states, deal with each state, and jump to corresponding opcode
                 for state in insn.states:
-                    jump_dest = state.stack[-1] # pop stack, the jump_dest is the pc of the dest
+                    jump_dest = state.stack[
+                        -1
+                    ]  # pop stack, the jump_dest is the pc of the dest
                     if not is_top(jump_dest):
                         jump_dests.add(jump_dest.value)
 
                 for jump_dest in jump_dests:
-                    branch_idx = self.contract.insn_pc_to_idx[jump_dest] # branch_idx is the first insn_idx of the branch
+                    branch_idx = self.contract.insn_pc_to_idx[
+                        jump_dest
+                    ]  # branch_idx is the first insn_idx of the branch
                     self.add_edge(block_idx, branch_idx, True, len(jump_dests) > 1)
 
                 block_idx = insn_idx + 1
@@ -156,9 +231,15 @@ class CFG:
 
                 block_idx = insn_idx + 1
             elif insn.op == JUMPDEST:
-                if insn_idx > 0 \
-                        and insns[insn_idx - 1].op not in \
-                        (STOP, JUMP, JUMPI, RETURN, REVERT, INVALID, SELFDESTRUCT):
+                if insn_idx > 0 and insns[insn_idx - 1].op not in (
+                    STOP,
+                    JUMP,
+                    JUMPI,
+                    RETURN,
+                    REVERT,
+                    INVALID,
+                    SELFDESTRUCT,
+                ):
                     block = self.add_block(block_idx)
                     block.length = insn_idx - block_idx
 
@@ -202,118 +283,152 @@ class CFG:
             else:
                 src_block.default = tgt_idx
 
-
     def add_block(self, start_idx):
         """
-        use start_idx as the blocks dict key, if the block exist return the block else create and return 
+        use start_idx as the blocks dict key, if the block exist return the block else create and return
         """
         if start_idx not in self.blocks:
-            block = CFGBlock(start_idx, self) # only initialize the block with start_idx of block
+            block = CFGBlock(
+                start_idx, self
+            )  # only initialize the block with start_idx of block
             self.blocks[start_idx] = block
 
         return self.blocks[start_idx]
 
-
     def to_graphviz(self):
         insns = self.contract.insns
 
-        graph = Digraph(name=self.contract.name, format='svg')
+        graph = Digraph(name=self.contract.name, format="svg")
         for start_idx in sorted(self.blocks.keys()):
             block = self.blocks[start_idx]
             last_insn = block.last_insn
 
             if last_insn.op == JUMP:
                 if start_idx in self.entry_to_method:
-                    label = '{} {} {} {}'.format(self.entry_to_method[start_idx].name, start_idx, format(insns[start_idx].pc, '02x'), block.length)
+                    label = "{} {} {} {}".format(
+                        self.entry_to_method[start_idx].name,
+                        start_idx,
+                        format(insns[start_idx].pc, "02x"),
+                        block.length,
+                    )
                 else:
-                    label = '{} {} {}'.format(start_idx, format(insns[start_idx].pc, '02x'), block.length)
+                    label = "{} {} {}".format(
+                        start_idx, format(insns[start_idx].pc, "02x"), block.length
+                    )
 
                 node_attrs = {}
                 if not block.covered:
-                    node_attrs['fillcolor'] = 'red'
-                    node_attrs['style'] = 'filled'
+                    node_attrs["fillcolor"] = "red"
+                    node_attrs["style"] = "filled"
 
                 if start_idx in self.entry_to_method:
-                    node_attrs['fillcolor'] = 'yellow'
-                    node_attrs['style'] = 'filled'
+                    node_attrs["fillcolor"] = "yellow"
+                    node_attrs["style"] = "filled"
 
                 graph.node(name=str(start_idx), label=label, **node_attrs)
 
                 if block.branch is not None:
-                    graph.edge(str(start_idx), str(block.branch), color='black')
+                    graph.edge(str(start_idx), str(block.branch), color="black")
 
                 for dep_branch in block.dep_branches:
-                    graph.edge(str(start_idx), str(dep_branch), color='black', style='dashed')
+                    graph.edge(
+                        str(start_idx), str(dep_branch), color="black", style="dashed"
+                    )
             elif last_insn.op == JUMPI:
                 if start_idx in self.entry_to_method:
-                    label = '{} {} {} {}'.format(self.entry_to_method[start_idx].name, start_idx, format(insns[start_idx].pc, '02x'), block.length)
+                    label = "{} {} {} {}".format(
+                        self.entry_to_method[start_idx].name,
+                        start_idx,
+                        format(insns[start_idx].pc, "02x"),
+                        block.length,
+                    )
                 else:
-                    label = '{} {} {}'.format(start_idx, format(insns[start_idx].pc, '02x'), block.length)
+                    label = "{} {} {}".format(
+                        start_idx, format(insns[start_idx].pc, "02x"), block.length
+                    )
 
                 node_attrs = {}
                 if not block.covered:
-                    node_attrs['fillcolor'] = 'red'
-                    node_attrs['style'] = 'filled'
+                    node_attrs["fillcolor"] = "red"
+                    node_attrs["style"] = "filled"
 
                 if start_idx in self.entry_to_method:
-                    node_attrs['fillcolor'] = 'yellow'
-                    node_attrs['style'] = 'filled'
+                    node_attrs["fillcolor"] = "yellow"
+                    node_attrs["style"] = "filled"
 
                 graph.node(name=str(start_idx), label=label, **node_attrs)
 
                 if block.branch is not None:
-                    graph.edge(str(start_idx), str(block.branch), color='green')
+                    graph.edge(str(start_idx), str(block.branch), color="green")
                 if block.default is not None:
-                    graph.edge(str(start_idx), str(block.default), color='red')
+                    graph.edge(str(start_idx), str(block.default), color="red")
 
                 for dep_branch in block.dep_branches:
-                    graph.edge(str(start_idx), str(dep_branch), color='green', style='dashed')
+                    graph.edge(
+                        str(start_idx), str(dep_branch), color="green", style="dashed"
+                    )
                 for dep_default in block.dep_defaults:
-                    graph.edge(str(start_idx), str(dep_default), color='red', style='dashed')
+                    graph.edge(
+                        str(start_idx), str(dep_default), color="red", style="dashed"
+                    )
             elif last_insn.op in (STOP, RETURN, SELFDESTRUCT, REVERT, INVALID):
                 if start_idx in self.entry_to_method:
-                    label = '{} {} {} {}'.format(self.entry_to_method[start_idx].name, start_idx, format(insns[start_idx].pc, '02x'), block.length)
+                    label = "{} {} {} {}".format(
+                        self.entry_to_method[start_idx].name,
+                        start_idx,
+                        format(insns[start_idx].pc, "02x"),
+                        block.length,
+                    )
                 else:
-                    label = '{} {} {}'.format(start_idx, format(insns[start_idx].pc, '02x'), block.length)
+                    label = "{} {} {}".format(
+                        start_idx, format(insns[start_idx].pc, "02x"), block.length
+                    )
 
                 node_attrs = {}
-                node_attrs['style'] = 'filled'
+                node_attrs["style"] = "filled"
                 if not block.covered:
-                    node_attrs['fillcolor'] = 'purple'
+                    node_attrs["fillcolor"] = "purple"
                 else:
-                    node_attrs['fillcolor'] = 'blue'
+                    node_attrs["fillcolor"] = "blue"
 
                 if start_idx in self.entry_to_method:
-                    node_attrs['fillcolor'] = 'yellow'
+                    node_attrs["fillcolor"] = "yellow"
 
                 graph.node(name=str(start_idx), label=label, **node_attrs)
             else:
                 if start_idx in self.entry_to_method:
-                    label = '{} {} {} {}'.format(self.entry_to_method[start_idx].name, start_idx, format(insns[start_idx].pc, '02x'), block.length)
+                    label = "{} {} {} {}".format(
+                        self.entry_to_method[start_idx].name,
+                        start_idx,
+                        format(insns[start_idx].pc, "02x"),
+                        block.length,
+                    )
                 else:
-                    label = '{} {} {}'.format(start_idx, format(insns[start_idx].pc, '02x'), block.length)
+                    label = "{} {} {}".format(
+                        start_idx, format(insns[start_idx].pc, "02x"), block.length
+                    )
 
                 node_attrs = {}
                 if not block.covered:
-                    node_attrs['fillcolor'] = 'red'
-                    node_attrs['style'] = 'filled'
+                    node_attrs["fillcolor"] = "red"
+                    node_attrs["style"] = "filled"
 
                 if start_idx in self.entry_to_method:
-                    node_attrs['fillcolor'] = 'yellow'
-                    node_attrs['style'] = 'filled'
+                    node_attrs["fillcolor"] = "yellow"
+                    node_attrs["style"] = "filled"
 
                 graph.node(name=str(start_idx), label=label, **node_attrs)
 
                 if block.default is not None:
-                    graph.edge(str(start_idx), str(block.default), color='black')
+                    graph.edge(str(start_idx), str(block.default), color="black")
 
         return graph
 
 
 class CFGBlock:
 
-    EXIT = 0xfffffffe
-    ERROR = 0xffffffff
+    EXIT = 0xFFFFFFFE
+    ERROR = 0xFFFFFFFF
 
     def __init__(self, start_idx, cfg):
         self.start_idx = start_idx
@@ -322,16 +437,17 @@ class CFGBlock:
         self.last_insn = None
 
         # parents are the src_blocks of self block
-        self.branch = None # branch block is that not following the self block
-        self.default = None # default block is the block that following the self block
-        self.parents = set() # the src_block only has one branch block
+        self.branch = None  # branch block is that not following the self block
+        self.default = None  # default block is the block that following the self block
+        self.parents = set()  # the src_block only has one branch block
 
-        self.dep_branches = set() # the branch blocks are that not following the block, and self can JUMP to these blocks
-        self.dep_defaults = set() # May not make sense
-        self.dep_parents = set() # the_src_block only has more than one branch blocks
+        self.dep_branches = (
+            set()
+        )  # the branch blocks are that not following the block, and self can JUMP to these blocks
+        self.dep_defaults = set()  # May not make sense
+        self.dep_parents = set()  # the_src_block only has more than one branch blocks
 
-        self.covered = False # the block is coverd or not in Fuzzing
-
+        self.covered = False  # the block is coverd or not in Fuzzing
 
     def add_block_to_method(self, method):
         """
@@ -359,9 +475,11 @@ class CFGBlock:
             if dep_branch not in method.blocks:
                 self.cfg.blocks[dep_branch].add_block_to_method(method)
 
-
     def storage_args(self, method, result, visited_blocks):
-        if self.start_idx in visited_blocks and visited_blocks[self.start_idx] >= BLOCK_VISIT_LIMIT:
+        if (
+            self.start_idx in visited_blocks
+            and visited_blocks[self.start_idx] >= BLOCK_VISIT_LIMIT
+        ):
             return
 
         if self.start_idx not in visited_blocks:
@@ -374,18 +492,22 @@ class CFGBlock:
             insn = insns[i]
 
             if insn.op == SSTORE:
-                if 'SSTORE' not in result:
-                    result['SSTORE'] = set()
-                res = self.trace_arg(i, -1 - STACK_CHANGES[insn.op], True, insn.op, method, 0, dict())
+                if "SSTORE" not in result:
+                    result["SSTORE"] = set()
+                res = self.trace_arg(
+                    i, -1 - STACK_CHANGES[insn.op], True, insn.op, method, 0, dict()
+                )
                 if res is not None:
-                    result['SSTORE'].add(res)
+                    result["SSTORE"].add(res)
                 # print('{} {}'.format(res, insn))
             elif insn.op == SLOAD:
-                if 'SLOAD' not in result:
-                    result['SLOAD'] = set()
-                res = self.trace_arg(i, -1 - STACK_CHANGES[insn.op], True, insn.op, method, 0, dict())
+                if "SLOAD" not in result:
+                    result["SLOAD"] = set()
+                res = self.trace_arg(
+                    i, -1 - STACK_CHANGES[insn.op], True, insn.op, method, 0, dict()
+                )
                 if res is not None:
-                    result['SLOAD'].add(res)
+                    result["SLOAD"].add(res)
                 # print('{} {}'.format(res, insn))
 
         # deal with all blocks in method
@@ -402,8 +524,9 @@ class CFGBlock:
 
         for dep_default in self.dep_defaults:
             if dep_default in method.blocks:
-                self.cfg.blocks[dep_default].storage_args(method, result, visited_blocks)
-
+                self.cfg.blocks[dep_default].storage_args(
+                    method, result, visited_blocks
+                )
 
     def trace_mstore_arg(self, insn_idx, offset, method, depth, visited_blocks):
         """
@@ -418,8 +541,24 @@ class CFGBlock:
             insn = insns[i]
             if insn.op in (MSTORE, MSTORE8):
                 # find the actual value of MSTORE and MSTORE8
-                mstore_offset = self.trace_arg(i, -1 - STACK_CHANGES[insn.op], True, insn.op, method, depth+1, dict())
-                mstore_value = self.trace_arg(i, -2 - STACK_CHANGES[insn.op], True, insn.op, method, depth+1, dict())
+                mstore_offset = self.trace_arg(
+                    i,
+                    -1 - STACK_CHANGES[insn.op],
+                    True,
+                    insn.op,
+                    method,
+                    depth + 1,
+                    dict(),
+                )
+                mstore_value = self.trace_arg(
+                    i,
+                    -2 - STACK_CHANGES[insn.op],
+                    True,
+                    insn.op,
+                    method,
+                    depth + 1,
+                    dict(),
+                )
                 if mstore_offset is not None and offset == mstore_offset:
                     # print('{} {} {}'.format(insn, format(mstore_offset, '02x'), format(mstore_value, '02x')))
                     return mstore_value
@@ -427,16 +566,34 @@ class CFGBlock:
         results = set()
 
         for parent in self.parents:
-            if not visited_blocks[parent] >= BLOCK_VISIT_LIMIT and parent in method.blocks:
+            if (
+                not visited_blocks[parent] >= BLOCK_VISIT_LIMIT
+                and parent in method.blocks
+            ):
                 parent_block = self.cfg.blocks[parent]
-                result = self.trace_mstore_arg(parent_block.start_idx + parent_block.end_idx - 1, offset, method, depth+1, visited_blocks)
+                result = self.trace_mstore_arg(
+                    parent_block.start_idx + parent_block.end_idx - 1,
+                    offset,
+                    method,
+                    depth + 1,
+                    visited_blocks,
+                )
                 if result is not None:
                     results.add(result)
 
         for parent in self.dep_parents:
-            if not visited_blocks[parent] >= BLOCK_VISIT_LIMIT and parent in method.blocks:
+            if (
+                not visited_blocks[parent] >= BLOCK_VISIT_LIMIT
+                and parent in method.blocks
+            ):
                 parent_block = self.cfg.blocks[parent]
-                result = self.trace_mstore_arg(parent_block.start_idx + parent_block.end_idx - 1, offset, method, depth+1, visited_blocks)
+                result = self.trace_mstore_arg(
+                    parent_block.start_idx + parent_block.end_idx - 1,
+                    offset,
+                    method,
+                    depth + 1,
+                    visited_blocks,
+                )
                 if result is not None:
                     results.add(result)
 
@@ -445,8 +602,9 @@ class CFGBlock:
         else:
             return None
 
-
-    def trace_arg(self, insn_idx, stack_pos, is_start, target_op, method, depth, visited_blocks):
+    def trace_arg(
+        self, insn_idx, stack_pos, is_start, target_op, method, depth, visited_blocks
+    ):
         """
         look back the ops in front of the insn_idx to trace the arg, get the actual value from stack
         is_start: is insn_idx the end of the trace(the look back point)?
@@ -478,8 +636,24 @@ class CFGBlock:
                 return None
             elif op == ADD:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return (s0 + s1) & TT256M1
@@ -487,8 +661,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == MUL:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return (s0 * s1) & TT256M1
@@ -496,8 +686,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SUB:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return (s0 - s1) & TT256M1
@@ -505,10 +711,26 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == DIV:
                 if stack_pos == -1 and not is_start:
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s1 is not None and s1 == 0:
                         return 0
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return s0 // s1
@@ -516,10 +738,26 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SDIV:
                 if stack_pos == -1 and not is_start:
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s1 is not None and s1 == 0:
                         return 0
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     s0, s1 = to_signed(s0), to_signed(s1)
@@ -528,10 +766,26 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == MOD:
                 if stack_pos == -1 and not is_start:
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s1 is not None and s1 == 0:
                         return 0
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return s0 % s1
@@ -539,10 +793,26 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SMOD:
                 if stack_pos == -1 and not is_start:
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s1 is not None and s1 == 0:
                         return 0
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     s0, s1 = to_signed(s0), to_signed(s1)
@@ -551,11 +821,35 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == ADDMOD:
                 if stack_pos == -1 and not is_start:
-                    s2 = self.trace_arg(insn_idx, -3 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s2 = self.trace_arg(
+                        insn_idx,
+                        -3 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s2 is not None and s2 == 0:
                         return 0
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None or s2 is None:
                         return None
                     return (s0 + s1) % s2
@@ -563,11 +857,35 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == MULMOD:
                 if stack_pos == -1 and not is_start:
-                    s2 = self.trace_arg(insn_idx, -3 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s2 = self.trace_arg(
+                        insn_idx,
+                        -3 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s2 is not None and s2 == 0:
                         return 0
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None or s2 is None:
                         return None
                     return (s0 * s1) % s2
@@ -575,8 +893,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == EXP:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return pow(s0, s1, TT256)
@@ -584,8 +918,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SIGNEXTEND:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     if s0 <= 31:
@@ -604,8 +954,24 @@ class CFGBlock:
         elif op < 0x20:
             if op == LT:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return int(s0 < s1)
@@ -613,8 +979,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == GT:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return int(s0 > s1)
@@ -622,8 +1004,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SLT:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     s0, s1 = to_signed(s0), to_signed(s1)
@@ -632,8 +1030,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SGT:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     s0, s1 = to_signed(s0), to_signed(s1)
@@ -642,8 +1056,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == EQ:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return int(s0 == s1)
@@ -651,7 +1081,15 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == ISZERO:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None:
                         return None
                     return int(s0 == 0)
@@ -659,8 +1097,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == AND:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return int(s0 & s1)
@@ -668,8 +1122,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == OR:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return int(s0 | s1)
@@ -677,8 +1147,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == XOR:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return int(s0 ^ s1)
@@ -686,7 +1172,15 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == NOT:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None:
                         return None
                     return TT256M1 - s0
@@ -694,10 +1188,26 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == BYTE:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is not None and s0 >= 32:
                         return 0
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return (s1 // 256 ** (31 - s0)) % 256
@@ -705,10 +1215,26 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SHL:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is not None and s0 >= 256:
                         return 0
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return numpy.left_shift(s1, s0) & TT256M1
@@ -716,10 +1242,26 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SHR:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is not None and s0 >= 256:
                         return 0
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     return numpy.right_shift(s1, s0) & TT256M1
@@ -727,8 +1269,24 @@ class CFGBlock:
                     stack_pos += STACK_CHANGES[op]
             elif op == SAR:
                 if stack_pos == -1 and not is_start:
-                    s0 = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                    s1 = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                    s0 = self.trace_arg(
+                        insn_idx,
+                        -1 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
+                    s1 = self.trace_arg(
+                        insn_idx,
+                        -2 - STACK_CHANGES[op],
+                        True,
+                        insn.op,
+                        method,
+                        depth + 1,
+                        dict(),
+                    )
                     if s0 is None or s1 is None:
                         return None
                     if s0 >= 256:
@@ -747,17 +1305,43 @@ class CFGBlock:
             if op == SHA3:
                 if stack_pos == -1 and not is_start:
                     if target_op in (SLOAD, SSTORE, MSTORE, MSTORE8):
-                        offset = self.trace_arg(insn_idx, -1 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
-                        length = self.trace_arg(insn_idx, -2 - STACK_CHANGES[op], True, insn.op, method, depth+1, dict())
+                        offset = self.trace_arg(
+                            insn_idx,
+                            -1 - STACK_CHANGES[op],
+                            True,
+                            insn.op,
+                            method,
+                            depth + 1,
+                            dict(),
+                        )
+                        length = self.trace_arg(
+                            insn_idx,
+                            -2 - STACK_CHANGES[op],
+                            True,
+                            insn.op,
+                            method,
+                            depth + 1,
+                            dict(),
+                        )
                         if offset is not None and length is not None and length == 0x40:
                             # print('{} {} {}'.format(insn, format(offset, '02x'), format(length, '02x')))
                             field_mem_off = offset + 0x20
-                            result = self.trace_mstore_arg(insn_idx, field_mem_off, method, depth+1, dict())
+                            result = self.trace_mstore_arg(
+                                insn_idx, field_mem_off, method, depth + 1, dict()
+                            )
                             return result
                     return None
                 else:
                     stack_pos += STACK_CHANGES[op]
-            elif op in (ADDRESS, ORIGIN, CALLER, CALLVALUE, CODESIZE, GASPRICE, RETURNDATASIZE):
+            elif op in (
+                ADDRESS,
+                ORIGIN,
+                CALLER,
+                CALLVALUE,
+                CODESIZE,
+                GASPRICE,
+                RETURNDATASIZE,
+            ):
                 if stack_pos == -1 and not is_start:
                     return None
                 else:
@@ -839,17 +1423,17 @@ class CFGBlock:
                 assert False
         elif is_dup(op):
             if stack_pos == -1:
-                stack_pos = 0x7f - op
+                stack_pos = 0x7F - op
             else:
                 stack_pos += STACK_CHANGES[op]
         elif is_swap(op):
             if stack_pos == -1:
-                stack_pos = 0x8e - op
-            elif stack_pos == 0x8e - op:
+                stack_pos = 0x8E - op
+            elif stack_pos == 0x8E - op:
                 stack_pos = -1
             else:
                 stack_pos += STACK_CHANGES[op]
-        elif 0xa0 <= op <= 0xa4: # LOG
+        elif 0xA0 <= op <= 0xA4:  # LOG
             if op == LOG0:
                 stack_pos += STACK_CHANGES[op]
             elif op == LOG1:
@@ -886,31 +1470,71 @@ class CFGBlock:
         elif op == SELFDESTRUCT:
             return None
         else:
-            assert False, 'unsuppored opcode {}'.format(op)
+            assert False, "unsuppored opcode {}".format(op)
 
         new_stack_pos = stack_pos
 
-        if new_stack_pos - old_stack_pos != STACK_CHANGES[op] and not is_dup(op) and not is_swap(op):
+        if (
+            new_stack_pos - old_stack_pos != STACK_CHANGES[op]
+            and not is_dup(op)
+            and not is_swap(op)
+        ):
             assert False
 
         if insn_idx > self.start_idx:
             # if the insn_idx is not the first insn in block
-            return self.trace_arg(insn_idx-1, stack_pos, False, target_op, method, depth+1, visited_blocks)
+            return self.trace_arg(
+                insn_idx - 1,
+                stack_pos,
+                False,
+                target_op,
+                method,
+                depth + 1,
+                visited_blocks,
+            )
         elif insn_idx == self.start_idx:
             # if the insn_idx is the first insn in block, find from the parents block
             results = set()
 
             for parent in self.parents:
-                if not (parent in visited_blocks and visited_blocks[parent] >= BLOCK_VISIT_LIMIT) and parent in method.blocks:
+                if (
+                    not (
+                        parent in visited_blocks
+                        and visited_blocks[parent] >= BLOCK_VISIT_LIMIT
+                    )
+                    and parent in method.blocks
+                ):
                     parent_block = self.cfg.blocks[parent]
-                    result = parent_block.trace_arg(parent_block.start_idx + parent_block.length - 1, stack_pos, False, target_op, method, depth+1, visited_blocks)
+                    result = parent_block.trace_arg(
+                        parent_block.start_idx + parent_block.length - 1,
+                        stack_pos,
+                        False,
+                        target_op,
+                        method,
+                        depth + 1,
+                        visited_blocks,
+                    )
                     if result is not None:
                         results.add(result)
 
             for parent in self.dep_parents:
-                if not (parent in visited_blocks and visited_blocks[parent] >= BLOCK_VISIT_LIMIT) and parent in method.blocks:
+                if (
+                    not (
+                        parent in visited_blocks
+                        and visited_blocks[parent] >= BLOCK_VISIT_LIMIT
+                    )
+                    and parent in method.blocks
+                ):
                     parent_block = self.cfg.blocks[parent]
-                    result = parent_block.trace_arg(parent_block.start_idx + parent_block.length - 1, stack_pos, False, target_op, method, depth+1, visited_blocks)
+                    result = parent_block.trace_arg(
+                        parent_block.start_idx + parent_block.length - 1,
+                        stack_pos,
+                        False,
+                        target_op,
+                        method,
+                        depth + 1,
+                        visited_blocks,
+                    )
                     if result is not None:
                         results.add(result)
 

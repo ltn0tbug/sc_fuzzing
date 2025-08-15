@@ -139,17 +139,3 @@ module.exports = {
   //   }
   // }
 };
-
-
-
-/*---BEGIN-FUZZING-CONFIG---*/
-const config = module.exports;
-// Modify the configuration to add a new network for fuzzing
-config.networks.fuzzing = {
-    host: "127.0.0.1",
-    port: 8545,
-    network_id: "*", // Match any network id
-}
-// Export the modified configuration
-module.exports = config;
-/*---END-FUZZING-CONFIG---*/

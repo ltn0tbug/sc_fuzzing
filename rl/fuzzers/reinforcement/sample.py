@@ -56,7 +56,9 @@ class PPO_agent:
         self.__dict__.update(kwargs)
 
         # Initialize Actor
-        self.actor = GaussianActor_musigma(self.state_dim, self.action_dim, self.net_width).to(self.dvc)
+        self.actor = GaussianActor_musigma(
+            self.state_dim, self.action_dim, self.net_width
+        ).to(self.dvc)
         self.actor_optimizer = optim.Adam(self.actor.parameters(), lr=self.a_lr)
 
         # Initialize Critic
@@ -68,7 +70,9 @@ class PPO_agent:
         self.a_hoder = np.zeros((self.T_horizon, self.action_dim), dtype=np.float32)
         self.r_hoder = np.zeros((self.T_horizon, 1), dtype=np.float32)
         self.s_next_hoder = np.zeros((self.T_horizon, self.state_dim), dtype=np.float32)
-        self.logprob_a_hoder = np.zeros((self.T_horizon, self.action_dim), dtype=np.float32)
+        self.logprob_a_hoder = np.zeros(
+            (self.T_horizon, self.action_dim), dtype=np.float32
+        )
         self.done_hoder = np.zeros((self.T_horizon, 1), dtype=np.bool_)
         self.dw_hoder = np.zeros((self.T_horizon, 1), dtype=np.bool_)
 
@@ -80,7 +84,9 @@ class PPO_agent:
                 return action.cpu().numpy()[0], None
             else:
                 dist = self.actor.get_dist(state)
-                action = dist.sample().to(torch.float64)  # Ensure the action is in higher precision
+                action = dist.sample().to(
+                    torch.float64
+                )  # Ensure the action is in higher precision
                 print(action.cpu().numpy()[0])
                 logprob_a = dist.log_prob(action).cpu().numpy().flatten()
                 return action.cpu().numpy()[0], logprob_a
@@ -114,8 +120,13 @@ class PPO_agent:
         np.random.shuffle(perm)
         perm = torch.LongTensor(perm).to(self.dvc)
 
-        s, a, td_target, adv, logprob_a = \
-            s[perm], a[perm], td_target[perm], adv[perm], logprob_a[perm]
+        s, a, td_target, adv, logprob_a = (
+            s[perm],
+            a[perm],
+            td_target[perm],
+            adv[perm],
+            logprob_a[perm],
+        )
 
         for _ in range(self.K_epochs):
             dist = self.actor.get_dist(s)
@@ -125,7 +136,10 @@ class PPO_agent:
 
             surr1 = ratio * adv
             surr2 = torch.clamp(ratio, 1 - self.clip_rate, 1 + self.clip_rate) * adv
-            a_loss = -torch.min(surr1, surr2).mean() - self.entropy_coef * dist_entropy.mean()
+            a_loss = (
+                -torch.min(surr1, surr2).mean()
+                - self.entropy_coef * dist_entropy.mean()
+            )
 
             self.actor_optimizer.zero_grad()
             a_loss.backward()
