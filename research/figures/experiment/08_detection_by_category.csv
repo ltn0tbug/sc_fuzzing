@@ -1,0 +1,5 @@
+category,RandomFuzz,FinanceFuzz,RLFuzz,MADFuzz,LLMFuzz,SSCFuzz (ours)
+arbitrary_mint,1,0,4,5,3,5
+access_control,1,1,3,2,1,2
+business_logic,0,0,3,3,1,3
+price_oracle_manipulation,0,0,0,0,1,0

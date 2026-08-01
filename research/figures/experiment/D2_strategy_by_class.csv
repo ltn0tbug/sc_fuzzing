@@ -1,0 +1,10 @@
+strategy,access_control,arbitrary_mint,business_logic
+reentrancy_probe,0,1,0
+arithmetic_probe,0,2,2
+access_control_probe,0,3,0
+price_oracle_probe,1,1,1
+logic_error_probe,1,2,3
+value_perturb,1,1,0
+call_insert,0,2,0
+call_swap,1,1,0
+arg_shuffle,0,1,0

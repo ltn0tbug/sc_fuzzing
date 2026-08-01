@@ -1,0 +1,7 @@
+method,EASY_rate,NORMAL_rate,HIGH_rate,IMPOSSIBLE_rate,corr_det_bits
+RandomFuzz,0.692,0.25,0.077,0.0,-0.62
+FinanceFuzz,0.154,0.167,0.231,0.0,-0.184
+RLFuzz,1.0,0.25,0.231,0.2,-0.538
+MADFuzz,1.0,0.333,0.0,0.2,-0.591
+LLMFuzz,0.846,0.333,0.0,0.15,-0.564
+SSCFuzz (ours),1.0,0.25,0.077,0.3,-0.49

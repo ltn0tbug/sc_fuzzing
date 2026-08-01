@@ -1,0 +1,10 @@
+strategy,greedy_share,unbiased_yield,realized_yield,kind
+reentrancy_probe,0.096,8.7848,1.4697,gen
+arithmetic_probe,0.107,5.1589,0.6086,gen
+access_control_probe,0.111,3.85,0.4404,gen
+price_oracle_probe,0.1098,4.2925,0.5018,gen
+logic_error_probe,0.1088,4.6882,0.4586,gen
+value_perturb,0.1112,0.0,0.0829,mut
+call_insert,0.122,0.679,0.3235,mut
+call_swap,0.1196,0.6146,0.1776,mut
+arg_shuffle,0.1144,0.0349,0.063,mut

@@ -1,0 +1,7 @@
+method,unique_contracts,total_found
+RandomFuzz,0,13
+FinanceFuzz,5,7
+RLFuzz,3,23
+MADFuzz,1,21
+LLMFuzz,1,18
+SSCFuzz (ours),2,23

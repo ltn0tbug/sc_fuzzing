@@ -1,0 +1,3 @@
+detection,n_contracts,rate
+generous (any property),1,0.04
+strict (planted-class match),0,0.0

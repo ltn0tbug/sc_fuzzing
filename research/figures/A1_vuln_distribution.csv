@@ -1,0 +1,9 @@
+dataset,category,n
+defihacklabs,access_control,9
+defihacklabs,arbitrary_mint,7
+defihacklabs,business_logic,6
+defihacklabs,price_oracle_manipulation,3
+smartbugs,reentrancy,18
+smartbugs,access_control,11
+smartbugs,arithmetic,3
+smartbugs,unchecked_low_level_calls,1

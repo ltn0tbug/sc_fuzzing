@@ -1,0 +1,451 @@
+{
+ "ds": "defihacklabs",
+ "N": 25,
+ "eda_N": 25,
+ "union_solvable": 14,
+ "best_base": "RLFuzz",
+ "h2h_win": 2,
+ "h2h_tie": 1,
+ "auc": {
+  "RandomFuzz": 0.467634222,
+  "FinanceFuzz": 0.16144231211033597,
+  "RLFuzz": 0.50034505,
+  "MADFuzz": 0.4782434208,
+  "LLMFuzz": 0.3004991892,
+  "SSCFuzz (ours)": 0.41948242040000006
+ },
+ "summary": [
+  {
+   "method": "RandomFuzz",
+   "detection_rate": 0.08,
+   "contracts_with_bug": 2,
+   "total_bugs": 62,
+   "mean_bugs": 2.48,
+   "mean_bc_cov": 0.487964,
+   "median_bc_cov": 0.5118,
+   "mean_reward": 21.717999999999996,
+   "median_ttfb": 1.0,
+   "coverage_auc": 0.467634222,
+   "tokens_total": 0,
+   "bugs_per_1k_tok": NaN
+  },
+  {
+   "method": "FinanceFuzz",
+   "detection_rate": 0.04,
+   "contracts_with_bug": 1,
+   "total_bugs": 1,
+   "mean_bugs": 0.04,
+   "mean_bc_cov": 0.179496,
+   "median_bc_cov": 0.1555,
+   "mean_reward": 0.0,
+   "median_ttfb": 6.0,
+   "coverage_auc": 0.16144231211033597,
+   "tokens_total": 0,
+   "bugs_per_1k_tok": NaN
+  },
+  {
+   "method": "RLFuzz",
+   "detection_rate": 0.4,
+   "contracts_with_bug": 10,
+   "total_bugs": 115,
+   "mean_bugs": 4.6,
+   "mean_bc_cov": 0.545424,
+   "median_bc_cov": 0.5683,
+   "mean_reward": 32.815599999999996,
+   "median_ttfb": 11.5,
+   "coverage_auc": 0.50034505,
+   "tokens_total": 0,
+   "bugs_per_1k_tok": NaN
+  },
+  {
+   "method": "MADFuzz",
+   "detection_rate": 0.4,
+   "contracts_with_bug": 10,
+   "total_bugs": 127,
+   "mean_bugs": 5.08,
+   "mean_bc_cov": 0.515484,
+   "median_bc_cov": 0.5395,
+   "mean_reward": 31.619199999999996,
+   "median_ttfb": 12.5,
+   "coverage_auc": 0.4782434208,
+   "tokens_total": 139128,
+   "bugs_per_1k_tok": 0.9128284744983038
+  },
+  {
+   "method": "LLMFuzz",
+   "detection_rate": 0.24,
+   "contracts_with_bug": 6,
+   "total_bugs": 94,
+   "mean_bugs": 3.76,
+   "mean_bc_cov": 0.34302,
+   "median_bc_cov": 0.3456,
+   "mean_reward": 23.9672,
+   "median_ttfb": 14.5,
+   "coverage_auc": 0.3004991892,
+   "tokens_total": 14755224,
+   "bugs_per_1k_tok": 0.006370625074888731
+  },
+  {
+   "method": "SSCFuzz (ours)",
+   "detection_rate": 0.4,
+   "contracts_with_bug": 10,
+   "total_bugs": 131,
+   "mean_bugs": 5.24,
+   "mean_bc_cov": 0.486712,
+   "median_bc_cov": 0.5161,
+   "mean_reward": 39.862,
+   "median_ttfb": 12.0,
+   "coverage_auc": 0.41948242040000006,
+   "tokens_total": 13239703,
+   "bugs_per_1k_tok": 0.009894481771985368
+  }
+ ],
+ "stats": [
+  {
+   "baseline": "RandomFuzz",
+   "d_cov_mean": -0.0012520000000000309,
+   "d_cov_median": 0.0042999999999999705,
+   "wilcoxon_p": 0.9578450322151184,
+   "cliffs_delta_cov": 0.0176,
+   "bug_sscfuzz_only": 8,
+   "bug_baseline_only": 0,
+   "mcnemar_p": 0.0078125
+  },
+  {
+   "baseline": "FinanceFuzz",
+   "d_cov_mean": 0.307216,
+   "d_cov_median": 0.36060000000000003,
+   "wilcoxon_p": 5.960464477539063e-08,
+   "cliffs_delta_cov": 0.8752,
+   "bug_sscfuzz_only": 9,
+   "bug_baseline_only": 0,
+   "mcnemar_p": 0.00390625
+  },
+  {
+   "baseline": "RLFuzz",
+   "d_cov_mean": -0.05871200000000004,
+   "d_cov_median": -0.052200000000000024,
+   "wilcoxon_p": 3.4300562234013e-05,
+   "cliffs_delta_cov": -0.2624,
+   "bug_sscfuzz_only": 2,
+   "bug_baseline_only": 2,
+   "mcnemar_p": 1.0
+  },
+  {
+   "baseline": "MADFuzz",
+   "d_cov_mean": -0.028772000000000075,
+   "d_cov_median": -0.023399999999999976,
+   "wilcoxon_p": 0.015158438877439456,
+   "cliffs_delta_cov": -0.1248,
+   "bug_sscfuzz_only": 1,
+   "bug_baseline_only": 1,
+   "mcnemar_p": 1.0
+  },
+  {
+   "baseline": "LLMFuzz",
+   "d_cov_mean": 0.143692,
+   "d_cov_median": 0.17049999999999998,
+   "wilcoxon_p": 1.1920928955078125e-07,
+   "cliffs_delta_cov": 0.5264,
+   "bug_sscfuzz_only": 5,
+   "bug_baseline_only": 1,
+   "mcnemar_p": 0.21875
+  }
+ ],
+ "comp": [
+  {
+   "method": "RandomFuzz",
+   "unique_contracts": 0,
+   "total_found": 2
+  },
+  {
+   "method": "FinanceFuzz",
+   "unique_contracts": 0,
+   "total_found": 1
+  },
+  {
+   "method": "RLFuzz",
+   "unique_contracts": 2,
+   "total_found": 10
+  },
+  {
+   "method": "MADFuzz",
+   "unique_contracts": 1,
+   "total_found": 10
+  },
+  {
+   "method": "LLMFuzz",
+   "unique_contracts": 1,
+   "total_found": 6
+  },
+  {
+   "method": "SSCFuzz (ours)",
+   "unique_contracts": 1,
+   "total_found": 10
+  }
+ ],
+ "cov_corr": [
+  {
+   "feature": "cyclomatic_complexity",
+   "rho": -0.8226241470788094,
+   "p": 4.5029297790213407e-07
+  },
+  {
+   "feature": "payable_fn_count",
+   "rho": -0.6771059400789142,
+   "p": 0.0002012236260857117
+  },
+  {
+   "feature": "avg_branches_per_fn",
+   "rho": -0.6323076923076923,
+   "p": 0.0006958827969825715
+  },
+  {
+   "feature": "loc",
+   "rho": -0.6315384615384615,
+   "p": 0.0007096818011476696
+  },
+  {
+   "feature": "max_branches_per_fn",
+   "rho": -0.5739131497032041,
+   "p": 0.0027017801266616946
+  },
+  {
+   "feature": "hardcoded_address_count",
+   "rho": -0.5038021697919718,
+   "p": 0.010239051019152833
+  },
+  {
+   "feature": "require_count",
+   "rho": -0.4246062521812385,
+   "p": 0.03437679725546605
+  },
+  {
+   "feature": "import_count",
+   "rho": -0.4162138043665548,
+   "p": 0.038499545639360304
+  },
+  {
+   "feature": "total_fn_count",
+   "rho": -0.38053100161877573,
+   "p": 0.0605799606505286
+  },
+  {
+   "feature": "external_fn_count",
+   "rho": -0.377483352513559,
+   "p": 0.06284416945736497
+  },
+  {
+   "feature": "defi_action_count_total",
+   "rho": -0.3526018105853072,
+   "p": 0.08384983269065871
+  },
+  {
+   "feature": "inheritance_depth",
+   "rho": -0.3369902853185624,
+   "p": 0.09950076720458273
+  },
+  {
+   "feature": "defi_withdraw_count",
+   "rho": -0.31928502835779865,
+   "p": 0.1197708340199813
+  },
+  {
+   "feature": "access_control_modifier_uses",
+   "rho": -0.2679421903720421,
+   "p": 0.19533603265878305
+  },
+  {
+   "feature": "defi_deposit_count",
+   "rho": -0.2515930934705152,
+   "p": 0.22505500937619452
+  },
+  {
+   "feature": "defi_swap_count",
+   "rho": -0.21358646733173609,
+   "p": 0.30529272030548205
+  },
+  {
+   "feature": "defi_transfer_count",
+   "rho": -0.1241800403865696,
+   "p": 0.5542463596220687
+  },
+  {
+   "feature": "assert_count",
+   "rho": -0.1063784803955321,
+   "p": 0.6127853712997645
+  },
+  {
+   "feature": "uncontrolled_token_op_count",
+   "rho": -0.09168432888354204,
+   "p": 0.6629294381394041
+  },
+  {
+   "feature": "defi_liquidity_count",
+   "rho": -0.07817553451381434,
+   "p": 0.7103132162562155
+  },
+  {
+   "feature": "magic_number_count",
+   "rho": -0.06816888468192553,
+   "p": 0.7461111628777105
+  },
+  {
+   "feature": "library_use_count",
+   "rho": -0.06345909539059774,
+   "p": 0.763143871927806
+  },
+  {
+   "feature": "branch_gini",
+   "rho": -0.033846153846153845,
+   "p": 0.872398699612784
+  },
+  {
+   "feature": "defi_mint_count",
+   "rho": 0.06182325925260965,
+   "p": 0.7690853582740103
+  },
+  {
+   "feature": "defi_burn_count",
+   "rho": 0.1270947737357221,
+   "p": 0.5449110800682956
+  },
+  {
+   "feature": "constraint_density",
+   "rho": 0.35237546333694425,
+   "p": 0.08406257840967848
+  }
+ ],
+ "diff_corr": [
+  {
+   "feature": "max_branches_per_fn",
+   "rho": -0.5243232029238847,
+   "p": 0.007133403604567668
+  },
+  {
+   "feature": "avg_branches_per_fn",
+   "rho": -0.49134095595824867,
+   "p": 0.01262085352594011
+  },
+  {
+   "feature": "defi_swap_count",
+   "rho": -0.48566847386854856,
+   "p": 0.01384730959563561
+  },
+  {
+   "feature": "hardcoded_address_count",
+   "rho": -0.42897175019452727,
+   "p": 0.03237588938161352
+  },
+  {
+   "feature": "defi_liquidity_count",
+   "rho": -0.4095807684298783,
+   "p": 0.04202743447857403
+  },
+  {
+   "feature": "defi_action_count_total",
+   "rho": -0.34184453892266475,
+   "p": 0.09441830211944649
+  },
+  {
+   "feature": "defi_transfer_count",
+   "rho": -0.2892334209621763,
+   "p": 0.16082207685059657
+  },
+  {
+   "feature": "branch_gini",
+   "rho": -0.26631165487687614,
+   "p": 0.19817283407745773
+  },
+  {
+   "feature": "assert_count",
+   "rho": -0.21547303008924362,
+   "p": 0.30093856474450786
+  },
+  {
+   "feature": "external_fn_count",
+   "rho": -0.21484176114078757,
+   "p": 0.30239120436432637
+  },
+  {
+   "feature": "access_control_modifier_uses",
+   "rho": -0.19443013987790592,
+   "p": 0.3516930286108609
+  },
+  {
+   "feature": "payable_fn_count",
+   "rho": -0.1353357640889187,
+   "p": 0.5189184720119301
+  },
+  {
+   "feature": "cyclomatic_complexity",
+   "rho": -0.11478481631351582,
+   "p": 0.5848235858684248
+  },
+  {
+   "feature": "import_count",
+   "rho": -0.09477669375578082,
+   "p": 0.6522496338761441
+  },
+  {
+   "feature": "loc",
+   "rho": -0.07689850216809492,
+   "p": 0.7148504196773258
+  },
+  {
+   "feature": "defi_withdraw_count",
+   "rho": -0.05796045201478479,
+   "p": 0.7831651422681887
+  },
+  {
+   "feature": "defi_burn_count",
+   "rho": 0.027365513654275888,
+   "p": 0.8966879198741536
+  },
+  {
+   "feature": "defi_deposit_count",
+   "rho": 0.10746426102368094,
+   "p": 0.60914291345062
+  },
+  {
+   "feature": "total_fn_count",
+   "rho": 0.14616338161967976,
+   "p": 0.4857026097109369
+  },
+  {
+   "feature": "uncontrolled_token_op_count",
+   "rho": 0.15530267430973999,
+   "p": 0.4585271523816337
+  },
+  {
+   "feature": "magic_number_count",
+   "rho": 0.1579851469831546,
+   "p": 0.4507049210976306
+  },
+  {
+   "feature": "library_use_count",
+   "rho": 0.20575881082320618,
+   "p": 0.3237726256581028
+  },
+  {
+   "feature": "defi_mint_count",
+   "rho": 0.2227872251474943,
+   "p": 0.2844245679773145
+  },
+  {
+   "feature": "inheritance_depth",
+   "rho": 0.22718723842222197,
+   "p": 0.2747715444688593
+  },
+  {
+   "feature": "require_count",
+   "rho": 0.24633458166062905,
+   "p": 0.23522131289210726
+  },
+  {
+   "feature": "constraint_density",
+   "rho": 0.3679693936809325,
+   "p": 0.07033377927687585
+  }
+ ]
+}

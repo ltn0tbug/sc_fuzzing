@@ -1,0 +1,7 @@
+dataset,method,deep_bugrate,shallow_bugrate,n_deep,n_shallow,odds_ratio,p_value
+smartbugs,RandomFuzz,0.0,0.478,10,23,0.0,0.013
+smartbugs,FinanceFuzz,0.2,0.174,10,23,1.19,1.0
+smartbugs,RLFuzz,0.2,0.478,10,23,0.27,0.245
+smartbugs,MADFuzz,0.1,0.435,10,23,0.14,0.109
+smartbugs,LLMFuzz,0.0,0.522,10,23,0.0,0.005
+smartbugs,SSCFuzz (ours),0.1,0.522,10,23,0.1,0.05

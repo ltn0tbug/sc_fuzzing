@@ -1,0 +1,6 @@
+,SSCFuzz (ours),LLMFuzz
+none (pure gen),0.5316,0.562
+call_swap,0.1272,0.1164
+call_insert,0.1252,0.1068
+value_perturb,0.1056,0.1172
+arg_shuffle,0.1104,0.0976

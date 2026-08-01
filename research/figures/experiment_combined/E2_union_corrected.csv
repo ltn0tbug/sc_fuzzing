@@ -1,0 +1,6 @@
+quantity,n,of_N
+5 in-house union,30,58
++FF generous (union),35,58
++FF strict (union),30,58
+FF unique (generous),5,58
+FF unique (strict),0,58

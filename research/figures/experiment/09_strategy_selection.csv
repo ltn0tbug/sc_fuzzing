@@ -1,0 +1,6 @@
+,SSCFuzz (ours),LLMFuzz
+reentrancy_probe,0.1676,0.242
+arithmetic_probe,0.2076,0.2004
+price_oracle_probe,0.2072,0.1984
+access_control_probe,0.204,0.1852
+logic_error_probe,0.2136,0.174

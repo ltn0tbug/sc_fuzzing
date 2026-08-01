@@ -1,0 +1,6 @@
+,RLFuzz,MADFuzz
+nopay-nocall-store,0.4012,0.5384
+attacker,0.5192,0.3784
+nopay-call,0.0452,0.0324
+pay-nocall,0.0236,0.0308
+pay-call,0.0108,0.02

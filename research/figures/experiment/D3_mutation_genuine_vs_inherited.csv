@@ -1,0 +1,5 @@
+strategy,genuine,inherited,total
+value_perturb,2,24,26
+call_insert,2,21,23
+call_swap,2,23,25
+arg_shuffle,1,24,25

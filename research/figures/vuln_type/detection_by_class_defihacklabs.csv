@@ -1,0 +1,5 @@
+category,n,rlfuzz_det,rlfuzz_det_pct,rlfuzz_cov,madfuzz_det,madfuzz_det_pct,madfuzz_cov,sscfuzz_det,sscfuzz_det_pct,sscfuzz_cov,randomfuzz_det,randomfuzz_det_pct,randomfuzz_cov,llmfuzz_det,llmfuzz_det_pct,llmfuzz_cov,financefuzz_det,financefuzz_det_pct,financefuzz_cov,union_solved
+access_control,9,3,33.3,0.513,2,22.2,0.487,2,22.2,0.418,1,11.1,0.461,1,11.1,0.298,1,11.1,0.131,3
+arbitrary_mint,7,4,57.1,0.608,5,71.4,0.588,5,71.4,0.583,1,14.3,0.548,3,42.9,0.449,0,0.0,0.279,7
+business_logic,6,3,50.0,0.556,3,50.0,0.521,3,50.0,0.527,0,0.0,0.493,1,16.7,0.346,0,0.0,0.174,3
+price_oracle_manipulation,3,0,0.0,0.478,0,0.0,0.42,0,0.0,0.39,0,0.0,0.42,1,33.3,0.29,0,0.0,0.102,1

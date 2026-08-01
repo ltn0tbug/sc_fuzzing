@@ -1,0 +1,13 @@
+dataset,method,mean_seq_div,std_seq_div
+defihacklabs,RandomFuzz,0.901,0.059
+defihacklabs,FinanceFuzz,0.34,0.085
+defihacklabs,RLFuzz,0.844,0.064
+defihacklabs,MADFuzz,0.852,0.056
+defihacklabs,LLMFuzz,0.799,0.061
+defihacklabs,SSCFuzz (ours),0.824,0.057
+smartbugs,RandomFuzz,0.486,0.173
+smartbugs,FinanceFuzz,0.171,0.102
+smartbugs,RLFuzz,0.418,0.149
+smartbugs,MADFuzz,0.451,0.145
+smartbugs,LLMFuzz,0.526,0.146
+smartbugs,SSCFuzz (ours),0.579,0.139

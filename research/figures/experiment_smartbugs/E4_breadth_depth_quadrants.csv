@@ -1,0 +1,5 @@
+dataset,quadrant,n,randomfuzz_cov,randomfuzz_bugrate,financefuzz_cov,financefuzz_bugrate,rlfuzz_cov,rlfuzz_bugrate,madfuzz_cov,madfuzz_bugrate,llmfuzz_cov,llmfuzz_bugrate,sscfuzz_cov,sscfuzz_bugrate,cov_winner
+smartbugs,narrow+deep,1,0.528,0.0,0.5,0.0,0.806,1.0,0.806,1.0,0.444,0.0,0.778,1.0,RLFuzz
+smartbugs,narrow+shallow,22,0.654,0.5,0.597,0.136,0.717,0.5,0.69,0.455,0.669,0.545,0.71,0.545,RLFuzz
+smartbugs,wide+deep,9,0.633,0.0,0.485,0.222,0.755,0.111,0.713,0.0,0.606,0.0,0.725,0.0,RLFuzz
+smartbugs,wide+shallow,1,0.6,0.0,0.675,1.0,0.7,0.0,0.6,0.0,0.6,0.0,0.7,0.0,RLFuzz

@@ -1,0 +1,7 @@
+dataset,method,mean_seq_div,std_seq_div
+smartbugs,RandomFuzz,0.486,0.173
+smartbugs,FinanceFuzz,0.171,0.102
+smartbugs,RLFuzz,0.418,0.149
+smartbugs,MADFuzz,0.451,0.145
+smartbugs,LLMFuzz,0.526,0.146
+smartbugs,SSCFuzz (ours),0.579,0.139

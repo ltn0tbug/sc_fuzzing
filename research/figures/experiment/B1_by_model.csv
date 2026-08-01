@@ -1,0 +1,19 @@
+method,model,n,k_with_bug,detection_rate,mean_bc_cov,note
+RandomFuzz,1.5B,25,2.0,0.08,0.487964,
+RandomFuzz,3B,25,2.0,0.08,0.487964,shared (LLM-free)
+RandomFuzz,7B,25,2.0,0.08,0.487964,shared (LLM-free)
+FinanceFuzz,1.5B,25,1.0,0.04,0.179496,
+FinanceFuzz,3B,25,1.0,0.04,0.179496,shared (LLM-free)
+FinanceFuzz,7B,25,1.0,0.04,0.179496,shared (LLM-free)
+RLFuzz,1.5B,25,10.0,0.4,0.545424,
+RLFuzz,3B,25,10.0,0.4,0.545424,shared (LLM-free)
+RLFuzz,7B,25,10.0,0.4,0.545424,shared (LLM-free)
+MADFuzz,1.5B,25,10.0,0.4,0.515484,
+MADFuzz,3B,25,7.0,0.28,0.508772,
+MADFuzz,7B,25,,,,incomplete
+LLMFuzz,1.5B,25,6.0,0.24,0.34302,
+LLMFuzz,3B,25,7.0,0.28,0.37385199999999996,
+LLMFuzz,7B,25,9.0,0.36,0.360692,
+SSCFuzz (ours),1.5B,25,10.0,0.4,0.486712,
+SSCFuzz (ours),3B,25,12.0,0.48,0.4864,
+SSCFuzz (ours),7B,25,12.0,0.48,0.480512,

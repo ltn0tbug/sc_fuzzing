@@ -1,0 +1,12 @@
+method,unique_solves,total_solves
+RandomFuzz,0,13
+FinanceFuzz,3,7
+RLFuzz,1,23
+MADFuzz·1.5B,0,21
+MADFuzz·3B,0,20
+LLMFuzz·1.5B,0,18
+LLMFuzz·3B,0,23
+LLMFuzz·7B,1,25
+SSCFuzz·1.5B,0,23
+SSCFuzz·3B,0,28
+SSCFuzz·7B,1,27

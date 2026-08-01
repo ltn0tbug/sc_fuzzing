@@ -1,0 +1,361 @@
+{
+ "ds": "smartbugs",
+ "N": 33,
+ "eda_N": 33,
+ "union_solvable": 21,
+ "best_base": "RLFuzz",
+ "h2h_win": 2,
+ "h2h_tie": 23,
+ "auc": {
+  "RandomFuzz": 0.6364776775757576,
+  "FinanceFuzz": 0.5172608414038751,
+  "RLFuzz": 0.7063494196969697,
+  "MADFuzz": 0.6787918248484849,
+  "LLMFuzz": 0.6027353551515151,
+  "SSCFuzz (ours)": 0.6822759103030303
+ },
+ "summary": [
+  {
+   "method": "RandomFuzz",
+   "detection_rate": 0.3333333333333333,
+   "contracts_with_bug": 11,
+   "total_bugs": 551,
+   "mean_bugs": 16.696969696969695,
+   "mean_bc_cov": 0.6429424242424243,
+   "median_bc_cov": 0.6667,
+   "mean_reward": 41.02030303030303,
+   "median_ttfb": 0.0,
+   "coverage_auc": 0.6364776775757576,
+   "tokens_total": 0,
+   "bugs_per_1k_tok": NaN
+  },
+  {
+   "method": "FinanceFuzz",
+   "detection_rate": 0.18181818181818182,
+   "contracts_with_bug": 6,
+   "total_bugs": 6,
+   "mean_bugs": 0.18181818181818182,
+   "mean_bc_cov": 0.5662242424242424,
+   "median_bc_cov": 0.625,
+   "mean_reward": 0.0,
+   "median_ttfb": 16.0,
+   "coverage_auc": 0.5172608414038751,
+   "tokens_total": 0,
+   "bugs_per_1k_tok": NaN
+  },
+  {
+   "method": "RLFuzz",
+   "detection_rate": 0.3939393939393939,
+   "contracts_with_bug": 13,
+   "total_bugs": 594,
+   "mean_bugs": 18.0,
+   "mean_bc_cov": 0.7292636363636364,
+   "median_bc_cov": 0.7143,
+   "mean_reward": 46.13969696969696,
+   "median_ttfb": 2.0,
+   "coverage_auc": 0.7063494196969697,
+   "tokens_total": 0,
+   "bugs_per_1k_tok": NaN
+  },
+  {
+   "method": "MADFuzz",
+   "detection_rate": 0.3333333333333333,
+   "contracts_with_bug": 11,
+   "total_bugs": 541,
+   "mean_bugs": 16.393939393939394,
+   "mean_bc_cov": 0.6973424242424242,
+   "median_bc_cov": 0.7143,
+   "mean_reward": 41.8330303030303,
+   "median_ttfb": 3.0,
+   "coverage_auc": 0.6787918248484849,
+   "tokens_total": 90872,
+   "bugs_per_1k_tok": 5.953428999031605
+  },
+  {
+   "method": "LLMFuzz",
+   "detection_rate": 0.36363636363636365,
+   "contracts_with_bug": 12,
+   "total_bugs": 376,
+   "mean_bugs": 11.393939393939394,
+   "mean_bc_cov": 0.6430878787878789,
+   "median_bc_cov": 0.6429,
+   "mean_reward": 57.62090909090909,
+   "median_ttfb": 1.0,
+   "coverage_auc": 0.6027353551515151,
+   "tokens_total": 8555146,
+   "bugs_per_1k_tok": 0.04395015584772019
+  },
+  {
+   "method": "SSCFuzz (ours)",
+   "detection_rate": 0.3939393939393939,
+   "contracts_with_bug": 13,
+   "total_bugs": 411,
+   "mean_bugs": 12.454545454545455,
+   "mean_bc_cov": 0.7160272727272727,
+   "median_bc_cov": 0.7143,
+   "mean_reward": 63.944545454545455,
+   "median_ttfb": 1.0,
+   "coverage_auc": 0.6822759103030303,
+   "tokens_total": 7633211,
+   "bugs_per_1k_tok": 0.05384365766909889
+  }
+ ],
+ "stats": [
+  {
+   "baseline": "RandomFuzz",
+   "d_cov_mean": 0.07308484848484842,
+   "d_cov_median": 0.04760000000000009,
+   "wilcoxon_p": 5.577424864260952e-05,
+   "cliffs_delta_cov": 0.5436179981634527,
+   "bug_sscfuzz_only": 4,
+   "bug_baseline_only": 2,
+   "mcnemar_p": 0.6875
+  },
+  {
+   "baseline": "FinanceFuzz",
+   "d_cov_mean": 0.14980303030303022,
+   "d_cov_median": 0.08930000000000005,
+   "wilcoxon_p": 9.323508377644746e-07,
+   "cliffs_delta_cov": 0.7933884297520661,
+   "bug_sscfuzz_only": 12,
+   "bug_baseline_only": 5,
+   "mcnemar_p": 0.143463134765625
+  },
+  {
+   "baseline": "RLFuzz",
+   "d_cov_mean": -0.013236363636363602,
+   "d_cov_median": 0.0,
+   "wilcoxon_p": 0.09260069782067576,
+   "cliffs_delta_cov": -0.07254361799816346,
+   "bug_sscfuzz_only": 2,
+   "bug_baseline_only": 2,
+   "mcnemar_p": 1.0
+  },
+  {
+   "baseline": "MADFuzz",
+   "d_cov_mean": 0.018684848484848526,
+   "d_cov_median": 0.0,
+   "wilcoxon_p": 0.13214263150106426,
+   "cliffs_delta_cov": 0.051423324150596875,
+   "bug_sscfuzz_only": 3,
+   "bug_baseline_only": 1,
+   "mcnemar_p": 0.625
+  },
+  {
+   "baseline": "LLMFuzz",
+   "d_cov_mean": 0.07293939393939397,
+   "d_cov_median": 0.07140000000000002,
+   "wilcoxon_p": 0.00016172073517587766,
+   "cliffs_delta_cov": 0.49770431588613406,
+   "bug_sscfuzz_only": 3,
+   "bug_baseline_only": 2,
+   "mcnemar_p": 1.0
+  }
+ ],
+ "comp": [
+  {
+   "method": "RandomFuzz",
+   "unique_contracts": 0,
+   "total_found": 11
+  },
+  {
+   "method": "FinanceFuzz",
+   "unique_contracts": 5,
+   "total_found": 6
+  },
+  {
+   "method": "RLFuzz",
+   "unique_contracts": 1,
+   "total_found": 13
+  },
+  {
+   "method": "MADFuzz",
+   "unique_contracts": 0,
+   "total_found": 11
+  },
+  {
+   "method": "LLMFuzz",
+   "unique_contracts": 0,
+   "total_found": 12
+  },
+  {
+   "method": "SSCFuzz (ours)",
+   "unique_contracts": 1,
+   "total_found": 13
+  }
+ ],
+ "cov_corr": [
+  {
+   "feature": "inheritance_depth",
+   "rho": -0.4109624136164627,
+   "p": 0.017510446645212514
+  },
+  {
+   "feature": "access_control_modifier_uses",
+   "rho": -0.30392962692593967,
+   "p": 0.08551123244512505
+  },
+  {
+   "feature": "branch_gini",
+   "rho": -0.2581879201253054,
+   "p": 0.14685883416410675
+  },
+  {
+   "feature": "uncontrolled_token_op_count",
+   "rho": -0.23113150610607747,
+   "p": 0.19561002565985883
+  },
+  {
+   "feature": "loc",
+   "rho": -0.19629470616385702,
+   "p": 0.2735857047934776
+  },
+  {
+   "feature": "defi_deposit_count",
+   "rho": -0.16006181633771446,
+   "p": 0.37357999490947563
+  },
+  {
+   "feature": "total_fn_count",
+   "rho": -0.1524580463246632,
+   "p": 0.3969935953613275
+  },
+  {
+   "feature": "external_fn_count",
+   "rho": -0.14056543924733497,
+   "p": 0.4352512302027028
+  },
+  {
+   "feature": "max_branches_per_fn",
+   "rho": -0.10404988776516196,
+   "p": 0.5644517912610214
+  },
+  {
+   "feature": "cyclomatic_complexity",
+   "rho": -0.10293632173950211,
+   "p": 0.5686495926559887
+  },
+  {
+   "feature": "defi_transfer_count",
+   "rho": -0.08584580912752691,
+   "p": 0.6347796750381471
+  },
+  {
+   "feature": "defi_action_count_total",
+   "rho": 0.03216706932835358,
+   "p": 0.8589534933638012
+  },
+  {
+   "feature": "payable_fn_count",
+   "rho": 0.07938459445639845,
+   "p": 0.6605599425660281
+  },
+  {
+   "feature": "avg_branches_per_fn",
+   "rho": 0.1086636452487787,
+   "p": 0.547212201547366
+  },
+  {
+   "feature": "require_count",
+   "rho": 0.15989840986655027,
+   "p": 0.37407444220276476
+  },
+  {
+   "feature": "constraint_density",
+   "rho": 0.23005246455633793,
+   "p": 0.1977632241653999
+  },
+  {
+   "feature": "defi_withdraw_count",
+   "rho": 0.41612115068531996,
+   "p": 0.016011961134439524
+  }
+ ],
+ "diff_corr": [
+  {
+   "feature": "total_fn_count",
+   "rho": -0.7110672928088945,
+   "p": 3.5217441856719345e-06
+  },
+  {
+   "feature": "external_fn_count",
+   "rho": -0.6903754090963362,
+   "p": 8.747680446523187e-06
+  },
+  {
+   "feature": "loc",
+   "rho": -0.6350739542767274,
+   "p": 7.181010882719089e-05
+  },
+  {
+   "feature": "max_branches_per_fn",
+   "rho": -0.6242352032098291,
+   "p": 0.00010350523381814924
+  },
+  {
+   "feature": "cyclomatic_complexity",
+   "rho": -0.6021402251125549,
+   "p": 0.00020939028038348916
+  },
+  {
+   "feature": "payable_fn_count",
+   "rho": -0.591112157206848,
+   "p": 0.00029203315577717667
+  },
+  {
+   "feature": "branch_gini",
+   "rho": -0.4843646082695767,
+   "p": 0.004285247680085173
+  },
+  {
+   "feature": "defi_deposit_count",
+   "rho": -0.33503526495956226,
+   "p": 0.056661080289361676
+  },
+  {
+   "feature": "avg_branches_per_fn",
+   "rho": -0.2989075842478779,
+   "p": 0.09107306150192829
+  },
+  {
+   "feature": "inheritance_depth",
+   "rho": -0.08297529753694365,
+   "p": 0.6461833644859843
+  },
+  {
+   "feature": "access_control_modifier_uses",
+   "rho": -0.08086941514759863,
+   "p": 0.654600148578653
+  },
+  {
+   "feature": "uncontrolled_token_op_count",
+   "rho": 0.01795821817491536,
+   "p": 0.9209856832937225
+  },
+  {
+   "feature": "defi_action_count_total",
+   "rho": 0.18528165454750103,
+   "p": 0.30193424841152855
+  },
+  {
+   "feature": "require_count",
+   "rho": 0.287289244648413,
+   "p": 0.10499645408512
+  },
+  {
+   "feature": "defi_transfer_count",
+   "rho": 0.3364538611487316,
+   "p": 0.0555574349105687
+  },
+  {
+   "feature": "constraint_density",
+   "rho": 0.4195415647819581,
+   "p": 0.015078713352582773
+  },
+  {
+   "feature": "defi_withdraw_count",
+   "rho": 0.5908139272970672,
+   "p": 0.00029462315477876445
+  }
+ ]
+}

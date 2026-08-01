@@ -1,0 +1,7 @@
+dataset,method,deep_bugrate,shallow_bugrate,n_deep,n_shallow,odds_ratio,p_value
+defihacklabs,RandomFuzz,0.0,0.143,11,14,0.0,0.487
+defihacklabs,FinanceFuzz,0.0,0.071,11,14,0.0,1.0
+defihacklabs,RLFuzz,0.182,0.571,11,14,0.17,0.099
+defihacklabs,MADFuzz,0.091,0.643,11,14,0.06,0.012
+defihacklabs,LLMFuzz,0.091,0.357,11,14,0.18,0.18
+defihacklabs,SSCFuzz (ours),0.091,0.643,11,14,0.06,0.012
