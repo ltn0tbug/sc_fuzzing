@@ -42,15 +42,15 @@ Contract Source + ABI
 ┌────────────────────────────────────────┐
 │            Fuzzing Loop                │
 │                                        │
-│  State (≤46-dim) → DQN → Strategy     │
+│  Payoff stats → Selector → Strategy    │
 │                     ↓                  │
-│     LLMGenerator → Fuzz Inputs        │
+│     LLMGenerator → Fuzz Inputs         │
 │          or                            │
-│     LLMMutator   → Mutated Inputs     │
+│     LLMMutator   → Mutated Inputs      │
 │                     ↓                  │
-│          Foundry → Results            │
+│          Foundry → Results             │
 │                     ↓                  │
-│       Coverage Reward → RL Update     │
+│    Coverage / Bug Reward → Selector    │
 └────────────────────────────────────────┘
         ↓
    Bug Report (JSON)
@@ -60,11 +60,21 @@ Contract Source + ABI
 
 | Component | Role | Technology |
 |-----------|------|------------|
-| RL Controller | Selects attack strategy + mode (gen vs mut) | DQN (PyTorch) |
+| Strategy Selector | Selects attack strategy + mode (gen vs mut) | Exhaustion-Switching Bandit (default) · DQN / LinUCB variants |
 | LLM Agent | Generates / mutates transaction sequences | Claude or llama-cpp |
 | Execution Engine | Runs inputs, measures coverage, detects bugs | Foundry + EVM |
 
-The RL controller selects from **17 strategies**: 7 generation strategies (the LLM authors an input from scratch) + 10 mutation strategies (the LLM transforms a corpus seed). The LLM handles the creative work of crafting inputs within the chosen strategy. Foundry provides ground-truth bytecode-level branch coverage and revert data.
+**On the selector.** Bare `sscfuzz` runs `sscfuzz_esb`, an **Exhaustion-Switching Bandit**
+(`BanditController`) — **no neural network, and no encoded state vector at all**: it ignores
+the encoder output and keeps its own per-arm payoff bookkeeping (warm up over all arms, pin
+any quick-win exploit, exploit the best *recent*-payoff arm while it keeps finding new
+branches, then eliminate that arm after `bandit_giveup` unproductive picks and move on).
+The neural variants are opt-in and selected by name — `sscfuzz_dqn` (factored per-arm-head
+DQN over a 52-dim per-arm state layout) and `sscfuzz_cb` (disjoint LinUCB contextual bandit
+over a 12-dim context). Only those two consume the `StateEncoder` vector — see
+*SScFuzz selector* under [Fuzzing Strategies](#fuzzing-strategies) below.
+
+The selector picks from **17 strategies**: 7 generation strategies (the LLM authors an input from scratch) + 10 mutation strategies (the LLM transforms a corpus seed). The LLM handles the creative work of crafting inputs within the chosen strategy. Foundry provides ground-truth bytecode-level branch coverage and revert data.
 
 ---
 
@@ -222,7 +232,7 @@ sc-fuzzing/
 │   │   ├── paths.py           exploit-path novelty (jaccard / is_distinct_path)
 │   │   ├── mutator.py         LLMMutator: corpus + ABI mutation-strategy fallbacks + llm_mutate
 │   │   ├── reward.py          compute_reward()
-│   │   ├── state.py           ContractFeatures + StateEncoder (≤46-dim; gated roster + mut/bug-trace/marginal blocks)
+│   │   ├── state.py           ContractFeatures + StateEncoder (layout-dependent: 7/12-dim context · 52-dim per-arm · block fallback; unused by the default bandit)
 │   │   └── templates/         Harness.sol (shared oracle + attacker) · inline · inline_legacy · fork · finance · finance_legacy · finance_fork (.sol.tpl)
 │   └── baselines/             rlfuzz · madfuzz · randomfuzz · llmfuzz · financefuzz · common/
 ├── src/experiment/            Full-dataset experiment harness (code only)
@@ -247,7 +257,7 @@ sc-fuzzing/
 +10 × (novel_branches / total)     seed divergence (mutation mode only)           [baseline path]
 ```
 
-The coverage and novelty terms are normalized by contract size so the DQN learns a
+The coverage and novelty terms are normalized by contract size so the selector sees a
 comparable signal across contracts. **SScFuzz (RL Iter 7) replaces the single coverage
 term above with a two-tier signal** (the block above is the baseline path RLFuzz / MADFuzz /
 LLMFuzz keep): a small **per-strategy base** paid every run for branches new to *that*
