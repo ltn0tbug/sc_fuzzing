@@ -1,0 +1,38 @@
+[
+  {
+    "type": "function",
+    "name": "init",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "a0"
+      },
+      {
+        "type": "uint256[]",
+        "name": "a1"
+      },
+      {
+        "type": "uint256[]",
+        "name": "a2"
+      },
+      {
+        "type": "address",
+        "name": "a3"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "emergencyExit",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "a0"
+      }
+    ],
+    "outputs": []
+  }
+]

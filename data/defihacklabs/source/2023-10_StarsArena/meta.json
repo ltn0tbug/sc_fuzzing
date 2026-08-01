@@ -1,0 +1,9 @@
+{
+  "target_id": "2023-10_StarsArena",
+  "chain": "avalanche",
+  "address": "0xa481b139a1a654ca19d2074f174f17d7534e8cec",
+  "verified": false,
+  "proxy": true,
+  "implementation": "0x44c383235a71ee4bc68501bfff10bb3c29f995b9",
+  "skip_reason": "proxy_impl_unverified"
+}

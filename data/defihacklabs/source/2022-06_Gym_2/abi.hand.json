@@ -1,0 +1,38 @@
+[
+  {
+    "type": "function",
+    "name": "depositFromOtherContract",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "a"
+      },
+      {
+        "type": "uint8",
+        "name": "b"
+      },
+      {
+        "type": "bool",
+        "name": "c"
+      },
+      {
+        "type": "address",
+        "name": "d"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "withdraw",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "i"
+      }
+    ],
+    "outputs": []
+  }
+]

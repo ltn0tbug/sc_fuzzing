@@ -1,0 +1,21 @@
+{
+  "target_id": "2024-09_PLN",
+  "chain": "mainnet",
+  "address": "0xe0c218e1633a5c76d57ff4f11149f07bfff16aea",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "PLNTOKEN",
+  "compiler_version": "v0.8.19+commit.7dd6d404",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "PLNTOKEN.sol"
+  ],
+  "primary_source": "PLNTOKEN.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424120
+}

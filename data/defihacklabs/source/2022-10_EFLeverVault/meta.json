@@ -1,0 +1,22 @@
+{
+  "target_id": "2022-10_EFLeverVault",
+  "chain": "mainnet",
+  "address": "0xe39fd820b58f83205db1d9225f28105971c3d309",
+  "verified": true,
+  "provider": "etherscan",
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "EFLeverVault",
+  "compiler_version": "v0.5.10+commit.5a6ea5b1",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "None",
+  "source_files": [
+    "EFLeverVault.sol"
+  ],
+  "primary_source": "EFLeverVault.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781942665
+}

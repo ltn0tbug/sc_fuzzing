@@ -1,0 +1,22 @@
+[
+  {
+    "type": "function",
+    "name": "uniswapV3SwapCallback",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "int256",
+        "name": "a0"
+      },
+      {
+        "type": "int256",
+        "name": "a1"
+      },
+      {
+        "type": "bytes",
+        "name": "a2"
+      }
+    ],
+    "outputs": []
+  }
+]

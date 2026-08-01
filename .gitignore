@@ -1,0 +1,84 @@
+# ── Python-generated ─────────────────────────────────────────────────────────
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+
+# ── Virtual environments ─────────────────────────────────────────────────────
+.venv/
+
+# ── Secrets ──────────────────────────────────────────────────────────────────
+.env
+.env.local
+
+# ── Tooling caches ───────────────────────────────────────────────────────────
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ── IDE ──────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Forge build / cache ──────────────────────────────────────────────────────
+.foundry/
+cache/
+out/
+
+# ── Fuzzer run outputs ───────────────────────────────────────────────────────
+# Experiment results (output/experiment*/<dataset>/<method>/*.json) are TRACKED —
+# they are the ICPADS-2026 evidence every figure/table is computed from.
+# Ad-hoc single-contract runs and per-run resume state are not.
+output/*.json
+output/**/_ckpt/
+output/**/_verify/
+
+# ── Archived experiment snapshots (archive/<date>/: output_experiment, reports, ─
+# figures, evidence, eda_survey.ipynb). Large + point-in-time; the report/figure
+# contents remain recoverable from git history at their pre-archive paths.
+archive/
+
+# ── Coverage reports ─────────────────────────────────────────────────────────
+coverage/
+*.lcov.info
+
+# ── External reference repos (DeFiHackLabs, smartbugs-curated, etc.) ─────────
+# Dataset source/ is the single source of truth and stays TRACKED (see below).
+ref/
+
+# ── Dataset refactor backups (manual snapshots) ──────────────────────────────
+experiment/dataset.backup-*/
+
+# ── Legacy pre-refactor dataset staging ──────────────────────────────────────
+# Generated intermediates are ignored (rebuildable by utils/build_*.py), but the
+# two HAND-CURATED inputs the build scripts read are tracked — without them
+# utils/fetch_defihacklabs_sources.py and utils/build_defihacklabs_dataset.py
+# cannot run from a clean clone.
+utils/legacy_intermediate/*
+!utils/legacy_intermediate/curated_targets.json
+!utils/legacy_intermediate/skip_overrides.json
+
+# ── Ad-hoc developer scratch ─────────────────────────────────────────────────
+log.txt
+test.json
+vault_test/
+contracts/
+
+# ── Claude Code ──────────────────────────────────────────────────────────────
+.claude/
+
+.tmp_agent/
+
+# ── Dataset sources always win ───────────────────────────────────────────────
+# The generic scratch/build rules above (out/ · cache/ · contracts/) must never
+# swallow a dataset row's verified contract source, which lives at
+# data/<dataset>/source/<id>/src/ and legitimately uses those directory names.
+!data/**/contracts/
+!data/**/out/
+!data/**/cache/

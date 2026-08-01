@@ -1,0 +1,8 @@
+{
+  "comment": "Post-fetch skip flags for entries that fetch cleanly but fail at scaffold/harness time. The dataset builder reads this and applies these reasons after computing the verified set.",
+  "skips": {
+    "2022-10_OlympusDao": "import_alias_mismatch:clones_vs_clones_with_immutable_args",
+    "2023-05_ERC20TokenBank": "legacy_pragma_solc_auto_detect_fails_in_fuzzer_compile_step",
+    "2022-10_EFLeverVault": "fork_bytecode_mismatch_0.4.x_solc_coverage_denominator_collapse"
+  }
+}

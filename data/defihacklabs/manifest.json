@@ -1,0 +1,1280 @@
+{
+  "dataset": "defihacklabs",
+  "kind": "fork",
+  "schema": "manifest",
+  "source_repo": "https://github.com/SunWeb3Sec/DeFiHackLabs",
+  "description": "Curation layer: skip/skip_reason/category + reference-exploit & bug-signal validation.",
+  "generated_by": "utils/restructure_datasets.py (+ validators via _dataset_io)",
+  "total_contracts": 86,
+  "meta": {
+    "usable": 25,
+    "skipped": 61,
+    "reference_exploits_reproduced": 54
+  },
+  "contracts": [
+    {
+      "id": "defihacklabs/2020-12_Cover",
+      "skip": true,
+      "skip_reason": "requires hand-seeded BPT capital (deal+approve) transcribed from the known PoC to fire — the seed_tokens mechanism that supplied this was removed as answer-key setup, not fuzzer discovery; out of scope (target-only, no pre-seeded capital)",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2020-12/Cover_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Deposit BPT: 15255552810089260015361",
+            "After claimRewards, Cover Balance: 40316176729922452045213336697791916580"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2021-05_RariCapital",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; cross-contract reentrancy through ibETH",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2021-05/RariCapital_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[Start] ETH Balance of attacker: 1040.442879801043994186",
+            "[End] ETH Balance of attacker: 1072.761945092250970103"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-02_BuildF",
+      "skip": true,
+      "skip_reason": "governance proposal must execute from the historical attacker address hardcoded in the approve() payload; runner address reverts transferFrom",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-06_InverseFinance",
+      "skip": true,
+      "skip_reason": "exploit requires a flash-loan callback + external DEX swaps to realize WBNB/WETH profit; not expressible as a flat target-ABI FuzzInput; Curve-LP spot-oracle manipulation, mint() needs underlying",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-06/InverseFinance_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Flashloaned, WBTC balance of attacker:: 27000",
+            "After add-liquidity, crv3crypto balance of attacker:: 5375596969399930881565",
+            "After add-liquidity, WBTC balance of attacker:: 26775",
+            "Deposited to Yearns Vault, yvCurve3 balance of attacker:: 4906754677503974414310",
+            "Deposited to Inverse Yearn 3Crypto Vault, anYvCrv3Crypto balance of attacker:: 24533773387519",
+            "YVCrv3CryptoFeed lastanswer:: 979943357748941122174",
+            "Before swap, USDT balance of attacker:: 0",
+            "Before swap, WBTC balance of CRV3Pool:: 426705810117",
+            "Before swap, WETH balance of CRV3Pool:: 75269151943667682615597",
+            "Before swap, USDT balance of CRV3Pool:: 87636422228320",
+            "After swap, USDT balance of attacker:: 75403376206326",
+            "After swap, WBTC balance of CRV3Pool:: 3104205810117",
+            "After swap, WBTC balance of CRV3Pool:: 75269151943667682615597",
+            "After swap, USDT balance of CRV3Pool:: 12233046021994",
+            "Manipulated YVCrv3CryptoFeed lastanswer:: 2831510989134333947252",
+            "DOLA balance of attacker:: 10133949192393802606886848",
+            "After swap, WBTC balance of attacker:: 26626",
+            "After swap,3crv balance of attacker:: 9881355040729892287779421",
+            "After swap, USDT balance of attacker:: 10099976315221",
+            "After swap, WBTC balance of attacker:: 2707754524305",
+            "After flashloan repaid, profit in WBTC of attacker:: 5324524305"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_OlympusDao",
+      "skip": true,
+      "skip_reason": "import_alias_mismatch:clones_vs_clones_with_immutable_args",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_Templedao",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-10/Templedao_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[Start] Attacker xFraxTempleLP balance before exploit: 0.000000000000000000",
+            "[End] Attacker xFraxTempleLP balance after exploit: 321154.865567124596801893"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-12_JAY",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; sell() reentered via the attacker's receive()",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-12/JAY_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[Start] Attacker ETH balance before exploit: 0.000000000000000000",
+            "[End] Attacker ETH balance after exploit: 15.324469731061671907"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_ERC20TokenBank",
+      "skip": true,
+      "skip_reason": "legacy_pragma_solc_auto_detect_fails_in_fuzzer_compile_step",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-08_Uwerx",
+      "skip": true,
+      "skip_reason": "exploit requires a flash-loan callback + external DEX swaps to realize WBNB/WETH profit; not expressible as a flat target-ABI FuzzInput; transfer-to-pair burn + skim/sync reserve inflation",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-08/Uwerx_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker WETH balance after exploit: 20174.786100489116297833",
+            "Attacker WETH balance after exploit, ETH PROFIT: 174.786100489116297833"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-09_CEXISWAP",
+      "skip": true,
+      "skip_reason": "unverified_source",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-09_DAppSocial",
+      "skip": true,
+      "skip_reason": "unverified_source",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_INUMI",
+      "skip": true,
+      "skip_reason": "unverified_source",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_PLN",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-09/PLN_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "before attack: balance of attacker: 0.900000000000000000",
+            "after attack: balance of attacker: 165.893847285453536788"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2025-03_UNI",
+      "skip": true,
+      "skip_reason": "target_contract is MISLABELED as the stock UniswapV2Pair (the manifest fetched the pair 0x76ea342bc038d665e8a116392c82552d2605eda1, whose source is bug-free generic infra). The real bug is in SamPrisonman (0xdDF309b8161aca09eA6bBF30Dd7cbD6c474FF700, VERIFIED on Etherscan, solc 0.8.27): _transfer->marketAndTIFFs overwrites `_balances[sender] = result - amount` where `result` is the return of an inline-assembly external call (selector 0x569937dd) to a helper at storage slot 0x52 -- an external-call-driven balance inflation (money-from-nowhere), not a flash loan. The PoC has NO flash loan or callback (prior 'requires a flash-loan callback' wording was wrong). Still skip / not LLM-attackable from --source for three independent reasons: (1) the payout is produced by an OFF-SOURCE helper (the slot-0x52 TIFFs contract reached via assembly to a hardcoded-slot address, not in SamPrisonman's source) and must be primed by a raw UNNAMED selector call addr2.call(0x4f49cd31) on another off-source contract 0xaCa4263fFddA9E60C7260AAbA08c2b8F80D63cB1 -- FuzzInput cannot express unnamed selectors or declare/reason about these helpers; (2) the sell leg uses a runtime balanceOf(this) as the swap amountIn (computed arg; $ret is single-scalar only); (3) the whitebox LLM reads only --source and sees `call(gas(), sload(0x52), ...)` to an unknown address. Re-assessed 2026-06-20: even repointing target->SamPrisonman with verified source does NOT promote. Out of scope.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-03/UNI_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "before attack: balance of attacker: 0.000000000000004000",
+            "after attack: balance of attacker: 6.579305366497962415"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2025-04_Roar",
+      "skip": true,
+      "skip_reason": "exploit requires a flash-loan callback + external DEX swaps to realize WBNB/WETH profit; not expressible as a flat target-ABI FuzzInput; UniswapV2Pair reserve manipulation (mint LP needs deposits)",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-04/Roar_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "before attack: balance of attacker: 0.000000000958904109",
+            "before attack: balance of attacker: 0.340710205283016328",
+            "after attack: balance of attacker: 100000000.099978911569917741",
+            "after attack: balance of attacker: 27.118157177720577672"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2021-05_ValueDefi",
+      "skip": true,
+      "skip_reason": "proxy_impl_unverified",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_ATK",
+      "skip": true,
+      "skip_reason": "exploit profit is a PancakeSwap flash-swap (ATK_BUSDT_PAIR.swap -> pancakeCall) whose claim runs against a CLOSED-SOURCE MLM/referral IDO farm (0x96bF2E6C..., not in the ATK-token --source). Verified on-chain @ bsc block 22102838: claimToken1() is gated on a prior referral-tree position - a fresh fuzzer-controlled address has canBuy=false / getTokenBalance=0 and its depoit() reverts 'address never Invited'; only the original attacker's pre-positioned contract (EXPLOIT_CONTRACT, canBuy=true, 97.4 ATK claimable) can claim. Reproducible ONLY by impersonating that pre-invited answer-key contract; the exploited farm is closed-source. Declared-external DEX calls + flash callback would still not make it fuzzer-discoverable. Out of scope (answer-key + closed-source off-target victim).",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-10/ATK_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[Start] Attacker ATK balance before exploit: 97.402384307223228763",
+            "[End] Attacker ATK balance after exploit: 44142787.002384307223228763"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_BEGO",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-10/BEGO_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[Start] Attacker WBNB balance before exploit: 0.000000000000000000",
+            "[End] Attacker WBNB balance after exploit: 12.037249252714479992"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_TransitSwap",
+      "skip": true,
+      "skip_reason": "unverified_source",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-12_DFS",
+      "skip": true,
+      "skip_reason": "real exploit drains via PancakePair skim() loop (flash-swap reserve manipulation); mint()/setMintlist are owner-gated — no direct-call profit path",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-12/DFS_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[start] Attacker USDT Balance: 0.000000000000000000",
+            "[INFO]  usdt balance : DFS_USDT_LP: 1462.547112307558921470",
+            "[INFO]  Flashloan received ",
+            "[INFO]  this balance (usdt token): 1462.547112307558921470",
+            "[INFO]  this balance (dfs token): 0.000000000000000000",
+            "[INFO]  swapamount : 99.216766548190000120",
+            "[INFO]  dfs balance : address(this): 99.216766548190000120",
+            "[INFO]  dfs balance : address(this): 398265.536438933393348235",
+            "[INFO]  address(this) balance (dfs token): 18021.515523861736049008",
+            "[INFO]  address(this) balance (usdt token): 0.000000000000000000",
+            "[INFO]  address(DFS_USDT_LP) balance (usdt token): 2925.094224615117842940",
+            "[INFO] payback amount usdt : 2922.169130390502725097",
+            "[INFO]  Flashloan payback success ",
+            "[INFO]  usdt balance : this: 1452.309282521406009020",
+            "[End] Attacker USDT Balance: 1452.309282521406009020"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-01_ThoreumFinance",
+      "skip": true,
+      "skip_reason": "proxy_impl_unverified",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_Bitpaidio",
+      "skip": true,
+      "skip_reason": "exploit requires a flash-loan callback + external DEX swaps to realize WBNB/WETH profit; not expressible as a flat target-ABI FuzzInput; lock/withdraw reward miscalc driven by a flash-loan",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-05/Bitpaidio_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker BTP balance after exploit: 10417.703132832080199502"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_FAPEN",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-05/FAPEN_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Amount of BNB before attack: 0.000000000000000000",
+            "Amount of BNB after attack: 2.042256597375684021"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2023-06_SELLC03",
+      "skip": true,
+      "skip_reason": "exploit requires a flash-loan callback + external DEX swaps to realize WBNB/WETH profit; not expressible as a flat target-ABI FuzzInput; DPP flash-loan + add/removeLiquidity miner manipulation",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-06/SELLC03_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[End] Attacker WBNB balance after exploit: 123.296300556608510348"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-06_SHIDO",
+      "skip": true,
+      "skip_reason": "real exploit profits via DODO flash-loan + lock/claim across SHIDO+router; withdrawToken/withdrawETH are owner-gated",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-06/SHIDO_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker WBNB balance after exploit: 977.065114464703755854"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-07_Bamboo",
+      "skip": true,
+      "skip_reason": "declared-external DEX calls now express the WBNB/BAMBOO router swaps, but the exploit still needs three out-of-scope mechanisms: (1) a 10,000-iteration `bamboo.transfer(pair,const); pair.skim(this)` drain loop (no repeat primitive; FuzzInput caps at 12 calls), (2) router.getAmountsIn array-return + a computed-expression arg (bambooBalance*9/10) - $ret chaining is single-scalar only, and (3) 4000 WBNB flash capital pre-seeded via `deal` (ERC20 capital seeding; harness funds native ETH only). Out of scope.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-07/Bamboo_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "start balance after flashloan 4000.0",
+            "profit after return flashloan 226.133480422706752470"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-07_FFIST",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; computed-address transfer + Pair.sync reserve abuse",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-07/FFIST_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker WBNB balance after exploit: 228.297650015295573429"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-11_LinkDao",
+      "skip": true,
+      "skip_reason": "unverified_source",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-04_GROKD",
+      "skip": true,
+      "skip_reason": "erc1967_proxy_impl_slot_zero_in_storage",
+      "validation": {
+        "reference_exploit": null,
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_WXETA",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-09/WXETA_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "before attack: balance of attacker: 0.020000000000000000",
+            "after attack: balance of attacker: 88.312060368955339022"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2023-08_EHIVE",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; 28 helper contracts + Aave flash-loan unstake chain",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-08/EHIVE_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker WETH balance before attack: 0.000000000000000000",
+            "Attacker WETH balance after attack: 9.325768301100185740"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-10_WiseLending",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; NFT-position deposit/withdraw share-price reentrancy",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-10/WiseLending_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker wstETH balance after exploit: 33.538664799002267467",
+            "Attacker aEthWETH balance after exploit: 98.969695913405122899",
+            "Attacker DAI balance after exploit: 200.094287736946980059",
+            "Attacker sDAI balance after exploit: 16161.480100000000000000",
+            "Attacker aEthDAI balance after exploit: 1302.840070263627457089",
+            "Attacker aEthUSDC balance after exploit: 5108.839054",
+            "Attacker aEthUSDT balance after exploit: 26082.605241",
+            "Attacker USDC balance after exploit: 50.000000"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_DOGGO",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; UniswapV3 flash-callback token bug",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-09/DOGGO_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "before attack: balance of attacker: 0.000000000000000378",
+            "after attack: balance of attacker: 2.717677533473243819"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_HANAToken",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; UniswapV3 flash-callback token bug",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-09/HANAToken_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "before attack: balance of attacker: 0.000000000000000390",
+            "after attack: balance of attacker: 0.108334790875911824"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2025-06_AAVEBoost",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; repeated boost-balance accrual loop via a proxy",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-06/AAVEBoost_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "before attack: balance of attacker: 0.000000000000000000",
+            "after attack: balance of attacker: 48.900000000000000000"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-08_EGD_Finance",
+      "skip": true,
+      "skip_reason": "exploit requires a flash-loan callback + external DEX swaps to realize WBNB/WETH profit; not expressible as a flat target-ABI FuzzInput; getEGDPrice oracle manipulation then claimAllReward",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-08/EGD_Finance_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "--------------------  Pre-work, stake 100 USDT to EGD Finance --------------------",
+            "Tx: 0x4a66d01a017158ff38d6a88db98ba78435c606be57ca6df36033db4d9514f9f8",
+            "Attacker Stake 100 USDT to EGD Finance",
+            "-------------------------------- Start Exploit ----------------------------------",
+            "[Start] Attacker USDT Balance: 0.000000000000000000",
+            "[INFO] EGD/USDT Price before price manipulation: 0.008096310933284567",
+            "[INFO] Current earned reward (EGD token): 0.000341874999999972",
+            "Attacker manipulating price oracle of EGD Finance...",
+            "Flashloan[1] : borrow 2,000 USDT from USDT/WBNB LPPool reserve",
+            "Flashloan[1] received",
+            "Flashloan[2] : borrow 99.99999925% USDT of EGD/USDT LPPool reserve",
+            "Flashloan[2] received",
+            "[INFO] EGD/USDT Price after price manipulation: 0.000000000060722331",
+            "Claim all EGD Token reward from EGD Finance contract",
+            "[INFO] Get reward (EGD token): 5630136.300267721935770000",
+            "Flashloan[2] payback success",
+            "Swap the profit...",
+            "Flashloan[1] payback success",
+            "-------------------------------- End Exploit ----------------------------------",
+            "[End] Attacker USDT Balance: 36149.420145779809942475"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-07_LUSD",
+      "skip": true,
+      "skip_reason": "exploit requires a flash-loan callback + external DEX swaps to realize WBNB/WETH profit; not expressible as a flat target-ABI FuzzInput; DODO flash-loan price manipulation",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-07/LUSD_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker BEP20USDT balance before attack: 0.000000000000000000",
+            "Attacker BEP20USDT balance after attack: 9464.716730420359231245"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-10_MicDao",
+      "skip": true,
+      "skip_reason": "exploit deploys a bespoke attacker contract with callbacks; the fork harness only issues flat target-ABI calls from fuzzer accounts; DPP flash-loan + 80 sybil helper contracts",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-10/MicDao_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker BUSDT balance before exploit: 0.000000000000000000",
+            "Attacker BUSDT balance after exploit: 12260.251676860937684429"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2025-01_Ast",
+      "skip": true,
+      "skip_reason": "exploit requires a flash-loan callback + external DEX swaps to realize WBNB/WETH profit; not expressible as a flat target-ABI FuzzInput; PancakeV3 flash-callback logic bug",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-01/Ast_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[Start] Attacker BUSD balance before flash: 1.000000000000000000",
+            "[Info] Attacker BUSD balance after flash: 30000001.000000000000000000",
+            "[Info] LP BUSD balance after skim: 30080145.197852789777147003",
+            "[Info] LP AST balance after skim: 0.000000000000000001",
+            "[Info] Attacker BUSD balance after exploit: 65146.197852789676322046"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_Uerii",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-10/Uerii_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[Start] Attacker WETH balance before exploit: 0.000000000000000000",
+            "[End] Attacker WETH balance after exploit: 1.855150444286128408"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_BabyDogeCoin",
+      "skip": true,
+      "skip_reason": "real exploit is a fee-on-transfer reentrancy via a bespoke attacker contract; no direct claim path nets the fuzzer account",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-05/BabyDogeCoin_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker WBNB balance after exploit: 428.359232393301834793"
+          ]
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-03_Umbrella",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-03/Umbrella_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Before exploiting, Attacker UniLP Balance: 0.000000000000000000",
+            "After exploiting, Attacker UniLP Balance: 8792.873290680252648282"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-03_CompoundTusd",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-03/CompoundTusd_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Before exploit, Compound TUSD balance:: 39961358379339258374306712",
+            "After exploit, Compound TUSD balance:: 0"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_Melo",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-05/Melo_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker USDT balance after exploit: 90488.680389646322334139"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-04_cftoken",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-04/cftoken_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Before exploit, cftoken balance:: 0",
+            "After exploit, cftoken balance:: 930000000000000000000"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2018-04_BEC",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2018-04/BEC_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Before Exploit, Attacker1 BEC Balance: 0.000000000000000000",
+            "Before Exploit, Attacker2 BEC Balance: 0.000000000000000000",
+            "After Exploit, Attacker1 BEC Balance: 57896044618658097711785492504343953926634992332820282019728.792003956564819968",
+            "After Exploit, Attacker2 BEC Balance: 57896044618658097711785492504343953926634992332820282019728.792003956564819968"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2020-06_Bancor",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2020-06/Bancor_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Victim XBPToken Allowance to Bancor Contract : : 30517969405419767",
+            "[Before Attack]Victim XBPToken Balance : : 905987",
+            "[Before Attack]Attacker XBPToken Balance : : 0",
+            "--------------------------------------------------------------",
+            "[After Attack]Victim XBPToken Balance : : 0",
+            "[After Attack]Attacker XBPToken Balance : : 905987"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2024-02_SwarmMarkets",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-02/SwarmMarkets_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "Attacker DAI balance before attack:: 0.000000000000000000",
+            "Attacker USDC balance before attack:: 0.000000000000000000",
+            "Attacker DAI balance after attack:: 7729.322331047062319597",
+            "Attacker USDC balance after attack:: 7729.322331047062319597"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-07_FlippazOne",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-07/FlippazOne_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2024-05_MetaDragon",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-05/MetaDragon_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "attacker weth balance before: 0",
+            "attacker MetaToken balance: 362600000000000000000000",
+            "attacker weth balance after: 7472668510259903860"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2025-01_98Token",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-01/98Token_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "[Begin] Attacker USDT before exploit: 0.000000000000000000",
+            "[End] Attacker USDT after exploit: 27995.389614557976722846"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-12_NovaExchange",
+      "skip": true,
+      "skip_reason": "rewardHolders() is onlyOwner in the verified source; an attacker-called fork validation reverts 'Ownable: caller is not the owner'. The real incident traces to reward-accounting / privileged control, not an arbitrary-caller public function, so it is not expressible as a target-only attacker FuzzInput. Not reproduced under the target-only harness.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-12/NovaExchange_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2017-11_Parity_kill",
+      "skip": true,
+      "skip_reason": "initWallet()+kill() succeed (the 2017 Parity library self-destruct) but produce NO attacker financial gain: the WalletLibrary holds no funds, so the financial-loss oracle emits no signal. This is a griefing/brick (it froze dependent wallets), not value transfer to the attacker — out of the financial-loss scope by design.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2017-11/Parity_kill_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_landNFT",
+      "skip": true,
+      "skip_reason": "public Miner.mint(address[],uint256[]) with no access control mints land NFTs to the caller. Skipped on two counts: (a) unverified source (no ABI to encode the call), and (b) NFT-only — the financial-loss oracle measures fungible value, so an NFT-count delta isn't the intended loss signal.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-05/landNFT_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-07_GAX",
+      "skip": true,
+      "skip_reason": "single call to selector 0x6c99d7c8 with an abi-encoded (uint256,uint256,uint256) payload drains the contract's BUSD to the caller. Unverified source — no function name/ABI — so the flat-ABI harness cannot encode it. Promotable if a verified ABI is recovered. 4byte.directory has no signature for selector 0x6c99d7c8, confirming the function name is unrecoverable; would require a raw-selector primitive (out of public-function scope). 4byte.directory has no signature for selector 0x6c99d7c8, confirming the function name is unrecoverable; would require a raw-selector primitive (out of public-function scope). 4byte.directory has no signature for selector 0x6c99d7c8, confirming the function name is unrecoverable; would require a raw-selector primitive (out of public-function scope).",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-07/GAX_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-10_StarsArena",
+      "skip": true,
+      "skip_reason": "AVAX reentrancy: a receive() hook re-enters buyShares/sellShares (bespoke selectors 0xe9ccf3a3/0x5632b2e4) with crafted share-math during the first call. The target is a proxy whose implementation is unverified (no ABI), and the multi-selector reentry sequence is not expressible as a flat target-only FuzzInput. Skipped.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-10/StarsArena_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-11_Ak1111",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-11/Ak1111_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "BUG_SIGNAL: attacker_gained"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2024-08_YodlRouter",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-08/YodlRouter_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "BUG_SIGNAL: attacker_gained"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2024-12_Pledge",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-12/Pledge_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "BUG_SIGNAL: attacker_gained",
+            "BUG_SIGNAL: target_drained"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-06_Snood",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-06/Snood_exp.sol",
+          "reproduced": true,
+          "logs": [
+            "BUG_SIGNAL: attacker_gained"
+          ]
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-06_Gym_2",
+      "skip": true,
+      "skip_reason": "depositFromOtherContract(fabricated credit) + withdraw drains GYMNET, but withdraw reverts 'Locking Period isn't over yet' — the exploit needs a vm.warp time-advance between calls. The target-only flat-FuzzInput harness has no warp primitive and adding one would only serve this single row (no RL/LLM generator emits a warp sentinel), so it stays skip. Reference PoC reproduces on a live fork.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-06/Gym_2_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-11_SheepFarm",
+      "skip": true,
+      "skip_reason": "needs ~200 repeated register(neighbor) calls then addGems/upgradeVillage/sellVillage/withdrawMoney to cash out ~0.098 BNB. Expressible only with a call-repeat primitive that no generator emits — adding it would just hard-code this row — so it stays skip. Reference PoC reproduces on a live fork.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-11/SheepFarm_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-01_DAO_SoulMate",
+      "skip": true,
+      "skip_reason": "clean single-call redeem(uint256,address) drains a multi-asset vault, validated on a live fork — but the contract is UNVERIFIED on Etherscan, so there is no source for the whitebox LLM prompt. The method feeds contract source to the LLM to author the attack; a source-less target is only attackable via a hand-written ABI+FuzzInput, not by the fuzzer. Skipped; promotable only if verified source is recovered. [Tier 1c: re-checked 2026-06-14 — no verified source at Etherscan v2 or Sourcify v2; stays skipped.]",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-01/DAO_SoulMate_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-11_KR",
+      "skip": true,
+      "skip_reason": "sellKr(uint256) mis-accounting pays out the contract's BUSD, validated on a live fork — but UNVERIFIED source (no whitebox source for the LLM). Skipped; promotable only if verified source is recovered. [Tier 1c: re-checked 2026-06-14 — no verified source at Etherscan v2 or Sourcify v2; stays skipped.]",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-11/KR_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2021-09_DaoMaker",
+      "skip": true,
+      "skip_reason": "unprotected init()→emergencyExit() drains DERC, validated on a live fork — but UNVERIFIED source (no whitebox source for the LLM). Skipped; promotable only if verified source is recovered. [Tier 1c: re-checked 2026-06-14 — no verified source at Etherscan v2 or Sourcify v2; stays skipped.]",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2021-09/DaoMaker_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-08_ReaperFarm",
+      "skip": true,
+      "skip_reason": "redeem(uint256,address,address) burns a victim's vault shares to USDC on Fantom, validated on a live fork — but Etherscan v2 doesn't serve Fantom source, so there is no verified source for the whitebox LLM prompt. Skipped; promotable only if verified source is recovered (e.g. from FTMScan). [Tier 1c: Fantom (250) is unsupported by Etherscan v2 and FTMScan's standalone API is decommissioned; Sourcify v2 has no match; stays skipped.]",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-08/ReaperFarm_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-07_UnverifiedContr_0x452E25",
+      "skip": true,
+      "skip_reason": "mis-implemented uniswapV3SwapCallback pays out WETH, validated on a live fork — but UNVERIFIED source (no whitebox source for the LLM). Skipped; promotable only if verified source is recovered.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-07/UnverifiedContr_0x452E25_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2025-08_0x8d2e",
+      "skip": true,
+      "skip_reason": "unprotected uniswapV3SwapCallback transfers all USDC out, validated on a live fork — but UNVERIFIED source (no whitebox source for the LLM). Skipped; promotable only if verified source is recovered.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-08/0x8d2e_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_NOON",
+      "skip": true,
+      "skip_reason": "external _transfer (wrong visibility) moves the LP's NO to the attacker, validated on a live fork — but closed/UNVERIFIED source (no whitebox source for the LLM). Skipped; promotable only if verified source is recovered. [Tier 1c: re-checked 2026-06-14 — no verified source at Etherscan v2 or Sourcify v2; stays skipped.]",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-05/NOON_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2017-07_Parity_first_hack",
+      "skip": true,
+      "skip_reason": "unprotected initWallet→execute drains the wallet's ETH. The Wallet address is verified but is a thin proxy; the exploit functions live in an UNVERIFIED WalletLibrary the LLM never sees, and the call required a hand-built ABI. Not a clean source-backed run. Skipped.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2017-07/Parity_first_hack_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_DEI",
+      "skip": true,
+      "skip_reason": "burnFrom(pair,0) underflow → transferFrom drains the pair. The deployed bytecode exposes burnFrom but the VERIFIED-source ABI does NOT (the exploit fn isn't in the source the LLM would read), so it required a hand-built ABI — not a clean source-backed run. Skipped.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-05/DEI_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-10_Erc20transfer",
+      "skip": true,
+      "skip_reason": "single erc20TransferFrom(token,to,from,0) on an unprotected transfer-wrapper drains a victim's USDC, but the contract is unverified (no source/ABI) AND the call hits EvmError: OutOfGas under the fork harness. Reference reproduces; promotable if source is recovered and the OOG cause resolved. [Tier 1c: re-checked 2026-06-14 — no verified source at Etherscan v2 or Sourcify v2; stays skipped.]",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-10/Erc20transfer_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2018-04_SmartMesh",
+      "skip": true,
+      "skip_reason": "classic SMT proxyOverflow: transferProxy(...) overflows value+feeSmt, but the call is gated by ecrecover(hash,v,r,s)==from — it needs a valid signature from the from-account over the params, which a flat FuzzInput cannot produce (no signing primitive). The reference uses the original attacker's recorded signature (answer-key).",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2018-04/SmartMesh_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2025-06_Stead",
+      "skip": true,
+      "skip_reason": "single unnamed-selector call 0x16fb27ce + abi.encode(1,1,1) drains STEAD; unverified source and 4byte.directory has no signature for the selector, so the flat-ABI harness cannot name/encode the function. Needs a raw-selector primitive (out of public-function scope).",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-06/Stead_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2025-08_0xf340",
+      "skip": true,
+      "skip_reason": "initVRF (named, unprotected) sets the LINK recipient, but the drain is 80x calls to unnamed selector 0x607d60e6 (4byte empty) + a DEX cash-out. Needs a raw-selector primitive plus a repeat primitive; the unnamed selector keeps it out of public-function scope.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-08/0xf340_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-04_FIL314",
+      "skip": true,
+      "skip_reason": "deflationary-token price manipulation: a bare-value buy, 6000x hourBurn(), then a sell loop whose amount is read from getAmountOut() and fed into transfer(). Needs an empty-calldata payable send AND dynamic view→arg chaining within one sequence; not expressible as a flat FuzzInput.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-04/FIL314_exp.sol",
+          "reproduced": false,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2024-02_PANDORA",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-02/PANDORA_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2024-04_NGFS",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2024-04/NGFS_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2023-12_HYPR",
+      "skip": true,
+      "skip_reason": "finalizeERC20Withdrawal's onlyOtherBridge check calls back messenger.xDomainMessageSender() and requires it to equal the L2 bridge address; the exploit makes the attacker contract the messenger (initialize(self)) and implements xDomainMessageSender() to return the canonical L2 messenger (0x4200..0010). Requires a bespoke attacker contract with a custom callback method — a flat fuzzer EOA cannot return a crafted xDomainMessageSender(), so the access check reverts. Out of scope.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-12/HYPR_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2021-12_Visor",
+      "skip": true,
+      "skip_reason": "RewardsHypervisor.deposit calls back from.delegatedTransferERC20(visr, this, amount); the exploit passes from = a bespoke attacker contract that stubs delegatedTransferERC20 as a no-op (and implements owner()), so vVISR shares mint without any VISR being pulled. Requires a bespoke attacker contract implementing the callback; a flat fuzzer EOA cannot. Out of scope.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2021-12/Visor_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2025-03_YziAIToken",
+      "skip": true,
+      "skip_reason": "the value-moving branch in transferFrom is gated `if(msg.sender == manager && amount == 1199002345)`; manager is set only in the constructor (manager = msg.sender) with no unprotected setter (setMin is manager-gated). The historical attacker WAS the manager, so this is a privileged-key prank — the fuzzer's fixed attacker/reentrancy accounts can never satisfy msg.sender==manager and the branch never fires. NOT a PANDORA twin (PANDORA had a broken-allowance underflow exploitable by any fresh account). Out of scope.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2025-03/YziAIToken_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-08_DDC",
+      "skip": true,
+      "skip_reason": "handleDeductFee->distributeFee deducts feeAmount from `from` (the pair) and credits the configured feeHandler addresses; the `user` (attacker) param appears only in an emitted event, so the attacker gains nothing directly from the call. Profit requires buy + pair reserve manipulation (handleDeductFee + Pair.sync) + a terminal router swap back to USDT. DEX reserve-manipulation cash-out, not a direct credit to the fuzzer account. Out of scope.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-08/DDC_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2023-12_PHIL",
+      "skip": true,
+      "skip_reason": "no verified source at Etherscan/Sourcify for the target (0x4308..bbebf1) — the whitebox LLM authors the attack from --source, so a source-less target is not method-attackable. (Additionally the WBNB cash-out swap needs a pancakeV3SwapCallback V3 flash callback.) Out of scope.",
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-12/PHIL_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": false
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_EFLeverVault",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-10/EFLeverVault_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2022-02_TecraSpace",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2022-02/TecraSpace_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": true
+      }
+    },
+    {
+      "id": "defihacklabs/2023-04_Swapos",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "reference_exploit": {
+          "poc_path": "ref/DeFiHackLabs/src/test/2023-04/Swapos_exp.sol",
+          "reproduced": true,
+          "logs": []
+        },
+        "fuzzer_bug_signal": true
+      }
+    }
+  ]
+}

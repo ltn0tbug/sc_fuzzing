@@ -1,0 +1,21 @@
+{
+  "target_id": "2018-04_BEC",
+  "chain": "mainnet",
+  "address": "0xc5d105e63711398af9bbff092d4b6769c82f793d",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "BecToken",
+  "compiler_version": "v0.4.19+commit.c4cbbb05",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "BecToken.sol"
+  ],
+  "primary_source": "BecToken.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781377956
+}

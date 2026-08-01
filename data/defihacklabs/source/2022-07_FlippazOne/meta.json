@@ -1,0 +1,21 @@
+{
+  "target_id": "2022-07_FlippazOne",
+  "chain": "mainnet",
+  "address": "0xe85a08cf316f695ebe7c13736c8cc38a7cc3e944",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "FlippazOne",
+  "compiler_version": "v0.8.15+commit.e14f2714",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "FlippazOne.sol"
+  ],
+  "primary_source": "FlippazOne.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781377962
+}

@@ -1,0 +1,25 @@
+{
+  "target_id": "2022-04_cftoken",
+  "chain": "bsc",
+  "address": "0x8b7218cf6ac641382d7c723de8aa173e98a80196",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "CFToken",
+  "compiler_version": "v0.6.12+commit.27d51765",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 999,
+  "license": "None",
+  "source_files": [
+    "src/CFTokenSinglePool_merge.sol",
+    "src/Context.sol",
+    "src/IBEP20.sol",
+    "src/Ownable.sol",
+    "src/SafeMath.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781375678
+}

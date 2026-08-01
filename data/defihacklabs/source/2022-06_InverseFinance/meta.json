@@ -1,0 +1,21 @@
+{
+  "target_id": "2022-06_InverseFinance",
+  "chain": "mainnet",
+  "address": "0x1429a930ec3bcf5aa32ef298ccc5ab09836ef587",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "CErc20ImmutableYearn",
+  "compiler_version": "v0.5.17+commit.d19bba13",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "CErc20ImmutableYearn.sol"
+  ],
+  "primary_source": "CErc20ImmutableYearn.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424109
+}

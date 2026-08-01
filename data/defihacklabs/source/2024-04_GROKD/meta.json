@@ -1,0 +1,22 @@
+{
+  "target_id": "2024-04_GROKD",
+  "chain": "bsc",
+  "address": "0x31d3231cda62c0b7989b488ca747245676a32d81",
+  "verified": false,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "ERC1967Proxy",
+  "compiler_version": "v0.8.21+commit.d9974bed",
+  "evm_version": "paris",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "ERC1967Proxy.sol"
+  ],
+  "primary_source": "ERC1967Proxy.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424140,
+  "skip_reason": "erc1967_proxy_impl_slot_zero_in_storage"
+}

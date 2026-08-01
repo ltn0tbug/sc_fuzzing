@@ -1,0 +1,21 @@
+{
+  "target_id": "2023-05_ERC20TokenBank",
+  "chain": "mainnet",
+  "address": "0x765b8d7cd8ff304f796f4b6fb1bcf78698333f6d",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "ExchangeBetweenPools",
+  "compiler_version": "v0.5.10+commit.5a6ea5b1",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "ExchangeBetweenPools.sol"
+  ],
+  "primary_source": "ExchangeBetweenPools.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424114
+}

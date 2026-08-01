@@ -1,0 +1,21 @@
+{
+  "target_id": "2024-01_Pledge",
+  "chain": "bsc",
+  "address": "0x061944c0f3c2d7dabafb50813efb05c4e0c952e1",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "Pledge",
+  "compiler_version": "v0.8.26+commit.8a97fa7a",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "Pledge.sol"
+  ],
+  "primary_source": "Pledge.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781381202
+}

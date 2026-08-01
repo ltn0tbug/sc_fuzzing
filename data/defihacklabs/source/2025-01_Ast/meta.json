@@ -1,0 +1,21 @@
+{
+  "target_id": "2025-01_Ast",
+  "chain": "bsc",
+  "address": "0xc10e0319337c7f83342424df72e73a70a29579b2",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "AST",
+  "compiler_version": "v0.8.28+commit.7893614a",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "src/sol1/ASTToken.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780506742
+}

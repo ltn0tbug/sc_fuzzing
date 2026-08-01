@@ -1,0 +1,44 @@
+[
+  {
+    "type": "function",
+    "name": "redeem",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "a0"
+      },
+      {
+        "type": "address",
+        "name": "a1"
+      },
+      {
+        "type": "address",
+        "name": "a2"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "uint256",
+        "name": ""
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "balanceOf",
+    "stateMutability": "view",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "a0"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "uint256",
+        "name": ""
+      }
+    ]
+  }
+]

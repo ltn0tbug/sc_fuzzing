@@ -1,0 +1,7 @@
+{
+  "target_id": "2021-09_DaoMaker",
+  "chain": "mainnet",
+  "address": "0x2fd602ed1f8cb6deaba9bedd560ffe772eb85940",
+  "verified": false,
+  "skip_reason": "no_verified_source_etherscan_sourcify"
+}

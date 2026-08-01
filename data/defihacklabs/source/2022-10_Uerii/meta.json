@@ -1,0 +1,21 @@
+{
+  "target_id": "2022-10_Uerii",
+  "chain": "mainnet",
+  "address": "0x418c24191ae947a78c99fdc0e45a1f96afb254be",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "Token",
+  "compiler_version": "v0.8.7+commit.e28d00a7",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "Token.sol"
+  ],
+  "primary_source": "Token.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780506743
+}

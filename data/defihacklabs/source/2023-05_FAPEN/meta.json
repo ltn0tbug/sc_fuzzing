@@ -1,0 +1,21 @@
+{
+  "target_id": "2023-05_FAPEN",
+  "chain": "bsc",
+  "address": "0xf3f1abae8bfeca054b330c379794a7bf84988228",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "FatherPepeInu",
+  "compiler_version": "v0.8.9+commit.e5eed63a",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "FatherPepeInu.sol"
+  ],
+  "primary_source": "FatherPepeInu.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424132
+}

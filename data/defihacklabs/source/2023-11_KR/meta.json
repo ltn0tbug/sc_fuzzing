@@ -1,0 +1,7 @@
+{
+  "target_id": "2023-11_KR",
+  "chain": "bsc",
+  "address": "0x15b1ed79ca9d7955af3e169d7b323c4f1eeb5d12",
+  "verified": false,
+  "skip_reason": "no_verified_source_etherscan_sourcify"
+}

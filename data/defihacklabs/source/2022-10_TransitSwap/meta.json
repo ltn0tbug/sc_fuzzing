@@ -1,0 +1,7 @@
+{
+  "target_id": "2022-10_TransitSwap",
+  "chain": "bsc",
+  "address": "0x8785bb8deae13783b24d7afe250d42ea7d7e9d72",
+  "verified": false,
+  "skip_reason": "unverified_source"
+}

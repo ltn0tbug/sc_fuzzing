@@ -1,0 +1,21 @@
+{
+  "target_id": "2021-05_RariCapital",
+  "chain": "mainnet",
+  "address": "0x67b66c99d3eb37fa76aa3ed1ff33e8e39f0b9c7a",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "Bank",
+  "compiler_version": "v0.5.16+commit.9c3226ce",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "Bank.sol"
+  ],
+  "primary_source": "Bank.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424226
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fuzz/dataset/enrich.schema.json",
+  "title": "Dataset ENRICH layer (runnable only)",
+  "description": "The runnable payload: ONLY contracts that actually run (skip=false). NORMALIZED — each row is just {id, poc, extend}; facts (category/target_contract/compiler/source/fork/optimizer/evm/reference_exploit) are NOT duplicated here, they live in raw/manifest and are re-joined by id in schema.py load_dataset(). `extend` carries ONLY runtime-only setup. One file per dataset: enrich.json.",
+  "type": "object",
+  "required": ["dataset", "kind", "schema", "total_contracts", "meta", "contracts"],
+  "additionalProperties": false,
+  "properties": {
+    "dataset": { "type": "string" },
+    "kind": { "enum": ["inline", "fork"], "description": "dataset-wide; per-row kind is derived from this (homogeneous datasets), not stored per row" },
+    "schema": { "const": "enrich" },
+    "source_repo": { "type": "string" },
+    "description": { "type": "string" },
+    "generated_by": { "type": "string" },
+    "total_contracts": { "type": "integer", "description": "MUST equal contracts.length" },
+    "meta": { "type": "object" },
+    "contracts": { "type": "array", "items": { "$ref": "#/$defs/contract" } }
+  },
+  "$defs": {
+    "contract": {
+      "type": "object",
+      "required": ["id", "poc", "extend"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "description": "join key into raw/manifest" },
+        "poc": { "$ref": "#/$defs/poc" },
+        "extend": { "$ref": "#/$defs/extend" }
+      }
+    },
+    "poc": {
+      "type": "object",
+      "required": ["strategy", "calls", "signals"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": ["string", "null"], "description": "fork: \"fuzzer_bug_signal\"; inline: omitted/null" },
+        "strategy": { "type": "string", "description": "one of the 14 strategy names (see CLAUDE.md)" },
+        "description": { "type": "string" },
+        "calls": { "type": "array", "items": { "$ref": "#/$defs/call" } },
+        "signals": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "net-profit BUG_SIGNAL names: attacker_profit / attacker_gained / target_loss / target_drained (asset & via are line fields, not name suffixes)"
+        },
+        "reproduced": { "type": "boolean", "description": "fork rows" },
+        "verified": { "type": "boolean", "description": "inline rows" }
+      }
+    },
+    "call": {
+      "type": "array",
+      "description": "[name, args, value, caller]. name = bare target fn, the atk.setReentrantCall sentinel, or \"<var>.<method>\" for a declared external. arg tokens: scalar, 40-hex address, \"max\", \"now\", \"$ret<idx>\", an external <var> name, or an array of those. caller = \"attacker_address\" (the single attacker identity).",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        { "type": "string" },
+        { "type": ["array", "object"] },
+        { "type": ["string", "integer"] },
+        { "type": "string" }
+      ]
+    },
+    "extend": {
+      "type": "object",
+      "description": "Runtime-ONLY setup, extensible per kind. Derivable facts (chain/block/target_address/optimizer/optimizer_runs/evm_version/reference_exploit/vulnerabilities/loc) must NOT be stored here — they live in raw/manifest and are re-joined by the loader.",
+      "additionalProperties": true,
+      "properties": {
+        "constructor_args": { "type": "array", "description": "inline: positional, zipped with ctor ABI" },
+        "constructor_value": { "type": ["string", "integer"] },
+        "pre_deploy": { "type": "array", "description": "inline: co-located deps to deploy in setUp()" },
+        "setup_calls": { "type": "array", "description": "inline: post-deploy wiring calls" },
+        "external": {
+          "type": "array",
+          "description": "fork: declared named on-chain addresses a PoC/LLM may reference. CALLABLE entry (has `abi`): a non-target contract callable as \"<var>.<method>\" and usable as an address arg `<var>`. DATA-ONLY entry (no `abi`): just a named `address constant <var>` (a victim/holder, LP pair, or a token passed only as an arg) usable in an address slot but not callable.",
+          "items": {
+            "type": "object",
+            "required": ["var", "address"],
+            "properties": {
+              "var": { "type": "string" },
+              "interface": { "type": "string", "description": "callable only; defaults to I<var>. Omit for data-only." },
+              "address": { "type": "string" },
+              "abi": { "type": "array", "description": "callable only: minimal ABI of the allowed calls. Omit/empty => data-only address constant." }
+            }
+          }
+        },
+        "setup_template": { "type": "string", "description": "fork: per-sample full Solidity template path" }
+      }
+    }
+  }
+}

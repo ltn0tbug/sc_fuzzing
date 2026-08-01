@@ -1,0 +1,2784 @@
+{
+  "dataset": "smartbugs_curated",
+  "kind": "inline",
+  "schema": "raw",
+  "source_repo": "https://github.com/smartbugs/smartbugs-curated",
+  "description": "Full SmartBugs Curated set (4 DASP categories); source under source/.",
+  "generated_by": "utils/restructure_datasets.py",
+  "total_contracts": 116,
+  "meta": {
+    "categories": [
+      "reentrancy",
+      "access_control",
+      "arithmetic",
+      "unchecked_low_level_calls"
+    ]
+  },
+  "contracts": [
+    {
+      "id": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f",
+      "category": "reentrancy",
+      "target_contract": "PERSONAL_BANK",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol"
+      },
+      "provenance": {
+        "name": "0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
+        "ref_path": "dataset/reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              54
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 96
+      }
+    },
+    {
+      "id": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4",
+      "category": "reentrancy",
+      "target_contract": "PrivateBank",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol"
+      },
+      "provenance": {
+        "name": "0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol",
+        "ref_path": "dataset/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              38
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 74
+      }
+    },
+    {
+      "id": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1",
+      "category": "reentrancy",
+      "target_contract": "ACCURAL_DEPOSIT",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol"
+      },
+      "provenance": {
+        "name": "0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol",
+        "ref_path": "dataset/reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              55
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 97
+      }
+    },
+    {
+      "id": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106",
+      "category": "reentrancy",
+      "target_contract": "PRIVATE_ETH_CELL",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol"
+      },
+      "provenance": {
+        "name": "0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol",
+        "ref_path": "dataset/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              54
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 96
+      }
+    },
+    {
+      "id": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31",
+      "category": "reentrancy",
+      "target_contract": "BANK_SAFE",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol"
+      },
+      "provenance": {
+        "name": "0x561eac93c92360949ab1f1403323e6db345cbf31.sol",
+        "ref_path": "dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              54
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 96
+      }
+    },
+    {
+      "id": "reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839",
+      "category": "reentrancy",
+      "target_contract": "TokenBank",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol"
+      },
+      "provenance": {
+        "name": "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol",
+        "ref_path": "dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              94
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 100
+      }
+    },
+    {
+      "id": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615",
+      "category": "reentrancy",
+      "target_contract": "U_BANK",
+      "compiler": "^0.4.25",
+      "source": {
+        "path": "source/reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615.sol"
+      },
+      "provenance": {
+        "name": "0x7541b76cb60f4c60af330c208b0623b7f54bf615.sol",
+        "ref_path": "dataset/reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              29
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 85
+      }
+    },
+    {
+      "id": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782",
+      "category": "reentrancy",
+      "target_contract": "PrivateDeposit",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol"
+      },
+      "provenance": {
+        "name": "0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol",
+        "ref_path": "dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              52
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 88
+      }
+    },
+    {
+      "id": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3",
+      "category": "reentrancy",
+      "target_contract": "W_WALLET",
+      "compiler": "^0.4.25",
+      "source": {
+        "path": "source/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol"
+      },
+      "provenance": {
+        "name": "0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol",
+        "ref_path": "dataset/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              29
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 85
+      }
+    },
+    {
+      "id": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344",
+      "category": "reentrancy",
+      "target_contract": "ETH_VAULT",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol"
+      },
+      "provenance": {
+        "name": "0x8c7777c45481dba411450c228cb692ac3d550344.sol",
+        "ref_path": "dataset/reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              41
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 77
+      }
+    },
+    {
+      "id": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5",
+      "category": "reentrancy",
+      "target_contract": "X_WALLET",
+      "compiler": "^0.4.25",
+      "source": {
+        "path": "source/reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol"
+      },
+      "provenance": {
+        "name": "0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol",
+        "ref_path": "dataset/reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              29
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 85
+      }
+    },
+    {
+      "id": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e",
+      "category": "reentrancy",
+      "target_contract": "ETH_FUND",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol"
+      },
+      "provenance": {
+        "name": "0x941d225236464a25eb18076df7da6a91d0f95e9e.sol",
+        "ref_path": "dataset/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 80
+      }
+    },
+    {
+      "id": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b",
+      "category": "reentrancy",
+      "target_contract": "PENNY_BY_PENNY",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol"
+      },
+      "provenance": {
+        "name": "0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol",
+        "ref_path": "dataset/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              63
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 104
+      }
+    },
+    {
+      "id": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8",
+      "category": "reentrancy",
+      "target_contract": "DEP_BANK",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol"
+      },
+      "provenance": {
+        "name": "0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol",
+        "ref_path": "dataset/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              54
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 95
+      }
+    },
+    {
+      "id": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12",
+      "category": "reentrancy",
+      "target_contract": "Private_Bank",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol"
+      },
+      "provenance": {
+        "name": "0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol",
+        "ref_path": "dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              40
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 76
+      }
+    },
+    {
+      "id": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e",
+      "category": "reentrancy",
+      "target_contract": "PrivateBank",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e.sol"
+      },
+      "provenance": {
+        "name": "0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e.sol",
+        "ref_path": "dataset/reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              38
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 74
+      }
+    },
+    {
+      "id": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f",
+      "category": "reentrancy",
+      "target_contract": "ETH_VAULT",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol"
+      },
+      "provenance": {
+        "name": "0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol",
+        "ref_path": "dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              41
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 77
+      }
+    },
+    {
+      "id": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888",
+      "category": "reentrancy",
+      "target_contract": "MONEY_BOX",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.sol"
+      },
+      "provenance": {
+        "name": "0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.sol",
+        "ref_path": "dataset/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              63
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 104
+      }
+    },
+    {
+      "id": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e",
+      "category": "reentrancy",
+      "target_contract": "WALLET",
+      "compiler": "^0.4.25",
+      "source": {
+        "path": "source/reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e.sol"
+      },
+      "provenance": {
+        "name": "0xcead721ef5b11f1a7b530171aab69b16c5e66b6e.sol",
+        "ref_path": "dataset/reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              29
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 85
+      }
+    },
+    {
+      "id": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68",
+      "category": "reentrancy",
+      "target_contract": "MY_BANK",
+      "compiler": "^0.4.25",
+      "source": {
+        "path": "source/reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol"
+      },
+      "provenance": {
+        "name": "0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol",
+        "ref_path": "dataset/reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              29
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 85
+      }
+    },
+    {
+      "id": "reentrancy/etherbank",
+      "category": "reentrancy",
+      "target_contract": "EtherBank",
+      "compiler": "^0.4.0",
+      "source": {
+        "path": "source/reentrancy/etherbank.sol"
+      },
+      "provenance": {
+        "name": "etherbank.sol",
+        "ref_path": "dataset/reentrancy/etherbank.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              21
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 24
+      }
+    },
+    {
+      "id": "reentrancy/etherstore",
+      "category": "reentrancy",
+      "target_contract": "EtherStore",
+      "compiler": "^0.4.10",
+      "source": {
+        "path": "source/reentrancy/etherstore.sol"
+      },
+      "provenance": {
+        "name": "etherstore.sol",
+        "ref_path": "dataset/reentrancy/etherstore.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              27
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 31
+      }
+    },
+    {
+      "id": "reentrancy/modifier_reentrancy",
+      "category": "reentrancy",
+      "target_contract": "attack",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/reentrancy/modifier_reentrancy.sol"
+      },
+      "provenance": {
+        "name": "modifier_reentrancy.sol",
+        "ref_path": "dataset/reentrancy/modifier_reentrancy.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              15
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 49
+      }
+    },
+    {
+      "id": "reentrancy/reentrance",
+      "category": "reentrancy",
+      "target_contract": "Reentrance",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/reentrancy/reentrance.sol"
+      },
+      "provenance": {
+        "name": "reentrance.sol",
+        "ref_path": "dataset/reentrancy/reentrance.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              24
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 32
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_bonus",
+      "category": "reentrancy",
+      "target_contract": "Reentrancy_bonus",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/reentrancy/reentrancy_bonus.sol"
+      },
+      "provenance": {
+        "name": "reentrancy_bonus.sol",
+        "ref_path": "dataset/reentrancy/reentrancy_bonus.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              28
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 31
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_cross_function",
+      "category": "reentrancy",
+      "target_contract": "Reentrancy_cross_function",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/reentrancy/reentrancy_cross_function.sol"
+      },
+      "provenance": {
+        "name": "reentrancy_cross_function.sol",
+        "ref_path": "dataset/reentrancy/reentrancy_cross_function.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              24
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 28
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_dao",
+      "category": "reentrancy",
+      "target_contract": "ReentrancyDAO",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/reentrancy/reentrancy_dao.sol"
+      },
+      "provenance": {
+        "name": "reentrancy_dao.sol",
+        "ref_path": "dataset/reentrancy/reentrancy_dao.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              18
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 28
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_insecure",
+      "category": "reentrancy",
+      "target_contract": "Reentrancy_insecure",
+      "compiler": "^0.5.0",
+      "source": {
+        "path": "source/reentrancy/reentrancy_insecure.sol"
+      },
+      "provenance": {
+        "name": "reentrancy_insecure.sol",
+        "ref_path": "dataset/reentrancy/reentrancy_insecure.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 21
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_simple",
+      "category": "reentrancy",
+      "target_contract": "Reentrance",
+      "compiler": "^0.4.15",
+      "source": {
+        "path": "source/reentrancy/reentrancy_simple.sol"
+      },
+      "provenance": {
+        "name": "reentrancy_simple.sol",
+        "ref_path": "dataset/reentrancy/reentrancy_simple.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              24
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 29
+      }
+    },
+    {
+      "id": "reentrancy/simple_dao",
+      "category": "reentrancy",
+      "target_contract": "SimpleDAO",
+      "compiler": "^0.4.2",
+      "source": {
+        "path": "source/reentrancy/simple_dao.sol"
+      },
+      "provenance": {
+        "name": "simple_dao.sol",
+        "ref_path": "dataset/reentrancy/simple_dao.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              19
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 27
+      }
+    },
+    {
+      "id": "reentrancy/spank_chain_payment",
+      "category": "reentrancy",
+      "target_contract": "LedgerChannel",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/reentrancy/spank_chain_payment.sol"
+      },
+      "provenance": {
+        "name": "spank_chain_payment.sol",
+        "ref_path": "dataset/reentrancy/spank_chain_payment.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              426
+            ],
+            "category": "reentrancy"
+          },
+          {
+            "lines": [
+              430
+            ],
+            "category": "reentrancy"
+          }
+        ],
+        "loc": 896
+      }
+    },
+    {
+      "id": "access_control/FibonacciBalance",
+      "category": "access_control",
+      "target_contract": "FibonacciBalance",
+      "compiler": "^0.4.22",
+      "source": {
+        "path": "source/access_control/FibonacciBalance.sol"
+      },
+      "provenance": {
+        "name": "FibonacciBalance.sol",
+        "ref_path": "dataset/access_control/FibonacciBalance.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              31
+            ],
+            "category": "access_control"
+          },
+          {
+            "lines": [
+              38
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 62
+      }
+    },
+    {
+      "id": "access_control/arbitrary_location_write_simple",
+      "category": "access_control",
+      "target_contract": "Wallet",
+      "compiler": "^0.4.25",
+      "source": {
+        "path": "source/access_control/arbitrary_location_write_simple.sol"
+      },
+      "provenance": {
+        "name": "arbitrary_location_write_simple.sol",
+        "ref_path": "dataset/access_control/arbitrary_location_write_simple.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              27
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 40
+      }
+    },
+    {
+      "id": "access_control/incorrect_constructor_name1",
+      "category": "access_control",
+      "target_contract": "Missing",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/incorrect_constructor_name1.sol"
+      },
+      "provenance": {
+        "name": "incorrect_constructor_name1.sol",
+        "ref_path": "dataset/access_control/incorrect_constructor_name1.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              20
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 34
+      }
+    },
+    {
+      "id": "access_control/incorrect_constructor_name2",
+      "category": "access_control",
+      "target_contract": "Missing",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/incorrect_constructor_name2.sol"
+      },
+      "provenance": {
+        "name": "incorrect_constructor_name2.sol",
+        "ref_path": "dataset/access_control/incorrect_constructor_name2.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              18
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 32
+      }
+    },
+    {
+      "id": "access_control/incorrect_constructor_name3",
+      "category": "access_control",
+      "target_contract": "Missing",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/incorrect_constructor_name3.sol"
+      },
+      "provenance": {
+        "name": "incorrect_constructor_name3.sol",
+        "ref_path": "dataset/access_control/incorrect_constructor_name3.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 32
+      }
+    },
+    {
+      "id": "access_control/mapping_write",
+      "category": "access_control",
+      "target_contract": "Map",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/mapping_write.sol"
+      },
+      "provenance": {
+        "name": "mapping_write.sol",
+        "ref_path": "dataset/access_control/mapping_write.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              20
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 30
+      }
+    },
+    {
+      "id": "access_control/multiowned_vulnerable",
+      "category": "access_control",
+      "target_contract": "TestContract",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/access_control/multiowned_vulnerable.sol"
+      },
+      "provenance": {
+        "name": "multiowned_vulnerable.sol",
+        "ref_path": "dataset/access_control/multiowned_vulnerable.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              38
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 63
+      }
+    },
+    {
+      "id": "access_control/mycontract",
+      "category": "access_control",
+      "target_contract": "MyContract",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/mycontract.sol"
+      },
+      "provenance": {
+        "name": "mycontract.sol",
+        "ref_path": "dataset/access_control/mycontract.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              20
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 24
+      }
+    },
+    {
+      "id": "access_control/parity_wallet_bug_1",
+      "category": "access_control",
+      "target_contract": "WalletLibrary",
+      "compiler": "0.4.9",
+      "source": {
+        "path": "source/access_control/parity_wallet_bug_1.sol"
+      },
+      "provenance": {
+        "name": "parity_wallet_bug_1.sol",
+        "ref_path": "dataset/access_control/parity_wallet_bug_1.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              223
+            ],
+            "category": "access_control"
+          },
+          {
+            "lines": [
+              437
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 469
+      }
+    },
+    {
+      "id": "access_control/parity_wallet_bug_2",
+      "category": "access_control",
+      "target_contract": "WalletLibrary",
+      "compiler": "^0.4.9",
+      "source": {
+        "path": "source/access_control/parity_wallet_bug_2.sol"
+      },
+      "provenance": {
+        "name": "parity_wallet_bug_2.sol",
+        "ref_path": "dataset/access_control/parity_wallet_bug_2.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              226
+            ],
+            "category": "access_control"
+          },
+          {
+            "lines": [
+              233
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 406
+      }
+    },
+    {
+      "id": "access_control/phishable",
+      "category": "access_control",
+      "target_contract": "Phishable",
+      "compiler": "^0.4.22",
+      "source": {
+        "path": "source/access_control/phishable.sol"
+      },
+      "provenance": {
+        "name": "phishable.sol",
+        "ref_path": "dataset/access_control/phishable.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              20
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 23
+      }
+    },
+    {
+      "id": "access_control/proxy",
+      "category": "access_control",
+      "target_contract": "Proxy",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/proxy.sol"
+      },
+      "provenance": {
+        "name": "proxy.sol",
+        "ref_path": "dataset/access_control/proxy.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              19
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 22
+      }
+    },
+    {
+      "id": "access_control/rubixi",
+      "category": "access_control",
+      "target_contract": "Rubixi",
+      "compiler": "^0.4.15",
+      "source": {
+        "path": "source/access_control/rubixi.sol"
+      },
+      "provenance": {
+        "name": "rubixi.sol",
+        "ref_path": "dataset/access_control/rubixi.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              23,
+              24
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 162
+      }
+    },
+    {
+      "id": "access_control/simple_suicide",
+      "category": "access_control",
+      "target_contract": "SimpleSuicide",
+      "compiler": "^0.4.0",
+      "source": {
+        "path": "source/access_control/simple_suicide.sol"
+      },
+      "provenance": {
+        "name": "simple_suicide.sol",
+        "ref_path": "dataset/access_control/simple_suicide.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              12,
+              13
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 16
+      }
+    },
+    {
+      "id": "access_control/unprotected0",
+      "category": "access_control",
+      "target_contract": "Unprotected",
+      "compiler": "^0.4.15",
+      "source": {
+        "path": "source/access_control/unprotected0.sol"
+      },
+      "provenance": {
+        "name": "unprotected0.sol",
+        "ref_path": "dataset/access_control/unprotected0.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              25
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 39
+      }
+    },
+    {
+      "id": "access_control/wallet_02_refund_nosub",
+      "category": "access_control",
+      "target_contract": "Wallet",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/wallet_02_refund_nosub.sol"
+      },
+      "provenance": {
+        "name": "wallet_02_refund_nosub.sol",
+        "ref_path": "dataset/access_control/wallet_02_refund_nosub.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              36
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 46
+      }
+    },
+    {
+      "id": "access_control/wallet_03_wrong_constructor",
+      "category": "access_control",
+      "target_contract": "Wallet",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/wallet_03_wrong_constructor.sol"
+      },
+      "provenance": {
+        "name": "wallet_03_wrong_constructor.sol",
+        "ref_path": "dataset/access_control/wallet_03_wrong_constructor.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              19,
+              20
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 41
+      }
+    },
+    {
+      "id": "access_control/wallet_04_confused_sign",
+      "category": "access_control",
+      "target_contract": "Wallet",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/access_control/wallet_04_confused_sign.sol"
+      },
+      "provenance": {
+        "name": "wallet_04_confused_sign.sol",
+        "ref_path": "dataset/access_control/wallet_04_confused_sign.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              30
+            ],
+            "category": "access_control"
+          }
+        ],
+        "loc": 42
+      }
+    },
+    {
+      "id": "arithmetic/BECToken",
+      "category": "arithmetic",
+      "target_contract": "PausableToken",
+      "compiler": "^0.4.16",
+      "source": {
+        "path": "source/arithmetic/BECToken.sol"
+      },
+      "provenance": {
+        "name": "BECToken.sol",
+        "ref_path": "dataset/arithmetic/BECToken.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              264
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 306
+      }
+    },
+    {
+      "id": "arithmetic/insecure_transfer",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowAdd",
+      "compiler": "^0.4.10",
+      "source": {
+        "path": "source/arithmetic/insecure_transfer.sol"
+      },
+      "provenance": {
+        "name": "insecure_transfer.sol",
+        "ref_path": "dataset/arithmetic/insecure_transfer.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              18
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 21
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_1",
+      "category": "arithmetic",
+      "target_contract": "Overflow",
+      "compiler": "^0.4.15",
+      "source": {
+        "path": "source/arithmetic/integer_overflow_1.sol"
+      },
+      "provenance": {
+        "name": "integer_overflow_1.sol",
+        "ref_path": "dataset/arithmetic/integer_overflow_1.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              14
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 24
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_add",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowAdd",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/arithmetic/integer_overflow_add.sol"
+      },
+      "provenance": {
+        "name": "integer_overflow_add.sol",
+        "ref_path": "dataset/arithmetic/integer_overflow_add.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 19
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_benign_1",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowBenign1",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/arithmetic/integer_overflow_benign_1.sol"
+      },
+      "provenance": {
+        "name": "integer_overflow_benign_1.sol",
+        "ref_path": "dataset/arithmetic/integer_overflow_benign_1.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 19
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_mapping_sym_1",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowMappingSym1",
+      "compiler": "^0.4.11",
+      "source": {
+        "path": "source/arithmetic/integer_overflow_mapping_sym_1.sol"
+      },
+      "provenance": {
+        "name": "integer_overflow_mapping_sym_1.sol",
+        "ref_path": "dataset/arithmetic/integer_overflow_mapping_sym_1.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              16
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 18
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_minimal",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowMinimal",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/arithmetic/integer_overflow_minimal.sol"
+      },
+      "provenance": {
+        "name": "integer_overflow_minimal.sol",
+        "ref_path": "dataset/arithmetic/integer_overflow_minimal.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 19
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_mul",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowMul",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/arithmetic/integer_overflow_mul.sol"
+      },
+      "provenance": {
+        "name": "integer_overflow_mul.sol",
+        "ref_path": "dataset/arithmetic/integer_overflow_mul.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 19
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_multitx_multifunc_feasible",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowMultiTxMultiFuncFeasible",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/arithmetic/integer_overflow_multitx_multifunc_feasible.sol"
+      },
+      "provenance": {
+        "name": "integer_overflow_multitx_multifunc_feasible.sol",
+        "ref_path": "dataset/arithmetic/integer_overflow_multitx_multifunc_feasible.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              25
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 27
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_multitx_onefunc_feasible",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowMultiTxOneFuncFeasible",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/arithmetic/integer_overflow_multitx_onefunc_feasible.sol"
+      },
+      "provenance": {
+        "name": "integer_overflow_multitx_onefunc_feasible.sol",
+        "ref_path": "dataset/arithmetic/integer_overflow_multitx_onefunc_feasible.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              22
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 24
+      }
+    },
+    {
+      "id": "arithmetic/overflow_simple_add",
+      "category": "arithmetic",
+      "target_contract": "Overflow_Add",
+      "compiler": "0.4.25",
+      "source": {
+        "path": "source/arithmetic/overflow_simple_add.sol"
+      },
+      "provenance": {
+        "name": "overflow_simple_add.sol",
+        "ref_path": "dataset/arithmetic/overflow_simple_add.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              14
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 16
+      }
+    },
+    {
+      "id": "arithmetic/overflow_single_tx",
+      "category": "arithmetic",
+      "target_contract": "IntegerOverflowSingleTransaction",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/arithmetic/overflow_single_tx.sol"
+      },
+      "provenance": {
+        "name": "overflow_single_tx.sol",
+        "ref_path": "dataset/arithmetic/overflow_single_tx.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              18
+            ],
+            "category": "arithmetic"
+          },
+          {
+            "lines": [
+              24
+            ],
+            "category": "arithmetic"
+          },
+          {
+            "lines": [
+              30
+            ],
+            "category": "arithmetic"
+          },
+          {
+            "lines": [
+              36
+            ],
+            "category": "arithmetic"
+          },
+          {
+            "lines": [
+              42
+            ],
+            "category": "arithmetic"
+          },
+          {
+            "lines": [
+              48
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 51
+      }
+    },
+    {
+      "id": "arithmetic/timelock",
+      "category": "arithmetic",
+      "target_contract": "TimeLock",
+      "compiler": "^0.4.10",
+      "source": {
+        "path": "source/arithmetic/timelock.sol"
+      },
+      "provenance": {
+        "name": "timelock.sol",
+        "ref_path": "dataset/arithmetic/timelock.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              22
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 32
+      }
+    },
+    {
+      "id": "arithmetic/token",
+      "category": "arithmetic",
+      "target_contract": "Token",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/arithmetic/token.sol"
+      },
+      "provenance": {
+        "name": "token.sol",
+        "ref_path": "dataset/arithmetic/token.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              20
+            ],
+            "category": "arithmetic"
+          },
+          {
+            "lines": [
+              22
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 30
+      }
+    },
+    {
+      "id": "arithmetic/tokensalechallenge",
+      "category": "arithmetic",
+      "target_contract": "TokenSaleChallenge",
+      "compiler": "^0.4.21",
+      "source": {
+        "path": "source/arithmetic/tokensalechallenge.sol"
+      },
+      "provenance": {
+        "name": "tokensalechallenge.sol",
+        "ref_path": "dataset/arithmetic/tokensalechallenge.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              23
+            ],
+            "category": "arithmetic"
+          },
+          {
+            "lines": [
+              25
+            ],
+            "category": "arithmetic"
+          },
+          {
+            "lines": [
+              33
+            ],
+            "category": "arithmetic"
+          }
+        ],
+        "loc": 35
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "PoCGame",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol"
+      },
+      "provenance": {
+        "name": "0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              201
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              213
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 297
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x0cbe050f75bc8f8c2d6c0d249fea125fd6e1acc9",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Caller",
+      "compiler": "^0.4.10",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x0cbe050f75bc8f8c2d6c0d249fea125fd6e1acc9.sol"
+      },
+      "provenance": {
+        "name": "0x0cbe050f75bc8f8c2d6c0d249fea125fd6e1acc9.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x0cbe050f75bc8f8c2d6c0d249fea125fd6e1acc9.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              12
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 14
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "daoPOLSKAtokens",
+      "compiler": "^0.4.11",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol"
+      },
+      "provenance": {
+        "name": "0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              439
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              465
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 506
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "demo",
+      "compiler": "^0.4.25",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2.sol"
+      },
+      "provenance": {
+        "name": "0x2972d548497286d18e92b5fa1f8f9139e5653fd2.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              14
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 18
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "TokenBank",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa.sol"
+      },
+      "provenance": {
+        "name": "0x39cfd754c85023648bf003bea2dd498c5612abfa.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              97
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 104
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "TokenBank",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol"
+      },
+      "provenance": {
+        "name": "0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              97
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 104
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "MultiplicatorX4",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol"
+      },
+      "provenance": {
+        "name": "0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              29
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 41
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x3f2ef511aa6e75231e4deafc7a3d2ecab3741de2",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "WhaleGiveaway2",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x3f2ef511aa6e75231e4deafc7a3d2ecab3741de2.sol"
+      },
+      "provenance": {
+        "name": "0x3f2ef511aa6e75231e4deafc7a3d2ecab3741de2.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x3f2ef511aa6e75231e4deafc7a3d2ecab3741de2.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              45
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 47
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "airdrop",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol"
+      },
+      "provenance": {
+        "name": "0x4051334adc52057aca763453820cb0e045076ef3.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              16
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 20
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "EBU",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c.sol"
+      },
+      "provenance": {
+        "name": "0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              19
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 23
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "airPort",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol"
+      },
+      "provenance": {
+        "name": "0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 21
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x524960d55174d912768678d8c606b4d50b79d7b1",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Centra4",
+      "compiler": "^0.4.13",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x524960d55174d912768678d8c606b4d50b79d7b1.sol"
+      },
+      "provenance": {
+        "name": "0x524960d55174d912768678d8c606b4d50b79d7b1.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x524960d55174d912768678d8c606b4d50b79d7b1.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              21
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 27
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "EtherGet",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol"
+      },
+      "provenance": {
+        "name": "0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              27
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 30
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x5aa88d2901c68fda244f1d0584400368d2c8e739",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "MultiplicatorX3",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x5aa88d2901c68fda244f1d0584400368d2c8e739.sol"
+      },
+      "provenance": {
+        "name": "0x5aa88d2901c68fda244f1d0584400368d2c8e739.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x5aa88d2901c68fda244f1d0584400368d2c8e739.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              29
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 41
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x610495793564aed0f9c7fc48dc4c7c9151d34fd6",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "SimpleWallet",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x610495793564aed0f9c7fc48dc4c7c9151d34fd6.sol"
+      },
+      "provenance": {
+        "name": "0x610495793564aed0f9c7fc48dc4c7c9151d34fd6.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x610495793564aed0f9c7fc48dc4c7c9151d34fd6.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              33
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 35
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "TokenBank",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol"
+      },
+      "provenance": {
+        "name": "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 100
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "PandaBreeding",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol"
+      },
+      "provenance": {
+        "name": "0x663e4229142a27f00bafb5d087e1e730648314c3.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              1152
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              1496
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              2467
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 2470
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "HomeyJar",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4.sol"
+      },
+      "provenance": {
+        "name": "0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              29
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 31
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x78c2a1e91b52bca4130b6ed9edd9fbcfd4671c37",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "WhaleGiveaway1",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x78c2a1e91b52bca4130b6ed9edd9fbcfd4671c37.sol"
+      },
+      "provenance": {
+        "name": "0x78c2a1e91b52bca4130b6ed9edd9fbcfd4671c37.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x78c2a1e91b52bca4130b6ed9edd9fbcfd4671c37.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              45
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 47
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x7a4349a749e59a5736efb7826ee3496a2dfd5489",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "WhaleGiveaway1",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x7a4349a749e59a5736efb7826ee3496a2dfd5489.sol"
+      },
+      "provenance": {
+        "name": "0x7a4349a749e59a5736efb7826ee3496a2dfd5489.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x7a4349a749e59a5736efb7826ee3496a2dfd5489.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 46
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "PoCGame",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol"
+      },
+      "provenance": {
+        "name": "0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              198
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              210
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 294
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x806a6bd219f162442d992bdc4ee6eba1f2c5a707",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Pie",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x806a6bd219f162442d992bdc4ee6eba1f2c5a707.sol"
+      },
+      "provenance": {
+        "name": "0x806a6bd219f162442d992bdc4ee6eba1f2c5a707.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x806a6bd219f162442d992bdc4ee6eba1f2c5a707.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 46
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x84d9ec85c9c568eb332b7226a8f826d897e0a4a8",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Owned",
+      "compiler": "^0.4.16",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x84d9ec85c9c568eb332b7226a8f826d897e0a4a8.sol"
+      },
+      "provenance": {
+        "name": "0x84d9ec85c9c568eb332b7226a8f826d897e0a4a8.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x84d9ec85c9c568eb332b7226a8f826d897e0a4a8.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              56
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 94
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "TownCrier",
+      "compiler": "^0.4.9",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol"
+      },
+      "provenance": {
+        "name": "0x89c1b3807d4c67df034fffb62f3509561218d30b.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              162
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              175
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              180
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              192
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 222
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "TokenBank",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol"
+      },
+      "provenance": {
+        "name": "0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              97
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 104
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x958a8f594101d2c0485a52319f29b2647f2ebc06",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Marriage",
+      "compiler": "^0.4.16",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x958a8f594101d2c0485a52319f29b2647f2ebc06.sol"
+      },
+      "provenance": {
+        "name": "0x958a8f594101d2c0485a52319f29b2647f2ebc06.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x958a8f594101d2c0485a52319f29b2647f2ebc06.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              55
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 148
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x9d06cbafa865037a01d322d3f4222fa3e04e5488",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Delta",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0x9d06cbafa865037a01d322d3f4222fa3e04e5488.sol"
+      },
+      "provenance": {
+        "name": "0x9d06cbafa865037a01d322d3f4222fa3e04e5488.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0x9d06cbafa865037a01d322d3f4222fa3e04e5488.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              54
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              65
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 90
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xa1fceeff3acc57d257b917e30c4df661401d6431",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "AirDropContract",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xa1fceeff3acc57d257b917e30c4df661401d6431.sol"
+      },
+      "provenance": {
+        "name": "0xa1fceeff3acc57d257b917e30c4df661401d6431.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xa1fceeff3acc57d257b917e30c4df661401d6431.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              31
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 35
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "EBU",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae.sol"
+      },
+      "provenance": {
+        "name": "0xa46edd6a9a93feec36576ee5048146870ea2c3ae.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              16
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 20
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb0510d68f210b7db66e8c7c814f22680f2b8d1d6",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Splitter",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xb0510d68f210b7db66e8c7c814f22680f2b8d1d6.sol"
+      },
+      "provenance": {
+        "name": "0xb0510d68f210b7db66e8c7c814f22680f2b8d1d6.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xb0510d68f210b7db66e8c7c814f22680f2b8d1d6.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              69
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              71
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              73
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              75
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              102
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 141
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "DepositProxy",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77.sol"
+      },
+      "provenance": {
+        "name": "0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              14
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 42
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb37f18af15bafb869a065b61fc83cfc44ed9cc27",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "SimpleWallet",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xb37f18af15bafb869a065b61fc83cfc44ed9cc27.sol"
+      },
+      "provenance": {
+        "name": "0xb37f18af15bafb869a065b61fc83cfc44ed9cc27.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xb37f18af15bafb869a065b61fc83cfc44ed9cc27.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              33
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 35
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "DrainMe",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol"
+      },
+      "provenance": {
+        "name": "0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              100
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              106
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              133
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 144
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "keepMyEther",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol"
+      },
+      "provenance": {
+        "name": "0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              25
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 28
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "VaultProxy",
+      "compiler": "^0.4.23",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.sol"
+      },
+      "provenance": {
+        "name": "0xbaa3de6504690efb064420d89e871c27065cdd52.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              14
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 42
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "VaultProxy",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c.sol"
+      },
+      "provenance": {
+        "name": "0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              14
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 42
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xd2018bfaa266a9ec0a1a84b061640faa009def76",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Pie",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xd2018bfaa266a9ec0a1a84b061640faa009def76.sol"
+      },
+      "provenance": {
+        "name": "0xd2018bfaa266a9ec0a1a84b061640faa009def76.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xd2018bfaa266a9ec0a1a84b061640faa009def76.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 46
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xd5967fed03e85d1cce44cab284695b41bc675b5c",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "demo",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xd5967fed03e85d1cce44cab284695b41bc675b5c.sol"
+      },
+      "provenance": {
+        "name": "0xd5967fed03e85d1cce44cab284695b41bc675b5c.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xd5967fed03e85d1cce44cab284695b41bc675b5c.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              16
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 20
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xdb1c55f6926e7d847ddf8678905ad871a68199d2",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "FreeEth",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xdb1c55f6926e7d847ddf8678905ad871a68199d2.sol"
+      },
+      "provenance": {
+        "name": "0xdb1c55f6926e7d847ddf8678905ad871a68199d2.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xdb1c55f6926e7d847ddf8678905ad871a68199d2.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              39
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 41
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "FiftyFlip",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol"
+      },
+      "provenance": {
+        "name": "0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              150
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 377
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xe4eabdca81e31d9acbc4af76b30f532b6ed7f3bf",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Honey",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xe4eabdca81e31d9acbc4af76b30f532b6ed7f3bf.sol"
+      },
+      "provenance": {
+        "name": "0xe4eabdca81e31d9acbc4af76b30f532b6ed7f3bf.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xe4eabdca81e31d9acbc4af76b30f532b6ed7f3bf.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 46
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xe82f0742a71a02b9e9ffc142fdcb6eb1ed06fb87",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Freebie",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xe82f0742a71a02b9e9ffc142fdcb6eb1ed06fb87.sol"
+      },
+      "provenance": {
+        "name": "0xe82f0742a71a02b9e9ffc142fdcb6eb1ed06fb87.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xe82f0742a71a02b9e9ffc142fdcb6eb1ed06fb87.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              39
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 41
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "airDrop",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220.sol"
+      },
+      "provenance": {
+        "name": "0xe894d54dca59cb53fe9cbc5155093605c7068220.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 21
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "TokenSender",
+      "compiler": "^0.4.11",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol"
+      },
+      "provenance": {
+        "name": "0xec329ffc97d75fe03428ae155fc7793431487f63.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              30
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 132
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "RealOldFuckMaker",
+      "compiler": "^0.4.16",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol"
+      },
+      "provenance": {
+        "name": "0xf2570186500a46986f3139f65afedc2afe4f445d.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              18
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 21
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "B",
+      "compiler": "^0.4.24",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol"
+      },
+      "provenance": {
+        "name": "0xf29ebe930a539a60279ace72c707cba851a57707.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              16
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 22
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xf70d589d76eebdd7c12cc5eec99f8f6fa4233b9e",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "WhaleGiveaway2",
+      "compiler": "^0.4.19",
+      "source": {
+        "path": "source/unchecked_low_level_calls/0xf70d589d76eebdd7c12cc5eec99f8f6fa4233b9e.sol"
+      },
+      "provenance": {
+        "name": "0xf70d589d76eebdd7c12cc5eec99f8f6fa4233b9e.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/0xf70d589d76eebdd7c12cc5eec99f8f6fa4233b9e.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              44
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 46
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/etherpot_lotto",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Lotto",
+      "compiler": "^0.4.0",
+      "source": {
+        "path": "source/unchecked_low_level_calls/etherpot_lotto.sol"
+      },
+      "provenance": {
+        "name": "etherpot_lotto.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/etherpot_lotto.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              109
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              141
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 162
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/king_of_the_ether_throne",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "KingOfTheEtherThrone",
+      "compiler": "^0.4.0",
+      "source": {
+        "path": "source/unchecked_low_level_calls/king_of_the_ether_throne.sol"
+      },
+      "provenance": {
+        "name": "king_of_the_ether_throne.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              110
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              118
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              132
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              174
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 182
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/lotto",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "Lotto",
+      "compiler": "^0.4.18",
+      "source": {
+        "path": "source/unchecked_low_level_calls/lotto.sol"
+      },
+      "provenance": {
+        "name": "lotto.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/lotto.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              20
+            ],
+            "category": "unchecked_low_level_calls"
+          },
+          {
+            "lines": [
+              27
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 29
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/mishandled",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "SendBack",
+      "compiler": "^0.4.0",
+      "source": {
+        "path": "source/unchecked_low_level_calls/mishandled.sol"
+      },
+      "provenance": {
+        "name": "mishandled.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/mishandled.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              14
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 16
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/unchecked_return_value",
+      "category": "unchecked_low_level_calls",
+      "target_contract": "ReturnValue",
+      "compiler": "0.4.25",
+      "source": {
+        "path": "source/unchecked_low_level_calls/unchecked_return_value.sol"
+      },
+      "provenance": {
+        "name": "unchecked_return_value.sol",
+        "ref_path": "dataset/unchecked_low_level_calls/unchecked_return_value.sol",
+        "vulnerabilities": [
+          {
+            "lines": [
+              17
+            ],
+            "category": "unchecked_low_level_calls"
+          }
+        ],
+        "loc": 19
+      }
+    }
+  ]
+}

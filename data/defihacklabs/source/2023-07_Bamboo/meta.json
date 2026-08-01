@@ -1,0 +1,21 @@
+{
+  "target_id": "2023-07_Bamboo",
+  "chain": "bsc",
+  "address": "0xed56784bc8f2c036f6b0d8e04cb83c253e4a6a94",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "BambooAI",
+  "compiler_version": "v0.8.19+commit.7dd6d404",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "BambooAI.sol"
+  ],
+  "primary_source": "BambooAI.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424136
+}

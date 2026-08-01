@@ -1,0 +1,21 @@
+{
+  "target_id": "2022-11_SheepFarm",
+  "chain": "bsc",
+  "address": "0x4726010da871f4b57b5031e3ea48bde961f122aa",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "SheepFarm",
+  "compiler_version": "v0.8.7+commit.e28d00a7",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "SheepFarm.sol"
+  ],
+  "primary_source": "SheepFarm.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781375685
+}

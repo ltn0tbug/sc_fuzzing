@@ -1,0 +1,21 @@
+{
+  "target_id": "2017-11_Parity_kill",
+  "chain": "mainnet",
+  "address": "0x863df6bfa4469f3ead0be8f9f2aae51c91a907b4",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "WalletLibrary",
+  "compiler_version": "v0.4.10+commit.f0d539ae",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "WalletLibrary.sol"
+  ],
+  "primary_source": "WalletLibrary.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781377983
+}

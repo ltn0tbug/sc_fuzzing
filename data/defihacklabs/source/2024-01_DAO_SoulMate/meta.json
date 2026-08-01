@@ -1,0 +1,7 @@
+{
+  "target_id": "2024-01_DAO_SoulMate",
+  "chain": "mainnet",
+  "address": "0x82c063afefb226859abd427ae40167cb77174b68",
+  "verified": false,
+  "skip_reason": "no_verified_source_etherscan_sourcify"
+}

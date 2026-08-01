@@ -1,0 +1,32 @@
+{
+  "target_id": "2024-04_NGFS",
+  "chain": "bsc",
+  "address": "0xa608985f5b40cdf6862bec775207f84280a91e3a",
+  "verified": true,
+  "provider": "etherscan",
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "NGFSToken",
+  "compiler_version": "v0.8.24+commit.e11b9ed9",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "src/Address.sol",
+    "src/Context.sol",
+    "src/IERC20.sol",
+    "src/IPancakeLibrary.sol",
+    "src/IPancakePair.sol",
+    "src/IPancakeRouter01.sol",
+    "src/IPancakeRouter02.sol",
+    "src/IUniswapV2Factory.sol",
+    "src/NGFSToken.sol",
+    "src/Ownable.sol",
+    "src/SafeMath.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781929396
+}

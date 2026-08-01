@@ -1,0 +1,21 @@
+{
+  "target_id": "2024-02_SwarmMarkets",
+  "chain": "mainnet",
+  "address": "0xd08e245fdb3f1504aea4056e2c71615da7001440",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "XToken",
+  "compiler_version": "v0.7.0+commit.9e61f92b",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "XToken.sol"
+  ],
+  "primary_source": "XToken.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781377961
+}

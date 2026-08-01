@@ -1,0 +1,7 @@
+{
+  "target_id": "2023-11_LinkDao",
+  "chain": "bsc",
+  "address": "0x6524a5fd3fec179db3b3c1d21f700da7abe6b0de",
+  "verified": false,
+  "skip_reason": "unverified_source"
+}

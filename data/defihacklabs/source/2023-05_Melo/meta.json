@@ -1,0 +1,21 @@
+{
+  "target_id": "2023-05_Melo",
+  "chain": "bsc",
+  "address": "0x9a1aef8c9ada4224ad774afdac07c24955c92a54",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "cERC20",
+  "compiler_version": "v0.5.11+commit.c082d0b4",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "cERC20.sol"
+  ],
+  "primary_source": "cERC20.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781375676
+}

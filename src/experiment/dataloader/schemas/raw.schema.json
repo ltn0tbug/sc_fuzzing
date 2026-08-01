@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fuzz/dataset/raw.schema.json",
+  "title": "Dataset RAW layer",
+  "description": "Raw scraped facts about EVERY catalogued contract + a pointer into source/. The single source of truth for facts (category/target_contract/compiler/source/fork/provenance) — manifest and enrich join to it by id and never duplicate these. No skip, no poc. One file per dataset: raw.json.",
+  "type": "object",
+  "required": ["dataset", "kind", "schema", "total_contracts", "meta", "contracts"],
+  "additionalProperties": false,
+  "properties": {
+    "dataset": { "type": "string" },
+    "kind": { "enum": ["inline", "fork"] },
+    "schema": { "const": "raw" },
+    "source_repo": { "type": "string" },
+    "description": { "type": "string" },
+    "generated_by": { "type": "string" },
+    "total_contracts": { "type": "integer", "description": "MUST equal contracts.length" },
+    "meta": { "type": "object" },
+    "contracts": { "type": "array", "items": { "$ref": "#/$defs/contract" } }
+  },
+  "$defs": {
+    "contract": {
+      "type": "object",
+      "oneOf": [{ "$ref": "#/$defs/inline" }, { "$ref": "#/$defs/fork" }]
+    },
+    "inline": {
+      "type": "object",
+      "required": ["id", "category", "target_contract", "compiler", "source", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": ["string", "null"] },
+        "target_contract": { "type": ["string", "null"] },
+        "compiler": { "type": ["string", "null"] },
+        "source": {
+          "type": "object",
+          "required": ["path"],
+          "additionalProperties": false,
+          "properties": { "path": { "type": "string", "description": "dataset-folder-relative" } }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "name": { "type": "string" },
+            "ref_path": { "type": "string" },
+            "vulnerabilities": { "type": "array", "items": { "type": "object" } },
+            "loc": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "fork": {
+      "type": "object",
+      "required": ["id", "category", "target_contract", "compiler", "source", "fork", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": ["string", "null"] },
+        "target_contract": { "type": ["string", "null"] },
+        "compiler": { "type": ["string", "null"] },
+        "source": { "$ref": "#/$defs/sourceFork" },
+        "fork": {
+          "type": "object",
+          "required": ["chain", "block", "target_address"],
+          "additionalProperties": false,
+          "properties": {
+            "chain": { "type": "string" },
+            "block": { "type": "integer" },
+            "target_address": { "type": "string" }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "poc_path": { "type": ["string", "null"] },
+            "optimizer": { "type": "boolean" },
+            "optimizer_runs": { "type": "integer" },
+            "evm_version": { "type": ["string", "null"] },
+            "license": { "type": ["string", "null"] },
+            "proxy": { "type": "boolean" },
+            "implementation": { "type": ["string", "null"] },
+            "verified": { "type": "boolean" },
+            "target_address_source": { "type": ["string", "null"] }
+          }
+        }
+      }
+    },
+    "sourceFork": {
+      "type": "object",
+      "required": ["dir", "files", "primary", "multifile", "abi_path"],
+      "additionalProperties": false,
+      "properties": {
+        "dir": { "type": ["string", "null"], "description": "dataset-folder-relative; null on source-less rows" },
+        "files": { "type": "array", "items": { "type": "string" } },
+        "primary": { "type": ["string", "null"], "description": "null on unverified / source-less rows" },
+        "multifile": { "type": "boolean" },
+        "abi_path": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

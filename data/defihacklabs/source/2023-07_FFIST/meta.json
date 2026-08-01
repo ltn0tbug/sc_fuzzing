@@ -1,0 +1,21 @@
+{
+  "target_id": "2023-07_FFIST",
+  "chain": "bsc",
+  "address": "0x80121da952a74c06adc1d7f85a237089b57af347",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "GoldCoin",
+  "compiler_version": "v0.8.17+commit.8df45f5f",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "None",
+  "source_files": [
+    "GoldCoin.sol"
+  ],
+  "primary_source": "GoldCoin.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424138
+}

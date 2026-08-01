@@ -1,0 +1,27 @@
+{
+  "target_id": "2022-08_EGD_Finance",
+  "chain": "bsc",
+  "address": "0x93c175439726797dcee24d08e4ac9164e88e7aee",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "EGD_Finance",
+  "compiler_version": "v0.8.4+commit.c7e474f2",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "src/contracts/contrtact/EGD_Defi.sol",
+    "src/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+    "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+    "src/contracts/router.sol",
+    "src/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
+    "src/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+    "src/@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780506737
+}

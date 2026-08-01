@@ -1,0 +1,7 @@
+{
+  "target_id": "2024-10_Erc20transfer",
+  "chain": "mainnet",
+  "address": "0x43dc865e916914fd93540461fde124484fbf8faa",
+  "verified": false,
+  "skip_reason": "no_verified_source_etherscan_sourcify"
+}

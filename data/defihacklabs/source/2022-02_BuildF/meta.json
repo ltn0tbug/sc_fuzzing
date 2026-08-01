@@ -1,0 +1,21 @@
+{
+  "target_id": "2022-02_BuildF",
+  "chain": "mainnet",
+  "address": "0x6e36556b3ee5aa28def2a8ec3dae30ec2b208739",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "BUILD",
+  "compiler_version": "v0.5.17+commit.d19bba13",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "None",
+  "source_files": [
+    "BUILD.sol"
+  ],
+  "primary_source": "BUILD.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424107
+}

@@ -1,0 +1,21 @@
+{
+  "target_id": "2024-02_PANDORA",
+  "chain": "mainnet",
+  "address": "0xddadf1bf44363d07e750c20219c2347ed7d826b9",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "PandorasNodes404",
+  "compiler_version": "v0.7.6+commit.7338295f",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "PandorasNodes404.sol"
+  ],
+  "primary_source": "PandorasNodes404.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781798748
+}

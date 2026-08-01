@@ -1,0 +1,21 @@
+{
+  "target_id": "2023-08_Uwerx",
+  "chain": "mainnet",
+  "address": "0x4306b12f8e824ce1fa9604bbd88f2ad4f0fe3c54",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "Uwerx",
+  "compiler_version": "v0.8.17+commit.8df45f5f",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "Uwerx.sol"
+  ],
+  "primary_source": "Uwerx.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424115
+}

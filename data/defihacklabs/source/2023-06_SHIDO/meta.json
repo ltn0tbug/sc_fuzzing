@@ -1,0 +1,28 @@
+{
+  "target_id": "2023-06_SHIDO",
+  "chain": "bsc",
+  "address": "0xa963ee460cf4b474c35ded8fff91c4ec011fb640",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "StandardToken",
+  "compiler_version": "v0.8.18+commit.87f61d96",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "src/@openzeppelin/contracts/access/Ownable.sol",
+    "src/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+    "src/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+    "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+    "src/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+    "src/@openzeppelin/contracts/utils/Address.sol",
+    "src/@openzeppelin/contracts/utils/Context.sol",
+    "src/contracts/Tokens/StandardTokens/StandardToken.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424135
+}

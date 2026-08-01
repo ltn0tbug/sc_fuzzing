@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fuzz/dataset/manifest.schema.json",
+  "title": "Dataset MANIFEST layer",
+  "description": "Curation decisions layered over raw for EVERY catalogued contract: skip / why / validation evidence. Joined to raw by id (category/target_contract are NOT duplicated here — they live in raw). One file per dataset: manifest.json.",
+  "type": "object",
+  "required": ["dataset", "kind", "schema", "total_contracts", "meta", "contracts"],
+  "additionalProperties": false,
+  "properties": {
+    "dataset": { "type": "string" },
+    "kind": { "enum": ["inline", "fork"] },
+    "schema": { "const": "manifest" },
+    "source_repo": { "type": "string" },
+    "description": { "type": "string" },
+    "generated_by": { "type": "string" },
+    "total_contracts": { "type": "integer", "description": "MUST equal contracts.length" },
+    "meta": { "type": "object" },
+    "contracts": { "type": "array", "items": { "$ref": "#/$defs/contract" } }
+  },
+  "$defs": {
+    "contract": {
+      "type": "object",
+      "required": ["id", "skip", "skip_reason", "validation"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "skip": { "type": "boolean" },
+        "skip_reason": {
+          "type": ["string", "null"],
+          "description": "non-null iff skip==true; the precise reason the oracle can't see the exploit"
+        },
+        "validation": {
+          "oneOf": [{ "$ref": "#/$defs/validationInline" }, { "$ref": "#/$defs/validationFork" }]
+        }
+      }
+    },
+    "validationInline": {
+      "type": "object",
+      "required": ["poc_validated"],
+      "additionalProperties": false,
+      "properties": { "poc_validated": { "type": "boolean" } }
+    },
+    "validationFork": {
+      "type": "object",
+      "required": ["fuzzer_bug_signal"],
+      "additionalProperties": false,
+      "properties": {
+        "reference_exploit": {
+          "description": "null on skipped rows with no replayable ref PoC",
+          "type": ["object", "null"],
+          "required": ["poc_path", "reproduced"],
+          "additionalProperties": false,
+          "properties": {
+            "poc_path": { "type": "string", "description": "the shipped ref/DeFiHackLabs *_exp.sol" },
+            "reproduced": { "type": "boolean", "description": "Layer 1: does the ref PoC replay at its block" },
+            "logs": { "type": "array" }
+          }
+        },
+        "fuzzer_bug_signal": {
+          "type": "boolean",
+          "description": "Layer 2: does our authored FuzzInput fire a BUG_SIGNAL (drives skip/poc)"
+        }
+      }
+    }
+  }
+}

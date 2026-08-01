@@ -1,0 +1,30 @@
+{
+  "target_id": "2024-05_MetaDragon",
+  "chain": "bsc",
+  "address": "0xef1f39d8391cddcaee62b8b383cb992f46a6ce4f",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "P404Token",
+  "compiler_version": "v0.8.24+commit.e11b9ed9",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "src/Context.sol",
+    "src/draft-IERC6093.sol",
+    "src/ERC20.sol",
+    "src/IERC165.sol",
+    "src/IERC20.sol",
+    "src/IERC20Metadata.sol",
+    "src/IERC721.sol",
+    "src/IERC721Metadata.sol",
+    "src/IERC721Receiver.sol",
+    "src/token.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781377981
+}

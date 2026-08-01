@@ -1,0 +1,1465 @@
+[
+  {
+    "id": "2020-12_Cover",
+    "poc_path": "2020-12/Cover_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 11542309,
+    "target_address": "0xe0b94a7bb45dd905c79bb1992c9879f40f1caed5",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x00007569643bc1709561ec2e86f385df3759e5dd",
+        3
+      ],
+      [
+        "0x59686e01aa841f622a43688153062c2f24f8fded",
+        1
+      ],
+      [
+        "0x5d8d9f5b96f4438195be9b99eee6118ed4304286",
+        1
+      ],
+      [
+        "0xe0b94a7bb45dd905c79bb1992c9879f40f1caed5",
+        1
+      ]
+    ],
+    "target_address_source": "manual_pin_from_poc_var_decl"
+  },
+  {
+    "id": "2021-05_RariCapital",
+    "poc_path": "2021-05/RariCapital_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 12394009,
+    "target_address": "0x67b66c99d3eb37fa76aa3ed1ff33e8e39f0b9c7a",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xcb36b1ee0af68dce5578a487ff2da81282512233",
+        3
+      ],
+      [
+        "0x2f755e8980f0c2e81681d82cccd1a4bd5b4d5d46",
+        2
+      ],
+      [
+        "0x67b66c99d3eb37fa76aa3ed1ff33e8e39f0b9c7a",
+        1
+      ],
+      [
+        "0x9eed7274ea4b614acc217e46727d377f7e6f9b24",
+        1
+      ]
+    ],
+    "target_address_source": "manual_pin_from_poc_var_decl"
+  },
+  {
+    "id": "2022-02_BuildF",
+    "poc_path": "2022-02/BuildF_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 14235712,
+    "target_address": "0x6e36556b3ee5aa28def2a8ec3dae30ec2b208739",
+    "target_iface_hint": "IERC20",
+    "address_counts": [
+      [
+        "0x6e36556b3ee5aa28def2a8ec3dae30ec2b208739",
+        3
+      ],
+      [
+        "0xf41c13f4e2f750408fc6eb5cf0e34225d52e7002",
+        2
+      ],
+      [
+        "0x562680a4dc50ed2f14d75bf31f494cfe0b8d10a1",
+        1
+      ],
+      [
+        "0x5a6ebeb61a80b2a2a5e0b4d893d731358d888583",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-06_InverseFinance",
+    "poc_path": "2022-06/InverseFinance_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 14972418,
+    "target_address": "0x1429a930ec3bcf5aa32ef298ccc5ab09836ef587",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x1429a930ec3bcf5aa32ef298ccc5ab09836ef587",
+        3
+      ],
+      [
+        "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        2
+      ],
+      [
+        "0xe537b5cc158eb71037d4125bdd7538421981e6aa",
+        2
+      ],
+      [
+        "0x4dcf7407ae5c07f8681e1659f626e114a7667339",
+        1
+      ],
+      [
+        "0x6c3f90f043a72fa612cbac8115ee7e52bde6e490",
+        1
+      ],
+      [
+        "0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9",
+        1
+      ],
+      [
+        "0x7fcb7dac61ee35b3d4a51117a7c58d53f0a8a670",
+        1
+      ],
+      [
+        "0x865377367054516e17014ccded1e7d814edc9ce4",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-10_OlympusDao",
+    "poc_path": "2022-10/OlympusDao_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 15794363,
+    "target_address": "0x007fe7c498a2cf30971ad8f2cbc36bd14ac51156",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x007fe7c498a2cf30971ad8f2cbc36bd14ac51156",
+        3
+      ],
+      [
+        "0x443cf223e209e5a2c08114a2501d8f0f9ec7d9be",
+        1
+      ],
+      [
+        "0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5",
+        1
+      ],
+      [
+        "0xa29e4fe451ccfa5e7def35188919ad7077a4de8f",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-10_Templedao",
+    "poc_path": "2022-10/Templedao_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 15725066,
+    "target_address": "0xd2869042e12a3506100af1d192b5b04d65137941",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xd2869042e12a3506100af1d192b5b04d65137941",
+        3
+      ],
+      [
+        "0x2df9c154fe24d081cfe568645fb4075d725431e0",
+        1
+      ],
+      [
+        "0x9c9fb3100a2a521985f0c47de3b4598dafd25b01",
+        1
+      ],
+      [
+        "0xbcb8b7fc9197feda75c101fa69d3211b5a30dcd9",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-12_JAY",
+    "poc_path": "2022-12/JAY_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 16288199,
+    "target_address": "0xf2919d1d80aff2940274014bef534f7791906ff2",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xf2919d1d80aff2940274014bef534f7791906ff2",
+        3
+      ],
+      [
+        "0x0348d20b74ddc0ac9bfc3626e06d30bb6fac213b",
+        1
+      ],
+      [
+        "0xba12222222228d8ba445958a75a0704d566bf2c8",
+        1
+      ],
+      [
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        1
+      ],
+      [
+        "0xce88686553686da562ce7cea497ce749da109f9f",
+        1
+      ],
+      [
+        "0xed42cb11b9d03c807ed1ba9c2ed1d3ba5bf37340",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-05_ERC20TokenBank",
+    "poc_path": "2023-05/ERC20TokenBank_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 17376906,
+    "target_address": "0x765b8d7cd8ff304f796f4b6fb1bcf78698333f6d",
+    "target_iface_hint": "IExchangeBetweenPools",
+    "address_counts": [
+      [
+        "0x765b8d7cd8ff304f796f4b6fb1bcf78698333f6d",
+        3
+      ],
+      [
+        "0x45f783cce6b7ff23b2ab2d70e416cdb7d6055f51",
+        1
+      ],
+      [
+        "0x5777d92f208679db4b9778590fa3cab3ac9e2168",
+        1
+      ],
+      [
+        "0x7c28e0977f72c5d08d5e1ac7d52a34db378282b3",
+        1
+      ],
+      [
+        "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        1
+      ],
+      [
+        "0xc0ffeebabe5d496b2dde509f9fa189c25cf29671",
+        1
+      ],
+      [
+        "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-08_Uwerx",
+    "poc_path": "2023-08/Uwerx_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 17826202,
+    "target_address": "0x4306b12f8e824ce1fa9604bbd88f2ad4f0fe3c54",
+    "target_iface_hint": "IERC20",
+    "address_counts": [
+      [
+        "0x4306b12f8e824ce1fa9604bbd88f2ad4f0fe3c54",
+        3
+      ],
+      [
+        "0x6057a831d43c395198a10cf2d7d6d6a063b1fce4",
+        1
+      ],
+      [
+        "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+        1
+      ],
+      [
+        "0xa41529982bcccdfa1105c6f08024df787ca758c4",
+        1
+      ],
+      [
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        1
+      ],
+      [
+        "0xda2ccfc4557ba55eada3cbebd0aeffcf97fc14ca",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-09_CEXISWAP",
+    "poc_path": "2023-09/CEXISWAP_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 18182605,
+    "target_address": "0xb8a5890d53df78dee6182a6c0968696e827e3305",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xb8a5890d53df78dee6182a6c0968696e827e3305",
+        3
+      ],
+      [
+        "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        2
+      ],
+      [
+        "0x060c169c4517d52c4be9a1dd53e41a3328d16f04",
+        1
+      ],
+      [
+        "0x8c425ee62d18b65cc975767c27c42de548d133a1",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-09_DAppSocial",
+    "poc_path": "2023-09/DAppSocial_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 18048982,
+    "target_address": "0x319ec3ad98cf8b12a8be5719fec6e0a9bb1ad0d1",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x319ec3ad98cf8b12a8be5719fec6e0a9bb1ad0d1",
+        3
+      ],
+      [
+        "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        2
+      ],
+      [
+        "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        2
+      ],
+      [
+        "0x7d9bc45a9abda926a7ce63f78759dbfa9ed72e26",
+        1
+      ],
+      [
+        "0xa8c6e7352b13815f6bfa87c7ffaaa6e3a7bfa849",
+        1
+      ],
+      [
+        "0xe897c0f9443785f8d4f0fa6e92a81066b3fbfee2",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2024-09_INUMI",
+    "poc_path": "2024-09/INUMI_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 20729548,
+    "target_address": "0xd129d8c12f0e7aa51157d9e6cc3f7ece2dc84ecd",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xd129d8c12f0e7aa51157d9e6cc3f7ece2dc84ecd",
+        3
+      ],
+      [
+        "0xd215ffaf0f85fb6f93f11e49bd6175ad58af0dfd",
+        2
+      ],
+      [
+        "0xdb27d4ff4be1cd04c34a7cb6f47402c37cb73459",
+        2
+      ]
+    ]
+  },
+  {
+    "id": "2024-09_PLN",
+    "poc_path": "2024-09/PLN_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 20681142,
+    "target_address": "0xe0c218e1633a5c76d57ff4f11149f07bfff16aea",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xe0c218e1633a5c76d57ff4f11149f07bfff16aea",
+        3
+      ],
+      [
+        "0x67404bcd629e920100c594d62f3678340f40d95a",
+        2
+      ],
+      [
+        "0xbe01c53ad466ef011e3f8a67f6e23c34e2e9976c",
+        2
+      ],
+      [
+        "0x000000000000000000000000000000000000dead",
+        1
+      ],
+      [
+        "0x3f5a63b89773986fd436a65884fcd321de77b832",
+        1
+      ],
+      [
+        "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+        1
+      ],
+      [
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2025-03_UNI",
+    "poc_path": "2025-03/UNI_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 21992033,
+    "target_address": "0x76ea342bc038d665e8a116392c82552d2605eda1",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x76ea342bc038d665e8a116392c82552d2605eda1",
+        3
+      ],
+      [
+        "0x97d8170e04771826a31c4c9b81e9f9191a1c8613",
+        2
+      ],
+      [
+        "0x2901c8b8e6d9f2c9f848987ded74b776ab1f973e",
+        1
+      ],
+      [
+        "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+        1
+      ],
+      [
+        "0xaca4263ffdda9e60c7260aaba08c2b8f80d63cb1",
+        1
+      ],
+      [
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        1
+      ],
+      [
+        "0xddf309b8161aca09ea6bbf30dd7cbd6c474ff700",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2025-04_Roar",
+    "poc_path": "2025-04/Roar_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 22278564,
+    "target_address": "0x13028e6b95520ad16898396667d1e52cb5e550ac",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x13028e6b95520ad16898396667d1e52cb5e550ac",
+        4
+      ],
+      [
+        "0xb0415d55f2c87b7f99285848bd341c367feac1ea",
+        4
+      ],
+      [
+        "0x8149f77504007450711023cf0ec11bdd6348401f",
+        2
+      ]
+    ]
+  },
+  {
+    "id": "2021-05_ValueDefi",
+    "poc_path": "2021-05/ValueDefi_exp.sol",
+    "chain": "bsc",
+    "fork_block": 7223029,
+    "target_address": "0xd7d069493685a581d27824fc46eda46b7efc0063",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xcb36b1ee0af68dce5578a487ff2da81282512233",
+        3
+      ],
+      [
+        "0x4269e4090ff9dfc99d8846eb0d42e67f01c3ac8b",
+        1
+      ],
+      [
+        "0x7af938f0efdd98dc513109f6a7e85106d26e16c4",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ],
+      [
+        "0xd4bbf439d3eab5155ca7c0537e583088fb4cfce8",
+        1
+      ],
+      [
+        "0xd7d069493685a581d27824fc46eda46b7efc0063",
+        1
+      ]
+    ],
+    "target_address_source": "manual_pin_from_poc_var_decl"
+  },
+  {
+    "id": "2022-10_ATK",
+    "poc_path": "2022-10/ATK_exp.sol",
+    "chain": "bsc",
+    "fork_block": 22102838,
+    "target_address": "0x9cb928bf50ed220ac8f703bce35be5ce7f56c99c",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x9cb928bf50ed220ac8f703bce35be5ce7f56c99c",
+        3
+      ],
+      [
+        "0xd7ba198ce82f4c46ad8f6148ccfdb41866750231",
+        2
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x3df6cd58716d22855afb3b828f82f10708afbb4f",
+        1
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ],
+      [
+        "0x96bf2e6cc029363b57ffa5984b943f825d333614",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ],
+      [
+        "0xd228faee4f73a73fcc73b6d9a1bd25ee1d6ee611",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-10_BEGO",
+    "poc_path": "2022-10/BEGO_exp.sol",
+    "chain": "bsc",
+    "fork_block": 22315679,
+    "target_address": "0xc342774492b54ce5f8ac662113ed702fc1b34972",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xc342774492b54ce5f8ac662113ed702fc1b34972",
+        3
+      ],
+      [
+        "0x08a525104ea2a92abbce8e4e61c667eed56f3b42",
+        1
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x88503f48e437a377f1ac2892cbb3a5b09949fadd",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ],
+      [
+        "0xde01f6ce91e4f4bdb94bb934d30647d72182320f",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-10_TransitSwap",
+    "poc_path": "2022-10/TransitSwap_exp.sol",
+    "chain": "bsc",
+    "fork_block": 21816545,
+    "target_address": "0x8785bb8deae13783b24d7afe250d42ea7d7e9d72",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x8785bb8deae13783b24d7afe250d42ea7d7e9d72",
+        4
+      ],
+      [
+        "0xed1afc8c4604958c2f38a3408fa63b32e737c428",
+        4
+      ],
+      [
+        "0x0b47275e0fe7d5054373778960c99fd24f59ff52",
+        2
+      ],
+      [
+        "0x1aae0303f795b6fcb185ea9526aa0549963319fc",
+        2
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ],
+      [
+        "0x5f0b31aa37bce387a8b21554a8360c6b8698fbef",
+        1
+      ],
+      [
+        "0x8ca8fd9c7641849a14cbf72faf05c305b0c68a34",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-12_DFS",
+    "poc_path": "2022-12/DFS_exp.sol",
+    "chain": "bsc",
+    "fork_block": 24349821,
+    "target_address": "0x2b806e6d78d8111dd09c58943b9855910bade005",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x2b806e6d78d8111dd09c58943b9855910bade005",
+        3
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x2b948b5d3ebe9f463b29280fc03ebcb82db1072f",
+        1
+      ],
+      [
+        "0x4b02d85e086809eb7af4e791103bc4cde83480d1",
+        1
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ],
+      [
+        "0x87bfd80c2a05ee98cfe188fd2a0e4d70187db137",
+        1
+      ],
+      [
+        "0xb358bfd28b02c5e925b89ad8b0eb35913d2d0805",
+        1
+      ],
+      [
+        "0xbfd48cc239bc7e7cd5ad9f9630319f9b59e0b9e1",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-01_ThoreumFinance",
+    "poc_path": "2023-01/ThoreumFinance_exp.sol",
+    "chain": "bsc",
+    "fork_block": 24913171,
+    "target_address": "0xce1b3e5087e8215876af976032382dd338cf8401",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xce1b3e5087e8215876af976032382dd338cf8401",
+        3
+      ],
+      [
+        "0x1285fe345523f00ab1a66acd18d9e23d18d2e35c",
+        1
+      ],
+      [
+        "0x1ae2dc57399b2f4597366c5bf4fe39859c006f99",
+        1
+      ],
+      [
+        "0x3a6d8ca21d1cf76f653a67577fa0d27453350dd8",
+        1
+      ],
+      [
+        "0x7d1e1901226e0ba389bfb1281ede859e6e48cc3d",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ],
+      [
+        "0xd822e1737b1180f72368b2a9eb2de22805b67e34",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-05_Bitpaidio",
+    "poc_path": "2023-05/Bitpaidio_exp.sol",
+    "chain": "bsc",
+    "fork_block": 28176675,
+    "target_address": "0x9d6d817ea5d4a69ff4c4509bea8f9b2534cec108",
+    "target_iface_hint": "IStaking",
+    "address_counts": [
+      [
+        "0x9d6d817ea5d4a69ff4c4509bea8f9b2534cec108",
+        3
+      ],
+      [
+        "0x40f75ed09c7bc89bf596ce0ff6fb2ff8d02ac019",
+        1
+      ],
+      [
+        "0x7b9265c6aa4b026b7220eee2e8697bf5ffa6bb9a",
+        1
+      ],
+      [
+        "0x858de6f832c9b92e2ea5c18582551ccd6add0295",
+        1
+      ],
+      [
+        "0x878a36edfb757e8640ff78b612f839b63adc2e51",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-05_FAPEN",
+    "poc_path": "2023-05/FAPEN_exp.sol",
+    "chain": "bsc",
+    "fork_block": 28637846,
+    "target_address": "0xf3f1abae8bfeca054b330c379794a7bf84988228",
+    "target_iface_hint": "IFAPEN",
+    "address_counts": [
+      [
+        "0xf3f1abae8bfeca054b330c379794a7bf84988228",
+        3
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-06_SELLC03",
+    "poc_path": "2023-06/SELLC03_exp.sol",
+    "chain": "bsc",
+    "fork_block": 29005754,
+    "target_address": "0x84be9475051a08ee5364fba44de7fe83a5ecc4f1",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x84be9475051a08ee5364fba44de7fe83a5ecc4f1",
+        3
+      ],
+      [
+        "0x0060129430df7ea188be3d8818404a2d40896089",
+        1
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x2cc392c0207d080aec0befe5272659d3bb8a7052",
+        1
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ],
+      [
+        "0x6098a5638d8d7e9ed2f952d35b2b67c34ec6b476",
+        1
+      ],
+      [
+        "0x9523b023e1d2c490c65d26fad3691b024d0305d7",
+        1
+      ],
+      [
+        "0xa645995e9801f2ca6e2361edf4c2a138362bade4",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-06_SHIDO",
+    "poc_path": "2023-06/SHIDO_exp.sol",
+    "chain": "bsc",
+    "fork_block": 29365171,
+    "target_address": "0xa963ee460cf4b474c35ded8fff91c4ec011fb640",
+    "target_iface_hint": "IERC20",
+    "address_counts": [
+      [
+        "0xa963ee460cf4b474c35ded8fff91c4ec011fb640",
+        3
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x69810917928b80636178b1bb011c746efe61770d",
+        1
+      ],
+      [
+        "0x733af324146dcfe743515d8d77dc25140a07f9e0",
+        1
+      ],
+      [
+        "0x81917eb96b397dfb1c6000d28a5bc08c0f05fc1d",
+        1
+      ],
+      [
+        "0x9869674e80d632f93c338bd398408273d20a6c8e",
+        1
+      ],
+      [
+        "0xaf0ca21363219c8f3d8050e7b61bb5f04e02f8d4",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-07_Bamboo",
+    "poc_path": "2023-07/Bamboo_exp.sol",
+    "chain": "bsc",
+    "fork_block": 29668034,
+    "target_address": "0xed56784bc8f2c036f6b0d8e04cb83c253e4a6a94",
+    "target_iface_hint": "IERC20",
+    "address_counts": [
+      [
+        "0xed56784bc8f2c036f6b0d8e04cb83c253e4a6a94",
+        3
+      ],
+      [
+        "0x00703face6621bd207d3b4ac9867058190c0bb09",
+        1
+      ],
+      [
+        "0x0557713d02a15a69dea5dd4116047e50f521c1b1",
+        1
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ],
+      [
+        "0xca143ce32fe78f1f7019d7d551a6402fc5350c73",
+        1
+      ],
+      [
+        "0xcdf0eb202cfd1f502f3fdca9006a4b5729aadebc",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-07_FFIST",
+    "poc_path": "2023-07/FFIST_exp.sol",
+    "chain": "bsc",
+    "fork_block": 30113117,
+    "target_address": "0x80121da952a74c06adc1d7f85a237089b57af347",
+    "target_iface_hint": "IairdropToken",
+    "address_counts": [
+      [
+        "0x80121da952a74c06adc1d7f85a237089b57af347",
+        3
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ],
+      [
+        "0x7a3adf2f6b239e64dab1738c695cf48155b6e152",
+        1
+      ],
+      [
+        "0xb31c7b7bdf69554345e47a4393f53c332255c9fb",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ],
+      [
+        "0xcc8617331849962c27f91859578dc91922f6f050",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-11_LinkDao",
+    "poc_path": "2023-11/LinkDao_exp.sol",
+    "chain": "bsc",
+    "fork_block": 33527744,
+    "target_address": "0x6524a5fd3fec179db3b3c1d21f700da7abe6b0de",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x6524a5fd3fec179db3b3c1d21f700da7abe6b0de",
+        3
+      ],
+      [
+        "0xdf6b0200b4e1bc4a310f33df95a9087cc2c79038",
+        3
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ],
+      [
+        "0x721a66c7767103e7dcacf8440e8dd074edff40a8",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2024-04_GROKD",
+    "poc_path": "2024-04/GROKD_exp.sol",
+    "chain": "bsc",
+    "fork_block": 37622476,
+    "target_address": "0x31d3231cda62c0b7989b488ca747245676a32d81",
+    "target_iface_hint": "IDeposite",
+    "address_counts": [
+      [
+        "0x31d3231cda62c0b7989b488ca747245676a32d81",
+        3
+      ],
+      [
+        "0x8af65d9114dfccd050e7352d77eec98f40c42cfd",
+        2
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0xa4133fed73ea3361f2f928f98313b1e1e5049612",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2024-09_WXETA",
+    "poc_path": "2024-09/WXETA_exp.sol",
+    "chain": "bsc",
+    "fork_block": 42284161,
+    "target_address": "0x05c2dd9cf547c6cccf91245346e6e1bc9926cae7",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x05c2dd9cf547c6cccf91245346e6e1bc9926cae7",
+        3
+      ],
+      [
+        "0x11bffb96daa9b0c47fef01401eb089549e87604e",
+        2
+      ],
+      [
+        "0x57ecf40b596274a985967e3f698437ae0a9600a0",
+        2
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x4848489f0b2bedd788c696e2d79b6b69d7484848",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ],
+      [
+        "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        1
+      ],
+      [
+        "0xf5a32e5e54a771b9d3c853143db74449b721c03b",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-10_EFLeverVault",
+    "poc_path": "2022-10/EFLeverVault_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 15746199,
+    "target_address": "0xe39fd820b58f83205db1d9225f28105971c3d309",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xe39fd820b58f83205db1d9225f28105971c3d309",
+        3
+      ],
+      [
+        "0x030ba81f1c18d280636f32af80b9aad02cf0854e",
+        1
+      ],
+      [
+        "0x071108ad85d7a766b41e0f5e5195537a8fc8e74d",
+        1
+      ],
+      [
+        "0x140cca423081ed0366765f18fc9f5ed299699388",
+        1
+      ],
+      [
+        "0x1982b2f5814301d4e9a8b0201555376e62f82428",
+        1
+      ],
+      [
+        "0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9",
+        1
+      ],
+      [
+        "0x8663fbfc41a0bac88e7cd4b128b7a77381e77781",
+        1
+      ],
+      [
+        "0xa50ba011c48153de246e5192c8f9258a2ba79ca9",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-08_EHIVE",
+    "poc_path": "2023-08/EHIVE_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 17690497,
+    "target_address": "0x4ae2cd1f5b8806a973953b76f9ce6d5fab9cdcfd",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x4ae2cd1f5b8806a973953b76f9ce6d5fab9cdcfd",
+        3
+      ],
+      [
+        "0x0195448a9c4adeaf27002c6051c949f3c3234bb5",
+        1
+      ],
+      [
+        "0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2",
+        1
+      ],
+      [
+        "0x98c2e1e85f8bf737d9c1450dd26d4a4bf880b892",
+        1
+      ],
+      [
+        "0xae851769593ac6048d36bc123700649827659a82",
+        1
+      ],
+      [
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-10_WiseLending",
+    "poc_path": "2023-10/WiseLending_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 18342120,
+    "target_address": "0x84524baa1951247b3a2617a843e6ece915bb9674",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x84524baa1951247b3a2617a843e6ece915bb9674",
+        4
+      ],
+      [
+        "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        2
+      ],
+      [
+        "0x9d6d4e2afab382ae9b52807a4b36a8d2afc78b07",
+        2
+      ],
+      [
+        "0x018008bfb33d285247a21d44e50697654f754e63",
+        1
+      ],
+      [
+        "0x23878914efe38d27c4d67ab83ed1b93a74d4086a",
+        1
+      ],
+      [
+        "0x3aa228a80f50763045bdfc45012da124bd0a6809",
+        1
+      ],
+      [
+        "0x4d5f47fa6a74757f35c14fd3a6ef8e3c9bc514e8",
+        1
+      ],
+      [
+        "0x6b175474e89094c44da98b954eedeac495271d0f",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2024-09_DOGGO",
+    "poc_path": "2024-09/DOGGO_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 20794802,
+    "target_address": "0x240cd7b53d364a208ed41f8ced4965d11f571b7a",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x240cd7b53d364a208ed41f8ced4965d11f571b7a",
+        3
+      ],
+      [
+        "0x7248939f65bdd23aab9eaab1bc4a4f909567486e",
+        2
+      ],
+      [
+        "0xbdb0bc0941ba81672593cd8b3f9281789f2754d1",
+        2
+      ],
+      [
+        "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+        1
+      ],
+      [
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        1
+      ],
+      [
+        "0xea5a12a857e8302d70fcb1123d5f8f57ef7b7d0b",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2024-09_HANAToken",
+    "poc_path": "2024-09/HANAToken_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 20827436,
+    "target_address": "0xb3912b20b3abc78c15e85e13ec0bf334fbb924f7",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xb3912b20b3abc78c15e85e13ec0bf334fbb924f7",
+        3
+      ],
+      [
+        "0xbdb0bc0941ba81672593cd8b3f9281789f2754d1",
+        3
+      ],
+      [
+        "0x7248939f65bdd23aab9eaab1bc4a4f909567486e",
+        2
+      ],
+      [
+        "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+        1
+      ],
+      [
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        1
+      ],
+      [
+        "0xf3cb07a3e57bf69301c3a51d8ac87427c53aa357",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2025-06_AAVEBoost",
+    "poc_path": "2025-06/AAVEBoost_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 22685443,
+    "target_address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
+        4
+      ],
+      [
+        "0x5d4430d14ae1d11526ddac1c1ef01da3b1dae455",
+        2
+      ],
+      [
+        "0x740836c95c6f3f49cccc65a27331d1f225138c39",
+        2
+      ],
+      [
+        "0x8fa5cf0aa8af0e5adc7b43746ea033ca1b8e68de",
+        1
+      ],
+      [
+        "0xd2933c86216dc0c938ffafeca3c8a2d6e633e2ca",
+        1
+      ],
+      [
+        "0xf36f3976f288b2b4903aca8c177efc019b81d88b",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-08_EGD_Finance",
+    "poc_path": "2022-08/EGD_Finance_exp.sol",
+    "chain": "bsc",
+    "fork_block": 20245522,
+    "target_address": "0x93c175439726797dcee24d08e4ac9164e88e7aee",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x93c175439726797dcee24d08e4ac9164e88e7aee",
+        3
+      ],
+      [
+        "0x34bd6dba456bc31c2b3393e499fa10bed32a9370",
+        2
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae",
+        1
+      ],
+      [
+        "0x202b233735bf743fa31abb8f71e641970161bf98",
+        1
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ],
+      [
+        "0x659b136c49da3d9ac48682d02f7bd8806184e218",
+        1
+      ],
+      [
+        "0xa361433e409adac1f87cdf133127585f8a93c67d",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-07_LUSD",
+    "poc_path": "2023-07/LUSD_exp.sol",
+    "chain": "bsc",
+    "fork_block": 29756866,
+    "target_address": "0x637de69f45f3b66d5389f305088a38109aa0cf7c",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x637de69f45f3b66d5389f305088a38109aa0cf7c",
+        3
+      ],
+      [
+        "0xdec12a1dcbc1f741ccd02dfd862ab226f6383003",
+        2
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x21ad028c185ac004474c21ec5666189885f9e518",
+        1
+      ],
+      [
+        "0x26d0c625e5f5d6de034495fbde1f6e9377185618",
+        1
+      ],
+      [
+        "0x3cd632c25a4db4c1a636cfb23b9285be1097a60d",
+        1
+      ],
+      [
+        "0x3f803ec2b816ea7f06ec76aa2b6f2532f9892d62",
+        1
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-10_MicDao",
+    "poc_path": "2023-10/MicDao_exp.sol",
+    "chain": "bsc",
+    "fork_block": 32711747,
+    "target_address": "0xf6876f6ab2637774804b85aecc17b434a2b57168",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xf6876f6ab2637774804b85aecc17b434a2b57168",
+        3
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        2
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x19345233ea7486c1d5d780a19f0e303597e480b5",
+        1
+      ],
+      [
+        "0x26d0c625e5f5d6de034495fbde1f6e9377185618",
+        1
+      ],
+      [
+        "0x502b4a51ca7900f391d474268c907b110a277d6f",
+        1
+      ],
+      [
+        "0xcd03ed98868a6cd78096f116a4b56a5f2c67757d",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2025-01_Ast",
+    "poc_path": "2025-01/Ast_exp.sol",
+    "chain": "bsc",
+    "fork_block": 45964639,
+    "target_address": "0xc10e0319337c7f83342424df72e73a70a29579b2",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xc10e0319337c7f83342424df72e73a70a29579b2",
+        3
+      ],
+      [
+        "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+        1
+      ],
+      [
+        "0x36696169c63e42cd08ce11f5deebbcebae652050",
+        1
+      ],
+      [
+        "0x55d398326f99059ff775485246999027b3197955",
+        1
+      ],
+      [
+        "0x56f77adc522bffebb3af0669564122933ab5ea4f",
+        1
+      ],
+      [
+        "0x5ffec8523a42be78b1ad1244fa526f14b64ba47a",
+        1
+      ],
+      [
+        "0xaae196b6e3f3ee34405e857e7bfb05d74c5cf775",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2022-10_Uerii",
+    "poc_path": "2022-10/Uerii_exp.sol",
+    "chain": "mainnet",
+    "fork_block": 15767837,
+    "target_address": "0x418c24191ae947a78c99fdc0e45a1f96afb254be",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0x418c24191ae947a78c99fdc0e45a1f96afb254be",
+        3
+      ],
+      [
+        "0x5ffaf1b4da96d6cfd4045035a94a924fc39631dc",
+        1
+      ],
+      [
+        "0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+        1
+      ],
+      [
+        "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        1
+      ],
+      [
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        1
+      ],
+      [
+        "0xcc1a341d0f2a06eaba436935399793f05c2bbe92",
+        1
+      ],
+      [
+        "0xe592427a0aece92de3edee1f18e0157c05861564",
+        1
+      ],
+      [
+        "0xfd4dccd754eaaa8c9196998c5bb06a56df6a1d95",
+        1
+      ]
+    ]
+  },
+  {
+    "id": "2023-05_BabyDogeCoin",
+    "poc_path": "2023-05/BabyDogeCoin_exp.sol",
+    "chain": "bsc",
+    "fork_block": 28593354,
+    "target_address": "0xc748673057861a797275cd8a068abb95a902e8de",
+    "target_iface_hint": null,
+    "address_counts": [
+      [
+        "0xc748673057861a797275cd8a068abb95a902e8de",
+        3
+      ],
+      [
+        "0x451583b6da479eaa04366443262848e27706f762",
+        1
+      ],
+      [
+        "0x51873a0b615a51115f2cfbc2e24d9db4bfa2e6e2",
+        1
+      ],
+      [
+        "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+        1
+      ],
+      [
+        "0xc736ca3d9b1e90af4230bd8f9626528b3d4e0ee0",
+        1
+      ],
+      [
+        "0xcbc0d0c1049eb011d7c7cfc4ff556d281f0afebb",
+        1
+      ],
+      [
+        "0xd50cf00b6e600dd036ba8ef475677d816d6c4281",
+        1
+      ]
+    ]
+  }
+]

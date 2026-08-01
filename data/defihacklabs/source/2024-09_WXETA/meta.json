@@ -1,0 +1,21 @@
+{
+  "target_id": "2024-09_WXETA",
+  "chain": "bsc",
+  "address": "0x05c2dd9cf547c6cccf91245346e6e1bc9926cae7",
+  "verified": true,
+  "proxy": true,
+  "implementation": "0x7c83dc9221cfd48ac760710b7f1cd7b76ff6fcc2",
+  "contract_name": "WXETA",
+  "compiler_version": "v0.8.17+commit.8df45f5f",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "WXETA.sol"
+  ],
+  "primary_source": "WXETA.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424142
+}

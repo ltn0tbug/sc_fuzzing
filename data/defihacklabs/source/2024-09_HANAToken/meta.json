@@ -1,0 +1,21 @@
+{
+  "target_id": "2024-09_HANAToken",
+  "chain": "mainnet",
+  "address": "0xb3912b20b3abc78c15e85e13ec0bf334fbb924f7",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "HANA",
+  "compiler_version": "v0.8.25+commit.b61c2a91",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "HANA.sol"
+  ],
+  "primary_source": "HANA.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780506732
+}

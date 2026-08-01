@@ -1,0 +1,21 @@
+{
+  "target_id": "2022-12_NovaExchange",
+  "chain": "bsc",
+  "address": "0xb5b27564d05db32cf4f25813d35b6e6de9210941",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "Nova",
+  "compiler_version": "v0.8.9+commit.e5eed63a",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "Nova.sol"
+  ],
+  "primary_source": "Nova.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781377965
+}

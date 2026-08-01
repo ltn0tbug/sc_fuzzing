@@ -1,0 +1,22 @@
+{
+  "target_id": "2022-02_TecraSpace",
+  "chain": "mainnet",
+  "address": "0xe38b72d6595fd3885d1d2f770aa23e94757f91a1",
+  "verified": true,
+  "provider": "etherscan",
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "TcrToken",
+  "compiler_version": "v0.8.2+commit.661d1103",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "Unlicense",
+  "source_files": [
+    "TcrToken.sol"
+  ],
+  "primary_source": "TcrToken.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781944179
+}

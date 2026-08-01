@@ -1,0 +1,31 @@
+{
+  "target_id": "2023-04_Swapos",
+  "chain": "mainnet",
+  "address": "0x8ce2f9286f50fbe2464bfd881fab8effc8dc584f",
+  "verified": true,
+  "provider": "etherscan",
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "SwaposV2Pair",
+  "compiler_version": "v0.5.16+commit.9c3226ce",
+  "evm_version": "Default",
+  "optimizer": false,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "src/contracts/interfaces/IERC20.sol",
+    "src/contracts/interfaces/ISwaposV2Callee.sol",
+    "src/contracts/interfaces/ISwaposV2ERC20.sol",
+    "src/contracts/interfaces/ISwaposV2Factory.sol",
+    "src/contracts/interfaces/ISwaposV2Pair.sol",
+    "src/contracts/libraries/Math.sol",
+    "src/contracts/libraries/SafeMath.sol",
+    "src/contracts/libraries/UQ112x112.sol",
+    "src/contracts/SwaposV2ERC20.sol",
+    "src/contracts/SwaposV2Pair.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781945288
+}

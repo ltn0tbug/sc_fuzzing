@@ -1,0 +1,21 @@
+{
+  "target_id": "2022-10_ATK",
+  "chain": "bsc",
+  "address": "0x9cb928bf50ed220ac8f703bce35be5ce7f56c99c",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "ATK",
+  "compiler_version": "v0.8.7+commit.e28d00a7",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "ATK.sol"
+  ],
+  "primary_source": "ATK.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424124
+}

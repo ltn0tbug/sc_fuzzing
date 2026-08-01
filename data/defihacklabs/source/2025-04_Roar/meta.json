@@ -1,0 +1,21 @@
+{
+  "target_id": "2025-04_Roar",
+  "chain": "mainnet",
+  "address": "0x13028e6b95520ad16898396667d1e52cb5e550ac",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "UniswapV2Pair",
+  "compiler_version": "v0.5.16+commit.9c3226ce",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 999999,
+  "license": "GNU GPLv3",
+  "source_files": [
+    "UniswapV2Pair.sol"
+  ],
+  "primary_source": "UniswapV2Pair.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424122
+}

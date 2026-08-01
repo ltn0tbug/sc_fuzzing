@@ -1,0 +1,33 @@
+{
+  "target_id": "2023-01_UFDao_UFT",
+  "chain": "bsc",
+  "address": "0xf887a2dac0dd432997c970bce597a94ead4a8c25",
+  "verified": true,
+  "provider": "etherscan",
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "LP",
+  "compiler_version": "v0.8.6+commit.11564f7e",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "src/contracts/core/LP.sol",
+    "src/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+    "src/@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol",
+    "src/@openzeppelin/contracts/security/ReentrancyGuard.sol",
+    "src/contracts/interfaces/IDao.sol",
+    "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+    "src/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+    "src/@openzeppelin/contracts/utils/Context.sol",
+    "src/@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
+    "src/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
+    "src/@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+    "src/@openzeppelin/contracts/utils/Counters.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781945290
+}

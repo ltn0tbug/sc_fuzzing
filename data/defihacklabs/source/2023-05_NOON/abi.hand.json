@@ -1,0 +1,22 @@
+[
+  {
+    "type": "function",
+    "name": "_transfer",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "s"
+      },
+      {
+        "type": "address",
+        "name": "r"
+      },
+      {
+        "type": "uint256",
+        "name": "a"
+      }
+    ],
+    "outputs": []
+  }
+]

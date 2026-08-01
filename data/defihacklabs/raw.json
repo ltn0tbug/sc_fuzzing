@@ -1,0 +1,2992 @@
+{
+  "dataset": "defihacklabs",
+  "kind": "fork",
+  "schema": "raw",
+  "source_repo": "https://github.com/SunWeb3Sec/DeFiHackLabs",
+  "description": "Full DeFiHackLabs candidate set (fork facts + multifile source under source/).",
+  "generated_by": "utils/restructure_datasets.py",
+  "total_contracts": 86,
+  "meta": {
+    "chains": {
+      "mainnet": 44,
+      "bsc": 37,
+      "avalanche": 1,
+      "fantom": 1,
+      "base": 1,
+      "arbitrum": 2
+    },
+    "verified": 62,
+    "skip_count": 24
+  },
+  "contracts": [
+    {
+      "id": "defihacklabs/2020-12_Cover",
+      "category": "reward_accounting",
+      "target_contract": "Blacksmith",
+      "compiler": "v0.7.4+commit.3f05b770",
+      "source": {
+        "dir": "source/2020-12_Cover",
+        "files": [
+          "src/contracts/Blacksmith.sol",
+          "src/contracts/ERC20/IERC20.sol",
+          "src/contracts/ERC20/SafeERC20.sol",
+          "src/contracts/utils/SafeMath.sol",
+          "src/contracts/utils/Ownable.sol",
+          "src/contracts/utils/ReentrancyGuard.sol",
+          "src/contracts/interfaces/ICOVER.sol",
+          "src/contracts/interfaces/IBlacksmith.sol",
+          "src/contracts/utils/Address.sol",
+          "src/contracts/Migrator.sol",
+          "src/contracts/utils/MerkleProof.sol",
+          "src/contracts/interfaces/IMigrator.sol",
+          "src/contracts/Vesting.sol",
+          "src/contracts/ERC20/ERC20.sol",
+          "src/contracts/COVER.sol"
+        ],
+        "primary": "src/contracts/Blacksmith.sol",
+        "multifile": true,
+        "abi_path": "source/2020-12_Cover/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 11542309,
+        "target_address": "0xe0b94a7bb45dd905c79bb1992c9879f40f1caed5"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2020-12/Cover_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2021-05_RariCapital",
+      "category": "reentrancy",
+      "target_contract": "Bank",
+      "compiler": "v0.5.16+commit.9c3226ce",
+      "source": {
+        "dir": "source/2021-05_RariCapital",
+        "files": [
+          "Bank.sol"
+        ],
+        "primary": "Bank.sol",
+        "multifile": false,
+        "abi_path": "source/2021-05_RariCapital/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 12394009,
+        "target_address": "0x67b66c99d3eb37fa76aa3ed1ff33e8e39f0b9c7a"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2021-05/RariCapital_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2022-02_BuildF",
+      "category": "access_control",
+      "target_contract": "BUILD",
+      "compiler": "v0.5.17+commit.d19bba13",
+      "source": {
+        "dir": "source/2022-02_BuildF",
+        "files": [
+          "BUILD.sol"
+        ],
+        "primary": "BUILD.sol",
+        "multifile": false,
+        "abi_path": "source/2022-02_BuildF/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 14235712,
+        "target_address": "0x6e36556b3ee5aa28def2a8ec3dae30ec2b208739"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-02/BuildF_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "None",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-06_InverseFinance",
+      "category": "price_oracle_manipulation",
+      "target_contract": "CErc20ImmutableYearn",
+      "compiler": "v0.5.17+commit.d19bba13",
+      "source": {
+        "dir": "source/2022-06_InverseFinance",
+        "files": [
+          "CErc20ImmutableYearn.sol"
+        ],
+        "primary": "CErc20ImmutableYearn.sol",
+        "multifile": false,
+        "abi_path": "source/2022-06_InverseFinance/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 14972418,
+        "target_address": "0x1429a930ec3bcf5aa32ef298ccc5ab09836ef587"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-06/InverseFinance_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_OlympusDao",
+      "category": null,
+      "target_contract": "BondFixedExpiryTeller",
+      "compiler": "v0.8.15+commit.e14f2714",
+      "source": {
+        "dir": "source/2022-10_OlympusDao",
+        "files": [
+          "src/src/BondFixedExpiryTeller.sol",
+          "src/lib/solmate/src/tokens/ERC20.sol",
+          "src/lib/clones-with-immutable-args/src/ClonesWithImmutableArgs.sol",
+          "src/src/bases/BondBaseTeller.sol",
+          "src/src/interfaces/IBondFixedExpiryTeller.sol",
+          "src/src/ERC20BondToken.sol",
+          "src/src/lib/TransferHelper.sol",
+          "src/src/lib/FullMath.sol",
+          "src/lib/solmate/src/utils/ReentrancyGuard.sol",
+          "src/lib/solmate/src/auth/Auth.sol",
+          "src/src/interfaces/IBondTeller.sol",
+          "src/src/interfaces/IBondCallback.sol",
+          "src/src/interfaces/IBondAggregator.sol",
+          "src/src/interfaces/IBondAuctioneer.sol",
+          "src/src/lib/CloneERC20.sol",
+          "src/lib/clones-with-immutable-args/src/Clone.sol"
+        ],
+        "primary": "src/src/BondFixedExpiryTeller.sol",
+        "multifile": true,
+        "abi_path": "source/2022-10_OlympusDao/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 15794363,
+        "target_address": "0x007fe7c498a2cf30971ad8f2cbc36bd14ac51156"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-10/OlympusDao_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 100000,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_Templedao",
+      "category": "access_control",
+      "target_contract": "StaxLPStaking",
+      "compiler": "v0.8.4+commit.c7e474f2",
+      "source": {
+        "dir": "source/2022-10_Templedao",
+        "files": [
+          "src/contracts/StaxLPStaking.sol",
+          "src/@openzeppelin/contracts/access/Ownable.sol",
+          "src/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+          "src/@openzeppelin/contracts/utils/Context.sol",
+          "src/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+          "src/@openzeppelin/contracts/utils/Address.sol"
+        ],
+        "primary": "src/contracts/StaxLPStaking.sol",
+        "multifile": true,
+        "abi_path": "source/2022-10_Templedao/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 15725066,
+        "target_address": "0xd2869042e12a3506100af1d192b5b04d65137941"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-10/Templedao_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 999999,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-12_JAY",
+      "category": "reentrancy",
+      "target_contract": "JAY",
+      "compiler": "v0.8.7+commit.e28d00a7",
+      "source": {
+        "dir": "source/2022-12_JAY",
+        "files": [
+          "JAY.sol"
+        ],
+        "primary": "JAY.sol",
+        "multifile": false,
+        "abi_path": "source/2022-12_JAY/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 16288199,
+        "target_address": "0xf2919d1d80aff2940274014bef534f7791906ff2"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-12/JAY_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_ERC20TokenBank",
+      "category": null,
+      "target_contract": "ExchangeBetweenPools",
+      "compiler": "v0.5.10+commit.5a6ea5b1",
+      "source": {
+        "dir": "source/2023-05_ERC20TokenBank",
+        "files": [
+          "ExchangeBetweenPools.sol"
+        ],
+        "primary": "ExchangeBetweenPools.sol",
+        "multifile": false,
+        "abi_path": "source/2023-05_ERC20TokenBank/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 17376906,
+        "target_address": "0x765b8d7cd8ff304f796f4b6fb1bcf78698333f6d"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-05/ERC20TokenBank_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-08_Uwerx",
+      "category": "unprotected_burn",
+      "target_contract": "Uwerx",
+      "compiler": "v0.8.17+commit.8df45f5f",
+      "source": {
+        "dir": "source/2023-08_Uwerx",
+        "files": [
+          "Uwerx.sol"
+        ],
+        "primary": "Uwerx.sol",
+        "multifile": false,
+        "abi_path": "source/2023-08_Uwerx/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 17826202,
+        "target_address": "0x4306b12f8e824ce1fa9604bbd88f2ad4f0fe3c54"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-08/Uwerx_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-09_CEXISWAP",
+      "category": null,
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2023-09_CEXISWAP",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 18182605,
+        "target_address": "0xb8a5890d53df78dee6182a6c0968696e827e3305"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-09/CEXISWAP_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-09_DAppSocial",
+      "category": null,
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2023-09_DAppSocial",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 18048982,
+        "target_address": "0x319ec3ad98cf8b12a8be5719fec6e0a9bb1ad0d1"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-09/DAppSocial_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_INUMI",
+      "category": null,
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2024-09_INUMI",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 20729548,
+        "target_address": "0xd129d8c12f0e7aa51157d9e6cc3f7ece2dc84ecd"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-09/INUMI_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_PLN",
+      "category": "price_oracle_manipulation",
+      "target_contract": "PLNTOKEN",
+      "compiler": "v0.8.19+commit.7dd6d404",
+      "source": {
+        "dir": "source/2024-09_PLN",
+        "files": [
+          "PLNTOKEN.sol"
+        ],
+        "primary": "PLNTOKEN.sol",
+        "multifile": false,
+        "abi_path": "source/2024-09_PLN/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 20681142,
+        "target_address": "0xe0c218e1633a5c76d57ff4f11149f07bfff16aea"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-09/PLN_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2025-03_UNI",
+      "category": "price_oracle_manipulation",
+      "target_contract": "UniswapV2Pair",
+      "compiler": "v0.5.16+commit.9c3226ce",
+      "source": {
+        "dir": "source/2025-03_UNI",
+        "files": [
+          "UniswapV2Pair.sol"
+        ],
+        "primary": "UniswapV2Pair.sol",
+        "multifile": false,
+        "abi_path": "source/2025-03_UNI/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 21992033,
+        "target_address": "0x76ea342bc038d665e8a116392c82552d2605eda1"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-03/UNI_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 999999,
+        "evm_version": "Default",
+        "license": "GNU GPLv3",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2025-04_Roar",
+      "category": "price_oracle_manipulation",
+      "target_contract": "UniswapV2Pair",
+      "compiler": "v0.5.16+commit.9c3226ce",
+      "source": {
+        "dir": "source/2025-04_Roar",
+        "files": [
+          "UniswapV2Pair.sol"
+        ],
+        "primary": "UniswapV2Pair.sol",
+        "multifile": false,
+        "abi_path": "source/2025-04_Roar/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 22278564,
+        "target_address": "0x13028e6b95520ad16898396667d1e52cb5e550ac"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-04/Roar_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 999999,
+        "evm_version": "Default",
+        "license": "GNU GPLv3",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2021-05_ValueDefi",
+      "category": null,
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2021-05_ValueDefi",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 7223029,
+        "target_address": "0xd7d069493685a581d27824fc46eda46b7efc0063"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2021-05/ValueDefi_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": true,
+        "implementation": "0x7684966f3a3d679939622ef0260ec9a20318e981",
+        "verified": false,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_ATK",
+      "category": "price_oracle_manipulation",
+      "target_contract": "ATK",
+      "compiler": "v0.8.7+commit.e28d00a7",
+      "source": {
+        "dir": "source/2022-10_ATK",
+        "files": [
+          "ATK.sol"
+        ],
+        "primary": "ATK.sol",
+        "multifile": false,
+        "abi_path": "source/2022-10_ATK/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 22102838,
+        "target_address": "0x9cb928bf50ed220ac8f703bce35be5ce7f56c99c"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-10/ATK_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_BEGO",
+      "category": "arbitrary_mint",
+      "target_contract": "BGeoToken",
+      "compiler": "v0.6.10+commit.00c0fcaf",
+      "source": {
+        "dir": "source/2022-10_BEGO",
+        "files": [
+          "BGeoToken.sol"
+        ],
+        "primary": "BGeoToken.sol",
+        "multifile": false,
+        "abi_path": "source/2022-10_BEGO/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 22315679,
+        "target_address": "0xc342774492b54ce5f8ac662113ed702fc1b34972"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-10/BEGO_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "None",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_TransitSwap",
+      "category": null,
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2022-10_TransitSwap",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 21816545,
+        "target_address": "0x8785bb8deae13783b24d7afe250d42ea7d7e9d72"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-10/TransitSwap_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-12_DFS",
+      "category": "business_logic",
+      "target_contract": "DFS",
+      "compiler": "v0.8.17+commit.8df45f5f",
+      "source": {
+        "dir": "source/2022-12_DFS",
+        "files": [
+          "DFS.sol"
+        ],
+        "primary": "DFS.sol",
+        "multifile": false,
+        "abi_path": "source/2022-12_DFS/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 24349821,
+        "target_address": "0x2b806e6d78d8111dd09c58943b9855910bade005"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-12/DFS_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "None",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-01_ThoreumFinance",
+      "category": null,
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2023-01_ThoreumFinance",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 24913171,
+        "target_address": "0xce1b3e5087e8215876af976032382dd338cf8401"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-01/ThoreumFinance_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": true,
+        "implementation": "0xa1df9edbc222452bde681e1e5073eb6cf1eaacf7",
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_Bitpaidio",
+      "category": "reward_accounting",
+      "target_contract": "Staking",
+      "compiler": "v0.8.14+commit.80d49f37",
+      "source": {
+        "dir": "source/2023-05_Bitpaidio",
+        "files": [
+          "Staking.sol"
+        ],
+        "primary": "Staking.sol",
+        "multifile": false,
+        "abi_path": "source/2023-05_Bitpaidio/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 28176675,
+        "target_address": "0x9d6d817ea5d4a69ff4c4509bea8f9b2534cec108"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-05/Bitpaidio_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "None",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_FAPEN",
+      "category": "business_logic",
+      "target_contract": "FatherPepeInu",
+      "compiler": "v0.8.9+commit.e5eed63a",
+      "source": {
+        "dir": "source/2023-05_FAPEN",
+        "files": [
+          "FatherPepeInu.sol"
+        ],
+        "primary": "FatherPepeInu.sol",
+        "multifile": false,
+        "abi_path": "source/2023-05_FAPEN/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 28637846,
+        "target_address": "0xf3f1abae8bfeca054b330c379794a7bf84988228"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-05/FAPEN_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-06_SELLC03",
+      "category": "price_oracle_manipulation",
+      "target_contract": "miner",
+      "compiler": "v0.8.19+commit.7dd6d404",
+      "source": {
+        "dir": "source/2023-06_SELLC03",
+        "files": [
+          "miner.sol"
+        ],
+        "primary": "miner.sol",
+        "multifile": false,
+        "abi_path": "source/2023-06_SELLC03/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 29005754,
+        "target_address": "0x84be9475051a08ee5364fba44de7fe83a5ecc4f1"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-06/SELLC03_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "None",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-06_SHIDO",
+      "category": "reward_accounting",
+      "target_contract": "StandardToken",
+      "compiler": "v0.8.18+commit.87f61d96",
+      "source": {
+        "dir": "source/2023-06_SHIDO",
+        "files": [
+          "src/@openzeppelin/contracts/access/Ownable.sol",
+          "src/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+          "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+          "src/@openzeppelin/contracts/utils/Address.sol",
+          "src/@openzeppelin/contracts/utils/Context.sol",
+          "src/contracts/Tokens/StandardTokens/StandardToken.sol"
+        ],
+        "primary": "src/@openzeppelin/contracts/access/Ownable.sol",
+        "multifile": true,
+        "abi_path": "source/2023-06_SHIDO/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 29365171,
+        "target_address": "0xa963ee460cf4b474c35ded8fff91c4ec011fb640"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-06/SHIDO_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-07_Bamboo",
+      "category": "price_oracle_manipulation",
+      "target_contract": "BambooAI",
+      "compiler": "v0.8.19+commit.7dd6d404",
+      "source": {
+        "dir": "source/2023-07_Bamboo",
+        "files": [
+          "BambooAI.sol"
+        ],
+        "primary": "BambooAI.sol",
+        "multifile": false,
+        "abi_path": "source/2023-07_Bamboo/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 29668034,
+        "target_address": "0xed56784bc8f2c036f6b0d8e04cb83c253e4a6a94"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-07/Bamboo_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-07_FFIST",
+      "category": "business_logic",
+      "target_contract": "GoldCoin",
+      "compiler": "v0.8.17+commit.8df45f5f",
+      "source": {
+        "dir": "source/2023-07_FFIST",
+        "files": [
+          "GoldCoin.sol"
+        ],
+        "primary": "GoldCoin.sol",
+        "multifile": false,
+        "abi_path": "source/2023-07_FFIST/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 30113117,
+        "target_address": "0x80121da952a74c06adc1d7f85a237089b57af347"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-07/FFIST_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "None",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-11_LinkDao",
+      "category": null,
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2023-11_LinkDao",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 33527744,
+        "target_address": "0x6524a5fd3fec179db3b3c1d21f700da7abe6b0de"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-11/LinkDao_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-04_GROKD",
+      "category": null,
+      "target_contract": "ERC1967Proxy",
+      "compiler": "v0.8.21+commit.d9974bed",
+      "source": {
+        "dir": "source/2024-04_GROKD",
+        "files": [
+          "ERC1967Proxy.sol"
+        ],
+        "primary": "ERC1967Proxy.sol",
+        "multifile": false,
+        "abi_path": "source/2024-04_GROKD/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 37622476,
+        "target_address": "0x31d3231cda62c0b7989b488ca747245676a32d81"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-04/GROKD_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "paris",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_WXETA",
+      "category": "arbitrary_mint",
+      "target_contract": "WXETA",
+      "compiler": "v0.8.17+commit.8df45f5f",
+      "source": {
+        "dir": "source/2024-09_WXETA",
+        "files": [
+          "WXETA.sol"
+        ],
+        "primary": "WXETA.sol",
+        "multifile": false,
+        "abi_path": "source/2024-09_WXETA/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 42284161,
+        "target_address": "0x05c2dd9cf547c6cccf91245346e6e1bc9926cae7"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-09/WXETA_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": true,
+        "implementation": "0x7c83dc9221cfd48ac760710b7f1cd7b76ff6fcc2",
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-08_EHIVE",
+      "category": "reward_accounting",
+      "target_contract": "EHIVE",
+      "compiler": "v0.8.15+commit.e14f2714",
+      "source": {
+        "dir": "source/2023-08_EHIVE",
+        "files": [
+          "EHIVE.sol"
+        ],
+        "primary": "EHIVE.sol",
+        "multifile": false,
+        "abi_path": "source/2023-08_EHIVE/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 17690497,
+        "target_address": "0x4ae2cd1f5b8806a973953b76f9ce6d5fab9cdcfd"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-08/EHIVE_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-10_WiseLending",
+      "category": "reentrancy",
+      "target_contract": "WiseLending",
+      "compiler": "v0.8.21+commit.d9974bed",
+      "source": {
+        "dir": "source/2023-10_WiseLending",
+        "files": [
+          "src/contracts/WiseLending.sol",
+          "src/contracts/PoolManager.sol",
+          "src/contracts/Babylonian.sol",
+          "src/contracts/WiseCore.sol",
+          "src/contracts/MainHelper.sol",
+          "src/contracts/TransferHub/TransferHelper.sol",
+          "src/contracts/WiseLowLevelHelper.sol",
+          "src/contracts/WiseLendingDeclaration.sol",
+          "src/contracts/TransferHub/CallOptionalReturn.sol",
+          "src/contracts/OwnableMaster.sol",
+          "src/contracts/InterfaceHub/IFeeManagerLight.sol",
+          "src/contracts/InterfaceHub/IWiseOracleHub.sol",
+          "src/contracts/InterfaceHub/IWiseSecurity.sol",
+          "src/contracts/InterfaceHub/IPositionNFTs.sol",
+          "src/contracts/InterfaceHub/IWETH.sol",
+          "src/contracts/InterfaceHub/IERC20.sol"
+        ],
+        "primary": "src/contracts/WiseLending.sol",
+        "multifile": true,
+        "abi_path": "source/2023-10_WiseLending/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 18342120,
+        "target_address": "0x84524baa1951247b3a2617a843e6ece915bb9674"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-10/WiseLending_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_DOGGO",
+      "category": "business_logic",
+      "target_contract": "DOGGO",
+      "compiler": "v0.8.25+commit.b61c2a91",
+      "source": {
+        "dir": "source/2024-09_DOGGO",
+        "files": [
+          "DOGGO.sol"
+        ],
+        "primary": "DOGGO.sol",
+        "multifile": false,
+        "abi_path": "source/2024-09_DOGGO/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 20794802,
+        "target_address": "0x240cd7b53d364a208ed41f8ced4965d11f571b7a"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-09/DOGGO_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-09_HANAToken",
+      "category": "business_logic",
+      "target_contract": "HANA",
+      "compiler": "v0.8.25+commit.b61c2a91",
+      "source": {
+        "dir": "source/2024-09_HANAToken",
+        "files": [
+          "HANA.sol"
+        ],
+        "primary": "HANA.sol",
+        "multifile": false,
+        "abi_path": "source/2024-09_HANAToken/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 20827436,
+        "target_address": "0xb3912b20b3abc78c15e85e13ec0bf334fbb924f7"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-09/HANAToken_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2025-06_AAVEBoost",
+      "category": "reward_accounting",
+      "target_contract": "AaveTokenV3",
+      "compiler": "v0.8.20+commit.a1b79de6",
+      "source": {
+        "dir": "source/2025-06_AAVEBoost",
+        "files": [
+          "src/src/AaveTokenV3.sol",
+          "src/src/BaseAaveTokenV2.sol",
+          "src/src/BaseDelegation.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol",
+          "src/src/utils/VersionedInitializable.sol",
+          "src/src/utils/EIP712.sol",
+          "src/src/BaseAaveToken.sol",
+          "src/src/utils/SafeCast72.sol",
+          "src/src/interfaces/IGovernancePowerDelegationToken.sol",
+          "src/src/DelegationAwareBalance.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/Strings.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/ShortStrings.sol",
+          "src/lib/openzeppelin-contracts/contracts/interfaces/IERC5267.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/Context.sol",
+          "src/lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol",
+          "src/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/math/SignedMath.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol"
+        ],
+        "primary": "src/src/AaveTokenV3.sol",
+        "multifile": true,
+        "abi_path": "source/2025-06_AAVEBoost/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 22685443,
+        "target_address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-06/AAVEBoost_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "paris",
+        "license": "",
+        "proxy": true,
+        "implementation": "0x5d4aa78b08bc7c530e21bf7447988b1be7991322",
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-08_EGD_Finance",
+      "category": "price_oracle_manipulation",
+      "target_contract": "EGD_Finance",
+      "compiler": "v0.8.4+commit.c7e474f2",
+      "source": {
+        "dir": "source/2022-08_EGD_Finance",
+        "files": [
+          "src/contracts/contrtact/EGD_Defi.sol",
+          "src/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+          "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "src/contracts/router.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol"
+        ],
+        "primary": "src/contracts/contrtact/EGD_Defi.sol",
+        "multifile": true,
+        "abi_path": "source/2022-08_EGD_Finance/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 20245522,
+        "target_address": "0x93c175439726797dcee24d08e4ac9164e88e7aee"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-08/EGD_Finance_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-07_LUSD",
+      "category": "price_oracle_manipulation",
+      "target_contract": "LUSDPool",
+      "compiler": "v0.8.17+commit.8df45f5f",
+      "source": {
+        "dir": "source/2023-07_LUSD",
+        "files": [
+          "src/@openzeppelin/contracts/access/AccessControl.sol",
+          "src/@openzeppelin/contracts/access/AccessControlEnumerable.sol",
+          "src/@openzeppelin/contracts/access/IAccessControl.sol",
+          "src/@openzeppelin/contracts/access/IAccessControlEnumerable.sol",
+          "src/@openzeppelin/contracts/security/ReentrancyGuard.sol",
+          "src/@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
+          "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+          "src/@openzeppelin/contracts/utils/Address.sol",
+          "src/@openzeppelin/contracts/utils/Context.sol",
+          "src/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+          "src/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+          "src/@openzeppelin/contracts/utils/math/Math.sol",
+          "src/@openzeppelin/contracts/utils/Strings.sol",
+          "src/@openzeppelin/contracts/utils/structs/EnumerableSet.sol",
+          "src/contracts/pool/LUSDPool.sol",
+          "src/contracts/token/interface/ILUSD.sol",
+          "src/contracts/tool/interface/IPancakeRouter.sol"
+        ],
+        "primary": "src/@openzeppelin/contracts/access/AccessControl.sol",
+        "multifile": true,
+        "abi_path": "source/2023-07_LUSD/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 29756866,
+        "target_address": "0x637de69f45f3b66d5389f305088a38109aa0cf7c"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-07/LUSD_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 1000,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-10_MicDao",
+      "category": "business_logic",
+      "target_contract": "MicDao",
+      "compiler": "v0.8.18+commit.87f61d96",
+      "source": {
+        "dir": "source/2023-10_MicDao",
+        "files": [
+          "MicDao.sol"
+        ],
+        "primary": "MicDao.sol",
+        "multifile": false,
+        "abi_path": "source/2023-10_MicDao/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 32711747,
+        "target_address": "0xf6876f6ab2637774804b85aecc17b434a2b57168"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-10/MicDao_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2025-01_Ast",
+      "category": "business_logic",
+      "target_contract": "AST",
+      "compiler": "v0.8.28+commit.7893614a",
+      "source": {
+        "dir": "source/2025-01_Ast",
+        "files": [
+          "src/sol1/ASTToken.sol"
+        ],
+        "primary": "src/sol1/ASTToken.sol",
+        "multifile": true,
+        "abi_path": "source/2025-01_Ast/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 45964639,
+        "target_address": "0xc10e0319337c7f83342424df72e73a70a29579b2"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-01/Ast_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_Uerii",
+      "category": "arbitrary_mint",
+      "target_contract": "Token",
+      "compiler": "v0.8.7+commit.e28d00a7",
+      "source": {
+        "dir": "source/2022-10_Uerii",
+        "files": [
+          "Token.sol"
+        ],
+        "primary": "Token.sol",
+        "multifile": false,
+        "abi_path": "source/2022-10_Uerii/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 15767837,
+        "target_address": "0x418c24191ae947a78c99fdc0e45a1f96afb254be"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-10/Uerii_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_BabyDogeCoin",
+      "category": "reentrancy",
+      "target_contract": "CoinToken",
+      "compiler": "v0.6.12+commit.27d51765",
+      "source": {
+        "dir": "source/2023-05_BabyDogeCoin",
+        "files": [
+          "CoinToken.sol"
+        ],
+        "primary": "CoinToken.sol",
+        "multifile": false,
+        "abi_path": "source/2023-05_BabyDogeCoin/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 28593354,
+        "target_address": "0xc748673057861a797275cd8a068abb95a902e8de"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-05/BabyDogeCoin_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "Apache-2.0",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-03_Umbrella",
+      "category": "business_logic",
+      "target_contract": "StakingRewards",
+      "compiler": "v0.7.5+commit.eb77ed08",
+      "source": {
+        "dir": "source/2022-03_Umbrella",
+        "files": [
+          "src/contracts/staking/StakingRewards.sol",
+          "src/@openzeppelin/contracts/math/Math.sol",
+          "src/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/SafeERC20.sol",
+          "src/@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+          "src/contracts/interfaces/IStakingRewards.sol",
+          "src/contracts/interfaces/Pausable.sol",
+          "src/contracts/interfaces/RewardsDistributionRecipient.sol",
+          "src/contracts/interfaces/OnDemandToken.sol",
+          "src/contracts/interfaces/MintableToken.sol",
+          "src/@openzeppelin/contracts/utils/Context.sol",
+          "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "src/@openzeppelin/contracts/math/SafeMath.sol",
+          "src/@openzeppelin/contracts/utils/Address.sol",
+          "src/contracts/interfaces/Owned.sol",
+          "src/@openzeppelin/contracts/access/Ownable.sol",
+          "src/contracts/interfaces/IBurnableToken.sol"
+        ],
+        "primary": "src/contracts/staking/StakingRewards.sol",
+        "multifile": true,
+        "abi_path": "source/2022-03_Umbrella/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 14421983,
+        "target_address": "0xb3fb1d01b07a706736ca175f827e4f56021b85de"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-03/Umbrella_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-03_CompoundTusd",
+      "category": "business_logic",
+      "target_contract": "CErc20Delegate",
+      "compiler": "v0.5.16+commit.9c3226ce",
+      "source": {
+        "dir": "source/2022-03_CompoundTusd",
+        "files": [
+          "src/contracts/CErc20.sol",
+          "src/contracts/CErc20Delegate.sol",
+          "src/contracts/CToken.sol",
+          "src/contracts/CTokenInterfaces.sol",
+          "src/contracts/CarefulMath.sol",
+          "src/contracts/ComptrollerInterface.sol",
+          "src/contracts/EIP20Interface.sol",
+          "src/contracts/EIP20NonStandardInterface.sol",
+          "src/contracts/ErrorReporter.sol",
+          "src/contracts/Exponential.sol",
+          "src/contracts/ExponentialNoError.sol",
+          "src/contracts/InterestRateModel.sol"
+        ],
+        "primary": "src/contracts/CErc20Delegate.sol",
+        "multifile": true,
+        "abi_path": "source/2022-03_CompoundTusd/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 14266479,
+        "target_address": "0x12392f67bdf24fae0af363c24ac620a2f67dad86"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-03/CompoundTusd_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "istanbul",
+        "license": "None",
+        "proxy": true,
+        "implementation": "0xa035b9e130f2b1aedc733eefb1c67ba4c503491f",
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_Melo",
+      "category": "arbitrary_mint",
+      "target_contract": "cERC20",
+      "compiler": "v0.5.11+commit.c082d0b4",
+      "source": {
+        "dir": "source/2023-05_Melo",
+        "files": [
+          "cERC20.sol"
+        ],
+        "primary": "cERC20.sol",
+        "multifile": false,
+        "abi_path": "source/2023-05_Melo/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 27960445,
+        "target_address": "0x9a1aef8c9ada4224ad774afdac07c24955c92a54"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-05/Melo_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-04_cftoken",
+      "category": "access_control",
+      "target_contract": "CFToken",
+      "compiler": "v0.6.12+commit.27d51765",
+      "source": {
+        "dir": "source/2022-04_cftoken",
+        "files": [
+          "src/CFTokenSinglePool_merge.sol",
+          "src/Context.sol",
+          "src/IBEP20.sol",
+          "src/Ownable.sol",
+          "src/SafeMath.sol"
+        ],
+        "primary": "src/CFTokenSinglePool_merge.sol",
+        "multifile": true,
+        "abi_path": "source/2022-04_cftoken/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 16841980,
+        "target_address": "0x8b7218cf6ac641382d7c723de8aa173e98a80196"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-04/cftoken_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 999,
+        "evm_version": "Default",
+        "license": "None",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2018-04_BEC",
+      "category": "business_logic",
+      "target_contract": "BecToken",
+      "compiler": "v0.4.19+commit.c4cbbb05",
+      "source": {
+        "dir": "source/2018-04_BEC",
+        "files": [
+          "BecToken.sol"
+        ],
+        "primary": "BecToken.sol",
+        "multifile": false,
+        "abi_path": "source/2018-04_BEC/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 5483642,
+        "target_address": "0xc5d105e63711398af9bbff092d4b6769c82f793d"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2018-04/BEC_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2020-06_Bancor",
+      "category": "access_control",
+      "target_contract": "BancorNetwork",
+      "compiler": "v0.4.26+commit.4563c3fc",
+      "source": {
+        "dir": "source/2020-06_Bancor",
+        "files": [
+          "BancorNetwork.sol"
+        ],
+        "primary": "BancorNetwork.sol",
+        "multifile": false,
+        "abi_path": "source/2020-06_Bancor/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 10307563,
+        "target_address": "0x5f58058c0ec971492166763c8c22632b583f667f"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2020-06/Bancor_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "Apache-2.0",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-02_SwarmMarkets",
+      "category": "arbitrary_mint",
+      "target_contract": "XToken",
+      "compiler": "v0.7.0+commit.9e61f92b",
+      "source": {
+        "dir": "source/2024-02_SwarmMarkets",
+        "files": [
+          "XToken.sol"
+        ],
+        "primary": "XToken.sol",
+        "multifile": false,
+        "abi_path": "source/2024-02_SwarmMarkets/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 19286456,
+        "target_address": "0xd08e245fdb3f1504aea4056e2c71615da7001440"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-02/SwarmMarkets_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-07_FlippazOne",
+      "category": "access_control",
+      "target_contract": "FlippazOne",
+      "compiler": "v0.8.15+commit.e14f2714",
+      "source": {
+        "dir": "source/2022-07_FlippazOne",
+        "files": [
+          "FlippazOne.sol"
+        ],
+        "primary": "FlippazOne.sol",
+        "multifile": false,
+        "abi_path": "source/2022-07_FlippazOne/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 15083765,
+        "target_address": "0xe85a08cf316f695ebe7c13736c8cc38a7cc3e944"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-07/FlippazOne_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-05_MetaDragon",
+      "category": "arbitrary_mint",
+      "target_contract": "P404Token",
+      "compiler": "v0.8.24+commit.e11b9ed9",
+      "source": {
+        "dir": "source/2024-05_MetaDragon",
+        "files": [
+          "src/Context.sol",
+          "src/draft-IERC6093.sol",
+          "src/ERC20.sol",
+          "src/IERC165.sol",
+          "src/IERC20.sol",
+          "src/IERC20Metadata.sol",
+          "src/IERC721.sol",
+          "src/IERC721Metadata.sol",
+          "src/IERC721Receiver.sol",
+          "src/token.sol"
+        ],
+        "primary": "src/Context.sol",
+        "multifile": true,
+        "abi_path": "source/2024-05_MetaDragon/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 39141426,
+        "target_address": "0xef1f39d8391cddcaee62b8b383cb992f46a6ce4f"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-05/MetaDragon_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2025-01_98Token",
+      "category": "access_control",
+      "target_contract": "Main",
+      "compiler": "v0.8.25+commit.b61c2a91",
+      "source": {
+        "dir": "source/2025-01_98Token",
+        "files": [
+          "src/Context.sol",
+          "src/IERC1363.sol",
+          "src/IERC165.sol",
+          "src/IERC20.sol",
+          "src/Main.sol",
+          "src/Ownable.sol",
+          "src/SafeERC20.sol"
+        ],
+        "primary": "src/Main.sol",
+        "multifile": true,
+        "abi_path": "source/2025-01_98Token/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 45462897,
+        "target_address": "0xb040d88e61ea79a1289507d56938a6ad9955349c"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-01/98Token_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-12_NovaExchange",
+      "category": "business_logic",
+      "target_contract": "Nova",
+      "compiler": "v0.8.9+commit.e5eed63a",
+      "source": {
+        "dir": "source/2022-12_NovaExchange",
+        "files": [
+          "Nova.sol"
+        ],
+        "primary": "Nova.sol",
+        "multifile": false,
+        "abi_path": "source/2022-12_NovaExchange/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 23749678,
+        "target_address": "0xb5b27564d05db32cf4f25813d35b6e6de9210941"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-12/NovaExchange_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2017-11_Parity_kill",
+      "category": "access_control",
+      "target_contract": "WalletLibrary",
+      "compiler": "v0.4.10+commit.f0d539ae",
+      "source": {
+        "dir": "source/2017-11_Parity_kill",
+        "files": [
+          "WalletLibrary.sol"
+        ],
+        "primary": "WalletLibrary.sol",
+        "multifile": false,
+        "abi_path": "source/2017-11_Parity_kill/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 4501735,
+        "target_address": "0x863df6bfa4469f3ead0be8f9f2aae51c91a907b4"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2017-11/Parity_kill_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_landNFT",
+      "category": "arbitrary_mint",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2023-05_landNFT",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 28208132,
+        "target_address": "0x2e599883715d2f92468fa5ae3f9aab4e930e3ac7"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-05/landNFT_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-07_GAX",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2024-07_GAX",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 40375924,
+        "target_address": "0xdb4b73df2f6de4afcd3a883efe8b7a4b0763822b"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-07/GAX_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-10_StarsArena",
+      "category": "reentrancy",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2023-10_StarsArena",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "avalanche",
+        "block": 36136405,
+        "target_address": "0xa481b139a1a654ca19d2074f174f17d7534e8cec"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-10/StarsArena_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": true,
+        "implementation": "0x44c383235a71ee4bc68501bfff10bb3c29f995b9",
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-11_Ak1111",
+      "category": "arbitrary_mint",
+      "target_contract": "AkashaOFT",
+      "compiler": "v0.8.12+commit.f00d7308",
+      "source": {
+        "dir": "source/2024-11_Ak1111",
+        "files": [
+          "src/contracts/AkashaOFT.sol",
+          "src/@openzeppelin/contracts/access/Ownable.sol",
+          "src/contracts/token/oft/v1/OFT.sol",
+          "src/@openzeppelin/contracts/access/AccessControl.sol",
+          "src/@openzeppelin/contracts/utils/Context.sol",
+          "src/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+          "src/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+          "src/contracts/token/oft/v1/interfaces/IOFT.sol",
+          "src/contracts/token/oft/v1/OFTCore.sol",
+          "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+          "src/contracts/token/oft/v1/interfaces/IOFTCore.sol",
+          "src/contracts/lzApp/NonblockingLzApp.sol",
+          "src/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+          "src/contracts/lzApp/LzApp.sol",
+          "src/contracts/libraries/ExcessivelySafeCall.sol",
+          "src/contracts/lzApp/interfaces/ILayerZeroReceiver.sol",
+          "src/contracts/lzApp/interfaces/ILayerZeroUserApplicationConfig.sol",
+          "src/contracts/lzApp/interfaces/ILayerZeroEndpoint.sol",
+          "src/contracts/libraries/BytesLib.sol",
+          "src/@openzeppelin/contracts/access/IAccessControl.sol",
+          "src/@openzeppelin/contracts/utils/Strings.sol",
+          "src/@openzeppelin/contracts/utils/math/Math.sol",
+          "src/@openzeppelin/contracts/utils/math/SignedMath.sol"
+        ],
+        "primary": "src/contracts/AkashaOFT.sol",
+        "multifile": true,
+        "abi_path": "source/2024-11_Ak1111/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 44280828,
+        "target_address": "0xc3b1b45e5784a8efececfc0be2e28247d3f49963"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-11/Ak1111_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-08_YodlRouter",
+      "category": "access_control",
+      "target_contract": "YodlRouter",
+      "compiler": "v0.8.26+commit.8a97fa7a",
+      "source": {
+        "dir": "source/2024-08_YodlRouter",
+        "files": [
+          "src/src/chains/EthereumYodlRouter.sol",
+          "src/src/routers/YodlTransferRouter.sol",
+          "src/src/routers/YodlCurveRouter.sol",
+          "src/src/routers/YodlUniswapRouter.sol",
+          "src/src/AbstractYodlRouter.sol",
+          "src/src/interfaces/IBeforeHook.sol",
+          "src/src/interfaces/ICurveRouter.sol",
+          "src/lib/swap-router-contracts/contracts/interfaces/ISwapRouter02.sol",
+          "src/lib/chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol",
+          "src/lib/v3-periphery/contracts/interfaces/external/IWETH9.sol",
+          "src/lib/v3-periphery/contracts/libraries/TransferHelper.sol",
+          "src/lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol",
+          "src/lib/v3-periphery/contracts/interfaces/ISelfPermit.sol",
+          "src/lib/swap-router-contracts/contracts/interfaces/IV2SwapRouter.sol",
+          "src/lib/swap-router-contracts/contracts/interfaces/IV3SwapRouter.sol",
+          "src/lib/swap-router-contracts/contracts/interfaces/IApproveAndCall.sol",
+          "src/lib/swap-router-contracts/contracts/interfaces/IMulticallExtended.sol",
+          "src/lib/foundry-chainlink-toolkit/lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol",
+          "src/lib/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol",
+          "src/lib/v3-periphery/contracts/interfaces/IMulticall.sol"
+        ],
+        "primary": "src/src/chains/EthereumYodlRouter.sol",
+        "multifile": true,
+        "abi_path": "source/2024-08_YodlRouter/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 20520368,
+        "target_address": "0xe3a0bc3483ae5a04db7ef2954315133a6f7d228e"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-08/YodlRouter_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "paris",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-12_Pledge",
+      "category": "access_control",
+      "target_contract": "Pledge",
+      "compiler": "v0.8.26+commit.8a97fa7a",
+      "source": {
+        "dir": "source/2024-12_Pledge",
+        "files": [
+          "Pledge.sol"
+        ],
+        "primary": "Pledge.sol",
+        "multifile": false,
+        "abi_path": "source/2024-12_Pledge/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 44555337,
+        "target_address": "0x061944c0f3c2d7dabafb50813efb05c4e0c952e1"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-12/Pledge_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-06_Snood",
+      "category": "access_control",
+      "target_contract": "SchnoodleV9",
+      "compiler": "v0.8.15+commit.e14f2714",
+      "source": {
+        "dir": "source/2022-06_Snood",
+        "files": [
+          "src/contracts/SchnoodleV9.sol",
+          "src/contracts/imports/SchnoodleV9Base.sol",
+          "src/@schnoodle/contracts-upgradeable/utils/math/MathUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/utils/introspection/IERC1820RegistryUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/utils/introspection/IERC165Upgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/utils/StringsUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/utils/ContextUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/utils/AddressUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/token/ERC777/presets/ERC777PresetFixedSupplyUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/token/ERC777/IERC777Upgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/token/ERC777/IERC777SenderUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/token/ERC777/IERC777RecipientUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/token/ERC777/ERC777Upgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/proxy/utils/Initializable.sol",
+          "src/@schnoodle/contracts-upgradeable/access/OwnableUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/access/IAccessControlUpgradeable.sol",
+          "src/@schnoodle/contracts-upgradeable/access/AccessControlUpgradeable.sol"
+        ],
+        "primary": "src/contracts/SchnoodleV9.sol",
+        "multifile": true,
+        "abi_path": "source/2022-06_Snood/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 14983660,
+        "target_address": "0xd45740ab9ec920bedbd9bab2e863519e59731941"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-06/Snood_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": true,
+        "implementation": "0xeac2a259f3ebb8fd1097aeccaa62e73b6e43d5bf",
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-06_Gym_2",
+      "category": "business_logic",
+      "target_contract": "GymSinglePool",
+      "compiler": "v0.8.12+commit.f00d7308",
+      "source": {
+        "dir": "source/2022-06_Gym_2",
+        "files": [
+          "src/contracts/GymSinglePool.sol",
+          "src/@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol",
+          "src/contracts/interfaces/IWETH.sol",
+          "src/contracts/interfaces/IGymMLM.sol",
+          "src/contracts/interfaces/IPancakeRouter02.sol",
+          "src/contracts/interfaces/IERC20Burnable.sol",
+          "src/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol",
+          "src/contracts/interfaces/IPancakePair.sol",
+          "src/contracts/interfaces/IPancakeFactory.sol",
+          "src/@quant-finance/solidity-datetime/contracts/DateTime.sol",
+          "src/contracts/interfaces/IGymLevelPool.sol",
+          "src/contracts/interfaces/IGymSinglePool.sol",
+          "src/@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol",
+          "src/contracts/interfaces/IPancakeRouter01.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol"
+        ],
+        "primary": "src/contracts/GymSinglePool.sol",
+        "multifile": true,
+        "abi_path": "source/2022-06_Gym_2/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 18501049,
+        "target_address": "0xa8987285e100a8b557f06a7889f79e0064b359f2"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-06/Gym_2_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": true,
+        "implementation": "0xb131c1cc89d209fb5c7250f68d31eff0fb5640d3",
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-11_SheepFarm",
+      "category": "business_logic",
+      "target_contract": "SheepFarm",
+      "compiler": "v0.8.7+commit.e28d00a7",
+      "source": {
+        "dir": "source/2022-11_SheepFarm",
+        "files": [
+          "SheepFarm.sol"
+        ],
+        "primary": "SheepFarm.sol",
+        "multifile": false,
+        "abi_path": "source/2022-11_SheepFarm/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 23088156,
+        "target_address": "0x4726010da871f4b57b5031e3ea48bde961f122aa"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-11/SheepFarm_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-01_DAO_SoulMate",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2024-01_DAO_SoulMate",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 19063676,
+        "target_address": "0x82c063afefb226859abd427ae40167cb77174b68"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-01/DAO_SoulMate_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-11_KR",
+      "category": "business_logic",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2023-11_KR",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 33267984,
+        "target_address": "0x15b1ed79ca9d7955af3e169d7b323c4f1eeb5d12"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-11/KR_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2021-09_DaoMaker",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2021-09_DaoMaker",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 13155320,
+        "target_address": "0x2fd602ed1f8cb6deaba9bedd560ffe772eb85940"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2021-09/DaoMaker_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-08_ReaperFarm",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2022-08_ReaperFarm",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "fantom",
+        "block": 44045899,
+        "target_address": "0xcda5dea176f2df95082f4dadb96255bdb2bc7c7d"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-08/ReaperFarm_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-07_UnverifiedContr_0x452E25",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2024-07_UnverifiedContr_0x452E25",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 20223094,
+        "target_address": "0x452e253eeb3bb16e40337d647c01b6c910aa84b3"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-07/UnverifiedContr_0x452E25_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2025-08_0x8d2e",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2025-08_0x8d2e",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "base",
+        "block": 34459413,
+        "target_address": "0x8d2ef0d39a438c3601112ae21701819e13c41288"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-08/0x8d2e_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_NOON",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2023-05_NOON",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 17366979,
+        "target_address": "0x6feac5f3792065b21f85bc118d891b33e0673bd8"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-05/NOON_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2017-07_Parity_first_hack",
+      "category": "access_control",
+      "target_contract": "Wallet",
+      "compiler": "v0.4.9+commit.364da425",
+      "source": {
+        "dir": "source/2017-07_Parity_first_hack",
+        "files": [
+          "Wallet.sol"
+        ],
+        "primary": "Wallet.sol",
+        "multifile": false,
+        "abi_path": "source/2017-07_Parity_first_hack/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 4043799,
+        "target_address": "0xbec591de75b8699a3ba52f073428822d0bfc0d7e"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2017-07/Parity_first_hack_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2023-05_DEI",
+      "category": "business_logic",
+      "target_contract": "DEIStablecoin",
+      "compiler": "v0.8.4+commit.c7e474f2",
+      "source": {
+        "dir": "source/2023-05_DEI",
+        "files": [
+          "src/contracts/LDEI/LDEI.sol",
+          "src/@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+          "src/contracts/LDEI/LERC20Upgradable.sol",
+          "src/@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-IERC20PermitUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/token/ERC20/extensions/IERC20MetadataUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/access/IAccessControlUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/introspection/IERC165Upgradeable.sol",
+          "src/contracts/interfaces/ILosslessERC20.sol",
+          "src/contracts/interfaces/ILosslessController.sol",
+          "src/contracts/interfaces/ILosslessGovernance.sol",
+          "src/contracts/interfaces/ILosslessStaking.sol",
+          "src/contracts/interfaces/ILosslessReporting.sol",
+          "src/contracts/interfaces/IProtectionStrategy.sol"
+        ],
+        "primary": "src/contracts/LDEI/LDEI.sol",
+        "multifile": true,
+        "abi_path": "source/2023-05_DEI/abi.json"
+      },
+      "fork": {
+        "chain": "arbitrum",
+        "block": 87626024,
+        "target_address": "0xde1e704dae0b4051e80dabb26ab6ad6c12262da0"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-05/DEI_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 100000,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": true,
+        "implementation": "0x7a6f1217c97de6ae9bf7bc2b526c72a0fb8c4093",
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-10_Erc20transfer",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2024-10_Erc20transfer",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 21019771,
+        "target_address": "0x43dc865e916914fd93540461fde124484fbf8faa"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-10/Erc20transfer_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2018-04_SmartMesh",
+      "category": "business_logic",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2018-04_SmartMesh",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 5499034,
+        "target_address": "0x55f93985431fc9304077687a35a1ba103dc1e081"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2018-04/SmartMesh_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2025-06_Stead",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2025-06_Stead",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "arbitrum",
+        "block": 352509407,
+        "target_address": "0xf9ff933f51ba180a474634440a406c95dfb27596"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-06/Stead_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2025-08_0xf340",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2025-08_0xf340",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 23232612,
+        "target_address": "0xf340bd3eb3e82994cff5b8c3493245edbce63436"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-08/0xf340_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-04_FIL314",
+      "category": "business_logic",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": "source/2024-04_FIL314",
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 37795991,
+        "target_address": "0xe8a290c6fc6fa6c0b79c9cfae1878d195aeb59af"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-04/FIL314_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-02_PANDORA",
+      "category": "business_logic",
+      "target_contract": "PandorasNodes404",
+      "compiler": "v0.7.6+commit.7338295f",
+      "source": {
+        "dir": "source/2024-02_PANDORA",
+        "files": [
+          "PandorasNodes404.sol"
+        ],
+        "primary": "PandorasNodes404.sol",
+        "multifile": false,
+        "abi_path": "source/2024-02_PANDORA/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 19184577,
+        "target_address": "0xddadf1bf44363d07e750c20219c2347ed7d826b9"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-02/PANDORA_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2024-04_NGFS",
+      "category": "access_control",
+      "target_contract": "NGFSToken",
+      "compiler": "v0.8.24+commit.e11b9ed9",
+      "source": {
+        "dir": "source/2024-04_NGFS",
+        "files": [
+          "src/Address.sol",
+          "src/Context.sol",
+          "src/IERC20.sol",
+          "src/IPancakeLibrary.sol",
+          "src/IPancakePair.sol",
+          "src/IPancakeRouter01.sol",
+          "src/IPancakeRouter02.sol",
+          "src/IUniswapV2Factory.sol",
+          "src/NGFSToken.sol",
+          "src/Ownable.sol",
+          "src/SafeMath.sol"
+        ],
+        "primary": "src/NGFSToken.sol",
+        "multifile": true,
+        "abi_path": "source/2024-04_NGFS/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 38167372,
+        "target_address": "0xa608985f5b40cdf6862bec775207f84280a91e3a"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2024-04/NGFS_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "MIT",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2023-12_HYPR",
+      "category": "access_control",
+      "target_contract": "L1StandardBridge",
+      "compiler": "v0.8.15+commit.e14f2714",
+      "source": {
+        "dir": "source/2023-12_HYPR",
+        "files": [
+          "src/src/L1/L1StandardBridge.sol",
+          "src/src/libraries/Predeploys.sol",
+          "src/src/universal/StandardBridge.sol",
+          "src/src/universal/Semver.sol",
+          "src/src/universal/CrossDomainMessenger.sol",
+          "src/lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/introspection/ERC165Checker.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/Address.sol",
+          "src/lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol",
+          "src/src/libraries/SafeCall.sol",
+          "src/src/universal/IOptimismMintableERC20.sol",
+          "src/src/universal/OptimismMintableERC20.sol",
+          "src/lib/openzeppelin-contracts/contracts/proxy/utils/Initializable.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/Strings.sol",
+          "src/lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol",
+          "src/src/libraries/Hashing.sol",
+          "src/src/libraries/Encoding.sol",
+          "src/src/libraries/Constants.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
+          "src/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
+          "src/lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+          "src/lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol",
+          "src/src/libraries/Types.sol",
+          "src/src/libraries/rlp/RLPWriter.sol",
+          "src/src/L1/ResourceMetering.sol",
+          "src/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/Context.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
+          "src/src/libraries/Burn.sol",
+          "src/src/libraries/Arithmetic.sol",
+          "src/lib/openzeppelin-contracts/contracts/utils/math/SignedMath.sol",
+          "src/lib/solmate/src/utils/FixedPointMathLib.sol"
+        ],
+        "primary": "src/src/L1/L1StandardBridge.sol",
+        "multifile": true,
+        "abi_path": "source/2023-12_HYPR/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 18774584,
+        "target_address": "0x40c31236b228935b0329eff066b1ad96e319595e"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-12/HYPR_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 999999,
+        "evm_version": "london",
+        "license": "",
+        "proxy": true,
+        "implementation": "0xe468b43b4ae4d750cd6a5d7edacc1a751302c99c",
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2021-12_Visor",
+      "category": "access_control",
+      "target_contract": "RewardsHypervisor",
+      "compiler": "v0.7.6+commit.7338295f",
+      "source": {
+        "dir": "source/2021-12_Visor",
+        "files": [
+          "src/contracts/RewardsHypervisor.sol",
+          "src/@openzeppelin/contracts/math/SafeMath.sol",
+          "src/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "src/@openzeppelin/contracts/token/ERC20/SafeERC20.sol",
+          "src/@openzeppelin/contracts/access/Ownable.sol",
+          "src/contracts/interfaces/IVisor.sol",
+          "src/contracts/vVISR.sol",
+          "src/@openzeppelin/contracts/utils/Context.sol",
+          "src/@openzeppelin/contracts/utils/Address.sol",
+          "src/@openzeppelin/contracts/drafts/ERC20Permit.sol",
+          "src/@openzeppelin/contracts/token/ERC20/ERC20Snapshot.sol",
+          "src/@openzeppelin/contracts/drafts/IERC20Permit.sol",
+          "src/@openzeppelin/contracts/cryptography/ECDSA.sol",
+          "src/@openzeppelin/contracts/utils/Counters.sol",
+          "src/@openzeppelin/contracts/drafts/EIP712.sol",
+          "src/@openzeppelin/contracts/utils/Arrays.sol",
+          "src/@openzeppelin/contracts/math/Math.sol"
+        ],
+        "primary": "src/contracts/RewardsHypervisor.sol",
+        "multifile": true,
+        "abi_path": "source/2021-12_Visor/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 13849006,
+        "target_address": "0xc9f27a50f82571c1c8423a42970613b8dbda14ef"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2021-12/Visor_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 800,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2025-03_YziAIToken",
+      "category": "access_control",
+      "target_contract": "YziLabs",
+      "compiler": "v0.8.26+commit.8a97fa7a",
+      "source": {
+        "dir": "source/2025-03_YziAIToken",
+        "files": [
+          "src/token (5).sol",
+          "src/node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol",
+          "src/node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol",
+          "src/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol",
+          "src/node_modules/@openzeppelin/contracts/access/Ownable.sol",
+          "src/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+          "src/node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/Nonces.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/cryptography/EIP712.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+          "src/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol",
+          "src/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/Context.sol",
+          "src/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+          "src/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "src/node_modules/@openzeppelin/contracts/interfaces/IERC5267.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/ShortStrings.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/Strings.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/StorageSlot.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/math/Math.sol",
+          "src/node_modules/@openzeppelin/contracts/utils/Panic.sol"
+        ],
+        "primary": "src/token (5).sol",
+        "multifile": true,
+        "abi_path": "source/2025-03_YziAIToken/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 47838544,
+        "target_address": "0x7fdff64bf87bad52e6430bda30239bd182389ee3"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2025-03/YziAIToken_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2022-08_DDC",
+      "category": "price_oracle_manipulation",
+      "target_contract": "BananaSwapToken",
+      "compiler": "v0.8.4+commit.c7e474f2",
+      "source": {
+        "dir": "source/2022-08_DDC",
+        "files": [
+          "src/contracts/banana/BananaSwapToken.sol",
+          "src/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol",
+          "src/contracts/interfaces/nana/IFeeHandler.sol",
+          "src/contracts/interfaces/ITokenAFeeHandler.sol",
+          "src/contracts/interfaces/IOracle.sol",
+          "src/contracts/libraries/TransferHelper.sol",
+          "src/contracts/BkWeList.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
+          "src/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+          "src/@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol",
+          "src/@openzeppelin/contracts/utils/structs/EnumerableSet.sol",
+          "src/contracts/interfaces/IERC20.sol",
+          "src/contracts/interfaces/IBkWeList.sol"
+        ],
+        "primary": "src/contracts/banana/BananaSwapToken.sol",
+        "multifile": true,
+        "abi_path": "source/2022-08_DDC/abi.json"
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 20840079,
+        "target_address": "0x443195aa3a4357242a7427fc8ce5f20c1e71fcb1"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-08/DDC_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 9999,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2023-12_PHIL",
+      "category": "access_control",
+      "target_contract": null,
+      "compiler": null,
+      "source": {
+        "dir": null,
+        "files": [],
+        "primary": null,
+        "multifile": false,
+        "abi_path": null
+      },
+      "fork": {
+        "chain": "bsc",
+        "block": 34345319,
+        "target_address": "0x4308d314096878d3bf16c9d8db86101f70bbebf1"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-12/PHIL_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": false,
+        "target_address_source": null
+      }
+    },
+    {
+      "id": "defihacklabs/2022-10_EFLeverVault",
+      "category": "price_oracle_manipulation",
+      "target_contract": "EFLeverVault",
+      "compiler": "v0.5.10+commit.5a6ea5b1",
+      "source": {
+        "dir": "source/2022-10_EFLeverVault",
+        "files": [
+          "EFLeverVault.sol"
+        ],
+        "primary": "EFLeverVault.sol",
+        "multifile": false,
+        "abi_path": "source/2022-10_EFLeverVault/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 15746199,
+        "target_address": "0xe39fd820b58f83205db1d9225f28105971c3d309"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-10/EFLeverVault_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2022-02_TecraSpace",
+      "category": "price_oracle_manipulation",
+      "target_contract": "TcrToken",
+      "compiler": "v0.8.2+commit.661d1103",
+      "source": {
+        "dir": "source/2022-02_TecraSpace",
+        "files": [
+          "TcrToken.sol"
+        ],
+        "primary": "TcrToken.sol",
+        "multifile": false,
+        "abi_path": "source/2022-02_TecraSpace/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 14139081,
+        "target_address": "0xe38b72d6595fd3885d1d2f770aa23e94757f91a1"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2022-02/TecraSpace_exp.sol",
+        "optimizer": true,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    },
+    {
+      "id": "defihacklabs/2023-04_Swapos",
+      "category": "business_logic",
+      "target_contract": "SwaposV2Pair",
+      "compiler": "v0.5.16+commit.9c3226ce",
+      "source": {
+        "dir": "source/2023-04_Swapos",
+        "files": [
+          "src/contracts/interfaces/IERC20.sol",
+          "src/contracts/interfaces/ISwaposV2Callee.sol",
+          "src/contracts/interfaces/ISwaposV2ERC20.sol",
+          "src/contracts/interfaces/ISwaposV2Factory.sol",
+          "src/contracts/interfaces/ISwaposV2Pair.sol",
+          "src/contracts/libraries/Math.sol",
+          "src/contracts/libraries/SafeMath.sol",
+          "src/contracts/libraries/UQ112x112.sol",
+          "src/contracts/SwaposV2ERC20.sol",
+          "src/contracts/SwaposV2Pair.sol"
+        ],
+        "primary": "src/contracts/SwaposV2Pair.sol",
+        "multifile": true,
+        "abi_path": "source/2023-04_Swapos/abi.json"
+      },
+      "fork": {
+        "chain": "mainnet",
+        "block": 17057419,
+        "target_address": "0x8ce2f9286f50fbe2464bfd881fab8effc8dc584f"
+      },
+      "provenance": {
+        "poc_path": "ref/DeFiHackLabs/src/test/2023-04/Swapos_exp.sol",
+        "optimizer": false,
+        "optimizer_runs": 200,
+        "evm_version": "Default",
+        "license": "",
+        "proxy": false,
+        "implementation": null,
+        "verified": true,
+        "target_address_source": "manual_pin_from_poc_var_decl"
+      }
+    }
+  ]
+}

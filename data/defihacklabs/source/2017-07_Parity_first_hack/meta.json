@@ -1,0 +1,21 @@
+{
+  "target_id": "2017-07_Parity_first_hack",
+  "chain": "mainnet",
+  "address": "0xbec591de75b8699a3ba52f073428822d0bfc0d7e",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "Wallet",
+  "compiler_version": "v0.4.9+commit.364da425",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "",
+  "source_files": [
+    "Wallet.sol"
+  ],
+  "primary_source": "Wallet.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781380229
+}

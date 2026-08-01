@@ -1,0 +1,52 @@
+[
+  {
+    "type": "function",
+    "name": "register",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "a0"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "addGems",
+    "stateMutability": "payable",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "upgradeVillage",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "a0"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "sellVillage",
+    "stateMutability": "nonpayable",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "withdrawMoney",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "a0"
+      }
+    ],
+    "outputs": []
+  }
+]

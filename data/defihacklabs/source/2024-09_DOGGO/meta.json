@@ -1,0 +1,21 @@
+{
+  "target_id": "2024-09_DOGGO",
+  "chain": "mainnet",
+  "address": "0x240cd7b53d364a208ed41f8ced4965d11f571b7a",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "DOGGO",
+  "compiler_version": "v0.8.25+commit.b61c2a91",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "MIT",
+  "source_files": [
+    "DOGGO.sol"
+  ],
+  "primary_source": "DOGGO.sol",
+  "multifile": false,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780506731
+}

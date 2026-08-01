@@ -1,0 +1,943 @@
+{
+  "dataset": "smartbugs_curated",
+  "kind": "inline",
+  "schema": "manifest",
+  "source_repo": "https://github.com/smartbugs/smartbugs-curated",
+  "description": "Curation layer over the raw set: skip/skip_reason/category per contract.",
+  "generated_by": "utils/restructure_datasets.py (+ validators via _dataset_io)",
+  "total_contracts": 116,
+  "meta": {
+    "usable": 33,
+    "skipped": 83
+  },
+  "contracts": [
+    {
+      "id": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839",
+      "skip": true,
+      "skip_reason": "oracle-blind under harness: both withdrawal paths (WithdrawToHolder/WitdrawTokenToHolder) are onlyOwner and owner==deployer; the onlyOwner modifier silently no-ops for non-owners, and Deposit only credits the caller's own funds, so no non-owner drain exists.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615",
+      "skip": true,
+      "skip_reason": "dep-deploy lifts the external-Log revert (Log deployed via extend.pre_deploy + wiring), but Collect is gated on `now > unlockTime` with `unlockTime = max(_unlockTime, now)` — no _lockTime can bypass it (the additive `now+_lockTime` overflow trick doesn't apply to a max), so draining needs a block-timestamp advance the target-only harness does not express (no warp primitive by design).",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3",
+      "skip": true,
+      "skip_reason": "dep-deploy lifts the external-Log revert (Log deployed via extend.pre_deploy + wiring), but Collect is gated on `now > unlockTime` with `unlockTime = max(_unlockTime, now)` — no _lockTime can bypass it (the additive `now+_lockTime` overflow trick doesn't apply to a max), so draining needs a block-timestamp advance the target-only harness does not express (no warp primitive by design).",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5",
+      "skip": true,
+      "skip_reason": "dep-deploy lifts the external-Log revert (Log deployed via extend.pre_deploy + wiring), but Collect is gated on `now > unlockTime` with `unlockTime = max(_unlockTime, now)` — no _lockTime can bypass it (the additive `now+_lockTime` overflow trick doesn't apply to a max), so draining needs a block-timestamp advance the target-only harness does not express (no warp primitive by design).",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e",
+      "skip": true,
+      "skip_reason": "dep-deploy lifts the external-Log revert, but CashOut is gated on `block.number > lastBlock` (lastBlock set in Deposit), so deposit+withdraw in one block can't drain — needs a block-number advance (vm.roll) the target-only harness does not express.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e",
+      "skip": true,
+      "skip_reason": "dep-deploy lifts the external-Log revert (Log deployed via extend.pre_deploy + wiring), but Collect is gated on `now > unlockTime` with `unlockTime = max(_unlockTime, now)` — no _lockTime can bypass it (the additive `now+_lockTime` overflow trick doesn't apply to a max), so draining needs a block-timestamp advance the target-only harness does not express (no warp primitive by design).",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68",
+      "skip": true,
+      "skip_reason": "dep-deploy lifts the external-Log revert (Log deployed via extend.pre_deploy + wiring), but Collect is gated on `now > unlockTime` with `unlockTime = max(_unlockTime, now)` — no _lockTime can bypass it (the additive `now+_lockTime` overflow trick doesn't apply to a max), so draining needs a block-timestamp advance the target-only harness does not express (no warp primitive by design).",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/etherbank",
+      "skip": true,
+      "skip_reason": "oracle-blind under harness: addToBalance is non-payable in the compiled ABI (missing `payable`, pre-0.4.0 semantics), so the harness cannot fund userBalances; there is no payable fallback, so withdrawBalance always sends 0.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/etherstore",
+      "skip": true,
+      "skip_reason": "oracle-blind under harness: withdrawFunds requires `now >= lastWithdrawTime + 1 weeks`; lastWithdrawTime starts 0 and the harness pins block.timestamp=1 with no vm.warp, so the 1-week time-lock is unreachable on the only withdrawal.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/modifier_reentrancy",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) and mints into a non-standard `tokenBalance` ledger the balanceOf oracle can't read — no ETH/ERC20 bug signal can fire.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/reentrance",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_bonus",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_cross_function",
+      "skip": true,
+      "skip_reason": "oracle-blind under harness: no payable deposit path, userBalances is always 0, so withdrawBalance sends 0 — no fund movement the oracle can see.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_dao",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_insecure",
+      "skip": true,
+      "skip_reason": "oracle-blind under harness: no payable deposit path, userBalances is always 0, so withdrawBalance sends 0 — no fund movement the oracle can see.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "reentrancy/reentrancy_simple",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/simple_dao",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "reentrancy/spank_chain_payment",
+      "skip": true,
+      "skip_reason": "unlinked_library: LedgerChannel depends on ECTools via DELEGATECALL; bytecode has unresolved link placeholders (__src/LedgerChannel.sol:ECTools__), so it won't deploy.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "access_control/FibonacciBalance",
+      "skip": true,
+      "skip_reason": "inert: the delegatecall exploit needs a real FibonacciLib deployed and passed to the ctor; the 0xdead sentinel makes delegatecall a no-op (calculatedFibNumber stays 0)",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "access_control/arbitrary_location_write_simple",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/incorrect_constructor_name1",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/incorrect_constructor_name2",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/incorrect_constructor_name3",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/mapping_write",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/multiowned_vulnerable",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/mycontract",
+      "skip": true,
+      "skip_reason": "unreachable: sendTo() requires tx.origin==owner, owner=deployer; fuzzer accounts are never the deployer",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "access_control/parity_wallet_bug_1",
+      "skip": true,
+      "skip_reason": "solc 0.4.9 lacks --allow-paths; ^0.4.9 (0.4.26) fails on inline assembly",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "access_control/parity_wallet_bug_2",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/phishable",
+      "skip": true,
+      "skip_reason": "unreachable: withdrawAll() requires tx.origin==owner (owner=0xdead ctor sentinel); tx.origin phishing not modelable in this harness",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "access_control/proxy",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "access_control/rubixi",
+      "skip": true,
+      "skip_reason": "oracle-blind: becoming creator only lets you collect tracked collectedFees (nets zero in isolation); no function pays this.balance to a non-creator, so the prefunded balance is unreachable",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "access_control/simple_suicide",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/unprotected0",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "access_control/wallet_02_refund_nosub",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/wallet_03_wrong_constructor",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "access_control/wallet_04_confused_sign",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "arithmetic/BECToken",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "arithmetic/insecure_transfer",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_1",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_add",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_benign_1",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_mapping_sym_1",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_minimal",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_mul",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_multitx_multifunc_feasible",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/integer_overflow_multitx_onefunc_feasible",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/overflow_simple_add",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/overflow_single_tx",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/timelock",
+      "skip": true,
+      "skip_reason": "oracle-blind: the overflow bypasses the time-lock but withdraw() returns only the caller's own deposit -> net-zero wallet change, no drain; the fund-flow oracle cannot see a timelock bypass",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "arithmetic/token",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "arithmetic/tokensalechallenge",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e",
+      "skip": true,
+      "skip_reason": "wrong_target: ERC20Interface declared as contract after PoCGame; _find_target_contract picks wrong last-contract",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x0cbe050f75bc8f8c2d6c0d249fea125fd6e1acc9",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10",
+      "skip": true,
+      "skip_reason": "owner-gated: unchecked send guarded by msg.sender==owner (owner=deployer)",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa",
+      "skip": true,
+      "skip_reason": "owner-gated: unchecked call is onlyOwner (owner=deployer); deposit path credits Holders only",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01",
+      "skip": true,
+      "skip_reason": "owner-gated: unchecked call is onlyOwner (owner=deployer); deposit path credits Holders only",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x3f2ef511aa6e75231e4deafc7a3d2ecab3741de2",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x524960d55174d912768678d8c606b4d50b79d7b1",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984",
+      "skip": true,
+      "skip_reason": "oracle-blind: labeled getTokens() forwards 0 wei; fund-moving paths only pay owner; no attacker net gain",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x5aa88d2901c68fda244f1d0584400368d2c8e739",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x610495793564aed0f9c7fc48dc4c7c9151d34fd6",
+      "skip": true,
+      "skip_reason": "no_drainable_path: SimpleWallet — all withdraw/sendMoney functions onlyOwner-gated and no broken constructor; attacker cannot bypass auth",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839",
+      "skip": true,
+      "skip_reason": "owner-gated: unchecked call is onlyOwner (owner=deployer); deposit path credits Holders only",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3",
+      "skip": true,
+      "skip_reason": "role-gated/paused: all 3 unchecked sends gated (onlyCFO / owner||nft / giveBirth needs owned pregnant panda); contract starts paused",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x78c2a1e91b52bca4130b6ed9edd9fbcfd4671c37",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x7a4349a749e59a5736efb7826ee3496a2dfd5489",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4",
+      "skip": true,
+      "skip_reason": "wrong_target: ERC20Interface declared as contract after PoCGame; _find_target_contract picks wrong last-contract",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x806a6bd219f162442d992bdc4ee6eba1f2c5a707",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x84d9ec85c9c568eb332b7226a8f826d897e0a4a8",
+      "skip": true,
+      "skip_reason": "no_drainable_path: TokenSender.execute is onlyOwner; no broken-constructor pattern; attacker cannot become owner",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b",
+      "skip": true,
+      "skip_reason": "role-gated: unchecked call in deliver() requires msg.sender==hardcoded SGX_ADDRESS",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35",
+      "skip": true,
+      "skip_reason": "owner-gated: unchecked call is onlyOwner (owner=deployer); deposit path credits Holders only",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x958a8f594101d2c0485a52319f29b2647f2ebc06",
+      "skip": true,
+      "skip_reason": "owner-gated: unchecked execute() is onlyOwner (owner=deployer); payout path gated behind owner-only marriage setup",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0x9d06cbafa865037a01d322d3f4222fa3e04e5488",
+      "skip": true,
+      "skip_reason": "no_drainable_path: Delta.tokens_buy sends 30% of msg.value to hardcoded owner2 address; target balance net INCREASES (10 + 0.7*V); withdraw is onlyOwner",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xa1fceeff3acc57d257b917e30c4df661401d6431",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb0510d68f210b7db66e8c7c814f22680f2b8d1d6",
+      "skip": true,
+      "skip_reason": "no_drainable_path: Splitter — fundPuppets and withdraw are onlyOwner; setExtra changes destination but cannot trigger fund flow; attacker cannot reach drain",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77",
+      "skip": true,
+      "skip_reason": "oracle-blind: public proxy() forwards only msg.sender value to a chosen target; never moves the contract balance, no attacker net gain",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb37f18af15bafb869a065b61fc83cfc44ed9cc27",
+      "skip": true,
+      "skip_reason": "no_drainable_path: SimpleWallet — all withdraw/sendMoney functions onlyOwner-gated and no broken constructor; attacker cannot bypass auth",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99",
+      "skip": true,
+      "skip_reason": "honeypot: claimPrize/winner unreachable (manipulateSecret short-circuits, guessSeed dead code); callTarget forwards own value",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7",
+      "skip": true,
+      "skip_reason": "oracle-blind under harness: the only deposit path is the unnamed payable fallback, which the harness cannot invoke (it only calls named ABI functions), so balances stays 0 and withdraw sends 0 — the reentrancy never has anything to drain.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52",
+      "skip": true,
+      "skip_reason": "oracle-blind: public proxy() forwards only msg.sender value to a chosen target; never moves the contract balance, no attacker net gain",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c",
+      "skip": true,
+      "skip_reason": "oracle-blind: public proxy() forwards only msg.sender value to a chosen target; never moves the contract balance, no attacker net gain",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xd2018bfaa266a9ec0a1a84b061640faa009def76",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xd5967fed03e85d1cce44cab284695b41bc675b5c",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xdb1c55f6926e7d847ddf8678905ad871a68199d2",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928",
+      "skip": true,
+      "skip_reason": "wrong_target: ERC20Interface declared as contract after FiftyFlip; _find_target_contract picks wrong last-contract",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xe4eabdca81e31d9acbc4af76b30f532b6ed7f3bf",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xe82f0742a71a02b9e9ffc142fdcb6eb1ed06fb87",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63",
+      "skip": true,
+      "skip_reason": "no_drainable_path: TokenSender.execute is onlyOwner; no broken-constructor pattern; attacker cannot become owner",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707",
+      "skip": true,
+      "skip_reason": "oracle-blind: go() forwards own value to a hardcoded addr then sweeps remainder to owner; no attacker net gain",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/0xf70d589d76eebdd7c12cc5eec99f8f6fa4233b9e",
+      "skip": true,
+      "skip_reason": "honeypot: unchecked Command() is require(msg.sender==Owner); only bypass is a hardcoded scammer address",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/etherpot_lotto",
+      "skip": true,
+      "skip_reason": "no_drainable_path: lottery winner derived from block.blockhash; not deterministically reachable by attacker within our iteration budget",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/king_of_the_ether_throne",
+      "skip": true,
+      "skip_reason": "oracle-blind under harness: claimThrone is non-payable in the compiled ABI (no `payable` keyword, pragma ^0.4.0), so the harness strips the value and valuePaid=0 < currentClaimPrice — every claim is refunded and rejected, so no monarch compensation (the only non-wizard payout) ever flows to a fuzzer account.",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/lotto",
+      "skip": false,
+      "skip_reason": null,
+      "validation": {
+        "poc_validated": true
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/mishandled",
+      "skip": true,
+      "skip_reason": "oracle-blind: no deposit path credits userBalances, so withdrawBalance() always sends 0; signal impossible",
+      "validation": {
+        "poc_validated": false
+      }
+    },
+    {
+      "id": "unchecked_low_level_calls/unchecked_return_value",
+      "skip": true,
+      "skip_reason": "no_eth_send: contract has no ETH-sending code (.call{value:}, .transfer, .send, selfdestruct) — ETH-based bug signals cannot fire",
+      "validation": {
+        "poc_validated": false
+      }
+    }
+  ]
+}

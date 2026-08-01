@@ -1,0 +1,28 @@
+{
+  "target_id": "2022-10_Templedao",
+  "chain": "mainnet",
+  "address": "0xd2869042e12a3506100af1d192b5b04d65137941",
+  "verified": true,
+  "proxy": false,
+  "implementation": null,
+  "contract_name": "StaxLPStaking",
+  "compiler_version": "v0.8.4+commit.c7e474f2",
+  "evm_version": "Default",
+  "optimizer": true,
+  "optimizer_runs": 999999,
+  "license": "",
+  "source_files": [
+    "src/contracts/StaxLPStaking.sol",
+    "src/@openzeppelin/contracts/access/Ownable.sol",
+    "src/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+    "src/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+    "src/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+    "src/@openzeppelin/contracts/utils/Context.sol",
+    "src/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+    "src/@openzeppelin/contracts/utils/Address.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1780424112
+}

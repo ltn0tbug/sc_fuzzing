@@ -1,0 +1,32 @@
+{
+  "target_id": "2022-03_CompoundTusd",
+  "chain": "mainnet",
+  "address": "0x12392f67bdf24fae0af363c24ac620a2f67dad86",
+  "verified": true,
+  "proxy": true,
+  "implementation": "0xa035b9e130f2b1aedc733eefb1c67ba4c503491f",
+  "contract_name": "CErc20Delegate",
+  "compiler_version": "v0.5.16+commit.9c3226ce",
+  "evm_version": "istanbul",
+  "optimizer": true,
+  "optimizer_runs": 200,
+  "license": "None",
+  "source_files": [
+    "src/contracts/CErc20.sol",
+    "src/contracts/CErc20Delegate.sol",
+    "src/contracts/CToken.sol",
+    "src/contracts/CTokenInterfaces.sol",
+    "src/contracts/CarefulMath.sol",
+    "src/contracts/ComptrollerInterface.sol",
+    "src/contracts/EIP20Interface.sol",
+    "src/contracts/EIP20NonStandardInterface.sol",
+    "src/contracts/ErrorReporter.sol",
+    "src/contracts/Exponential.sol",
+    "src/contracts/ExponentialNoError.sol",
+    "src/contracts/InterestRateModel.sol"
+  ],
+  "primary_source": null,
+  "multifile": true,
+  "abi_path": "abi.json",
+  "fetched_at_unix": 1781375675
+}

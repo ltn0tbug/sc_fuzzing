@@ -1,0 +1,7 @@
+{
+  "target_id": "2022-08_ReaperFarm",
+  "chain": "fantom",
+  "address": "0xcda5dea176f2df95082f4dadb96255bdb2bc7c7d",
+  "verified": false,
+  "skip_reason": "no_verified_source_etherscan_sourcify"
+}
